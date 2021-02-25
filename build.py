@@ -48,8 +48,9 @@ def build(name):
         print('** destination', destDir, 'exists')
         sys.exit(1)
     for dirname, dirnames, filenames in os.walk('.'):
-        if dirname.find('.~') >= 0:
-            continue
+        for ignore in ['.~', '.git']:
+            if ignore in dirnames:
+                dirnames.remove(ignore)
         for filename in filenames:
             sourcePath = os.path.join(dirname, filename)[2:]
             print('--', sourcePath)

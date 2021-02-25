@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Application-->
+        <scene sceneID="JPo-4y-FX3">
+            <objects>
+                <application id="hnw-xV-0zn" sceneMemberID="viewController">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+                        <items>
+                            <menuItem title="__NAME__" id="1Xt-HY-uBw" userLabel="LPF Host">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="__NAME__" systemMenu="apple" id="uQy-DD-JDr">
+                                    <items>
+                                        <menuItem title="About __NAME__" id="5kV-Vb-QxS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
+                                        <menuItem title="Quit __NAME__" keyEquivalent="q" id="4sb-4s-VLi">
+                                            <connections>
+                                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="File" id="dMs-cI-mzQ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="File" autoenablesItems="NO" id="bib-Uj-vzu">
+                                    <items>
+                                        <menuItem title="Play" keyEquivalent="p" id="Flz-EE-5KD">
+                                            <connections>
+                                                <action selector="togglePlay:" target="Ady-hI-5gd" id="bOw-DI-TIr"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Bypass" keyEquivalent="b" id="Bvy-ud-WPR" userLabel="Bypass">
+                                            <connections>
+                                                <action selector="toggleBypass:" target="Ady-hI-5gd" id="8j1-Gh-MqW"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
+                                            <connections>
+                                                <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Presets" tag="666" id="jxT-CU-nIS">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Presets" id="GEO-Iw-cKr">
+                                    <items>
+                                        <menuItem title="Save" enabled="NO" id="9NY-AS-9aU">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="gsf-1N-Qsg"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Window" id="aUF-d1-5bR">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
+                                    <items>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="R4o-n2-Eq4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="DRN-fu-gQh"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Help" id="wpr-3q-Mcd">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
+                                    <items>
+                                        <menuItem title="__NAME__ Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                            <connections>
+                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                    </connections>
+                </application>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="__NAME__" customModuleProvider="target">
+                    <connections>
+                        <outlet property="bypassMenuItem" destination="Bvy-ud-WPR" id="TDv-X8-WS4"/>
+                        <outlet property="playMenuItem" destination="Flz-EE-5KD" id="5E5-IR-Gxn"/>
+                        <outlet property="savePresetMenuItem" destination="9NY-AS-9aU" id="H1m-5w-gvK"/>
+                    </connections>
+                </customObject>
+                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="106" y="-60"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="R2V-B0-nI4">
+            <objects>
+                <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="__NAME__" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="__NAME__" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="__NAME__" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" userLabel="__NAME__">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
+                        <rect key="contentRect" x="81" y="580" width="960" height="540"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1175"/>
+                        <value key="minSize" type="size" width="800" height="400"/>
+                        <toolbar key="toolbar" implicitIdentifier="5207E1E8-A93F-4F10-9C18-0E48AC0FF7E7" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="BM6-k9-grP">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Rub-ZQ-gKo"/>
+                                <toolbarItem implicitItemIdentifier="290CDF7D-A4F5-4CB1-8BAB-065BEAC4FDC3" label="Play" paletteLabel="Play Button" sizingBehavior="auto" id="gZY-Pi-OZc">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="ogO-fI-sF4">
+                                        <rect key="frame" x="4" y="14" width="60" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <buttonCell key="cell" type="push" title="Play" alternateTitle="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7Br-57-RWg">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="togglePlay:" target="Oky-zY-oP4" id="UIW-9E-M7U"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="2AC2063E-880F-4AEB-A2B8-5747B89394F6" label="Bypass" paletteLabel="Bypass Button" sizingBehavior="auto" id="3w5-Pk-Kuc" userLabel="Bypass Button">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="WpS-Vu-loZ" userLabel="Bypass">
+                                        <rect key="frame" x="3" y="14" width="78" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <buttonCell key="cell" type="push" title="Bypass" alternateTitle="Resume" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="W6e-XW-QNj">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="toggleBypass:" target="Oky-zY-oP4" id="S6c-ZS-53j"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="fUX-bF-tWt"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="Rub-ZQ-gKo"/>
+                                <toolbarItem reference="gZY-Pi-OZc"/>
+                                <toolbarItem reference="3w5-Pk-Kuc"/>
+                            </defaultToolbarItems>
+                        </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="TOF-Bu-sXm"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <outlet property="bypassButton" destination="WpS-Vu-loZ" id="vss-i2-oQd"/>
+                        <outlet property="playButton" destination="ogO-fI-sF4" id="mnc-aK-30h"/>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="4gy-rt-TT0"/>
+                    </connections>
+                </windowController>
+                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="166.5" y="432"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="hIz-AP-VOD">
+            <objects>
+                <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="__NAME__" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="467" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVM-k6-jTo" userLabel="Content View">
+                                <rect key="frame" x="10" y="10" width="447" height="394"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iO5-GT-K4x">
+                                        <rect key="frame" x="172" y="183" width="103" height="28"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Loading…" id="fyr-Jd-O0Q">
+                                            <font key="font" metaFont="system" size="24"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="iO5-GT-K4x" firstAttribute="centerX" secondItem="AVM-k6-jTo" secondAttribute="centerX" id="jKE-HI-XiS"/>
+                                    <constraint firstItem="iO5-GT-K4x" firstAttribute="centerY" secondItem="AVM-k6-jTo" secondAttribute="centerY" id="pn7-zq-qTJ"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="AVM-k6-jTo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="3f5-lk-ZZb"/>
+                            <constraint firstAttribute="bottom" secondItem="AVM-k6-jTo" secondAttribute="bottom" constant="10" id="Lno-1a-N0L"/>
+                            <constraint firstAttribute="trailing" secondItem="AVM-k6-jTo" secondAttribute="trailing" constant="10" id="Nud-sn-hDf"/>
+                            <constraint firstItem="AVM-k6-jTo" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="q6J-Jx-dsR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="AVM-k6-jTo" id="0Du-8s-SA4"/>
+                        <outlet property="loadingText" destination="iO5-GT-K4x" id="YsE-Bw-a4P"/>
+                    </connections>
+                </viewController>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="159.5" y="1122"/>
+        </scene>
+    </scenes>
+</document>

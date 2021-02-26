@@ -21,7 +21,15 @@ GarageBand, but also using test hosts on both devices as well as the excellent
 
 Finally, it passes all
 [auval](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/AudioUnitProgrammingGuide/AudioUnitDevelopmentFundamentals/AudioUnitDevelopmentFundamentals.html)
-tests. (`auval -v aufx flng BRay`)
+tests:
+
+```
+% auval -v aufx flng BRay
+```
+
+Here `flng` is the unique component subtype for my [SimplyFlange](https://github.com/bradhowes/SimplyFlange)
+effect and `BRay` is my own manufacturer ID. You should use your own values that you put in
+[Configuration/Common.xcconfig](Configuration/Common.xcconfig).
 
 # Building a new AUv3
 
@@ -34,8 +42,11 @@ name of the new project:
 
 It creates new folder called `../MyEffect` and populates it with the files from the template. Afterwards you
 should have a working AUv3 effect and delivery apps. To successfully compile you will need to edit
-`Configuration/Common.xcconfig` and change `DEVELOPMENT_TEAM` to your Apple developer account so you can sign
-the binaries.
+[Configuration/Common.xcconfig](Configuration/Common.xcconfig) and change `DEVELOPMENT_TEAM` to your Apple
+developer account so you can sign the binaries.
+
+There are additional values in this file that you really should change, especially to remove any risk of
+collision with other AUv3 effects you may have on your system.
 
 > :warning: You are free to use the code according to [LICENSE.md](LICENSE.md), but you must not replicate
 > someone elses UI, icons, samples, or any other assets if you are going to distribute your effect on the App

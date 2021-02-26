@@ -41,6 +41,17 @@ the binaries.
 > someone elses UI, icons, samples, or any other assets if you are going to distribute your effect on the App
 > Store.
 
+## fastlane
+
+The project will also be setup to generate screenshots using [fastlane](https://github.com/fastlane/fastlane).
+However, you will still need to *install* fastlane if you don't already have it. I used:
+
+```
+% brew install fastlane
+```
+
+but there are other (better?) ways described in the [fastlane docs](https://docs.fastlane.tools).
+
 # App Targets
 
 The macOS and iOS apps are simple hosts that demonstrate the functionality of the AUv3 component. In the AUv3 world,

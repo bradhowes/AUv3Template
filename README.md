@@ -1,8 +1,8 @@
-![CI](https://github.com/bradhowes/__NAME__/workflows/CI/badge.svg?branch=main)
+![CI](https://github.com/bradhowes/AUv3Template/workflows/CI/badge.svg?branch=main)
 
 ![](macOS/App/Assets.xcassets/AppIcon.appiconset/256px.png)
 
-# About AUv3Temlate
+# About AUv3Template
 
 This is full-featured AUv3 effect template for both iOS and macOS platforms. When configured, it will build an
 app for each platform and embed in the app an app extension containing the AUv3 component. The apps are designed
@@ -49,8 +49,7 @@ There are additional values in this file that you really should change, especial
 collision with other AUv3 effects you may have on your system.
 
 > :warning: You are free to use the code according to [LICENSE.md](LICENSE.md), but you must not replicate
-> someone elses UI, icons, samples, or any other assets if you are going to distribute your effect on the App
-> Store.
+> someone's UI, icons, samples, or any other assets if you are going to distribute your effect on the App Store.
 
 ## fastlane
 

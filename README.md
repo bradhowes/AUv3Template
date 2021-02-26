@@ -37,7 +37,7 @@ should have a working AUv3 effect and delivery apps. To successfully compile you
 `Configuration/Common.xcconfig` and change `DEVELOPMENT_TEAM` to your Apple developer account so you can sign
 the binaries.
 
-> :warning: You are free to use the code according to [LICENSE.md](LICENSE.MD), but you must not replicate
+> :warning: You are free to use the code according to [LICENSE.md](LICENSE.md), but you must not replicate
 > someone elses UI, icons, samples, or any other assets if you are going to distribute your effect on the App
 > Store.
 

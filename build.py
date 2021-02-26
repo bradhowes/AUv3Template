@@ -2,18 +2,14 @@
 
 import os
 import os.path
+import re
 import shutil
 import subprocess
 import sys
 
 
 def substituteName(content, name):
-    tag = '__NAME__'
-    while True:
-        pos = content.find(tag)
-        if pos == -1:
-            return content
-        content = content[: pos] + name + content[pos + len(tag) :]
+    return content.replace('__NAME__', name)
 
 def makeDestPath(sourcePath, destDir, name):
     return substituteName(os.path.join(destDir, sourcePath), name)
@@ -26,7 +22,8 @@ def buildFile(sourcePath, destPath, name):
     else:
         open(destPath, 'w').write(substituteName(open(sourcePath, 'r').read(), name))
 
-def runCommand(*args):
+def runCommand(step, *args):
+    print('--', step)
     process = subprocess.run(args, stdout=subprocess.PIPE, universal_newlines=True)
     if process.returncode != 0:
         print(process.stdout)
@@ -35,12 +32,9 @@ def runCommand(*args):
 
 def createRepo(destDir):
     os.chdir(destDir)
-    print('-- creating git repo')
-    runCommand('git', 'init')
-    print('-- adding files to repo')
-    runCommand('git', 'add', '-A')
-    print('-- commit files to repo')
-    runCommand('git', 'commit', '-m', 'Yeah! Initial commit')
+    runCommand('creating repo', 'git', 'init')
+    runCommand('stagiing files', 'git', 'add', '-A')
+    runCommand('committing to repo', 'git', 'commit', '-m', 'Yeah! Initial commit')
 
 def build(name):
     destDir = os.path.join('..', name)

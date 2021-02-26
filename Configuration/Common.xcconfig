@@ -1,8 +1,26 @@
+# Your personal Apple developer account value
 DEVELOPMENT_TEAM = UP6SS5ES7E
+
+# The unique App Store ID for your macOS/iOS app
 APP_STORE_ID = 1554960150
+
+# The name of the AUv3 audio unit
 AU_BASE_NAME = __NAME__
+
+# The component name. This is made up of a presentable manufacturer name followed by a ':' *and* a space, and
+# then the presentable component name.
 AU_COMPONENT_NAME = B-Ray: __NAME__
+
+# The component type - auxf = effect
 AU_COMPONENT_TYPE = aufx
+
+# The component subtype. This should be unique for effects from the same manufacturer.
 AU_COMPONENT_SUBTYPE = flng
+
+# The unique manufacturer ID. Pick your own, but values with all lowercase letters are reserved
+# by Apple. There used to be a registry...
 AU_COMPONENT_MANUFACTURER = BRay
+
+# The bundle / class that will be used to instantiate the AUv3. It must implement the `AUAudioUnitFactory`
+# protocol.
 AU_FACTORY_FUNCTION = FilterFramework.FilterViewController

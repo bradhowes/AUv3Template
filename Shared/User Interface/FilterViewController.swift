@@ -41,9 +41,7 @@ public final class FilterViewController: AUViewController {
     public var audioUnit: FilterAudioUnit? {
         didSet {
             performOnMain {
-                if self.isViewLoaded {
-                    self.connectViewToAU()
-                }
+                self.connectViewToAU()
             }
         }
     }
@@ -60,7 +58,6 @@ public final class FilterViewController: AUViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        guard audioUnit != nil else { return }
         view.backgroundColor = .black
 
         groupings[.depth] = Grouping(label: depthValueLabel, slider: depthSlider)
@@ -107,8 +104,13 @@ extension FilterViewController {
     private func connectViewToAU() {
         os_log(.info, log: log, "connectViewToAU")
 
+        // Already connected?
         guard parameterObserverToken == nil else { return }
-        guard let audioUnit = audioUnit else { fatalError("logic error -- nil audioUnit value") }
+
+        // Only connect if both audioUnit and view are read
+        guard let audioUnit = audioUnit, isViewLoaded else { return }
+
+        // Should have parameter tree initialized by now
         guard let paramTree = audioUnit.parameterTree else { fatalError("logic error -- nil parameterTree") }
 
         keyValueObserverToken = audioUnit.observe(\.allParameterValues) { _, _ in

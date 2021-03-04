@@ -15,9 +15,9 @@ def makeDestPath(sourcePath, destDir, name):
     return substituteName(os.path.join(destDir, sourcePath), name)
 
 def buildFile(sourcePath, destPath, name):
-    skip = ['.py', '.png', '.caf', '.wav', '.xcuserstate', '.opacity']
+    justCopy = ['.py', '.png', '.caf', '.wav', '.xcuserstate', '.opacity']
     os.makedirs(os.path.split(destPath)[0], exist_ok=True)
-    if os.path.splitext(destPath)[1] in skip:
+    if os.path.splitext(destPath)[1] in justCopy:
         shutil.copy2(sourcePath, destPath)
     else:
         open(destPath, 'w').write(substituteName(open(sourcePath, 'r').read(), name))
@@ -42,10 +42,11 @@ def build(name):
         print('** destination', destDir, 'exists')
         sys.exit(1)
     for dirname, dirnames, filenames in os.walk('.'):
-        for ignore in ['.~', '.git']:
+        for ignore in ['.~', '.git', 'DerivedData']:
             if ignore in dirnames:
                 dirnames.remove(ignore)
         for filename in filenames:
+            if filename == '.DS_Store': continue
             sourcePath = os.path.join(dirname, filename)[2:]
             print('--', sourcePath)
             buildFile(sourcePath, makeDestPath(sourcePath, destDir, name), name)

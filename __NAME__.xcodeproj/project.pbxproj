@@ -27,6 +27,10 @@
 		BD1D258825D5AAE300523748 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D258725D5AAE300523748 /* SnapshotHelper.swift */; };
 		BD1F7BAE249FF7EF00960DA3 /* DelayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = BD1F7BAB249FF7EF00960DA3 /* DelayBuffer.h */; };
 		BD1F7BAF249FF7EF00960DA3 /* DelayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = BD1F7BAB249FF7EF00960DA3 /* DelayBuffer.h */; };
+		BD24B3FC25F1133500338362 /* Biquad.h in Headers */ = {isa = PBXBuildFile; fileRef = BD24B3FB25F1133500338362 /* Biquad.h */; };
+		BD24B3FD25F1133500338362 /* Biquad.h in Headers */ = {isa = PBXBuildFile; fileRef = BD24B3FB25F1133500338362 /* Biquad.h */; };
+		BD24B40625F113AD00338362 /* BiquadTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD24B40525F113AD00338362 /* BiquadTests.mm */; };
+		BD24B40725F113AD00338362 /* BiquadTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD24B40525F113AD00338362 /* BiquadTests.mm */; };
 		BD2FD3ED259B5104004A3196 /* AUParameterTree+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FD3EC259B5104004A3196 /* AUParameterTree+Extensions.swift */; };
 		BD2FD3EE259B5104004A3196 /* AUParameterTree+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FD3EC259B5104004A3196 /* AUParameterTree+Extensions.swift */; };
 		BD2FD3F5259B5130004A3196 /* AUParameterAddress+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FD3F4259B512F004A3196 /* AUParameterAddress+Extensions.swift */; };
@@ -92,10 +96,10 @@
 		C433F56122404C7C00F1B750 /* FilterViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433F56022404C7C00F1B750 /* FilterViewControllerExtension.swift */; };
 		C437FE59222367CD008D6C09 /* FilterFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* FilterFramework.framework */; };
 		C437FE5A222367CD008D6C09 /* FilterFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* FilterFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C437FE712223686D008D6C09 /* __NAME__.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FE632223686D008D6C09 /* __NAME__.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C437FE712223686D008D6C09 /* __NAME__AU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FE632223686D008D6C09 /* __NAME__AU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C4660A5C2225F9A0007BE3B1 /* FilterFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* FilterFramework.framework */; };
 		C4660A5D2225F9A0007BE3B1 /* FilterFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* FilterFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C4660A602225F9A0007BE3B1 /* __NAME__.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FEA0222368B7008D6C09 /* __NAME__.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C4660A602225F9A0007BE3B1 /* __NAME__AU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FEA0222368B7008D6C09 /* __NAME__AU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C46B8B8122418B6000E00B1E /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C9EAAB2227D79D003FEE1C /* FilterViewController.xib */; };
 		C4737B0B2231D930002CAD0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4737B0A2231D930002CAD0B /* AudioToolbox.framework */; };
 		C496341422238CFA001D1F5B /* FilterFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE80D2223713E001E6B6D /* FilterFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -201,7 +205,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				C437FE712223686D008D6C09 /* __NAME__.appex in Embed App Extensions */,
+				C437FE712223686D008D6C09 /* __NAME__AU.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,6 +251,8 @@
 		BD1D257A25D5AAB000523748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD1D258725D5AAE300523748 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		BD1F7BAB249FF7EF00960DA3 /* DelayBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DelayBuffer.h; sourceTree = "<group>"; };
+		BD24B3FB25F1133500338362 /* Biquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Biquad.h; sourceTree = "<group>"; };
+		BD24B40525F113AD00338362 /* BiquadTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BiquadTests.mm; sourceTree = "<group>"; };
 		BD2FD3EC259B5104004A3196 /* AUParameterTree+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AUParameterTree+Extensions.swift"; sourceTree = "<group>"; };
 		BD2FD3F4259B512F004A3196 /* AUParameterAddress+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AUParameterAddress+Extensions.swift"; sourceTree = "<group>"; };
 		BD446BAB25E2B4C5009B7347 /* LFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFO.h; sourceTree = "<group>"; };
@@ -455,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				BD95147724A08BB600D8024C /* NewSwiftTestTemplate.swift */,
+				BD24B40525F113AD00338362 /* BiquadTests.mm */,
 				BD1D249425D4831B00523748 /* BundlePropertiesTests.swift */,
 				BD938B4F24A6BC1F00892358 /* DelayBufferTests.mm */,
 				BD446BBF25E2B9CD009B7347 /* LFOTests.mm */,
@@ -471,6 +478,7 @@
 			isa = PBXGroup;
 			children = (
 				BD578F0D25D2C4720040D83D /* README.md */,
+				BD24B3FB25F1133500338362 /* Biquad.h */,
 				BD1F7BAB249FF7EF00960DA3 /* DelayBuffer.h */,
 				BD446BAB25E2B4C5009B7347 /* LFO.h */,
 				BD446BB525E2B741009B7347 /* DSP.h */,
@@ -693,6 +701,7 @@
 				BD446BAC25E2B4C5009B7347 /* LFO.h in Headers */,
 				BDB7CE97249F7694009580D5 /* ValueChangeDetector.hpp in Headers */,
 				C4BEE7EF22236F24001E6B6D /* RampingValueChangeDetector.hpp in Headers */,
+				BD24B3FC25F1133500338362 /* Biquad.h in Headers */,
 				BDB7CE90249D3C00009580D5 /* NonCopyable.hpp in Headers */,
 				C4BEE7EE22236F24001E6B6D /* FilterDSPKernel.h in Headers */,
 				C4BEE7F022236F24001E6B6D /* KernelEventProcessor.h in Headers */,
@@ -710,6 +719,7 @@
 				BD446BAD25E2B4C5009B7347 /* LFO.h in Headers */,
 				BDB7CE98249F7694009580D5 /* ValueChangeDetector.hpp in Headers */,
 				C4BEE7F322236F27001E6B6D /* RampingValueChangeDetector.hpp in Headers */,
+				BD24B3FD25F1133500338362 /* Biquad.h in Headers */,
 				BDB7CE91249D3C00009580D5 /* NonCopyable.hpp in Headers */,
 				C4BEE7F222236F27001E6B6D /* FilterDSPKernel.h in Headers */,
 				C4BEE7F422236F27001E6B6D /* KernelEventProcessor.h in Headers */,
@@ -1057,6 +1067,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD24B40625F113AD00338362 /* BiquadTests.mm in Sources */,
 				BD446BD025E2BA4C009B7347 /* LFOTests.mm in Sources */,
 				BD1D24CD25D48B8E00523748 /* RampingValueChangeDetectorTests.mm in Sources */,
 				BD1D24D425D48B9600523748 /* LogScaling.swift in Sources */,
@@ -1081,6 +1092,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD24B40725F113AD00338362 /* BiquadTests.mm in Sources */,
 				BD446BD825E2BA4E009B7347 /* LFOTests.mm in Sources */,
 				BD95147824A08BB600D8024C /* NewSwiftTestTemplate.swift in Sources */,
 				BD938B5024A6BC1F00892358 /* DelayBufferTests.mm in Sources */,

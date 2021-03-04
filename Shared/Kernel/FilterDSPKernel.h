@@ -2,6 +2,7 @@
 
 #pragma once
 
+#import <string>
 #import <AVFoundation/AVFoundation.h>
 
 #import "DelayBuffer.h"
@@ -14,12 +15,12 @@ public:
     using super = KernelEventProcessor<FilterDSPKernel>;
     friend super;
 
-    FilterDSPKernel(std::string const& name, float maxDelayMilliseconds)
-    :
-    super(os_log_create(name.c_str(), "FilterDSPKernel")),
-    maxDelayMilliseconds_{maxDelayMilliseconds},
+    FilterDSPKernel(std::string const& name, double maxDelayMilliseconds)
+    : super(os_log_create(name.c_str(), "FilterDSPKernel")), maxDelayMilliseconds_{maxDelayMilliseconds},
     delayLines_{}, lfo_()
-    {}
+    {
+        lfo_.setWaveform(LFO<double>::Waveform::triangle);
+    }
 
     /**
      Update kernel and buffers to support the given format and channel count
@@ -29,7 +30,7 @@ public:
         initialize(format.channelCount, format.sampleRate);
     }
 
-    void initialize(int channelCount, float sampleRate) {
+    void initialize(int channelCount, double sampleRate) {
         samplesPerMillisecond_ = sampleRate / 1000.0;
         delayInSamples_ = delay_ * samplesPerMillisecond_;
         lfo_.initialize(sampleRate, rate_);
@@ -38,18 +39,19 @@ public:
         os_log_with_type(log_, OS_LOG_TYPE_INFO, "delayLine size: %f delayInSamples: %f", size, delayInSamples_);
         delayLines_.clear();
         for (int index = 0; index < channelCount; ++index)
-            delayLines_.emplace_back(size);
+        delayLines_.emplace_back(size);
     }
 
     void stopProcessing() { super::stopProcessing(); }
 
     void setParameterValue(AUParameterAddress address, AUValue value) {
+        double tmp;
         switch (address) {
             case FilterParameterAddressDepth:
-                value = value / 100.0;
-                if (value == depth_) return;
-                os_log_with_type(log_, OS_LOG_TYPE_INFO, "depth - %f", value);
-                depth_ = value;
+                tmp = value / 200.0; // !!!
+                if (tmp == depth_) return;
+                os_log_with_type(log_, OS_LOG_TYPE_INFO, "depth - %f", tmp);
+                depth_ = tmp;
                 break;
             case FilterParameterAddressRate:
                 if (value == rate_) return;
@@ -64,29 +66,29 @@ public:
                 os_log_with_type(log_, OS_LOG_TYPE_INFO, "delay - %f  delayInSamples: %f", value, delayInSamples_);
                 break;
             case FilterParameterAddressFeedback:
-                value = value / 100.0;
-                if (value == feedback_) return;
-                os_log_with_type(log_, OS_LOG_TYPE_INFO, "feedback - %f", value);
-                feedback_ = value;
+                tmp = value / 100.0;
+                if (tmp == feedback_) return;
+                os_log_with_type(log_, OS_LOG_TYPE_INFO, "feedback - %f", tmp);
+                feedback_ = tmp;
                 break;
             case FilterParameterAddressDryMix:
-                value = value / 100.0;
-                if (value == dryMix_) return;
-                os_log_with_type(log_, OS_LOG_TYPE_INFO, "dryMix - %f", value);
-                dryMix_ = value;
+                tmp = value / 100.0;
+                if (tmp == dryMix_) return;
+                os_log_with_type(log_, OS_LOG_TYPE_INFO, "dryMix - %f", tmp);
+                dryMix_ = tmp;
                 break;
             case FilterParameterAddressWetMix:
-                value = value / 100.0;
-                if (value == wetMix_) return;
-                os_log_with_type(log_, OS_LOG_TYPE_INFO, "wetMix - %f", value);
-                wetMix_ = value;
+                tmp = value / 100.0;
+                if (tmp == wetMix_) return;
+                os_log_with_type(log_, OS_LOG_TYPE_INFO, "wetMix - %f", tmp);
+                wetMix_ = tmp;
                 break;
         }
     }
 
     AUValue getParameterValue(AUParameterAddress address) const {
         switch (address) {
-            case FilterParameterAddressDepth: return depth_ * 100.0;
+            case FilterParameterAddressDepth: return depth_ * 200.0; // !!!
             case FilterParameterAddressRate: return rate_;
             case FilterParameterAddressDelay: return delay_;
             case FilterParameterAddressFeedback: return feedback_ * 100.0;
@@ -96,26 +98,17 @@ public:
         return 0.0;
     }
 
-    float depth() const { return depth_; }
-    float rate() const { return rate_; }
-    float delay() const { return delay_; }
-    float feedback() const { return feedback_; }
-    float dryMix() const { return dryMix_; }
-    float wetMix() const { return wetMix_; }
-
 private:
 
     void doParameterEvent(AUParameterEvent const& event) { setParameterValue(event.parameterAddress, event.value); }
 
-    void doRendering(std::vector<float const*> ins, std::vector<float*> outs, AUAudioFrameCount frameCount) {
-//        os_log_with_type(log_, OS_LOG_TYPE_DEBUG, "delay: %f feedback: %f mix: %f delayInSamples: %f",
-//                         delay_, feedback_, wetDryMix_, delayInSamples_);
+    void doRendering(std::vector<AUValue const*> ins, std::vector<AUValue*> outs, AUAudioFrameCount frameCount) {
         for (int frame = 0; frame < frameCount; ++frame) {
             auto lfoValue = lfo_.value();
             for (int channel = 0; channel < ins.size(); ++channel) {
-                auto inputSample = ins[channel][frame];
-                auto delayPos = lfoValue * depth_ * delayInSamples_ / 2.0 + delayInSamples_;
-                auto delayedSample = delayLines_[channel].read(delayPos);
+                AUValue inputSample = ins[channel][frame];
+                double delayPos = lfoValue * depth_ * delayInSamples_ + delayInSamples_;
+                AUValue delayedSample = delayLines_[channel].read(delayPos);
                 delayLines_[channel].write(inputSample + feedback_ * delayedSample);
                 outs[channel][frame] = wetMix_ * delayedSample + dryMix_ * inputSample;
             }
@@ -124,16 +117,16 @@ private:
 
     void doMIDIEvent(AUMIDIEvent const& midiEvent) {}
 
-    float maxDelayMilliseconds_;
-    float samplesPerMillisecond_;
-    float depth_;
-    float rate_;
-    float delay_;
-    float delayInSamples_;
-    float feedback_;
-    float dryMix_;
-    float wetMix_;
+    double depth_; // NOTE: this ranges from 0.0 - 0.5 to absorb a / 2 operation in the delayPos calculation
+    double rate_;
+    double delay_;
+    double feedback_;
+    double dryMix_;
+    double wetMix_;
 
-    std::vector<DelayBuffer<float>> delayLines_;
-    LFO<float> lfo_;
+    double maxDelayMilliseconds_;
+    double samplesPerMillisecond_;
+    double delayInSamples_;
+    std::vector<DelayBuffer<AUValue>> delayLines_;
+    LFO<double> lfo_;
 };

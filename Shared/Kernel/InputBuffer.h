@@ -2,6 +2,7 @@
 
 #pragma once
 
+#import <os/log.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <AudioUnit/AudioUnit.h>
 #import <AVFoundation/AVFoundation.h>
@@ -58,7 +59,7 @@ struct InputBuffer {
      */
     void prepareInputBufferList(AVAudioFrameCount frameCount)
     {
-        UInt32 byteSize = frameCount * sizeof(float);
+        UInt32 byteSize = frameCount * sizeof(AUValue);
         for (UInt32 i = 0; i < mutableAudioBufferList_->mNumberBuffers; ++i) {
             mutableAudioBufferList_->mBuffers[i].mDataByteSize = byteSize;
         }
@@ -67,7 +68,7 @@ struct InputBuffer {
     AudioBufferList* mutableAudioBufferList() const { return mutableAudioBufferList_; }
 
 private:
-    os_log_t logger_ = os_log_create("LPF", "BufferedInputBus");
+    os_log_t logger_ = os_log_create("SimplyFlange", "BufferedInputBus");
     AUAudioFrameCount maxFramesToRender_ = 0;
     AVAudioPCMBuffer* buffer_ = nullptr;
     AudioBufferList* mutableAudioBufferList_ = nullptr;

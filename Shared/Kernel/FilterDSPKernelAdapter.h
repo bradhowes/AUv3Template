@@ -12,12 +12,12 @@
 /**
  Set an AUParameter to a new value
  */
- - (void)set:(nonnull AUParameter *)parameter value:(AUValue)value;
+- (void)set:(nonnull AUParameter *)parameter value:(AUValue)value;
 
 /**
  Get the current value of an AUParameter
  */
- - (AUValue)get:(nonnull AUParameter *)parameter;
+- (AUValue)get:(nonnull AUParameter *)parameter;
 
 @end
 

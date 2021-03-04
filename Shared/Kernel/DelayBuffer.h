@@ -2,14 +2,13 @@
 
 #pragma once
 
-#include <Accelerate/Accelerate.h>
 #include <cmath>
 #include <vector>
 
 template <typename T>
 class DelayBuffer {
 public:
-    DelayBuffer(float sizeInSamples)
+    DelayBuffer(double sizeInSamples)
     :
     wrapMask_{smallestPowerOf2For(sizeInSamples) - 1},
     buffer_(wrapMask_ + 1, 0.0),
@@ -22,7 +21,7 @@ public:
         std::fill(buffer_.begin(), buffer_.end(), 0.0);
     }
 
-    void setSizeInSamples(float sizeInSamples) {
+    void setSizeInSamples(double sizeInSamples) {
         wrapMask_ = smallestPowerOf2For(sizeInSamples) - 1;
         buffer_.resize(wrapMask_ + 1);
         writePos_ = 0;
@@ -39,7 +38,7 @@ public:
     T readFromOffset(int offset) const {
         return buffer_[(writePos_ - offset) & wrapMask_]; }
 
-    T read(float delay) const {
+    T read(double delay) const {
         T y1 = readFromOffset(int(delay));
         T y2 = readFromOffset(int(delay + 1));
         auto partial = delay - int(delay);
@@ -49,7 +48,7 @@ public:
 
 private:
 
-    static size_t smallestPowerOf2For(float value) {
+    static size_t smallestPowerOf2For(double value) {
         return size_t(::pow(2.0, ::ceil(::log2(::fmaxf(value, 1.0)))));
     }
 
@@ -57,4 +56,3 @@ private:
     std::vector<T> buffer_;
     size_t writePos_;
 };
-

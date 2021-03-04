@@ -129,8 +129,8 @@ private:
         ins_.clear();
         outs_.clear();
         for (size_t channel = 0; channel < inputs->mNumberBuffers; ++channel) {
-            ins_.emplace_back(static_cast<float*>(inputs_->mBuffers[channel].mData));
-            outs_.emplace_back(static_cast<float*>(outputs_->mBuffers[channel].mData));
+            ins_.emplace_back(static_cast<AUValue*>(inputs_->mBuffers[channel].mData));
+            outs_.emplace_back(static_cast<AUValue*>(outputs_->mBuffers[channel].mData));
         }
     }
 
@@ -171,17 +171,17 @@ private:
                     continue;
                 }
 
-                auto in = reinterpret_cast<float*>(inputs_->mBuffers[channel].mData) + processedFrameCount;
-                auto out = reinterpret_cast<float*>(outputs_->mBuffers[channel].mData) + processedFrameCount;
-                memcpy(out, in, frameCount * sizeof(float));
+                auto in = static_cast<AUValue*>(inputs_->mBuffers[channel].mData) + processedFrameCount;
+                auto out = static_cast<AUValue*>(outputs_->mBuffers[channel].mData) + processedFrameCount;
+                memcpy(out, in, frameCount * sizeof(AUValue));
             }
             return;
         }
 
         for (size_t channel = 0; channel < inputs_->mNumberBuffers; ++channel) {
-            ins_[channel] = static_cast<float*>(inputs_->mBuffers[channel].mData) + processedFrameCount;
-            outs_[channel] = static_cast<float*>(outputs_->mBuffers[channel].mData) + processedFrameCount;
-            outputs_->mBuffers[channel].mDataByteSize = sizeof(float) * (processedFrameCount + frameCount);
+            ins_[channel] = static_cast<AUValue*>(inputs_->mBuffers[channel].mData) + processedFrameCount;
+            outs_[channel] = static_cast<AUValue*>(outputs_->mBuffers[channel].mData) + processedFrameCount;
+            outputs_->mBuffers[channel].mDataByteSize = sizeof(AUValue) * (processedFrameCount + frameCount);
         }
 
         injected()->doRendering(ins_, outs_, frameCount);
@@ -194,8 +194,8 @@ private:
     AudioBufferList const* inputs_ = nullptr;
     AudioBufferList* outputs_ = nullptr;
 
-    std::vector<float const*> ins_;
-    std::vector<float*> outs_;
+    std::vector<AUValue const*> ins_;
+    std::vector<AUValue*> outs_;
 
     bool bypassed_ = false;
 };

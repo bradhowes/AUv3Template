@@ -8,7 +8,12 @@ public extension Color {
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
         var alpha: CGFloat = 0
-        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        #if os(macOS)
+        guard let hsb = usingColorSpace(.extendedSRGB) else { return self }
+        #else
+        let hsb = self
+        #endif
+        hsb.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         return Color(hue: hue, saturation: saturation, brightness: brightness * 0.8, alpha: alpha)
     }
 
@@ -18,7 +23,12 @@ public extension Color {
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
         var alpha: CGFloat = 0
-        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        #if os(macOS)
+        guard let hsb = usingColorSpace(.extendedSRGB) else { return self }
+        #else
+        let hsb = self
+        #endif
+        hsb.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         return Color(hue: hue, saturation: saturation, brightness: brightness * 1.2, alpha: alpha)
     }
 }

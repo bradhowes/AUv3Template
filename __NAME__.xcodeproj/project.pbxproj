@@ -51,6 +51,10 @@
 		BD578EEE25D278490040D83D /* AudioUnitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD578EEC25D278490040D83D /* AudioUnitManager.swift */; };
 		BD63B15424AE25F80015236D /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = BD49661924A3605800A81F0B /* LICENSE.md */; };
 		BD63B15624AE26020015236D /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = BD49661924A3605800A81F0B /* LICENSE.md */; };
+		BD66842E25F11F77009CF8ED /* KnobController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD66842B25F11F77009CF8ED /* KnobController.swift */; };
+		BD66842F25F11F77009CF8ED /* KnobController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD66842B25F11F77009CF8ED /* KnobController.swift */; };
+		BD66843125F11F77009CF8ED /* Knob_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD66842C25F11F77009CF8ED /* Knob_macOS.swift */; };
+		BD66843225F11F77009CF8ED /* Knob_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD66842D25F11F77009CF8ED /* Knob_iOS.swift */; };
 		BD71E31125E1AFB4005C5E1E /* FilterPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD71E30125E1AF2A005C5E1E /* FilterPreset.swift */; };
 		BD71E31925E1AFB5005C5E1E /* FilterPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD71E30125E1AF2A005C5E1E /* FilterPreset.swift */; };
 		BD72F2E525D1D4CE0031E422 /* InputBuffer.h in Sources */ = {isa = PBXBuildFile; fileRef = BD72F2E425D1D4CE0031E422 /* InputBuffer.h */; };
@@ -264,6 +268,9 @@
 		BD50D29225D6D76E00375455 /* FilterDSPKernelAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterDSPKernelAdapter.h; sourceTree = "<group>"; };
 		BD578EEC25D278490040D83D /* AudioUnitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitManager.swift; sourceTree = "<group>"; };
 		BD578F0D25D2C4720040D83D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BD66842B25F11F77009CF8ED /* KnobController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnobController.swift; sourceTree = "<group>"; };
+		BD66842C25F11F77009CF8ED /* Knob_macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Knob_macOS.swift; sourceTree = "<group>"; };
+		BD66842D25F11F77009CF8ED /* Knob_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Knob_iOS.swift; sourceTree = "<group>"; };
 		BD71E30125E1AF2A005C5E1E /* FilterPreset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterPreset.swift; sourceTree = "<group>"; };
 		BD72F2E425D1D4CE0031E422 /* InputBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputBuffer.h; sourceTree = "<group>"; };
 		BD75B67025DA9B7A0071F55E /* AppStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -671,6 +678,9 @@
 			isa = PBXGroup;
 			children = (
 				C4F07730223AC4F5008FFF06 /* FilterViewController.swift */,
+				BD66842D25F11F77009CF8ED /* Knob_iOS.swift */,
+				BD66842C25F11F77009CF8ED /* Knob_macOS.swift */,
+				BD66842B25F11F77009CF8ED /* KnobController.swift */,
 				C4BEE7DB22236E99001E6B6D /* TypeAliases.swift */,
 			);
 			path = "User Interface";
@@ -1132,6 +1142,7 @@
 				BD06772C24CF9FA00039F161 /* Optional+Extensions.swift in Sources */,
 				BD71E31925E1AFB5005C5E1E /* FilterPreset.swift in Sources */,
 				C4BEE80422236F6F001E6B6D /* TypeAliases.swift in Sources */,
+				BD66842E25F11F77009CF8ED /* KnobController.swift in Sources */,
 				BD18B39D24CB248200B7CB1E /* AudioComponentDescription+Extensions.swift in Sources */,
 				BDB11A5524A13C4B00DD8EF9 /* Comparble+Extensions.swift in Sources */,
 				BDB11A5C24A13F8700DD8EF9 /* Color+Extensions.swift in Sources */,
@@ -1140,6 +1151,7 @@
 				BD2FD3F5259B5130004A3196 /* AUParameterAddress+Extensions.swift in Sources */,
 				BD578EED25D278490040D83D /* AudioUnitManager.swift in Sources */,
 				BD18B3A024CB31B200B7CB1E /* AudioUnitParameters.swift in Sources */,
+				BD66843225F11F77009CF8ED /* Knob_iOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1180,6 +1192,8 @@
 				BDB11A5D24A13F8800DD8EF9 /* Color+Extensions.swift in Sources */,
 				BD71E31125E1AFB4005C5E1E /* FilterPreset.swift in Sources */,
 				BD2FD3EE259B5104004A3196 /* AUParameterTree+Extensions.swift in Sources */,
+				BD66842F25F11F77009CF8ED /* KnobController.swift in Sources */,
+				BD66843125F11F77009CF8ED /* Knob_macOS.swift in Sources */,
 				BDE2CDF624A3DF25004AC8FA /* Bundle+Extensions.swift in Sources */,
 				C4BEE80022236F6E001E6B6D /* TypeAliases.swift in Sources */,
 				BD2FD3F6259B5130004A3196 /* AUParameterAddress+Extensions.swift in Sources */,

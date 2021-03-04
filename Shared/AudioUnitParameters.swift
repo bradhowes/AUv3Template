@@ -76,17 +76,31 @@ public final class AudioUnitParameters: NSObject {
             return formatted
         }
     }
+}
+
+extension AudioUnitParameters {
 
     public subscript(address: FilterParameterAddress) -> AUParameter { parameters[address] }
 
+    public func valueFormatter(_ address: FilterParameterAddress) -> (AUValue) -> String {
+        let unitName = self[address].unitName ?? ""
+
+        let separator: String = {
+            switch address {
+            case .rate, .delay: return " "
+            default: return ""
+            }
+        }()
+
+        let format: String = formatting(address)
+
+        return { value in String(format: format, value) + separator + unitName }
+    }
+
     public func formatValue(_ address: FilterParameterAddress?, value: AUValue) -> String {
-        switch address {
-        case .depth, .feedback: return String(format: "%.2f%%", value)
-        case .rate: return String(format: "%.2f Hz", value)
-        case .delay: return String(format: "%.2f ms", value)
-        case .dryMix, .wetMix: return String(format: "%.0f%%", value)
-        default: return "?"
-        }
+        guard let address = address else { return "?" }
+        let format = formatting(address)
+        return String(format: format, value)
     }
 
     /**
@@ -100,5 +114,17 @@ public final class AudioUnitParameters: NSObject {
         self.feedback.value = preset.feedback
         self.dryMix.value = preset.dryMix
         self.wetMix.value = preset.wetMix
+    }
+}
+
+extension AudioUnitParameters {
+    private func formatting(_ address: FilterParameterAddress) -> String {
+        switch address {
+        case .depth, .feedback: return "%.2f"
+        case .rate: return "%.2f"
+        case .delay: return "%.2f"
+        case .dryMix, .wetMix: return "%.0f"
+        default: return "?"
+        }
     }
 }

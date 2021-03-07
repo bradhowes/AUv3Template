@@ -1,7 +1,7 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
 #import <XCTest/XCTest.h>
-#import <vector>
+#import <cmath>
 
 #import "DSP.h"
 
@@ -19,16 +19,6 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
 }
 
-- (void)testClamp {
-    XCTAssertEqual(DSP::clamp(0.0, 1.0, 2.0), 1.0);
-    XCTAssertEqual(DSP::clamp(1.3, 1.0, 2.0), 1.3);
-    XCTAssertEqual(DSP::clamp(2.1, 1.0, 2.0), 2.0);
-
-    XCTAssertEqual(DSP::clamp( 0.0, -1.0, 1.0),  0.0);
-    XCTAssertEqual(DSP::clamp(-1.3, -1.0, 1.0), -1.0);
-    XCTAssertEqual(DSP::clamp( 2.1, -1.0, 1.0),  1.0);
-}
-
 - (void)testUnipolarModulation {
     XCTAssertEqual(DSP::unipolarModulation(-3.0, 10.0, 20.0), 10.0);
     XCTAssertEqual(DSP::unipolarModulation(0.0, 10.0, 20.0), 10.0);
@@ -42,6 +32,10 @@
     XCTAssertEqual(DSP::bipolarModulation(-1.0, 10.0, 20.0), 10.0);
     XCTAssertEqual(DSP::bipolarModulation(0.0, 10.0, 20.0), 15.0);
     XCTAssertEqual(DSP::bipolarModulation(1.0, 10.0, 20.0), 20.0);
+
+    XCTAssertEqual(DSP::bipolarModulation(-1.0, -20.0, 13.0), -20.0);
+    XCTAssertEqual(DSP::bipolarModulation(0.0,  -20.0, 13.0), -3.5);
+    XCTAssertEqual(DSP::bipolarModulation(1.0,  -20.0, 13.0), 13.0);
 }
 
 - (void)testUnipolarToBipolar {
@@ -54,6 +48,14 @@
     XCTAssertEqual(DSP::bipolarToUnipolar(-1.0), 0.0);
     XCTAssertEqual(DSP::bipolarToUnipolar(0.0), 0.5);
     XCTAssertEqual(DSP::bipolarToUnipolar(1.0), 1.0);
+}
+
+- (void)testParabolicSineAccuracy {
+    for (int index = 0; index < 360.0; ++index) {
+        auto theta = 2.0 * M_PI * index / 360.0 - M_PI;
+        auto real = std::sin(theta);
+        XCTAssertEqualWithAccuracy(DSP::parabolicSine(theta), real, 0.0011);
+    }
 }
 
 - (void)testZZZ {

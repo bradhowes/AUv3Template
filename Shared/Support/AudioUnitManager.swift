@@ -20,17 +20,22 @@ public protocol AudioUnitManagerDelegate: class {
  send audio samples to the AudioUnit.
  */
 public final class AudioUnitManager {
-    private let log = Logging.logger("AudioUnitManager")
+    private static let log = Logging.logger("AudioUnitManager")
+    private var log: OSLog { Self.log }
+
     private let playEngine = SimplePlayEngine()
 
-    /// View controller for the AudioUnit interface
-    public private(set) var viewController: FilterViewController
+    private var _viewController: FilterViewController?
+
+    /// View controller for the AudioUnit interface. NOTE: this is only valid after the delegate `connected` function
+    /// is called -- invoked before and it will raise an fatal error.
+    public var viewController: FilterViewController { _viewController! }
 
     /// True if the audio engine is currently playing
     public var isPlaying: Bool { playEngine.isPlaying }
 
     /// The AudioUnit being managed.
-    public var audioUnit: FilterAudioUnit? { viewController.audioUnit }
+    public var audioUnit: FilterAudioUnit? { _viewController?.audioUnit }
 
     /// Delegate to signal when everything is wired up.
     public weak var delegate: AudioUnitManagerDelegate? { didSet { signalConnected() } }
@@ -39,7 +44,7 @@ public final class AudioUnitManager {
      Create a new instance. Instantiates new FilterAudioUnit and its view controller.
      */
     public init(componentDescription: AudioComponentDescription, appExtension: String) {
-        self.viewController = Self.loadViewController(appExtension: appExtension)
+        // self.viewController = Self.loadViewController(appExtension: appExtension)
         createAudioUnit(componentDescription: componentDescription)
     }
 }
@@ -71,11 +76,17 @@ extension AudioUnitManager {
             guard error == nil, let avAudioUnit = avAudioUnit else {
                 fatalError("Could not instantiate audio unit: \(String(describing: error))")
             }
-            self.wireAudioUnit(avAudioUnit)
+            avAudioUnit.auAudioUnit.requestViewController { controller in
+                guard let viewController = controller as? FilterViewController else {
+                    fatalError("Did not get FilterViewController")
+                }
+                self._viewController = viewController
+                self.wireAudioUnit(avAudioUnit, viewController: viewController)
+            }
         }
     }
 
-    private func wireAudioUnit(_ avAudioUnit: AVAudioUnit) {
+    private func wireAudioUnit(_ avAudioUnit: AVAudioUnit, viewController: FilterViewController) {
         guard let auAudioUnit = avAudioUnit.auAudioUnit as? FilterAudioUnit else {
             fatalError("avAudioUnit.auAudioUnit is nil or wrong type")
         }
@@ -86,15 +97,18 @@ extension AudioUnitManager {
     }
 
     private func signalConnected() {
-        if viewController.audioUnit != nil {
+        if _viewController?.audioUnit != nil {
             DispatchQueue.main.async { self.delegate?.connected() }
         }
     }
 
     private static func loadViewController(appExtension: String) -> FilterViewController {
+        os_log(.info, log: log, "loadViewController - %{public}s", appExtension)
         guard let url = Bundle.main.builtInPlugInsURL?.appendingPathComponent(appExtension) else {
             fatalError("Could not obtain extension bundle URL")
         }
+
+        os_log(.info, log: log, "path: %{public}s", url.path)
         guard let extensionBundle = Bundle(url: url) else { fatalError("Could not get app extension bundle") }
 
         #if os(iOS)
@@ -107,7 +121,10 @@ extension AudioUnitManager {
 
         #elseif os(macOS)
 
-        return FilterViewController(nibName: "FilterViewController", bundle: extensionBundle)
+        os_log(.info, log: log, "creating new FilterViewController")
+        let viewController = FilterViewController(nibName: "FilterViewController", bundle: extensionBundle)
+        os_log(.info, log: log, "done")
+        return viewController
 
         #endif
     }

@@ -6,7 +6,7 @@ import os
 /**
  Controller for the AUv3 filter view. Handles wiring up of the controls with AUParameter settings.
  */
-public final class FilterViewController: AUViewController {
+@objc public final class FilterViewController: AUViewController {
     private let log = Logging.logger("FilterViewController")
 
     private var viewConfig: AUAudioUnitViewConfiguration!

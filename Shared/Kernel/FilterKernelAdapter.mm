@@ -2,16 +2,16 @@
 
 #import <CoreAudioKit/CoreAudioKit.h>
 
-#import "FilterDSPKernel.h"
-#import "FilterDSPKernelAdapter.h"
+#import "FilterKernel.h"
+#import "FilterKernelAdapter.h"
 
-@implementation FilterDSPKernelAdapter {
-    FilterDSPKernel* kernel_;
+@implementation FilterKernelAdapter {
+    FilterKernel* kernel_;
 }
 
 - (instancetype)init:(NSString*)appExtensionName maxDelayMilliseconds:(float)maxDelay {
     if (self = [super init]) {
-        self->kernel_ = new FilterDSPKernel(std::string(appExtensionName.UTF8String), maxDelay);
+        self->kernel_ = new FilterKernel(std::string(appExtensionName.UTF8String), maxDelay);
     }
     return self;
 }

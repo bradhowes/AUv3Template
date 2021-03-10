@@ -10,13 +10,13 @@
 #import "KernelEventProcessor.h"
 #import "LFO.h"
 
-class FilterDSPKernel : public KernelEventProcessor<FilterDSPKernel> {
+class FilterKernel : public KernelEventProcessor<FilterKernel> {
 public:
-    using super = KernelEventProcessor<FilterDSPKernel>;
+    using super = KernelEventProcessor<FilterKernel>;
     friend super;
 
-    FilterDSPKernel(const std::string& name, double maxDelayMilliseconds)
-    : super(os_log_create(name.c_str(), "FilterDSPKernel")), maxDelayMilliseconds_{maxDelayMilliseconds},
+    FilterKernel(const std::string& name, double maxDelayMilliseconds)
+    : super(os_log_create(name.c_str(), "FilterKernel")), maxDelayMilliseconds_{maxDelayMilliseconds},
     delayLines_{}, lfo_()
     {
         lfo_.setWaveform(LFOWaveform::triangle);

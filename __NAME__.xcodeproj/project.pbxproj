@@ -45,8 +45,8 @@
 		BD446C0725E2C6A0009B7347 /* DSPTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD446BE725E2C654009B7347 /* DSPTests.mm */; };
 		BD49661624A35D8700A81F0B /* FourCharCode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49661424A35D1E00A81F0B /* FourCharCode+Extensions.swift */; };
 		BD49661724A35D8900A81F0B /* FourCharCode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49661424A35D1E00A81F0B /* FourCharCode+Extensions.swift */; };
-		BD50D29A25D6D76E00375455 /* FilterDSPKernelAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = BD50D29225D6D76E00375455 /* FilterDSPKernelAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BD50D29B25D6D76E00375455 /* FilterDSPKernelAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = BD50D29225D6D76E00375455 /* FilterDSPKernelAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD50D29A25D6D76E00375455 /* FilterKernelAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = BD50D29225D6D76E00375455 /* FilterKernelAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD50D29B25D6D76E00375455 /* FilterKernelAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = BD50D29225D6D76E00375455 /* FilterKernelAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD578EED25D278490040D83D /* AudioUnitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD578EEC25D278490040D83D /* AudioUnitManager.swift */; };
 		BD578EEE25D278490040D83D /* AudioUnitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD578EEC25D278490040D83D /* AudioUnitManager.swift */; };
 		BD63B15424AE25F80015236D /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = BD49661924A3605800A81F0B /* LICENSE.md */; };
@@ -81,13 +81,11 @@
 		BDB11A6024A13FCF00DD8EF9 /* CATransaction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB11A5E24A13FAA00DD8EF9 /* CATransaction+Extensions.swift */; };
 		BDB11A6124A13FD000DD8EF9 /* CATransaction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB11A5E24A13FAA00DD8EF9 /* CATransaction+Extensions.swift */; };
 		BDB11A6324A1530D00DD8EF9 /* LogScaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB11A6224A1530D00DD8EF9 /* LogScaling.swift */; };
-		BDB7CE90249D3C00009580D5 /* NonCopyable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BDB7CE8F249D3C00009580D5 /* NonCopyable.hpp */; };
-		BDB7CE91249D3C00009580D5 /* NonCopyable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BDB7CE8F249D3C00009580D5 /* NonCopyable.hpp */; };
 		BDB7CE93249EC556009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE92249EC556009580D5 /* Accelerate.framework */; };
 		BDB7CE94249EC565009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE92249EC556009580D5 /* Accelerate.framework */; };
 		BDB7CE95249EC570009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE92249EC556009580D5 /* Accelerate.framework */; };
-		BDB7CE97249F7694009580D5 /* ValueChangeDetector.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BDB7CE96249F7209009580D5 /* ValueChangeDetector.hpp */; };
-		BDB7CE98249F7694009580D5 /* ValueChangeDetector.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BDB7CE96249F7209009580D5 /* ValueChangeDetector.hpp */; };
+		BDB7CE97249F7694009580D5 /* ValueChangeDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = BDB7CE96249F7209009580D5 /* ValueChangeDetector.h */; };
+		BDB7CE98249F7694009580D5 /* ValueChangeDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = BDB7CE96249F7209009580D5 /* ValueChangeDetector.h */; };
 		BDB7CE9B249FC0AB009580D5 /* AUAudioUnitPreset+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB7CE99249FC026009580D5 /* AUAudioUnitPreset+Extensions.swift */; };
 		BDB7CE9C249FC0AC009580D5 /* AUAudioUnitPreset+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB7CE99249FC026009580D5 /* AUAudioUnitPreset+Extensions.swift */; };
 		BDB7CE9E249FC152009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE9D249FC152009580D5 /* Accelerate.framework */; };
@@ -115,11 +113,11 @@
 		C4BEE7D122236A58001E6B6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BEE7C622236A58001E6B6D /* Assets.xcassets */; };
 		C4BEE7D222236A58001E6B6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4BEE7C722236A58001E6B6D /* Main.storyboard */; };
 		C4BEE7D322236A58001E6B6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BEE7C922236A58001E6B6D /* AppDelegate.swift */; };
-		C4BEE7EE22236F24001E6B6D /* FilterDSPKernel.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E322236E99001E6B6D /* FilterDSPKernel.h */; };
-		C4BEE7EF22236F24001E6B6D /* RampingValueChangeDetector.hpp in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E522236E99001E6B6D /* RampingValueChangeDetector.hpp */; };
+		C4BEE7EE22236F24001E6B6D /* FilterKernel.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E322236E99001E6B6D /* FilterKernel.h */; };
+		C4BEE7EF22236F24001E6B6D /* RampingValueChangeDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E522236E99001E6B6D /* RampingValueChangeDetector.h */; };
 		C4BEE7F022236F24001E6B6D /* KernelEventProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E622236E99001E6B6D /* KernelEventProcessor.h */; };
-		C4BEE7F222236F27001E6B6D /* FilterDSPKernel.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E322236E99001E6B6D /* FilterDSPKernel.h */; };
-		C4BEE7F322236F27001E6B6D /* RampingValueChangeDetector.hpp in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E522236E99001E6B6D /* RampingValueChangeDetector.hpp */; };
+		C4BEE7F222236F27001E6B6D /* FilterKernel.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E322236E99001E6B6D /* FilterKernel.h */; };
+		C4BEE7F322236F27001E6B6D /* RampingValueChangeDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E522236E99001E6B6D /* RampingValueChangeDetector.h */; };
 		C4BEE7F422236F27001E6B6D /* KernelEventProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE7E622236E99001E6B6D /* KernelEventProcessor.h */; };
 		C4BEE80022236F6E001E6B6D /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BEE7DB22236E99001E6B6D /* TypeAliases.swift */; };
 		C4BEE80122236F6E001E6B6D /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BEE7D722236E99001E6B6D /* View+Extensions.swift */; };
@@ -131,8 +129,8 @@
 		C4BEE8172223736F001E6B6D /* __NAME__Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE8162223736F001E6B6D /* __NAME__Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C4BEE81922237394001E6B6D /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; };
 		C4BEE81A222373A6001E6B6D /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* __NAME__Framework.framework */; };
-		C4F004A32239B1E10014E248 /* FilterDSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A02239B1E10014E248 /* FilterDSPKernelAdapter.mm */; };
-		C4F004A42239B1E10014E248 /* FilterDSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A02239B1E10014E248 /* FilterDSPKernelAdapter.mm */; };
+		C4F004A32239B1E10014E248 /* FilterKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A02239B1E10014E248 /* FilterKernelAdapter.mm */; };
+		C4F004A42239B1E10014E248 /* FilterKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A02239B1E10014E248 /* FilterKernelAdapter.mm */; };
 		C4F004A62239B2070014E248 /* FilterAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A52239B2070014E248 /* FilterAudioUnit.swift */; };
 		C4F004A72239B2070014E248 /* FilterAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A52239B2070014E248 /* FilterAudioUnit.swift */; };
 		C4F07731223AC4F5008FFF06 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F07730223AC4F5008FFF06 /* FilterViewController.swift */; };
@@ -265,7 +263,7 @@
 		BD446BE725E2C654009B7347 /* DSPTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DSPTests.mm; sourceTree = "<group>"; };
 		BD49661424A35D1E00A81F0B /* FourCharCode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourCharCode+Extensions.swift"; sourceTree = "<group>"; };
 		BD49661924A3605800A81F0B /* LICENSE.md */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = LICENSE.md; sourceTree = "<group>"; };
-		BD50D29225D6D76E00375455 /* FilterDSPKernelAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterDSPKernelAdapter.h; sourceTree = "<group>"; };
+		BD50D29225D6D76E00375455 /* FilterKernelAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterKernelAdapter.h; sourceTree = "<group>"; };
 		BD578EEC25D278490040D83D /* AudioUnitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitManager.swift; sourceTree = "<group>"; };
 		BD578F0D25D2C4720040D83D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BD66842B25F11F77009CF8ED /* KnobController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnobController.swift; sourceTree = "<group>"; };
@@ -291,9 +289,8 @@
 		BDB11A5A24A13F2A00DD8EF9 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		BDB11A5E24A13FAA00DD8EF9 /* CATransaction+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransaction+Extensions.swift"; sourceTree = "<group>"; };
 		BDB11A6224A1530D00DD8EF9 /* LogScaling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogScaling.swift; sourceTree = "<group>"; };
-		BDB7CE8F249D3C00009580D5 /* NonCopyable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NonCopyable.hpp; sourceTree = "<group>"; };
 		BDB7CE92249EC556009580D5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		BDB7CE96249F7209009580D5 /* ValueChangeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ValueChangeDetector.hpp; sourceTree = "<group>"; };
+		BDB7CE96249F7209009580D5 /* ValueChangeDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueChangeDetector.h; sourceTree = "<group>"; };
 		BDB7CE99249FC026009580D5 /* AUAudioUnitPreset+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUAudioUnitPreset+Extensions.swift"; sourceTree = "<group>"; };
 		BDB7CE9D249FC152009580D5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.5.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
@@ -329,8 +326,8 @@
 		C4BEE7CA22236A58001E6B6D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4BEE7D722236E99001E6B6D /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		C4BEE7DB22236E99001E6B6D /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
-		C4BEE7E322236E99001E6B6D /* FilterDSPKernel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterDSPKernel.h; sourceTree = "<group>"; };
-		C4BEE7E522236E99001E6B6D /* RampingValueChangeDetector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RampingValueChangeDetector.hpp; sourceTree = "<group>"; };
+		C4BEE7E322236E99001E6B6D /* FilterKernel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterKernel.h; sourceTree = "<group>"; };
+		C4BEE7E522236E99001E6B6D /* RampingValueChangeDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RampingValueChangeDetector.h; sourceTree = "<group>"; };
 		C4BEE7E622236E99001E6B6D /* KernelEventProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KernelEventProcessor.h; sourceTree = "<group>"; };
 		C4BEE80822237078001E6B6D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C4BEE80A222370B2001E6B6D /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -341,7 +338,7 @@
 		C4BEE81B22237772001E6B6D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		C4C9EAAB2227D79D003FEE1C /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		C4CE62D8222601070055FE6B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		C4F004A02239B1E10014E248 /* FilterDSPKernelAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FilterDSPKernelAdapter.mm; sourceTree = "<group>"; };
+		C4F004A02239B1E10014E248 /* FilterKernelAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FilterKernelAdapter.mm; sourceTree = "<group>"; };
 		C4F004A52239B2070014E248 /* FilterAudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAudioUnit.swift; sourceTree = "<group>"; };
 		C4F07730223AC4F5008FFF06 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -486,17 +483,27 @@
 			isa = PBXGroup;
 			children = (
 				BD578F0D25D2C4720040D83D /* README.md */,
+				C4BEE7E322236E99001E6B6D /* FilterKernel.h */,
+				BD50D29225D6D76E00375455 /* FilterKernelAdapter.h */,
+				C4F004A02239B1E10014E248 /* FilterKernelAdapter.mm */,
+				BDDCA51D25F8B526009C1AA7 /* DSP */,
+			);
+			path = Kernel;
+			sourceTree = "<group>";
+		};
+		BDDCA51D25F8B526009C1AA7 /* DSP */ = {
+			isa = PBXGroup;
+			children = (
+				BD446BB525E2B741009B7347 /* DSP.h */,
 				BD24B3FB25F1133500338362 /* Biquad.h */,
 				BD1F7BAB249FF7EF00960DA3 /* DelayBuffer.h */,
 				BD446BAB25E2B4C5009B7347 /* LFO.h */,
-				BD446BB525E2B741009B7347 /* DSP.h */,
-				C4BEE7E322236E99001E6B6D /* FilterDSPKernel.h */,
-				BD50D29225D6D76E00375455 /* FilterDSPKernelAdapter.h */,
-				C4F004A02239B1E10014E248 /* FilterDSPKernelAdapter.mm */,
-				BD72F2E425D1D4CE0031E422 /* InputBuffer.h */,
 				C4BEE7E622236E99001E6B6D /* KernelEventProcessor.h */,
+				BD72F2E425D1D4CE0031E422 /* InputBuffer.h */,
+				C4BEE7E522236E99001E6B6D /* RampingValueChangeDetector.h */,
+				BDB7CE96249F7209009580D5 /* ValueChangeDetector.h */,
 			);
-			path = Kernel;
+			path = DSP;
 			sourceTree = "<group>";
 		};
 		C437FE2F2223672C008D6C09 = {
@@ -644,11 +651,8 @@
 			children = (
 				BD578EEC25D278490040D83D /* AudioUnitManager.swift */,
 				BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */,
-				BDB7CE8F249D3C00009580D5 /* NonCopyable.hpp */,
-				C4BEE7E522236E99001E6B6D /* RampingValueChangeDetector.hpp */,
-				BDB7CE96249F7209009580D5 /* ValueChangeDetector.hpp */,
-				BD49661824A35F3900A81F0B /* Class Extensions */,
 				C4DCBAD5223ADE79000D9CB3 /* Audio */,
+				BD49661824A35F3900A81F0B /* Class Extensions */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -707,15 +711,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4BEE8172223736F001E6B6D /* __NAME__Framework.h in Headers */,
-				BD50D29A25D6D76E00375455 /* FilterDSPKernelAdapter.h in Headers */,
+				BD50D29A25D6D76E00375455 /* FilterKernelAdapter.h in Headers */,
 				BD1F7BAE249FF7EF00960DA3 /* DelayBuffer.h in Headers */,
 				BD446BB625E2B741009B7347 /* DSP.h in Headers */,
 				BD446BAC25E2B4C5009B7347 /* LFO.h in Headers */,
-				BDB7CE97249F7694009580D5 /* ValueChangeDetector.hpp in Headers */,
-				C4BEE7EF22236F24001E6B6D /* RampingValueChangeDetector.hpp in Headers */,
+				BDB7CE97249F7694009580D5 /* ValueChangeDetector.h in Headers */,
+				C4BEE7EF22236F24001E6B6D /* RampingValueChangeDetector.h in Headers */,
 				BD24B3FC25F1133500338362 /* Biquad.h in Headers */,
-				BDB7CE90249D3C00009580D5 /* NonCopyable.hpp in Headers */,
-				C4BEE7EE22236F24001E6B6D /* FilterDSPKernel.h in Headers */,
+				C4BEE7EE22236F24001E6B6D /* FilterKernel.h in Headers */,
 				C4BEE7F022236F24001E6B6D /* KernelEventProcessor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -725,15 +728,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C496341422238CFA001D1F5B /* __NAME__Framework.h in Headers */,
-				BD50D29B25D6D76E00375455 /* FilterDSPKernelAdapter.h in Headers */,
+				BD50D29B25D6D76E00375455 /* FilterKernelAdapter.h in Headers */,
 				BD1F7BAF249FF7EF00960DA3 /* DelayBuffer.h in Headers */,
 				BD446BB725E2B741009B7347 /* DSP.h in Headers */,
 				BD446BAD25E2B4C5009B7347 /* LFO.h in Headers */,
-				BDB7CE98249F7694009580D5 /* ValueChangeDetector.hpp in Headers */,
-				C4BEE7F322236F27001E6B6D /* RampingValueChangeDetector.hpp in Headers */,
+				BDB7CE98249F7694009580D5 /* ValueChangeDetector.h in Headers */,
+				C4BEE7F322236F27001E6B6D /* RampingValueChangeDetector.h in Headers */,
 				BD24B3FD25F1133500338362 /* Biquad.h in Headers */,
-				BDB7CE91249D3C00009580D5 /* NonCopyable.hpp in Headers */,
-				C4BEE7F222236F27001E6B6D /* FilterDSPKernel.h in Headers */,
+				C4BEE7F222236F27001E6B6D /* FilterKernel.h in Headers */,
 				C4BEE7F422236F27001E6B6D /* KernelEventProcessor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1149,7 +1151,7 @@
 				BDB11A5524A13C4B00DD8EF9 /* Comparble+Extensions.swift in Sources */,
 				BDB11A5C24A13F8700DD8EF9 /* Color+Extensions.swift in Sources */,
 				BDB7CE9B249FC0AB009580D5 /* AUAudioUnitPreset+Extensions.swift in Sources */,
-				C4F004A32239B1E10014E248 /* FilterDSPKernelAdapter.mm in Sources */,
+				C4F004A32239B1E10014E248 /* FilterKernelAdapter.mm in Sources */,
 				BD2FD3F5259B5130004A3196 /* AUParameterAddress+Extensions.swift in Sources */,
 				BD578EED25D278490040D83D /* AudioUnitManager.swift in Sources */,
 				BD18B3A024CB31B200B7CB1E /* AudioUnitParameters.swift in Sources */,
@@ -1203,7 +1205,7 @@
 				C4A3D65C223FF12A002784D4 /* SimplePlayEngine.swift in Sources */,
 				BD49661724A35D8900A81F0B /* FourCharCode+Extensions.swift in Sources */,
 				BDB11A6124A13FD000DD8EF9 /* CATransaction+Extensions.swift in Sources */,
-				C4F004A42239B1E10014E248 /* FilterDSPKernelAdapter.mm in Sources */,
+				C4F004A42239B1E10014E248 /* FilterKernelAdapter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

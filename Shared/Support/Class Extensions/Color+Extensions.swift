@@ -1,9 +1,9 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
-public extension Color {
+extension Color {
 
     /// Obtain a darker variation of the current color
-    var darker: Color {
+    public var darker: Color {
         var hue: CGFloat = 0
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
@@ -18,7 +18,7 @@ public extension Color {
     }
 
     /// Obtain a lighter variation of the current color
-    var lighter: Color {
+    public var lighter: Color {
         var hue: CGFloat = 0
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0

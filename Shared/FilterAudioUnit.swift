@@ -6,9 +6,9 @@ import CoreAudioKit
 import os
 
 /**
- Derivation of AUAudioUnit that provides a Swift container for the C++ FilterDSPKernel (by way of the Obj-C
- FilterDSPKernelAdapter). Also provides for factory presets and preset management. The actual filtering logic
- resides in the FilterDSPKernel class.
+ Derivation of AUAudioUnit that provides a Swift container for the C++ FilterKernel (by way of the Obj-C
+ FilterKernelAdapter). Also provides for factory presets and preset management. The actual filtering logic
+ resides in the FilterKernel class.
  */
 public final class FilterAudioUnit: AUAudioUnit {
     private static let log = Logging.logger("FilterAudioUnit")
@@ -133,8 +133,8 @@ public final class FilterAudioUnit: AUAudioUnit {
     /// Maximum frames to render
     private let maxFramesToRender: UInt32 = 512
     /// Objective-C bridge into the C++ kernel
-    private let kernel = FilterDSPKernelAdapter(Bundle.main.auBaseName,
-                                                maxDelayMilliseconds: AudioUnitParameters.maxDelayMilliseconds)
+    private let kernel = FilterKernelAdapter(Bundle.main.auBaseName,
+                                             maxDelayMilliseconds: AudioUnitParameters.maxDelayMilliseconds)
 
     private let factoryPresetValues:[(name: String, preset: FilterPreset)] = [
         ("Flangie", FilterPreset(depth: 100, rate: 0.14, delay: 0.72, feedback: 50, dryMix: 50, wetMix: 50)),

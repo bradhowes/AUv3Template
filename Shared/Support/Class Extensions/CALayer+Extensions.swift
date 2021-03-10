@@ -2,9 +2,9 @@
 
 import Foundation
 
-public extension CALayer {
+extension CALayer {
 
-    convenience init(color: Color, frame: CGRect) {
+    public convenience init(color: Color, frame: CGRect) {
         self.init()
         backgroundColor = color.cgColor
         self.frame = frame

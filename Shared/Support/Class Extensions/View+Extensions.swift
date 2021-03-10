@@ -1,8 +1,8 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
-public extension View {
+extension View {
 
-    func pinToSuperviewEdges() {
+    public func pinToSuperviewEdges() {
         guard let superview = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

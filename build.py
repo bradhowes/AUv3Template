@@ -8,19 +8,19 @@ import subprocess
 import sys
 
 
-def substituteName(content, name):
-    return content.replace('__NAME__', name)
+def substituteName(content, name, subtype):
+    return content.replace('__NAME__', name).replace('__SUBTYPE__', subtype)
 
-def makeDestPath(sourcePath, destDir, name):
-    return substituteName(os.path.join(destDir, sourcePath), name)
+def makeDestPath(sourcePath, destDir, name, subtype):
+    return substituteName(os.path.join(destDir, sourcePath), name, subtype)
 
-def buildFile(sourcePath, destPath, name):
+def buildFile(sourcePath, destPath, name, subtype):
     justCopy = ['.py', '.png', '.caf', '.wav', '.xcuserstate', '.opacity']
     os.makedirs(os.path.split(destPath)[0], exist_ok=True)
     if os.path.splitext(destPath)[1] in justCopy:
         shutil.copy2(sourcePath, destPath)
     else:
-        open(destPath, 'w').write(substituteName(open(sourcePath, 'r').read(), name))
+        open(destPath, 'w').write(substituteName(open(sourcePath, 'r').read(), name, subtype))
 
 def runCommand(step, *args):
     print('--', step)
@@ -36,7 +36,7 @@ def createRepo(destDir):
     runCommand('stagiing files', 'git', 'add', '-A')
     runCommand('committing to repo', 'git', 'commit', '-m', 'Yeah! Initial commit')
 
-def build(name):
+def build(name, subtype):
     destDir = os.path.join('..', name)
     if os.path.exists(destDir):
         print('** destination', destDir, 'exists')
@@ -49,8 +49,8 @@ def build(name):
             if filename == '.DS_Store': continue
             sourcePath = os.path.join(dirname, filename)[2:]
             print('--', sourcePath)
-            buildFile(sourcePath, makeDestPath(sourcePath, destDir, name), name)
+            buildFile(sourcePath, makeDestPath(sourcePath, destDir, name, subtype), name, subtype)
     createRepo(destDir)
 
 if __name__ == '__main__':
-    build(sys.argv[1])
+    build(sys.argv[1], sys.argv[2])

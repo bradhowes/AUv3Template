@@ -14,7 +14,7 @@
 		BD18B39F24CB31B200B7CB1E /* AudioUnitParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD18B39E24CB31B200B7CB1E /* AudioUnitParameters.swift */; };
 		BD18B3A024CB31B200B7CB1E /* AudioUnitParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD18B39E24CB31B200B7CB1E /* AudioUnitParameters.swift */; };
 		BD1D249525D4831B00523748 /* BundlePropertiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D249425D4831B00523748 /* BundlePropertiesTests.swift */; };
-		BD1D24AE25D486A800523748 /* FilterFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* FilterFramework.framework */; platformFilter = ios; };
+		BD1D24AE25D486A800523748 /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; platformFilter = ios; };
 		BD1D24C625D48B8500523748 /* ValueChangeDetectorTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD95148224A090E400D8024C /* ValueChangeDetectorTests.mm */; };
 		BD1D24CD25D48B8E00523748 /* RampingValueChangeDetectorTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD95148424A092E800D8024C /* RampingValueChangeDetectorTests.mm */; };
 		BD1D24D425D48B9600523748 /* LogScaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB11A6224A1530D00DD8EF9 /* LogScaling.swift */; };
@@ -22,7 +22,7 @@
 		BD1D24E225D48BA200523748 /* BundlePropertiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D249425D4831B00523748 /* BundlePropertiesTests.swift */; };
 		BD1D24E925D48BA800523748 /* NewSwiftTestTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD95147724A08BB600D8024C /* NewSwiftTestTemplate.swift */; };
 		BD1D24F625D48D8100523748 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE92249EC556009580D5 /* Accelerate.framework */; };
-		BD1D24FE25D48DB700523748 /* FilterFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* FilterFramework.framework */; };
+		BD1D24FE25D48DB700523748 /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; };
 		BD1D257925D5AAB000523748 /* Snapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D257825D5AAB000523748 /* Snapshots.swift */; };
 		BD1D258825D5AAE300523748 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D258725D5AAE300523748 /* SnapshotHelper.swift */; };
 		BD1F7BAE249FF7EF00960DA3 /* DelayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = BD1F7BAB249FF7EF00960DA3 /* DelayBuffer.h */; };
@@ -98,15 +98,15 @@
 		BDE2CDF524A3DF24004AC8FA /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDF324A3DF13004AC8FA /* Bundle+Extensions.swift */; };
 		BDE2CDF624A3DF25004AC8FA /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDF324A3DF13004AC8FA /* Bundle+Extensions.swift */; };
 		C433F56122404C7C00F1B750 /* FilterViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433F56022404C7C00F1B750 /* FilterViewControllerExtension.swift */; };
-		C437FE59222367CD008D6C09 /* FilterFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* FilterFramework.framework */; };
-		C437FE5A222367CD008D6C09 /* FilterFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* FilterFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C437FE59222367CD008D6C09 /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; };
+		C437FE5A222367CD008D6C09 /* __NAME__Framework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C437FE712223686D008D6C09 /* __NAME__AU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FE632223686D008D6C09 /* __NAME__AU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C4660A5C2225F9A0007BE3B1 /* FilterFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* FilterFramework.framework */; };
-		C4660A5D2225F9A0007BE3B1 /* FilterFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* FilterFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4660A5C2225F9A0007BE3B1 /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* __NAME__Framework.framework */; };
+		C4660A5D2225F9A0007BE3B1 /* __NAME__Framework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* __NAME__Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C4660A602225F9A0007BE3B1 /* __NAME__AU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FEA0222368B7008D6C09 /* __NAME__AU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C46B8B8122418B6000E00B1E /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C9EAAB2227D79D003FEE1C /* FilterViewController.xib */; };
 		C4737B0B2231D930002CAD0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4737B0A2231D930002CAD0B /* AudioToolbox.framework */; };
-		C496341422238CFA001D1F5B /* FilterFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE80D2223713E001E6B6D /* FilterFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C496341422238CFA001D1F5B /* __NAME__Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE80D2223713E001E6B6D /* __NAME__Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C4A3D65B223FF12A002784D4 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3D65A223FF12A002784D4 /* SimplePlayEngine.swift */; };
 		C4A3D65C223FF12A002784D4 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3D65A223FF12A002784D4 /* SimplePlayEngine.swift */; };
 		C4BEE7B122236A29001E6B6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BEE7A422236A29001E6B6D /* Assets.xcassets */; };
@@ -128,9 +128,9 @@
 		C4BEE80922237078001E6B6D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BEE80822237078001E6B6D /* MainViewController.swift */; };
 		C4BEE81022237302001E6B6D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BEE80F22237302001E6B6D /* MainViewController.swift */; };
 		C4BEE8132223734E001E6B6D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4BEE8112223734E001E6B6D /* MainInterface.storyboard */; };
-		C4BEE8172223736F001E6B6D /* FilterFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE8162223736F001E6B6D /* FilterFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C4BEE81922237394001E6B6D /* FilterFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* FilterFramework.framework */; };
-		C4BEE81A222373A6001E6B6D /* FilterFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* FilterFramework.framework */; };
+		C4BEE8172223736F001E6B6D /* __NAME__Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BEE8162223736F001E6B6D /* __NAME__Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C4BEE81922237394001E6B6D /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; };
+		C4BEE81A222373A6001E6B6D /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE8F222368A1008D6C09 /* __NAME__Framework.framework */; };
 		C4F004A32239B1E10014E248 /* FilterDSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A02239B1E10014E248 /* FilterDSPKernelAdapter.mm */; };
 		C4F004A42239B1E10014E248 /* FilterDSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A02239B1E10014E248 /* FilterDSPKernelAdapter.mm */; };
 		C4F004A62239B2070014E248 /* FilterAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F004A52239B2070014E248 /* FilterAudioUnit.swift */; };
@@ -159,14 +159,14 @@
 			containerPortal = C437FE302223672C008D6C09 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C437FE8E222368A1008D6C09;
-			remoteInfo = "AUv3FilterFramework macOS";
+			remoteInfo = "AUv3__NAME__Framework macOS";
 		};
 		C437FE57222367CD008D6C09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C437FE302223672C008D6C09 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C437FE51222367CD008D6C09;
-			remoteInfo = "AUv3FilterFramework iOS";
+			remoteInfo = "AUv3__NAME__Framework iOS";
 		};
 		C437FE6F2223686D008D6C09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -180,7 +180,7 @@
 			containerPortal = C437FE302223672C008D6C09 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C437FE8E222368A1008D6C09;
-			remoteInfo = "AUv3FilterFramework macOS";
+			remoteInfo = "AUv3__NAME__Framework macOS";
 		};
 		C4660A612225F9A0007BE3B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -198,7 +198,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C437FE5A222367CD008D6C09 /* FilterFramework.framework in Embed Frameworks */,
+				C437FE5A222367CD008D6C09 /* __NAME__Framework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +220,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C4660A5D2225F9A0007BE3B1 /* FilterFramework.framework in Embed Frameworks */,
+				C4660A5D2225F9A0007BE3B1 /* __NAME__Framework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,10 +305,10 @@
 		C4201A2822403120006E4333 /* FilterViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewControllerExtension.swift; sourceTree = "<group>"; };
 		C433F56022404C7C00F1B750 /* FilterViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewControllerExtension.swift; sourceTree = "<group>"; };
 		C437FE3A222367A6008D6C09 /* __NAME__Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = __NAME__Host.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FE52222367CD008D6C09 /* FilterFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FilterFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE52222367CD008D6C09 /* __NAME__Framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = __NAME__Framework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C437FE632223686D008D6C09 /* __NAME__AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = __NAME__AU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C437FE7A2223688D008D6C09 /* __NAME__.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = __NAME__.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FE8F222368A1008D6C09 /* FilterFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FilterFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE8F222368A1008D6C09 /* __NAME__Framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = __NAME__Framework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C437FEA0222368B7008D6C09 /* __NAME__AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = __NAME__AU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44F544422260E2500484B67 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C44F544622260E2C00484B67 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
@@ -334,10 +334,10 @@
 		C4BEE7E622236E99001E6B6D /* KernelEventProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KernelEventProcessor.h; sourceTree = "<group>"; };
 		C4BEE80822237078001E6B6D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C4BEE80A222370B2001E6B6D /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
-		C4BEE80D2223713E001E6B6D /* FilterFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterFramework.h; sourceTree = "<group>"; };
+		C4BEE80D2223713E001E6B6D /* __NAME__Framework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __NAME__Framework.h; sourceTree = "<group>"; };
 		C4BEE80F22237302001E6B6D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C4BEE8122223734E001E6B6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		C4BEE8162223736F001E6B6D /* FilterFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterFramework.h; sourceTree = "<group>"; };
+		C4BEE8162223736F001E6B6D /* __NAME__Framework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __NAME__Framework.h; sourceTree = "<group>"; };
 		C4BEE81B22237772001E6B6D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		C4C9EAAB2227D79D003FEE1C /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		C4CE62D8222601070055FE6B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -352,7 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD1D24F625D48D8100523748 /* Accelerate.framework in Frameworks */,
-				BD1D24AE25D486A800523748 /* FilterFramework.framework in Frameworks */,
+				BD1D24AE25D486A800523748 /* __NAME__Framework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +367,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD1D24FE25D48DB700523748 /* FilterFramework.framework in Frameworks */,
+				BD1D24FE25D48DB700523748 /* __NAME__Framework.framework in Frameworks */,
 				BD938B5724A781C200892358 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,7 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDB7CE9E249FC152009580D5 /* Accelerate.framework in Frameworks */,
-				C437FE59222367CD008D6C09 /* FilterFramework.framework in Frameworks */,
+				C437FE59222367CD008D6C09 /* __NAME__Framework.framework in Frameworks */,
 				C4737B0B2231D930002CAD0B /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,7 +394,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4BEE81922237394001E6B6D /* FilterFramework.framework in Frameworks */,
+				C4BEE81922237394001E6B6D /* __NAME__Framework.framework in Frameworks */,
 				BDB7CE9F249FC157009580D5 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,7 +403,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4660A5C2225F9A0007BE3B1 /* FilterFramework.framework in Frameworks */,
+				C4660A5C2225F9A0007BE3B1 /* __NAME__Framework.framework in Frameworks */,
 				BDB7CE93249EC556009580D5 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,7 +420,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4BEE81A222373A6001E6B6D /* FilterFramework.framework in Frameworks */,
+				C4BEE81A222373A6001E6B6D /* __NAME__Framework.framework in Frameworks */,
 				BDB7CE94249EC565009580D5 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,10 +520,10 @@
 			isa = PBXGroup;
 			children = (
 				C437FE3A222367A6008D6C09 /* __NAME__Host.app */,
-				C437FE52222367CD008D6C09 /* FilterFramework.framework */,
+				C437FE52222367CD008D6C09 /* __NAME__Framework.framework */,
 				C437FE632223686D008D6C09 /* __NAME__AU.appex */,
 				C437FE7A2223688D008D6C09 /* __NAME__.app */,
-				C437FE8F222368A1008D6C09 /* FilterFramework.framework */,
+				C437FE8F222368A1008D6C09 /* __NAME__Framework.framework */,
 				C437FEA0222368B7008D6C09 /* __NAME__AU.appex */,
 				BD95147524A08BB600D8024C /* macOS Tests.xctest */,
 				BD1D24A925D486A700523748 /* iOS Tests.xctest */,
@@ -556,7 +556,7 @@
 		C4BEE79F22236A29001E6B6D /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				C4BEE8162223736F001E6B6D /* FilterFramework.h */,
+				C4BEE8162223736F001E6B6D /* __NAME__Framework.h */,
 				C4BEE7A122236A29001E6B6D /* Info.plist */,
 			);
 			path = Framework;
@@ -602,7 +602,7 @@
 		C4BEE7C022236A58001E6B6D /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				C4BEE80D2223713E001E6B6D /* FilterFramework.h */,
+				C4BEE80D2223713E001E6B6D /* __NAME__Framework.h */,
 				C4BEE7C222236A58001E6B6D /* Info.plist */,
 			);
 			path = Framework;
@@ -706,7 +706,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4BEE8172223736F001E6B6D /* FilterFramework.h in Headers */,
+				C4BEE8172223736F001E6B6D /* __NAME__Framework.h in Headers */,
 				BD50D29A25D6D76E00375455 /* FilterDSPKernelAdapter.h in Headers */,
 				BD1F7BAE249FF7EF00960DA3 /* DelayBuffer.h in Headers */,
 				BD446BB625E2B741009B7347 /* DSP.h in Headers */,
@@ -724,7 +724,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C496341422238CFA001D1F5B /* FilterFramework.h in Headers */,
+				C496341422238CFA001D1F5B /* __NAME__Framework.h in Headers */,
 				BD50D29B25D6D76E00375455 /* FilterDSPKernelAdapter.h in Headers */,
 				BD1F7BAF249FF7EF00960DA3 /* DelayBuffer.h in Headers */,
 				BD446BB725E2B741009B7347 /* DSP.h in Headers */,
@@ -830,8 +830,8 @@
 			dependencies = (
 			);
 			name = "iOS Framework";
-			productName = "AUv3FilterFramework iOS";
-			productReference = C437FE52222367CD008D6C09 /* FilterFramework.framework */;
+			productName = "AUv3__NAME__Framework iOS";
+			productReference = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C437FE622223686D008D6C09 /* iOS Extension */ = {
@@ -886,8 +886,8 @@
 			dependencies = (
 			);
 			name = "macOS Framework";
-			productName = "AUv3FilterFramework macOS";
-			productReference = C437FE8F222368A1008D6C09 /* FilterFramework.framework */;
+			productName = "AUv3__NAME__Framework macOS";
+			productReference = C437FE8F222368A1008D6C09 /* __NAME__Framework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C437FE9F222368B7008D6C09 /* macOS Extension */ = {
@@ -1759,7 +1759,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__.framework;
-				PRODUCT_NAME = FilterFramework;
+				PRODUCT_NAME = __NAME__Framework;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1985,8 +1985,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__.framework;
-				PRODUCT_MODULE_NAME = FilterFramework;
-				PRODUCT_NAME = FilterFramework;
+				PRODUCT_MODULE_NAME = __NAME__Framework;
+				PRODUCT_NAME = __NAME__Framework;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -2229,7 +2229,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__.framework;
-				PRODUCT_NAME = FilterFramework;
+				PRODUCT_NAME = __NAME__Framework;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2474,8 +2474,8 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__.framework;
-				PRODUCT_MODULE_NAME = FilterFramework;
-				PRODUCT_NAME = FilterFramework;
+				PRODUCT_MODULE_NAME = __NAME__Framework;
+				PRODUCT_NAME = __NAME__Framework;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;

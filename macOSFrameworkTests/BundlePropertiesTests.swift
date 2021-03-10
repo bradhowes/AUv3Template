@@ -1,7 +1,7 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
 import XCTest
-import FilterFramework
+import __NAME__Framework
 
 extension Bundle {
     func info(for key: String) -> String { infoDictionary?[key] as! String }
@@ -16,12 +16,12 @@ extension Bundle {
 class BundlePropertiesTests: XCTestCase {
 
     func testComponentAttributes() throws {
-        let bundle = Bundle(for: FilterFramework.FilterAudioUnit.self)
+        let bundle = Bundle(for: __NAME__Framework.FilterAudioUnit.self)
         XCTAssertEqual("__NAME__", bundle.auBaseName)
         XCTAssertEqual("B-Ray: __NAME__", bundle.auComponentName)
         XCTAssertEqual("aufx", bundle.auComponentType)
         XCTAssertEqual("flng", bundle.auComponentSubtype)
         XCTAssertEqual("BRay", bundle.auComponentManufacturer)
-        XCTAssertEqual("FilterFramework.FilterViewController", bundle.auFactoryFunction)
+        XCTAssertEqual("__NAME__Framework.FilterViewController", bundle.auFactoryFunction)
     }
 }

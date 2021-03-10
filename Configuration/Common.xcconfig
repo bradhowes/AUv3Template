@@ -23,4 +23,4 @@ AU_COMPONENT_MANUFACTURER = BRay
 
 // The bundle / class that will be used to instantiate the AUv3. It must implement the `AUAudioUnitFactory`
 // protocol.
-AU_FACTORY_FUNCTION = FilterFramework.FilterViewController
+AU_FACTORY_FUNCTION = __NAME__Framework.FilterViewController

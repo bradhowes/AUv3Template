@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="FilterViewController" customModule="FilterFramework">
+        <customObject id="-2" userLabel="File's Owner" customClass="FilterViewController" customModule="__NAME__Framework">
             <connections>
                 <outlet property="delayControl" destination="1VT-Na-dOb" id="SJt-NU-97M"/>
                 <outlet property="delayValueLabel" destination="aOT-T3-0Np" id="wc3-cA-O6c"/>
@@ -30,7 +30,7 @@
                 <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oPI-wC-N8q">
                     <rect key="frame" x="102" y="38" width="384" height="224"/>
                     <subviews>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="vJE-Qk-G6z" customClass="Knob" customModule="FilterFramework">
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="vJE-Qk-G6z" customClass="Knob" customModule="__NAME__Framework">
                             <rect key="frame" x="20" y="124" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="QUK-PT-mqw"/>
@@ -40,7 +40,7 @@
                                 <action selector="depthChanged:" target="-2" id="XyO-qx-ME0"/>
                             </connections>
                         </customView>
-                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNZ-OF-PRt" customClass="FocusAwareTextField" customModule="FilterFramework">
+                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNZ-OF-PRt" customClass="FocusAwareTextField" customModule="__NAME__Framework">
                             <rect key="frame" x="18" y="116" width="84" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="wMm-uE-pHU"/>
@@ -51,7 +51,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </textFieldCell>
                         </textField>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="25e-Ls-Yhr" customClass="Knob" customModule="FilterFramework">
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="25e-Ls-Yhr" customClass="Knob" customModule="__NAME__Framework">
                             <rect key="frame" x="108" y="124" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="EDP-SX-7Vf"/>
@@ -61,7 +61,7 @@
                                 <action selector="rateChanged:" target="-2" id="9xy-8C-djC"/>
                             </connections>
                         </customView>
-                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuF-pJ-Rk3" customClass="FocusAwareTextField" customModule="FilterFramework">
+                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuF-pJ-Rk3" customClass="FocusAwareTextField" customModule="__NAME__Framework">
                             <rect key="frame" x="106" y="116" width="84" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="A7M-iM-efX"/>
@@ -72,7 +72,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </textFieldCell>
                         </textField>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="1VT-Na-dOb" customClass="Knob" customModule="FilterFramework">
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="1VT-Na-dOb" customClass="Knob" customModule="__NAME__Framework">
                             <rect key="frame" x="196" y="124" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="C1h-AW-fOA"/>
@@ -82,7 +82,7 @@
                                 <action selector="delayChanged:" target="-2" id="TWP-Z8-m03"/>
                             </connections>
                         </customView>
-                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOT-T3-0Np" customClass="FocusAwareTextField" customModule="FilterFramework">
+                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOT-T3-0Np" customClass="FocusAwareTextField" customModule="__NAME__Framework">
                             <rect key="frame" x="194" y="116" width="84" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="eeP-Bv-mve"/>
@@ -93,7 +93,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </textFieldCell>
                         </textField>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="nyC-Ao-wzj" customClass="Knob" customModule="FilterFramework">
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="nyC-Ao-wzj" customClass="Knob" customModule="__NAME__Framework">
                             <rect key="frame" x="284" y="124" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="gXp-Wc-TyK"/>
@@ -103,7 +103,7 @@
                                 <action selector="feedbackChanged:" target="-2" id="pUJ-TA-dO7"/>
                             </connections>
                         </customView>
-                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVU-LP-fEC" customClass="FocusAwareTextField" customModule="FilterFramework">
+                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVU-LP-fEC" customClass="FocusAwareTextField" customModule="__NAME__Framework">
                             <rect key="frame" x="282" y="116" width="84" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="FRm-Hh-rJg"/>
@@ -114,7 +114,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </textFieldCell>
                         </textField>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="oTi-Ii-NHh" customClass="Knob" customModule="FilterFramework">
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="oTi-Ii-NHh" customClass="Knob" customModule="__NAME__Framework">
                             <rect key="frame" x="108" y="28" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="Vze-vS-v09"/>
@@ -124,7 +124,7 @@
                                 <action selector="dryMixChanged:" target="-2" id="PEG-Zb-Jqb"/>
                             </connections>
                         </customView>
-                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3X-9K-MVH" customClass="FocusAwareTextField" customModule="FilterFramework">
+                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3X-9K-MVH" customClass="FocusAwareTextField" customModule="__NAME__Framework">
                             <rect key="frame" x="106" y="20" width="84" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="Ob0-G4-Fbi"/>
@@ -135,7 +135,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </textFieldCell>
                         </textField>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="KfU-K8-Mrs" customClass="Knob" customModule="FilterFramework">
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="KfU-K8-Mrs" customClass="Knob" customModule="__NAME__Framework">
                             <rect key="frame" x="196" y="28" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="6WU-mH-P2b"/>
@@ -145,7 +145,7 @@
                                 <action selector="wetMixChanged:" target="-2" id="sh6-IC-ufg"/>
                             </connections>
                         </customView>
-                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgn-eW-ymD" customClass="FocusAwareTextField" customModule="FilterFramework">
+                        <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgn-eW-ymD" customClass="FocusAwareTextField" customModule="__NAME__Framework">
                             <rect key="frame" x="194" y="20" width="84" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="7Ss-uv-eri"/>

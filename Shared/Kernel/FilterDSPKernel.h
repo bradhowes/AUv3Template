@@ -6,7 +6,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "DelayBuffer.h"
-#import "FilterFramework/FilterFramework-Swift.h"
+#import "__NAME__Framework/__NAME__Framework-Swift.h"
 #import "KernelEventProcessor.h"
 #import "LFO.h"
 

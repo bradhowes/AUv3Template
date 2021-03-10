@@ -1,11 +1,11 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
-import Foundation
+import AudioToolbox
 import os
 
 extension AudioComponentDescription {
 
-    func log(_ logger: OSLog, type: OSLogType) {
+    public func log(_ logger: OSLog, type: OSLogType) {
         os_log(type, log: logger,
                "AudioComponentDescription type: %{public}s, subtype: %{public}s, manufacturer: %{public}s flags: %x (%x)",
                componentType.stringValue,

@@ -2,7 +2,7 @@
 
 import UIKit
 import AVKit
-import FilterFramework
+import __NAME__Framework
 import os
 
 @UIApplicationMain

@@ -12,7 +12,7 @@
         <!--FilterViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="FilterViewController" customClass="FilterViewController" customModule="FilterFramework" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="FilterViewController" customClass="FilterViewController" customModule="__NAME__Framework" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTt-pC-dYn" userLabel="Controls">
                                 <rect key="frame" x="167.5" y="89.5" width="332" height="196"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hui-tD-xRO" customClass="Knob" customModule="FilterFramework">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hui-tD-xRO" customClass="Knob" customModule="__NAME__Framework">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <accessibility key="accessibilityConfiguration" identifier="0"/>
@@ -42,7 +42,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHo-9f-pLo" userLabel="TapEdit">
                                         <rect key="frame" x="0.0" y="72" width="80" height="22"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hF3-lq-xlE" customClass="Knob" customModule="FilterFramework">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hF3-lq-xlE" customClass="Knob" customModule="__NAME__Framework">
                                         <rect key="frame" x="84" y="0.0" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <accessibility key="accessibilityConfiguration" identifier="1"/>
@@ -64,7 +64,7 @@
                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ki-wy-l3o" userLabel="TapEdit">
                                         <rect key="frame" x="84" y="72" width="80" height="22"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mvw-nZ-fi3" customClass="Knob" customModule="FilterFramework">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mvw-nZ-fi3" customClass="Knob" customModule="__NAME__Framework">
                                         <rect key="frame" x="168" y="0.0" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <accessibility key="accessibilityConfiguration" identifier="2"/>
@@ -86,7 +86,7 @@
                                     <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdN-B7-7c6" userLabel="TapEdit">
                                         <rect key="frame" x="168" y="72" width="80" height="22"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqE-Fz-AGz" customClass="Knob" customModule="FilterFramework">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqE-Fz-AGz" customClass="Knob" customModule="__NAME__Framework">
                                         <rect key="frame" x="252" y="0.0" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <accessibility key="accessibilityConfiguration" identifier="3"/>
@@ -111,7 +111,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUC-u4-A8f" userLabel="Mixes">
                                         <rect key="frame" x="82" y="102" width="168" height="94"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jzc-6g-Fgq" customClass="Knob" customModule="FilterFramework">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jzc-6g-Fgq" customClass="Knob" customModule="__NAME__Framework">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="4"/>
@@ -133,7 +133,7 @@
                                             <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYA-kZ-hpS" userLabel="TapEdit">
                                                 <rect key="frame" x="0.0" y="72" width="80" height="22"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjB-dE-KcA" customClass="Knob" customModule="FilterFramework">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjB-dE-KcA" customClass="Knob" customModule="__NAME__Framework">
                                                 <rect key="frame" x="88" y="0.0" width="80" height="80"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="5"/>

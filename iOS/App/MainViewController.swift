@@ -1,7 +1,7 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
 import UIKit
-import FilterFramework
+import __NAME__Framework
 
 final class MainViewController: UIViewController {
 

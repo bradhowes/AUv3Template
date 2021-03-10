@@ -1,7 +1,7 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
 import Cocoa
-import FilterFramework
+import __NAME__Framework
 
 final class MainViewController: NSViewController {
 

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C437FE8E222368A1008D6C09"
-               BuildableName = "FilterFramework.framework"
+               BuildableName = "__NAME__Framework.framework"
                BlueprintName = "macOS Framework"
                ReferencedContainer = "container:__NAME__.xcodeproj">
             </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C437FE8E222368A1008D6C09"
-            BuildableName = "FilterFramework.framework"
+            BuildableName = "__NAME__Framework.framework"
             BlueprintName = "macOS Framework"
             ReferencedContainer = "container:__NAME__.xcodeproj">
          </BuildableReference>

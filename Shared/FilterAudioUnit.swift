@@ -6,9 +6,9 @@ import CoreAudioKit
 import os
 
 /**
- Derivation of AUAudioUnit that provides a Swift container for the C++ FilterKernel (by way of the Obj-C
- FilterKernelAdapter). Also provides for factory presets and preset management. The actual filtering logic
- resides in the FilterKernel class.
+ Derivation of AUAudioUnit that provides a Swift container for the C++ __NAME__Kernel (by way of the Obj-C
+ __NAME__KernelAdapter). Also provides for factory presets and preset management. The actual filtering logic
+ resides in the __NAME__Kernel class.
  */
 public final class FilterAudioUnit: AUAudioUnit {
     private static let log = Logging.logger("FilterAudioUnit")
@@ -133,7 +133,7 @@ public final class FilterAudioUnit: AUAudioUnit {
     /// Maximum frames to render
     private let maxFramesToRender: UInt32 = 512
     /// Objective-C bridge into the C++ kernel
-    private let kernel = FilterKernelAdapter(Bundle.main.auBaseName,
+    private let kernel = __NAME__KernelAdapter(Bundle.main.auBaseName,
                                              maxDelayMilliseconds: AudioUnitParameters.maxDelayMilliseconds)
 
     private let factoryPresetValues:[(name: String, preset: FilterPreset)] = [

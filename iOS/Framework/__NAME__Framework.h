@@ -5,7 +5,7 @@
 FOUNDATION_EXPORT double __NAME__Framework_iOSVersionNumber;
 FOUNDATION_EXPORT const unsigned char __NAME__Framework_iOSVersionString[];
 
-#import <__NAME__Framework/FilterKernelAdapter.h>
+#import <__NAME__Framework/__NAME__KernelAdapter.h>
 
 @class FilterAudioUnit;
 @class FilterViewController;

@@ -25,7 +25,7 @@
  Small Obj-C wrapper around the FilterDSPKernel C++ class. Handles AUParameter get/set requests by forwarding them to
  the kernel.
  */
-@interface FilterKernelAdapter : NSObject <AUParameterHandler>
+@interface __NAME__KernelAdapter : NSObject <AUParameterHandler>
 
 - (nonnull id)init:(nonnull NSString*)appExtensionName maxDelayMilliseconds:(float)maxDelay;
 

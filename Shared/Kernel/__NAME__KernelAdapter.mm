@@ -2,16 +2,16 @@
 
 #import <CoreAudioKit/CoreAudioKit.h>
 
-#import "FilterKernel.h"
-#import "FilterKernelAdapter.h"
+#import "__NAME__Kernel.h"
+#import "__NAME__KernelAdapter.h"
 
-@implementation FilterKernelAdapter {
-    FilterKernel* kernel_;
+@implementation __NAME__KernelAdapter {
+    __NAME__Kernel* kernel_;
 }
 
 - (instancetype)init:(NSString*)appExtensionName maxDelayMilliseconds:(float)maxDelay {
     if (self = [super init]) {
-        self->kernel_ = new FilterKernel(std::string(appExtensionName.UTF8String), maxDelay);
+        self->kernel_ = new __NAME__Kernel(std::string(appExtensionName.UTF8String), maxDelay);
     }
     return self;
 }

@@ -1,20 +1,12 @@
 # Kernel Directory
 
-This directory contains the files involved in filtering.
+This directory contains the files involved in doing the audio filtering and digital signal processing (DSP).
 
-- [BiquadFilter](BiquadFilter.hpp) -- represents the actual low-pass filter and performs the filtering via the
-  [vDSP_biquadm](https://developer.apple.com/documentation/accelerate/vdsp/multichannel_biquadratic_iir_filters?language=objc)
-  routine in the Apple's [Accelerate framework](https://developer.apple.com/documentation/accelerate?language=objc).
+- [DSP](DSP) -- contains various C++ classes and functions that are useful when working with audio signals.
 
-- [FilterDSPKernel](FilterDSPKernel.hpp) -- holds parameters that define the filter (cutoff and resonance) and applies the filter to
-  samples during audio unit rendering.
+- [__NAME__Kernel](__NAME__Kernel.h) -- holds the main processing block that acts on individual audio samples.
 
-- [FilterDSPKernelAdapter](FilterDSPKernelAdapter.h) -- tiny Objective-C wrapper for the [FilterDSPKernel](FilterDSPKernel.hpp) so that
-  Swift can work with it
-
-- [InputBuffer](InputBuffer.hpp) -- manages an [AVAudioPCMBuffer](https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer)
-  that holds audio samples from an upstream node for processing by the filter.
-
-- [KernelEventProcessor](KernelEventProcessor.hpp) -- templated base class that understands how to properly interleave events
-  and sample renderings for sample-accurate events. Uses the "curiously recurring template pattern" to do so
-  without need of virtual method calls. [FilterDSPKernel](FilterDSPKernel.hpp) derives from this.
+- [__NAME__KernelAdapter](__NAME__KernelAdapter.h) -- tiny Objective-C wrapper for the
+  [__NAME__PKernel](__NAME__Kernel.h) so that Swift can communicate with it. Note that most of the integration
+  work is done elsewhere via AUParameter values. This adapter is mainly in charge of creating a new
+  __NAME__Kernel and forwarding rendering requests to it.

@@ -95,6 +95,10 @@
 		BDE2CDF224A3DEE5004AC8FA /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */; };
 		BDE2CDF524A3DF24004AC8FA /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDF324A3DF13004AC8FA /* Bundle+Extensions.swift */; };
 		BDE2CDF624A3DF25004AC8FA /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDF324A3DF13004AC8FA /* Bundle+Extensions.swift */; };
+		BDF15ADB25FBACC9008E5965 /* SwitchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF15ADA25FBACC9008E5965 /* SwitchController.swift */; };
+		BDF15ADC25FBACC9008E5965 /* SwitchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF15ADA25FBACC9008E5965 /* SwitchController.swift */; };
+		BDF15AE525FBACDE008E5965 /* AUParameterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF15AE425FBACDE008E5965 /* AUParameterController.swift */; };
+		BDF15AE625FBACDE008E5965 /* AUParameterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF15AE425FBACDE008E5965 /* AUParameterController.swift */; };
 		C433F56122404C7C00F1B750 /* FilterViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433F56022404C7C00F1B750 /* FilterViewControllerExtension.swift */; };
 		C437FE59222367CD008D6C09 /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; };
 		C437FE5A222367CD008D6C09 /* __NAME__Framework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -299,6 +303,8 @@
 		BDE2CE1824A3E8DB004AC8FA /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Staging.xcconfig; path = Configuration/Staging.xcconfig; sourceTree = "<group>"; };
 		BDE2CE1924A3EBD1004AC8FA /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Common.xcconfig; path = Configuration/Common.xcconfig; sourceTree = "<group>"; };
 		BDEFCA2825F64BF10095858D /* __NAME__AU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = __NAME__AU.entitlements; sourceTree = "<group>"; };
+		BDF15ADA25FBACC9008E5965 /* SwitchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchController.swift; sourceTree = "<group>"; };
+		BDF15AE425FBACDE008E5965 /* AUParameterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUParameterController.swift; sourceTree = "<group>"; };
 		C4201A2822403120006E4333 /* FilterViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewControllerExtension.swift; sourceTree = "<group>"; };
 		C433F56022404C7C00F1B750 /* FilterViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewControllerExtension.swift; sourceTree = "<group>"; };
 		C437FE3A222367A6008D6C09 /* __NAME__Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = __NAME__Host.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -686,7 +692,9 @@
 				C4F07730223AC4F5008FFF06 /* FilterViewController.swift */,
 				BD66842D25F11F77009CF8ED /* Knob_iOS.swift */,
 				BD66842C25F11F77009CF8ED /* Knob_macOS.swift */,
+				BDF15AE425FBACDE008E5965 /* AUParameterController.swift */,
 				BD66842B25F11F77009CF8ED /* KnobController.swift */,
+				BDF15ADA25FBACC9008E5965 /* SwitchController.swift */,
 				C4BEE7DB22236E99001E6B6D /* TypeAliases.swift */,
 			);
 			path = "User Interface";
@@ -1133,11 +1141,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD49661624A35D8700A81F0B /* FourCharCode+Extensions.swift in Sources */,
+				BDF15AE525FBACDE008E5965 /* AUParameterController.swift in Sources */,
 				C4BEE80522236F6F001E6B6D /* View+Extensions.swift in Sources */,
 				C4F07731223AC4F5008FFF06 /* FilterViewController.swift in Sources */,
 				BDE2CDF524A3DF24004AC8FA /* Bundle+Extensions.swift in Sources */,
 				C4F004A62239B2070014E248 /* FilterAudioUnit.swift in Sources */,
 				BDB11A5824A13CB100DD8EF9 /* CALayer+Extensions.swift in Sources */,
+				BDF15ADB25FBACC9008E5965 /* SwitchController.swift in Sources */,
 				BD2FD3ED259B5104004A3196 /* AUParameterTree+Extensions.swift in Sources */,
 				BDB11A6024A13FCF00DD8EF9 /* CATransaction+Extensions.swift in Sources */,
 				C4A3D65B223FF12A002784D4 /* SimplePlayEngine.swift in Sources */,
@@ -1183,11 +1193,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD06772D24CF9FA00039F161 /* Optional+Extensions.swift in Sources */,
+				BDF15AE625FBACDE008E5965 /* AUParameterController.swift in Sources */,
 				BD18B39C24CB248100B7CB1E /* AudioComponentDescription+Extensions.swift in Sources */,
 				BD18B39F24CB31B200B7CB1E /* AudioUnitParameters.swift in Sources */,
 				BD578EEE25D278490040D83D /* AudioUnitManager.swift in Sources */,
 				C4F07732223AC4F5008FFF06 /* FilterViewController.swift in Sources */,
 				C4BEE80122236F6E001E6B6D /* View+Extensions.swift in Sources */,
+				BDF15ADC25FBACC9008E5965 /* SwitchController.swift in Sources */,
 				BDB11A5424A13C4A00DD8EF9 /* Comparble+Extensions.swift in Sources */,
 				BDB7CE9C249FC0AC009580D5 /* AUAudioUnitPreset+Extensions.swift in Sources */,
 				BD72F2E625D1D4CE0031E422 /* InputBuffer.h in Sources */,

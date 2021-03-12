@@ -97,12 +97,12 @@ import os
         self.viewConfig = viewConfig
     }
 
-    @IBAction public func depthChanged(_: Knob) { controls[.depth]?.knobChanged()}
-    @IBAction public func rateChanged(_: Knob) { controls[.rate]?.knobChanged() }
-    @IBAction public func delayChanged(_: Knob) { controls[.delay]?.knobChanged() }
-    @IBAction public func feedbackChanged(_: Knob) { controls[.feedback]?.knobChanged() }
-    @IBAction public func dryMixChanged(_: Knob) { controls[.dryMix]?.knobChanged() }
-    @IBAction public func wetMixChanged(_: Knob) { controls[.wetMix]?.knobChanged() }
+    @IBAction public func depthChanged(_: Knob) { controls[.depth]?.controlChanged()}
+    @IBAction public func rateChanged(_: Knob) { controls[.rate]?.controlChanged() }
+    @IBAction public func delayChanged(_: Knob) { controls[.delay]?.controlChanged() }
+    @IBAction public func feedbackChanged(_: Knob) { controls[.feedback]?.controlChanged() }
+    @IBAction public func dryMixChanged(_: Knob) { controls[.dryMix]?.controlChanged() }
+    @IBAction public func wetMixChanged(_: Knob) { controls[.wetMix]?.controlChanged() }
 
     #if os(macOS)
     override public func mouseDown(with event: NSEvent) {

@@ -6,14 +6,14 @@
 
 This is full-featured AUv3 effect template for both iOS and macOS platforms. When configured, it will build an
 app for each platform and embed in the app an app extension containing the AUv3 component. The apps are designed
-to load the component and use it to demonstrate how it works by playing a sample audio file and routing it
+to load the AUv3 component and use it to demonstrate how it works by playing a sample audio file and routing it
 through the effect.
 
 Additional features and info:
 
-* uses an Objective-C++ kernel for audio sample manipulation in the render thread
-* provides a *very* tiny Objective-C interface to the kernel for access with Swift
-* uses Swift all UI and all audio unit work not associated with rendering
+* Uses an C++ kernel for audio sample manipulation in the render thread
+* Provides a *very* tiny Objective-C (Objective-C++) wrapper for access to the kernel in Swift
+* Uses Swift for all UI and all audio unit work not associated with rendering
 
 The code was developed in Xcode 12.4 on macOS 11.2.1. I have tested on both macOS and iOS devices primarily in
 GarageBand, but also using test hosts on both devices as well as the excellent
@@ -31,25 +31,29 @@ Here `flng` is the unique component subtype for my [SimplyFlange](https://github
 effect and `BRay` is my own manufacturer ID. You should use your own values that you put in
 [Configuration/Common.xcconfig](Configuration/Common.xcconfig).
 
-# Building a new AUv3
+# Generating a new AUv3 Project
 
-Use the Python3 script `build.py` to create a new project derived from the template. It takes one argument, the
-name of the new project:
+Since this is a template, use the [build.py](build.py) Python3 script to create a new project from it. It takes
+two arguments, the name of the new project and the _subtype_ of the effect:
 
 ```
-% python3 build.py MyEffect sub-type
+% python3 build.py MyEffect subtype
 ```
 
-The two values given to `build.py` represent the new _name_ of the project and app, and the unique 4-character
-subtype for the effect. It creates new folder called `../MyEffect` and populates it with the files from this
-template. Afterwards you should have a working AUv3 effect and delivery apps. All files with `__NAME__` in them
-will be replaced with the first argument given to `build.py` (e.g. "MyEffect"), and all text files will be
-edited so that all places with the string `__NAME__` and `__SUBTYPE__` are replaced with the values you
+The name value should be self-evident in purpose; the _subtype_ is a unique 4-character identifier for your new
+effect. It should be unique at least for your manufacturer space (see
+[Configuration/Common.xcconfig](Configuration/Common.xcconfig))
+
+The script will creates new folder called `../MyEffect` and populate it with the files from this template.
+Afterwards you should have a working AUv3 effect embedded in demo apps for iOS and macOS. All files with
+`__NAME__` in them will be replaced with the first argument given to `build.py` (e.g. "MyEffect"), and all text
+files will be changed so that the strings `__NAME__` and `__SUBTYPE__` are replaced with the values you
 provided.
 
-To successfully compile you will need to edit [Configuration/Common.xcconfig](Configuration/Common.xcconfig) and
-change `DEVELOPMENT_TEAM` to your Apple developer account so you can sign the binaries. You should also adjust
-other settings as well to properly identify you and/or your company.
+Note that To successfully compile you will need to edit
+[Configuration/Common.xcconfig](Configuration/Common.xcconfig) and change `DEVELOPMENT_TEAM` to hold your own
+Apple developer account ID so you can sign the binaries. You should also adjust other settings as well to
+properly identify you and/or your company.
 
 There are additional values in this file that you really should change, especially to remove any risk of
 collision with other AUv3 effects you may have on your system.
@@ -70,9 +74,9 @@ but there are other (better?) ways described in the [fastlane docs](https://docs
 
 # App Targets
 
-The macOS and iOS apps are simple hosts that demonstrate the functionality of the AUv3 component. In the AUv3 world,
-an app serves as a delivery mechanism for an app extension like AUv3. When the app is installed, the operating system will
-also install and register any app extensions found in the app.
+The macOS and iOS apps are simple AUv3 hosts that demonstrate the functionality of the AUv3 component. In the
+AUv3 world, an app serves as a delivery mechanism for an app extension like AUv3. When the app is installed, the
+operating system will also install and register any app extensions found in the app.
 
 The apps attempt to instantiate the AUv3 component and wire it up to an audio file player and the output
 speaker. When it runs, you can play the sample file and manipulate the effects settings in the components UI.

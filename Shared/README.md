@@ -10,7 +10,7 @@ framework targets.
 
 - [FilterAudioUnit](FilterAudioUnit.swift) -- The actual AUv3 component, derived from `AUAudioUnit` class.
   Implements presets and configures the audio unit but the actual audio processing is done in
-  [Kernel/__NAME__Kernel](Kernel/__NAME__Kernel.hpp). For the most part, this class can remain as-is except
+  [Kernel/__NAME__Kernel](Kernel/__NAME__Kernel.h). For the most part, this class can remain as-is except
   for the definition of any factory defaults.
 
 - [Kernel](Kernel) -- Contains the files involved in audio processing, the most important being the

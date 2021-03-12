@@ -5,7 +5,7 @@
 #import <atomic>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "ValueChangeDetector.hpp"
+#import "ValueChangeDetector.h"
 
 /**
  Adaptation of a ValueChangeDetector that will provide ramped values when set to a new value.

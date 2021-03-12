@@ -2,7 +2,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "RampingValueChangeDetector.hpp"
+#import "RampingValueChangeDetector.h"
 
 @interface RampingValueChangeDetectorTests : XCTestCase
 @end

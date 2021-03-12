@@ -5,15 +5,13 @@
 #import <atomic>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "NonCopyable.hpp"
-
 /**
  Template class which provides a way to passively determine if a value changes. Useful in threaded environments where
  the value is changed in one thread, and detected and used in another. Uses a std::atomic counter to record when a
  change happened.
  */
 template <typename T>
-class ValueChangeDetector : NonCopyable {
+class ValueChangeDetector {
 public:
     using counter_type = std::atomic<int32_t>;
 

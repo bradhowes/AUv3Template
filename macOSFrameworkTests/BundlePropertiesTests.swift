@@ -20,7 +20,7 @@ class BundlePropertiesTests: XCTestCase {
         XCTAssertEqual("__NAME__", bundle.auBaseName)
         XCTAssertEqual("B-Ray: __NAME__", bundle.auComponentName)
         XCTAssertEqual("aufx", bundle.auComponentType)
-        XCTAssertEqual("flng", bundle.auComponentSubtype)
+        XCTAssertEqual("__SUBTYPE__", bundle.auComponentSubtype)
         XCTAssertEqual("BRay", bundle.auComponentManufacturer)
         XCTAssertEqual("__NAME__Framework.FilterViewController", bundle.auFactoryFunction)
     }

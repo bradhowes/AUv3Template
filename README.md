@@ -37,13 +37,19 @@ Use the Python3 script `build.py` to create a new project derived from the templ
 name of the new project:
 
 ```
-% python3 build.py MyEffect
+% python3 build.py MyEffect sub-type
 ```
 
-It creates new folder called `../MyEffect` and populates it with the files from the template. Afterwards you
-should have a working AUv3 effect and delivery apps. To successfully compile you will need to edit
-[Configuration/Common.xcconfig](Configuration/Common.xcconfig) and change `DEVELOPMENT_TEAM` to your Apple
-developer account so you can sign the binaries.
+The two values given to `build.py` represent the new _name_ of the project and app, and the unique 4-character
+subtype for the effect. It creates new folder called `../MyEffect` and populates it with the files from this
+template. Afterwards you should have a working AUv3 effect and delivery apps. All files with `__NAME__` in them
+will be replaced with the first argument given to `build.py` (e.g. "MyEffect"), and all text files will be
+edited so that all places with the string `__NAME__` and `__SUBTYPE__` are replaced with the values you
+provided.
+
+To successfully compile you will need to edit [Configuration/Common.xcconfig](Configuration/Common.xcconfig) and
+change `DEVELOPMENT_TEAM` to your Apple developer account so you can sign the binaries. You should also adjust
+other settings as well to properly identify you and/or your company.
 
 There are additional values in this file that you really should change, especially to remove any risk of
 collision with other AUv3 effects you may have on your system.
@@ -81,11 +87,9 @@ Each OS ([macOS](macOS) and [iOS](iOS)) have the same code layout:
   [Shared/User Interface/FilterViewController.swift](Shared/User%20Interface/FilterViewController.swift)
 * `Framework` -- code configury for the framework that contains the shared code
 
-The [Shared](Shared) folder holds all of the code that is used by the above products. In it you will find
+The [Shared](Shared) folder holds all of the code that is used by the above products. In it you will find the
+files for the audio unit ([FilterAudioUnit](Shared/FilterAudioUnit.swift)), the user changable parameters for
+the audio unit ([AudioUnitParameters](Shared/AudioUnitParameters.swift)), and the audio processing "kernel"
+written in C++ ([__NAME__Kernel](Shared/Kernel/__NAME__Kernel.h)).
 
-* [FilterDSPKernel](Shared/Kernel/FilterDSPKernel.h) -- C++ class that does the rendering of audio samples
-* [FilterAudioUnit](Shared/FilterAudioUnit.swift) -- the actual AUv3 AudioUnit written in Swift.
-* [FilterViewController](Shared/User%20Interface/FilterViewController.swift) -- a custom view controller that
-works with both UIView and NSView views to show the effect's controls.
-
-Additional supporting files can be found in [Support](Shared/Support).
+There are adidtional details in the individual folders as well.

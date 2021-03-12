@@ -28,8 +28,7 @@ extension MainViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        audioUnitManager = AudioUnitManager(componentDescription: FilterAudioUnit.componentDescription,
-                                            appExtension: Bundle.main.auExtensionName)
+        audioUnitManager = AudioUnitManager(interfaceName: "FilterViewController")
         audioUnitManager.delegate = self
     }
 

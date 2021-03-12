@@ -38,9 +38,13 @@ extension Bundle {
 
     public var auBaseName: String { info(for: "AU_BASE_NAME") }
     public var auComponentName: String { info(for: "AU_COMPONENT_NAME") }
-    public var auComponentType: String { info(for: "AU_COMPONENT_TYPE") }
-    public var auComponentSubtype: String { info(for: "AU_COMPONENT_SUBTYPE") }
-    public var auComponentManufacturer: String { info(for: "AU_COMPONENT_MANUFACTURER") }
+    public var auComponentTypeString: String { info(for: "AU_COMPONENT_TYPE") }
+    public var auComponentSubtypeString: String { info(for: "AU_COMPONENT_SUBTYPE") }
+    public var auComponentManufacturerString: String { info(for: "AU_COMPONENT_MANUFACTURER") }
+    public var auComponentType: FourCharCode { FourCharCode(stringLiteral: info(for: "AU_COMPONENT_TYPE")) }
+    public var auComponentSubtype: FourCharCode { FourCharCode(stringLiteral: info(for: "AU_COMPONENT_SUBTYPE")) }
+    public var auComponentManufacturer: FourCharCode { FourCharCode(stringLiteral: info(for: "AU_COMPONENT_MANUFACTURER")) }
     public var auExtensionName: String { auBaseName + "AU.appex" }
+    public var auExtensionUrl: URL? { builtInPlugInsURL?.appendingPathComponent(auExtensionName) }
     public var appStoreId: String { info(for: "APP_STORE_ID") }
 }

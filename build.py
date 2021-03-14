@@ -42,7 +42,7 @@ def build(name, subtype):
         print('** destination', destDir, 'exists')
         sys.exit(1)
     for dirname, dirnames, filenames in os.walk('.'):
-        for ignore in ['.~', '.git', 'DerivedData']:
+        for ignore in ['.~', '.git', 'DerivedData', 'xcuserdata']:
             if ignore in dirnames:
                 dirnames.remove(ignore)
         for filename in filenames:
@@ -51,6 +51,7 @@ def build(name, subtype):
             print('--', sourcePath)
             buildFile(sourcePath, makeDestPath(sourcePath, destDir, name, subtype), name, subtype)
     createRepo(destDir)
+    runCommand('opening project', 'open', os.path.join(destDir, name + '.xcodeproj'))
 
 if __name__ == '__main__':
     build(sys.argv[1], sys.argv[2])

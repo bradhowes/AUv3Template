@@ -89,7 +89,7 @@ public final class FilterAudioUnit: AUAudioUnit {
                let name = newValue[kAUPresetNameKey] as? String,
                let number = newValue[kAUPresetNumberKey] as? NSNumber {
                 os_log(.info, log: log, "name %{public}s number %d", name, number.intValue)
-                currentPreset = AUAudioUnitPreset(number: number.intValue, name: name)
+                _currentPreset = AUAudioUnitPreset(number: number.intValue, name: name)
             }
         }
     }

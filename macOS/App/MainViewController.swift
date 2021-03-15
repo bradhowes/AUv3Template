@@ -72,9 +72,11 @@ extension MainViewController {
         alert.messageText = "AUv3 Component Installed"
         alert.informativeText =
 """
-The AUv3 component '__NAME__' is now available on your system.
+The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as GarageBand and Logic.
 
-This app uses the component to demonstrate how it works and sounds.
+You can continue to use this app to experiment, but you do not need to have it running to access the AUv3 component in other apps.
+
+However, if you later delete this app from your device, the AUv3 component will no longer be available in other host apps.
 """
         alert.addButton(withTitle: "OK")
         alert.beginSheetModal(for: view.window!){ _ in }

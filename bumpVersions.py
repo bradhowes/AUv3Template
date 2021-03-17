@@ -29,7 +29,7 @@ from collections import namedtuple
 from datetime import datetime
 import subprocess
 import tempfile
-from typing import Callable, List, NamedTuple, NoReturn, Type, TypeVar
+from typing import Callable, List, NamedTuple, NoReturn, Tuple, Type, TypeVar
 
 
 Path = str
@@ -46,8 +46,12 @@ class MarketingVersion(NamedTuple):
     patch: int
 
     @classmethod
+    def fromTuple(cls, value: Tuple[str]) -> 'MarketingVersion':
+        return cls(int(value[0]), int(value[1]), int(value[2]))
+
+    @classmethod
     def fromString(cls, value: str) -> 'MarketingVersion':
-        return cls(*map(int, value.split('.')))
+        return MarketingVersion.fromTuple(value.split('.'))
 
     def __str__(self):
         return f"{self.major}.{self.minor}.{self.patch}"
@@ -65,18 +69,25 @@ class MarketingVersion(NamedTuple):
         return MarketingVersion(self.major, self.minor, self.patch + 1)
 
 
-def error(*args) -> NoReturn:
+def errorAndExit(*args) -> NoReturn:
     print('**', *args)
     sys.exit(1)
 
+
+def error(*args) -> NoReturn:
+    print('**', *args)
+
+
 def log(*args) -> None:
     print('--', *args)
+
 
 def saveFile(path: Path, contents: str) -> None:
     '''Write the contents to a file at the given path.
     '''
     with open(path, 'w') as fd:
         fd.write(contents)
+
 
 def getAndBackupFile(path: Path) -> str:
     '''Read the contents from a file at the given path and make a backup of the file with the extension '.old'
@@ -85,6 +96,7 @@ def getAndBackupFile(path: Path) -> str:
         contents = fd.read()
     saveFile(path + '.old', contents)
     return contents
+
 
 def locateFiles(cond: PathPredicate) -> PathList:
     '''Visit all files and directories in the current directory. Returns the collection of all files where the
@@ -99,18 +111,20 @@ def locateFiles(cond: PathPredicate) -> PathList:
                 found.append(os.path.join(dirname, path))
     return found
 
+
 def locateProjectFiles() -> PathList:
     def cond(path):
         return path == 'project.pbxproj'
     return locateFiles(cond)
 
+
 def getCurrentMarketingVersion(projectFiles: PathList) -> MarketingVersion:
     '''Visit all project files, compare MARKETING_VERSION values to make sure they all match, and return one.
     '''
-    pattern = re.compile('MARKETING_VERSION = ([0-9]+)\\.([0-9]+)\\.([0-9]+)')
-    version = ''
-    for project in projectFiles:
-        with open(project, 'r') as fd:
+    pattern = re.compile(r'MARKETING_VERSION = ([0-9]+)\.([0-9]+)\.([0-9]+)')
+    version = None
+    for file in projectFiles:
+        with open(file, 'r') as fd:
             contents = fd.read()
         versions = pattern.findall(contents)
         if version is None:
@@ -118,13 +132,15 @@ def getCurrentMarketingVersion(projectFiles: PathList) -> MarketingVersion:
             versions = versions[1:]
         for v in versions:
             if v != version:
-                error('version mismatch -', v, version)
-    if version == '':
-        error('no MARKETING_VERSION found')
-    return MarketingVersion.fromString(version)
+                log(f'{file} has mismatched version: {v} - expected: {version}')
+    if version == None:
+        errorAndExit('no MARKETING_VERSION found')
+    return MarketingVersion.fromTuple(version)
+
 
 def getNewProjectVersion() -> ProjectVersion:
-    return datetime.utcnow().strftime('%Y%m%d%H%M')
+    return datetime.utcnow().strftime('%Y%m%d%H%M%S')
+
 
 def updateProjectContents(contents: str, marketingVersion: MarketingVersion, projectVersion: ProjectVersion) -> str:
     contents = re.sub(r'(MARKETING_VERSION =) ([0-9]+\.[0-9]+\.[0-9]+);',
@@ -134,45 +150,56 @@ def updateProjectContents(contents: str, marketingVersion: MarketingVersion, pro
                   f'\\1 {projectVersion};',
                   contents)
 
+
 def updateProjectFiles(projectFiles: PathList, marketingVersion: MarketingVersion,
                        projectVersion: ProjectVersion) -> None:
     for path in projectFiles:
-        print('-- processing', path)
+        log(f"processing project file '{path}'")
         contents = getAndBackupFile(path)
         contents = updateProjectContents(contents, marketingVersion, projectVersion)
         saveFile(path, contents)
+
 
 def locateUIFiles() -> PathList:
     def cond(path):
         return os.path.splitext(path)[-1] in ['.storyboard', '.xib']
     return locateFiles(cond)
 
+
 def updateUIContents(contents: str, marketingVersion: MarketingVersion) -> str:
     return re.sub(r'(userLabel="APP_VERSION".*(text|title)=)"[^\"]*"',
                   f'\\1"v{marketingVersion}"', contents)
 
+
 def updateUIFiles(uiFiles: PathList, marketingVersion: MarketingVersion):
     for path in uiFiles:
-        print('-- processing', path)
+        log(f"processing UI file '{path}'")
         contents = getAndBackupFile(path)
         saveFile(path, contents)
 
-def runCommand(*args) -> None:
-    print('-- processing', args[1])
-    subprocess.run(args[:], stdout=subprocess.PIPE, universal_newlines=True)
+
+def runPlistBuddy(path, setArg) -> None:
+    log(f"processing info file '{path}'")
+    status = subprocess.run(['/usr/libexec/PlistBuddy', path, '-c', setArg], stdout=subprocess.PIPE,
+                            universal_newlines=True)
+    if status.returncode != 0:
+        error('failed to process', args[0])
+
 
 def locateInfoFiles() -> PathList:
     def cond(path):
         return path == 'Info.plist'
     return locateFiles(cond)
 
+
 def updateInfoFiles(infoFiles: PathList, marketingVersion: MarketingVersion) -> None:
     componentVersion = marketingVersion.asInt()
+    setArg = f'Set :NSExtension:NSExtensionAttributes:AudioComponents:0:version {componentVersion}'
     for path in infoFiles:
-        runCommand('PlistBuddy',
-                   path,
-                   '-c',
-                   f'Set :NSExtension:NSExtensionAttributes:AudioComponents:0:version {componentVersion}')
+        if open(path).read().find('<key>AudioComponents</key>') == -1:
+            continue
+        runPlistBuddy(path, setArg)
+
 
 def main(args):
     parser = argparse.ArgumentParser(prog=args[0])
@@ -190,7 +217,9 @@ def main(args):
 
     projectFiles = locateProjectFiles()
     marketingVersion = getCurrentMarketingVersion(projectFiles)
+    log(f"current marketingVersion: {marketingVersion}")
     projectVersion = getNewProjectVersion()
+    log(f"new projectVersion: {projectVersion}")
 
     if parsed.set:
         marketingVersion = MarketingVersion.fromString(parsed.set)
@@ -201,10 +230,12 @@ def main(args):
     elif parsed.patch:
         marketingVersion = marketingVersion.bumpPatch()
 
-    marketingVersion = str(marketingVersion)
+    log(f"new marketingVersion: {marketingVersion}")
+    log(f"new projectVersion: {projectVersion}")
     updateProjectFiles(projectFiles, marketingVersion, projectVersion)
     updateUIFiles(locateUIFiles(), marketingVersion)
     updateInfoFiles(locateInfoFiles(), marketingVersion)
+
 
 if __name__ == '__main__':
     main(sys.argv)
@@ -228,7 +259,7 @@ class Tests(unittest.TestCase):
 
     def test_getNewProjectVersion(self):
         value = getNewProjectVersion()
-        self.assertTrue(len(value) == 12)
+        self.assertEqual(len(value), 14)
 
     def test_locateFiles(self):
         def cond(path):

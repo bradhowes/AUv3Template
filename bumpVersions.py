@@ -21,6 +21,7 @@ The script edits three kinds of files:
   (major * 65536 + minor * 256 + patch). So 1.2.3 = 65051
 
 '''
+
 import argparse
 import os
 import re

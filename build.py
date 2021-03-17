@@ -1,5 +1,12 @@
 #!/bin/env python3
 
+'''Create a new project from this template. Requires two arguments:
+
+- project name
+- audio unit subtype
+
+'''
+
 import os
 import os.path
 import re

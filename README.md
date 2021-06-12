@@ -11,9 +11,9 @@ through the effect.
 
 Additional features and info:
 
-* Uses an C++ kernel for audio sample manipulation in the render thread
+* Uses a C++ kernel for audio sample manipulation in the render thread
 * Provides a *very* tiny Objective-C (Objective-C++) wrapper for access to the kernel in Swift
-* Uses Swift for all UI and all audio unit work not associated with rendering
+* Uses Swift for all UI and all audio unit work not associated with sample rendering
 
 The code was developed in Xcode 12.4 on macOS 11.2.1. I have tested on both macOS and iOS devices primarily in
 GarageBand, but also using test hosts on both devices as well as the excellent

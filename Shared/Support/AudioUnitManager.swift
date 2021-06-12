@@ -6,7 +6,7 @@ import os
 /**
  Delegation protocol for AudioUnitManager class.
  */
-public protocol AudioUnitManagerDelegate: class {
+public protocol AudioUnitManagerDelegate: AnyObject {
 
     /**
      Notification that the FilterViewController in the AudioUnitManager has a FilterAudioUnit

@@ -215,7 +215,10 @@ public final class FilterAudioUnit: AUAudioUnit {
         if outputBus.format.channelCount != inputBus.format.channelCount {
             os_log(.error, log: log, "unequal channel count")
             setRenderResourcesAllocated(false)
-            throw Failure.statusError(kAudioUnitErr_FailedInitialization)
+            // NOTE: changing this to something else will cause `auval` to emit the following:
+            //   WARNING: Can Initialize Unit to un-supported num channels:InputChan:1, OutputChan:2
+            //
+            throw NSError(domain: NSOSStatusErrorDomain, code: Int(kAudioUnitErr_FailedInitialization), userInfo: nil)
         }
 
         // Communicate to the kernel the new formats being used

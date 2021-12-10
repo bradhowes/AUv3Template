@@ -40,10 +40,9 @@ extension MainViewController {
 
   override func viewWillAppear() {
     super.viewWillAppear()
-
     guard let appDelegate = NSApplication.shared.delegate as? AppDelegate else { fatalError() }
+
     presetsMenu = appDelegate.presetsMenu
-    guard presetsMenu != nil else { fatalError() }
     presetsMenu.autoenablesItems = false
 
     savePresetMenuItem = appDelegate.savePresetMenuItem
@@ -68,8 +67,10 @@ extension MainViewController {
 
     playButton = windowController.playButton
     bypassButton = windowController.bypassButton
-    bypassButton.isEnabled = false
     presetsButton = windowController.presetsButton
+    guard playButton != nil, bypassButton != nil, presetsButton != nil else { fatalError() }
+
+    bypassButton.isEnabled = false
 
     guard let savePresetMenuItem = appDelegate.savePresetMenuItem else { fatalError() }
     savePresetMenuItem.target = self
@@ -110,6 +111,7 @@ extension MainViewController: AudioUnitHostDelegate {
   func connected(audioUnit: AUAudioUnit, viewController: ViewController) {
     userPresetsManager = .init(for: audioUnit)
     connectFilterView(viewController)
+    populatePresetMenu()
   }
 
   func failed(error: AudioUnitHostError) {
@@ -132,6 +134,7 @@ extension MainViewController: AudioUnitHostDelegate {
 extension MainViewController {
 
   @IBAction private func togglePlay(_ sender: NSButton) {
+    audioUnitHost.togglePlayback()
     let isPlaying = audioUnitHost.isPlaying
 
     playButton?.image = isPlaying ? NSImage(named: "stop") : NSImage(named: "play")
@@ -150,27 +153,27 @@ extension MainViewController {
     bypassMenuItem?.title = isBypassed ? "Resume" : "Bypass"
   }
 
-  @IBAction private func presetsButton(_ sender: NSButton) {
+  @IBAction private func showPresetsMenu(_ sender: NSButton) {
     let location = NSPoint(x: 0, y: sender.frame.height + 5)
     presetsMenu.popUp(positioning: nil, at: location, in: sender)
   }
 
-  @objc private func handleSavePresetMenuSelected(_ sender: NSMenuItem) throws {
+  @IBAction private func handleSavePresetMenuSelected(_ sender: NSMenuItem) throws {
     SavePresetAction(self).start(sender)
     updatePresetMenu()
   }
 
-  @objc private func handleRenamePresetMenuSelected(_ sender: NSMenuItem) throws {
+  @IBAction private func handleRenamePresetMenuSelected(_ sender: NSMenuItem) throws {
     RenamePresetAction(self).start(sender)
     updatePresetMenu()
   }
 
-  @objc private func handleDeletePresetMenuSelected(_ sender: NSMenuItem) throws {
+  @IBAction private func handleDeletePresetMenuSelected(_ sender: NSMenuItem) throws {
     DeletePresetAction(self).start(sender)
     updatePresetMenu()
   }
 
-  @objc private func presetMenuItemSelected(_ sender: NSMenuItem) {
+  @IBAction private func presetMenuItemSelected(_ sender: NSMenuItem) {
     guard let userPresetsManager = userPresetsManager else { return }
     let number = tagToNumber(sender.tag)
     userPresetsManager.makeCurrentPreset(number: number)

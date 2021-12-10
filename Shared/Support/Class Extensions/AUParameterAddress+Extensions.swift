@@ -3,5 +3,5 @@
 import AVFoundation
 
 public extension AUParameterAddress {
-    var filterParameter: FilterParameterAddress? { FilterParameterAddress(rawValue: self) }
+  var filterParameter: FilterParameterAddress? { FilterParameterAddress(rawValue: self) }
 }

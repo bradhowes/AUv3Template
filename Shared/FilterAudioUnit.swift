@@ -3,7 +3,7 @@
 import AudioToolbox
 import AVFoundation
 import CoreAudioKit
-import os
+import os.log
 
 /**
  Derivation of AUAudioUnit that provides a Swift container for the C++ __NAME__Kernel (by way of the Obj-C
@@ -34,14 +34,16 @@ public final class FilterAudioUnit: AUAudioUnit {
 
   /// Name of the component
   public static let componentName = Bundle(for: FilterAudioUnit.self).auComponentName
-  /// The associated view controller for the audio unit that shows the controls
-  public weak var viewController: FilterViewController?
+
   /// Runtime parameter definitions for the audio unit
   public lazy var parameterDefinitions: AudioUnitParameters = .init(parameterHandler: kernel)
+
   /// Support one input bus
   override public var inputBusses: AUAudioUnitBusArray { _inputBusses }
+
   /// Support one output bus
   override public var outputBusses: AUAudioUnitBusArray { _outputBusses }
+
   /// Parameter tree containing filter parameter values
   override public var parameterTree: AUParameterTree? {
     get { parameterDefinitions.parameterTree }
@@ -50,60 +52,19 @@ public final class FilterAudioUnit: AUAudioUnit {
 
   /// Factory presets for the filter
   override public var factoryPresets: [AUAudioUnitPreset] { _factoryPresets }
+
   /// Announce support for user presets as well
   override public var supportsUserPresets: Bool { true }
-  /// Preset get/set
-  override public var currentPreset: AUAudioUnitPreset? {
-    get {
-      os_log(.info, log: log, "get currentPreset - %{public}s", _currentPreset.descriptionOrNil)
-      return _currentPreset
-    }
-    set {
-      os_log(.info, log: log, "set currentPreset - %{public}s", newValue.descriptionOrNil)
-      guard let preset = newValue else {
-        _currentPreset = nil
-        return
-      }
-
-      if preset.number >= 0 {
-        os_log(.info, log: log, "factoryPreset %d", preset.number)
-        let settings = factoryPresetValues[preset.number]
-        _currentPreset = preset
-        os_log(.info, log: log, "updating parameters")
-        parameterDefinitions.setValues(settings.preset)
-      } else {
-        os_log(.info, log: log, "userPreset %d", preset.number)
-        if let state = try? presetState(for: preset) {
-          os_log(.info, log: log, "state: %{public}s", state.debugDescription)
-          fullState = state
-          _currentPreset = preset
-        }
-      }
-    }
-  }
 
   override public var fullState: [String: Any]? {
     get {
-      os_log(.info, log: log, "fullState GET")
-      var value = super.fullState ?? [String: Any]()
-      if let preset = _currentPreset {
-        value[kAUPresetNameKey] = preset.name
-        value[kAUPresetNumberKey] = preset.number
-      }
-      os_log(.info, log: log, "value: %{public}s", value.description)
+      let value = super.fullState
+      os_log(.info, log: log, "fullState GET: %{public}s", value.descriptionOrNil)
       return value
     }
     set {
-      os_log(.info, log: log, "fullState SET")
-      os_log(.info, log: log, "value: %{public}s", newValue.descriptionOrNil)
+      os_log(.info, log: log, "fullState SET: %{public}s", newValue.descriptionOrNil)
       super.fullState = newValue
-      if let newValue = newValue,
-         let name = newValue[kAUPresetNameKey] as? String,
-         let number = newValue[kAUPresetNumberKey] as? NSNumber
-      {
-        os_log(.info, log: log, "name %{public}s number %d", name, number.intValue)
-        _currentPreset = AUAudioUnitPreset(number: number.intValue, name: name)
-      }
     }
   }
 
@@ -111,14 +72,12 @@ public final class FilterAudioUnit: AUAudioUnit {
 
   override public var fullStateForDocument: [String: Any]? {
     get {
-      os_log(.info, log: log, "fullStateForDocument GET")
       let value = super.fullStateForDocument
-      os_log(.info, log: log, "value: %{public}s", value.descriptionOrNil)
+      os_log(.info, log: log, "fullStateForDocument GET: %{public}s", value.descriptionOrNil)
       return value
     }
     set {
-      os_log(.info, log: log, "fullStateForDocument SET")
-      os_log(.info, log: log, "value: %{public}s", newValue.descriptionOrNil)
+      os_log(.info, log: log, "fullStateForDocument SET: %{public}s", newValue.descriptionOrNil)
       super.fullStateForDocument = newValue
     }
   }
@@ -128,10 +87,13 @@ public final class FilterAudioUnit: AUAudioUnit {
 
   /// Initial sample rate
   private let sampleRate: Double = 44100.0
+
   /// Maximum number of channels to support
   private let maxNumberOfChannels: UInt32 = 8
+
   /// Maximum frames to render
   private let maxFramesToRender: UInt32 = 512
+
   /// Objective-C bridge into the C++ kernel
   private let kernel = __NAME__KernelAdapter(Bundle.main.auBaseName,
                                              maxDelayMilliseconds: AudioUnitParameters.maxDelayMilliseconds)
@@ -141,10 +103,6 @@ public final class FilterAudioUnit: AUAudioUnit {
     ("Sweeper", FilterPreset(depth: 100, rate: 0.14, delay: 1.51, feedback: 80, dryMix: 50, wetMix: 50)),
     ("Lord Tremolo", FilterPreset(depth: 100, rate: 8.6, delay: 0.07, feedback: 90, dryMix: 0, wetMix: 100))
   ]
-
-  private var _currentPreset: AUAudioUnitPreset? {
-    didSet { os_log(.debug, log: log, "* _currentPreset name: %{public}s", _currentPreset.descriptionOrNil) }
-  }
 
   private lazy var _factoryPresets = factoryPresetValues.enumerated().map {
     AUAudioUnitPreset(number: $0, name: $1.name)
@@ -175,6 +133,9 @@ public final class FilterAudioUnit: AUAudioUnit {
       completionHandler(nil, error)
     }
   }
+
+  private var currentPresetObserver: NSKeyValueObservation?
+  private var parameterTreeObserver: NSKeyValueObservation?
 
   /**
    Construct new instance, throwing exception if there is an error doing so.
@@ -211,9 +172,39 @@ public final class FilterAudioUnit: AUAudioUnit {
     maximumFramesToRender = maxFramesToRender
     self.currentPreset = factoryPresets.first
 
+    self.currentPresetObserver = observe(\.currentPreset, options: [.new]) { _, change in
+      self.presetChanged(change.newValue!)
+    }
+
+    self.parameterTreeObserver = observe(\.parameterTree, options: [.new]) { _, _ in
+      os_log(.info, log: self.log, "parameter tree changed")
+    }
+
     // This really should be postponed until allocateRenderResources is called. However, for some weird reason
     // internalRenderBlock is fetched before allocateRenderResources() gets called, so we need to preflight here.
     kernel.startProcessing(format, maxFramesToRender: maxFramesToRender)
+  }
+
+  deinit {
+    self.currentPresetObserver?.invalidate()
+    self.parameterTreeObserver?.invalidate()
+  }
+
+  private func presetChanged(_ preset: AUAudioUnitPreset?) {
+    os_log(.info, log: log, "presetChanged %{public}s", preset.descriptionOrNil)
+    guard let preset = preset else { return }
+    if preset.number >= 0 {
+      os_log(.info, log: log, "factoryPreset %d", preset.number)
+      let values = factoryPresetValues[preset.number]
+      os_log(.info, log: log, "updating parameters")
+      parameterDefinitions.setValues(values.preset)
+    } else {
+      os_log(.info, log: log, "userPreset %d", preset.number)
+      if let state = try? presetState(for: preset) {
+        os_log(.info, log: log, "state: %{public}s", state.debugDescription)
+        fullState = state
+      }
+    }
   }
 
   /**
@@ -278,6 +269,6 @@ public final class FilterAudioUnit: AUAudioUnit {
   }
 
   override public func select(_ viewConfiguration: AUAudioUnitViewConfiguration) {
-    viewController?.selectViewConfiguration(viewConfiguration)
+    os_log(.info, log: log, "select:viewConfiguration - %{public}s", viewConfiguration.description)
   }
 }

@@ -47,8 +47,8 @@
 		BD49661724A35D8900A81F0B /* FourCharCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49661424A35D1E00A81F0B /* FourCharCode.swift */; };
 		BD50D29A25D6D76E00375455 /* __NAME__KernelAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = BD50D29225D6D76E00375455 /* __NAME__KernelAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD50D29B25D6D76E00375455 /* __NAME__KernelAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = BD50D29225D6D76E00375455 /* __NAME__KernelAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BD578EED25D278490040D83D /* AudioUnitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD578EEC25D278490040D83D /* AudioUnitManager.swift */; };
-		BD578EEE25D278490040D83D /* AudioUnitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD578EEC25D278490040D83D /* AudioUnitManager.swift */; };
+		BD578EED25D278490040D83D /* AudioUnitHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD578EEC25D278490040D83D /* AudioUnitHost.swift */; };
+		BD578EEE25D278490040D83D /* AudioUnitHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD578EEC25D278490040D83D /* AudioUnitHost.swift */; };
 		BD63B15424AE25F80015236D /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = BD49661924A3605800A81F0B /* LICENSE.md */; };
 		BD63B15624AE26020015236D /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = BD49661924A3605800A81F0B /* LICENSE.md */; };
 		BD66842E25F11F77009CF8ED /* KnobController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD66842B25F11F77009CF8ED /* KnobController.swift */; };
@@ -272,7 +272,7 @@
 		BD49661424A35D1E00A81F0B /* FourCharCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourCharCode.swift; sourceTree = "<group>"; };
 		BD49661924A3605800A81F0B /* LICENSE.md */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = LICENSE.md; sourceTree = "<group>"; };
 		BD50D29225D6D76E00375455 /* __NAME__KernelAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __NAME__KernelAdapter.h; sourceTree = "<group>"; };
-		BD578EEC25D278490040D83D /* AudioUnitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitManager.swift; sourceTree = "<group>"; };
+		BD578EEC25D278490040D83D /* AudioUnitHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitHost.swift; sourceTree = "<group>"; };
 		BD578F0D25D2C4720040D83D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BD66842B25F11F77009CF8ED /* KnobController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnobController.swift; sourceTree = "<group>"; };
 		BD66842C25F11F77009CF8ED /* Knob_macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Knob_macOS.swift; sourceTree = "<group>"; };
@@ -663,7 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				BDC21626276357EA00560D90 /* UserPresetsManager.swift */,
-				BD578EEC25D278490040D83D /* AudioUnitManager.swift */,
+				BD578EEC25D278490040D83D /* AudioUnitHost.swift */,
 				BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */,
 				C4DCBAD5223ADE79000D9CB3 /* Audio */,
 				BD49661824A35F3900A81F0B /* Class Extensions */,
@@ -1173,7 +1173,7 @@
 				BDB7CE9B249FC0AB009580D5 /* AUAudioUnitPreset.swift in Sources */,
 				C4F004A32239B1E10014E248 /* __NAME__KernelAdapter.mm in Sources */,
 				BD2FD3F5259B5130004A3196 /* AUParameterAddress.swift in Sources */,
-				BD578EED25D278490040D83D /* AudioUnitManager.swift in Sources */,
+				BD578EED25D278490040D83D /* AudioUnitHost.swift in Sources */,
 				BD18B3A024CB31B200B7CB1E /* AudioUnitParameters.swift in Sources */,
 				BD66843225F11F77009CF8ED /* Knob_iOS.swift in Sources */,
 			);
@@ -1206,7 +1206,7 @@
 				BDF15AE625FBACDE008E5965 /* AUParameterController.swift in Sources */,
 				BD18B39C24CB248100B7CB1E /* AudioComponentDescription.swift in Sources */,
 				BD18B39F24CB31B200B7CB1E /* AudioUnitParameters.swift in Sources */,
-				BD578EEE25D278490040D83D /* AudioUnitManager.swift in Sources */,
+				BD578EEE25D278490040D83D /* AudioUnitHost.swift in Sources */,
 				C4F07732223AC4F5008FFF06 /* FilterViewController.swift in Sources */,
 				C4BEE80122236F6E001E6B6D /* View.swift in Sources */,
 				BDF15ADC25FBACC9008E5965 /* SwitchController.swift in Sources */,

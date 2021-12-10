@@ -4,7 +4,7 @@ import __NAME__Framework
 import Cocoa
 
 final class MainViewController: NSViewController {
-  private var audioUnitManager: AudioUnitManager!
+  private var audioUnitHost: AudioUnitHost!
 
   private var playButton: NSButton!
   private var bypassButton: NSButton!
@@ -27,8 +27,8 @@ final class MainViewController: NSViewController {
 extension MainViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    audioUnitManager = AudioUnitManager(interfaceName: "FilterViewController")
-    audioUnitManager.delegate = self
+    audioUnitHost = AudioUnitHost(interfaceName: "FilterViewController")
+    audioUnitHost.delegate = self
   }
 
   override func viewWillAppear() {

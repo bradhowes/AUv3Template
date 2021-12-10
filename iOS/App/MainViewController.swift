@@ -2,18 +2,26 @@
 
 import __NAME__Framework
 import UIKit
+import os.log
 
 final class MainViewController: UIViewController {
 
   private let audioUnitHost = AudioUnitHost(componentDescription: FilterAudioUnit.componentDescription)
   internal var userPresetsManager: UserPresetsManager?
 
-  @IBOutlet var reviewButton: UIButton!
-  @IBOutlet var playButton: UIButton!
-  @IBOutlet var bypassButton: UIButton!
-  @IBOutlet var containerView: UIView!
-  @IBOutlet var preset1Button: UIButton!
-  @IBOutlet var preset2Button: UIButton!
+  @IBOutlet weak var reviewButton: UIButton!
+  @IBOutlet weak var playButton: UIButton!
+  @IBOutlet weak var bypassButton: UIButton!
+  @IBOutlet weak var containerView: UIView!
+  @IBOutlet weak var presetSelection: UISegmentedControl!
+  @IBOutlet weak var userPresetsMenu: UIButton!
+
+  private lazy var renameAction = UIAction(title: "Rename", handler: RenamePresetAction(self).start(_:))
+  private lazy var deleteAction = UIAction(title: "Delete", handler: DeletePresetAction(self).start(_:))
+  private lazy var saveAction = UIAction(title: "Save", handler: SavePresetAction(self).start(_:))
+
+  private var allParameterValuesObserverToken: NSKeyValueObservation?
+  private var parameterTreeObserverToken: AUParameterObserverToken?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -54,19 +62,15 @@ final class MainViewController: UIViewController {
 
   @IBAction private func togglePlay(_ sender: UIButton) {
     let isPlaying = audioUnitHost.togglePlayback()
-    let titleText = isPlaying ? "Stop" : "Play"
-    playButton.setTitle(titleText, for: .normal)
-    playButton.setTitleColor(isPlaying ? .systemRed : .systemTeal, for: .normal)
+    sender.isSelected = isPlaying
+    sender.tintColor = isPlaying ? .systemYellow : .systemTeal
   }
 
   @IBAction private func toggleBypass(_ sender: UIButton) {
     let wasBypassed = audioUnitHost.audioUnit?.shouldBypassEffect ?? false
     let isBypassed = !wasBypassed
     audioUnitHost.audioUnit?.shouldBypassEffect = isBypassed
-
-    let titleText = isBypassed ? "Resume" : "Bypass"
-    bypassButton.setTitle(titleText, for: .normal)
-    bypassButton.setTitleColor(isBypassed ? .systemYellow : .systemTeal, for: .normal)
+    sender.isSelected = isBypassed
   }
 
   @IBAction private func visitAppStore(_ sender: UIButton) {
@@ -77,12 +81,8 @@ final class MainViewController: UIViewController {
     UIApplication.shared.open(url, options: [:], completionHandler: nil)
   }
 
-  @IBAction func usePreset1(_ sender: Any) {
-    userPresetsManager?.makeCurrentPreset(number: 0)
-  }
-
-  @IBAction func usePreset2(_ sender: Any) {
-    userPresetsManager?.makeCurrentPreset(number: 1)
+  @IBAction func useFactoryPreset(_ sender: UISegmentedControl? = nil) {
+    userPresetsManager?.makeCurrentPreset(number: presetSelection.selectedSegmentIndex)
   }
 
   @IBAction private func reviewApp(_ sender: UIButton) {
@@ -92,21 +92,98 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: AudioUnitHostDelegate {
   func connected(audioUnit: AUAudioUnit, viewController: ViewController) {
-    self.userPresetsManager = .init(for: audioUnit)
+    userPresetsManager = .init(for: audioUnit)
     connectFilterView(viewController)
+    connectParametersToControls(audioUnit)
   }
 
   func failed(error: AudioUnitHostError) {
-    print(error.localizedDescription)
+    let message = "Unable to load the AUv3 component. \(error.description)"
+    let controller = UIAlertController(title: "AUv3 Failure", message: message, preferredStyle: .alert)
+    present(controller, animated: true)
   }
 
   private func connectFilterView(_ viewController: UIViewController) {
-    guard let filterView = viewController.view else { fatalError("no view found from audio unit") }
+    let filterView = viewController.view!
     containerView.addSubview(filterView)
     filterView.pinToSuperviewEdges()
 
     addChild(viewController)
     view.setNeedsLayout()
     containerView.setNeedsLayout()
+  }
+
+  private func connectParametersToControls(_ audioUnit: AUAudioUnit) {
+    guard let parameterTree = audioUnit.parameterTree else {
+      fatalError("FilterAudioUnit does not define any parameters.")
+    }
+
+    audioUnitHost.restore()
+    updatePresetMenu()
+
+    allParameterValuesObserverToken = audioUnit.observe(\.allParameterValues) { [weak self] _, _ in
+      guard let self = self else { return }
+      DispatchQueue.performOnMain { self.updateView() }
+    }
+
+    parameterTreeObserverToken = parameterTree.token(byAddingParameterObserver: { [weak self] address, _ in
+      guard let self = self else { return }
+      DispatchQueue.performOnMain { self.updateView() }
+    })
+  }
+
+  private func useUserPreset(name: String) {
+    guard let userPresetManager = userPresetsManager else { return }
+    userPresetManager.makeCurrentPreset(name: name)
+    updatePresetMenu()
+  }
+
+  func updatePresetMenu() {
+    guard let userPresetsManager = userPresetsManager else { return }
+    let active = userPresetsManager.audioUnit.currentPreset?.number ?? Int.max
+
+    let presets = userPresetsManager.presetsOrderedByName.map { (preset: AUAudioUnitPreset) -> UIAction in
+      let action = UIAction(title: preset.name, handler: { _ in self.useUserPreset(name: preset.name) })
+      action.state = active == preset.number ? .on : .off
+      return action
+    }
+
+    let actionsGroup = UIMenu(title: "Actions", options: [],
+                              children: active < 0 ? [saveAction, renameAction, deleteAction] : [saveAction])
+    let menu = UIMenu(title: "User Presets", options: [], children: presets + [actionsGroup])
+    userPresetsMenu.menu = menu
+    userPresetsMenu.showsMenuAsPrimaryAction = true
+  }
+
+  private func updateView() {
+    guard let audioUnit = audioUnitHost.audioUnit else { return }
+
+    updatePresetMenu()
+    updatePresetSelection(audioUnit)
+
+    audioUnitHost.save()
+  }
+
+  private func updatePresetSelection(_ audioUnit: AUAudioUnit) {
+    if let presetNumber = audioUnit.currentPreset?.number {
+      presetSelection.selectedSegmentIndex = presetNumber
+    } else {
+      presetSelection.selectedSegmentIndex = -1
+    }
+  }
+}
+
+extension MainViewController {
+  func notify(_ title: String, message: String) {
+    let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    controller.addAction(UIAlertAction(title: "OK", style: .default))
+    present(controller, animated: true)
+  }
+
+  func yesOrNo(_ title: String, message: String, continuation: @escaping (UIAlertAction) -> Void) {
+    let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    controller.addAction(.init(title: "Continue", style: .default, handler: continuation))
+    controller.addAction(.init(title: "Cancel", style: .cancel))
+    present(controller, animated: true)
   }
 }

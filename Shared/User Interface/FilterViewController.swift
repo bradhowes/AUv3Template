@@ -97,12 +97,35 @@ import os
     self.viewConfig = viewConfig
   }
 
-  @IBAction public func depthChanged(_: Knob) { controls[.depth]?.controlChanged() }
-  @IBAction public func rateChanged(_: Knob) { controls[.rate]?.controlChanged() }
-  @IBAction public func delayChanged(_: Knob) { controls[.delay]?.controlChanged() }
-  @IBAction public func feedbackChanged(_: Knob) { controls[.feedback]?.controlChanged() }
-  @IBAction public func dryMixChanged(_: Knob) { controls[.dryMix]?.controlChanged() }
-  @IBAction public func wetMixChanged(_: Knob) { controls[.wetMix]?.controlChanged() }
+  @IBAction public func depthChanged(_: Knob) {
+    controls[.depth]?.controlChanged()
+    audioUnit?.currentPreset = nil
+  }
+
+  @IBAction public func rateChanged(_: Knob) {
+    controls[.rate]?.controlChanged()
+    audioUnit?.currentPreset = nil
+  }
+
+  @IBAction public func delayChanged(_: Knob) {
+    controls[.delay]?.controlChanged()
+    audioUnit?.currentPreset = nil
+  }
+
+  @IBAction public func feedbackChanged(_: Knob) {
+    controls[.feedback]?.controlChanged()
+    audioUnit?.currentPreset = nil
+  }
+
+  @IBAction public func dryMixChanged(_: Knob) {
+    controls[.dryMix]?.controlChanged()
+    audioUnit?.currentPreset = nil
+  }
+
+  @IBAction public func wetMixChanged(_: Knob) {
+    controls[.wetMix]?.controlChanged()
+    audioUnit?.currentPreset = nil
+  }
 
   #if os(macOS)
   override public func mouseDown(with event: NSEvent) {
@@ -128,6 +151,7 @@ extension FilterViewController: AUAudioUnitFactory {
 }
 
 extension FilterViewController {
+
   private func connectViewToAU() {
     os_log(.info, log: log, "connectViewToAU")
 

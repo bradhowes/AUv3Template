@@ -20,12 +20,3 @@ public extension AUAudioUnitPreset {
 public extension AUAudioUnitPreset {
   override var description: String { "<AuAudioUnitPreset name: \(name)/\(number)>" }
 }
-
-public extension RandomAccessCollection {
-  /// Returns the element at the specified index if it is within bounds, otherwise nil.
-  /// - complexity: O(1)
-  /// https://stackoverflow.com/a/68453929/629836
-  subscript(validating index: Index) -> Element? {
-    index >= startIndex && index < endIndex ? self[index] : nil
-  }
-}

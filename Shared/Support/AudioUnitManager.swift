@@ -55,9 +55,9 @@ extension AudioUnitManager {
     /// Component description that defines the AudioUnit to create. The values must match those found in the
     /// Info.plist used by the app hosts to load the right component.
     let bundle = Bundle.main
-    let component = AudioComponentDescription(componentType: bundle.auComponentType,
-                                              componentSubType: bundle.auComponentSubtype,
-                                              componentManufacturer: bundle.auComponentManufacturer,
+    let component = AudioComponentDescription(componentType: FourCharCode(bundle.auComponentSubtype),
+                                              componentSubType: FourCharCode(bundle.auComponentSubtype),
+                                              componentManufacturer: FourCharCode(bundle.auComponentManufacturer),
                                               componentFlags: 0, componentFlagsMask: 0)
     component.log(log, type: .info)
 

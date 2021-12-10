@@ -1,4 +1,4 @@
-// Copyright © 2021 Brad Howes. All rights reserved.
+// Copyright © 2020 Brad Howes. All rights reserved.
 
 import AVFoundation
 

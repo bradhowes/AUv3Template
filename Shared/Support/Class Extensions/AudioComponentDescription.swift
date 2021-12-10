@@ -1,7 +1,7 @@
-// Copyright © 2021 Brad Howes. All rights reserved.
+// Copyright © 2020 Apple. All rights reserved.
 
-import AudioToolbox
-import os
+import Foundation
+import os.log
 
 public extension AudioComponentDescription {
   func log(_ logger: OSLog, type: OSLogType) {

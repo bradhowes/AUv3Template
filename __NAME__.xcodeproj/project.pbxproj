@@ -91,6 +91,8 @@
 		BDB7CE9E249FC152009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE9D249FC152009580D5 /* Accelerate.framework */; };
 		BDB7CE9F249FC157009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE9D249FC152009580D5 /* Accelerate.framework */; };
 		BDB7CEA0249FC162009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE92249EC556009580D5 /* Accelerate.framework */; };
+		BDC216242763578100560D90 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC216232763578100560D90 /* DispatchQueue.swift */; };
+		BDC216252763578100560D90 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC216232763578100560D90 /* DispatchQueue.swift */; };
 		BDE2CDF124A3DEE4004AC8FA /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */; };
 		BDE2CDF224A3DEE5004AC8FA /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */; };
 		BDE2CDF524A3DF24004AC8FA /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDF324A3DF13004AC8FA /* Bundle.swift */; };
@@ -297,6 +299,7 @@
 		BDB7CE96249F7209009580D5 /* ValueChangeDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueChangeDetector.h; sourceTree = "<group>"; };
 		BDB7CE99249FC026009580D5 /* AUAudioUnitPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUAudioUnitPreset.swift; sourceTree = "<group>"; };
 		BDB7CE9D249FC152009580D5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.5.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		BDC216232763578100560D90 /* DispatchQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		BDE2CDF324A3DF13004AC8FA /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		BDE2CE1724A3E887004AC8FA /* Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Dev.xcconfig; path = Configuration/Dev.xcconfig; sourceTree = "<group>"; };
@@ -461,6 +464,7 @@
 				BDB11A5E24A13FAA00DD8EF9 /* CATransaction.swift */,
 				BDB11A5A24A13F2A00DD8EF9 /* Color.swift */,
 				BDB11A5224A13BFA00DD8EF9 /* Comparble.swift */,
+				BDC216232763578100560D90 /* DispatchQueue.swift */,
 				BD49661424A35D1E00A81F0B /* FourCharCode.swift */,
 				BD06772B24CF9FA00039F161 /* Optional.swift */,
 				C4BEE7D722236E99001E6B6D /* View.swift */,
@@ -1157,6 +1161,7 @@
 				BD71E31925E1AFB5005C5E1E /* FilterPreset.swift in Sources */,
 				C4BEE80422236F6F001E6B6D /* TypeAliases.swift in Sources */,
 				BD66842E25F11F77009CF8ED /* KnobController.swift in Sources */,
+				BDC216242763578100560D90 /* DispatchQueue.swift in Sources */,
 				BD18B39D24CB248200B7CB1E /* AudioComponentDescription.swift in Sources */,
 				BDB11A5524A13C4B00DD8EF9 /* Comparble.swift in Sources */,
 				BDB11A5C24A13F8700DD8EF9 /* Color.swift in Sources */,
@@ -1209,6 +1214,7 @@
 				BD71E31125E1AFB4005C5E1E /* FilterPreset.swift in Sources */,
 				BD2FD3EE259B5104004A3196 /* AUParameterTree.swift in Sources */,
 				BD66842F25F11F77009CF8ED /* KnobController.swift in Sources */,
+				BDC216252763578100560D90 /* DispatchQueue.swift in Sources */,
 				BD66843125F11F77009CF8ED /* Knob_macOS.swift in Sources */,
 				BDE2CDF624A3DF25004AC8FA /* Bundle.swift in Sources */,
 				C4BEE80022236F6E001E6B6D /* TypeAliases.swift in Sources */,

@@ -1,6 +1,9 @@
-// Copyright © 2021 Brad Howes. All rights reserved.
+// Copyright © 2020 Brad Howes. All rights reserved.
 
 public extension View {
+  /**
+   Add layout constraints such that the edges of this view extend to those of the enclosing view.
+   */
   func pinToSuperviewEdges() {
     guard let superview = superview else { return }
     translatesAutoresizingMaskIntoConstraints = false

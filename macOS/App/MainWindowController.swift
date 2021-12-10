@@ -5,4 +5,5 @@ import Cocoa
 final class MainWindowController: NSWindowController {
   @IBOutlet public var playButton: NSButton!
   @IBOutlet public var bypassButton: NSButton!
+  @IBOutlet public var presetsButton: NSButton!
 }

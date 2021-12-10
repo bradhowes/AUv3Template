@@ -19,6 +19,19 @@ public final class FilterAudioUnit: AUAudioUnit {
     case unableToInitialize(String)
   }
 
+  /// Component description that matches this AudioUnit. The values must match those found in the Info.plist
+  /// Used by the app hosts to load the right component.
+  public static let componentDescription: AudioComponentDescription = {
+    let bundle = Bundle(for: FilterAudioUnit.self)
+    return AudioComponentDescription(
+      componentType: FourCharCode(stringLiteral: bundle.auComponentType),
+      componentSubType: FourCharCode(stringLiteral: bundle.auComponentSubtype),
+      componentManufacturer: FourCharCode(stringLiteral: bundle.auComponentManufacturer),
+      componentFlags: 0,
+      componentFlagsMask: 0
+    )
+  }()
+
   /// Name of the component
   public static let componentName = Bundle(for: FilterAudioUnit.self).auComponentName
   /// The associated view controller for the audio unit that shows the controls

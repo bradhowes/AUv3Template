@@ -4,13 +4,21 @@ import __NAME__Framework
 import Cocoa
 
 final class MainViewController: NSViewController {
-  private var audioUnitHost: AudioUnitHost!
+
+  private let audioUnitHost = AudioUnitHost(componentDescription: FilterAudioUnit.componentDescription)
+  internal var userPresetsManager: UserPresetsManager?
 
   private var playButton: NSButton!
   private var bypassButton: NSButton!
+  private var presetsButton: NSButton!
+
+  private var presetsMenu: NSMenu!
+  private var savePresetMenuItem: NSMenuItem!
+  private var renamePresetMenuItem: NSMenuItem!
+  private var deletePresetMenuItem: NSMenuItem!
+
   private var playMenuItem: NSMenuItem!
   private var bypassMenuItem: NSMenuItem!
-  private var savePresetMenuItem: NSMenuItem!
 
   @IBOutlet var containerView: NSView!
   @IBOutlet var loadingText: NSTextField!
@@ -27,34 +35,48 @@ final class MainViewController: NSViewController {
 extension MainViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    audioUnitHost = AudioUnitHost(interfaceName: "FilterViewController")
     audioUnitHost.delegate = self
   }
 
   override func viewWillAppear() {
     super.viewWillAppear()
-    guard let appDelegate = appDelegate,
-          let windowController = windowController
-    else {
-      fatalError()
-    }
 
-    view.window?.delegate = self
+    guard let appDelegate = NSApplication.shared.delegate as? AppDelegate else { fatalError() }
+    presetsMenu = appDelegate.presetsMenu
+    guard presetsMenu != nil else { fatalError() }
+    presetsMenu.autoenablesItems = false
+
     savePresetMenuItem = appDelegate.savePresetMenuItem
-    guard savePresetMenuItem != nil else { fatalError() }
+    savePresetMenuItem.target = self
+    savePresetMenuItem.action = #selector(handleSavePresetMenuSelected(_:))
 
-    playButton = windowController.playButton
+    renamePresetMenuItem = appDelegate.renamePresetMenuItem
+    renamePresetMenuItem.target = self
+    renamePresetMenuItem.action = #selector(handleRenamePresetMenuSelected(_:))
+
+    deletePresetMenuItem = appDelegate.deletePresetMenuItem
+    deletePresetMenuItem.target = self
+    deletePresetMenuItem.action = #selector(handleDeletePresetMenuSelected(_:))
+
     playMenuItem = appDelegate.playMenuItem
-
-    bypassButton = windowController.bypassButton
     bypassMenuItem = appDelegate.bypassMenuItem
-    bypassButton.isEnabled = false
+    guard playMenuItem != nil, bypassMenuItem != nil else { fatalError() }
     bypassMenuItem.isEnabled = false
 
-    savePresetMenuItem.isHidden = true
-    savePresetMenuItem.isEnabled = false
+    guard let windowController = view.window?.windowController as? MainWindowController else { fatalError() }
+    view.window?.delegate = self
+
+    playButton = windowController.playButton
+    bypassButton = windowController.bypassButton
+    bypassButton.isEnabled = false
+    presetsButton = windowController.presetsButton
+
+    guard let savePresetMenuItem = appDelegate.savePresetMenuItem else { fatalError() }
     savePresetMenuItem.target = self
-    savePresetMenuItem.action = #selector(handleSavePresetMenuSelection(_:))
+    savePresetMenuItem.action = #selector(handleSavePresetMenuSelected(_:))
+
+    // Keep last
+    audioUnitHost.delegate = self
   }
 
   override func viewDidLayout() {
@@ -83,79 +105,19 @@ extension MainViewController {
   }
 }
 
-extension MainViewController: AudioUnitManagerDelegate {
-  func connected() {
-    guard filterView == nil else { return }
-    connectFilterView()
-  }
-}
+extension MainViewController: AudioUnitHostDelegate {
 
-extension MainViewController {
-  @IBAction private func togglePlay(_ sender: NSButton) {
-    audioUnitManager.togglePlayback()
-    playButton?.state = audioUnitManager.isPlaying ? .on : .off
-    playButton?.title = audioUnitManager.isPlaying ? "Stop" : "Play"
-    playMenuItem?.title = audioUnitManager.isPlaying ? "Stop" : "Play"
-    bypassButton?.isEnabled = audioUnitManager.isPlaying
-    bypassMenuItem?.isEnabled = audioUnitManager.isPlaying
+  func connected(audioUnit: AUAudioUnit, viewController: ViewController) {
+    userPresetsManager = .init(for: audioUnit)
+    connectFilterView(viewController)
   }
 
-  @IBAction private func toggleBypass(_ sender: NSButton) {
-    let wasBypassed = audioUnitManager.audioUnit?.shouldBypassEffect ?? false
-    let isBypassed = !wasBypassed
-    audioUnitManager.audioUnit?.shouldBypassEffect = isBypassed
-    bypassButton?.state = isBypassed ? .on : .off
-    bypassButton?.title = isBypassed ? "Resume" : "Bypass"
-    bypassMenuItem?.title = isBypassed ? "Resume" : "Bypass"
+  func failed(error: AudioUnitHostError) {
+
   }
 
-  @objc private func handleSavePresetMenuSelection(_ sender: NSMenuItem) throws {
-    guard let audioUnit = audioUnitManager.viewController.audioUnit else { return }
-    guard let presetMenu = NSApplication.shared.mainMenu?.item(withTag: 666)?.submenu else { return }
-
-    let preset = AUAudioUnitPreset()
-    let index = audioUnit.userPresets.count + 1
-    preset.name = "Preset \(index)"
-    preset.number = -index
-
-    do {
-      try audioUnit.saveUserPreset(preset)
-    } catch {
-      print(error.localizedDescription)
-    }
-
-    let menuItem = NSMenuItem(title: preset.name,
-                              action: #selector(handlePresetMenuSelection(_:)),
-                              keyEquivalent: "")
-    menuItem.tag = preset.number
-    presetMenu.addItem(menuItem)
-  }
-
-  @objc private func handlePresetMenuSelection(_ sender: NSMenuItem) {
-    guard let audioUnit = audioUnitManager.viewController.audioUnit else { return }
-    sender.menu?.items.forEach { $0.state = .off }
-    if sender.tag >= 0 {
-      audioUnit.currentPreset = audioUnit.factoryPresets[sender.tag]
-    } else {
-      audioUnit.currentPreset = audioUnit.userPresets[sender.tag]
-    }
-
-    sender.state = .on
-  }
-}
-
-extension MainViewController: NSWindowDelegate {
-  func windowWillClose(_ notification: Notification) {
-    audioUnitManager.cleanup()
-    guard let parameterTree = audioUnitManager.viewController.audioUnit?.parameterTree,
-          let parameterObserverToken = parameterObserverToken else { return }
-    parameterTree.removeParameterObserver(parameterObserverToken)
-  }
-}
-
-extension MainViewController {
-  private func connectFilterView() {
-    let viewController = audioUnitManager.viewController
+  private func connectFilterView(_ viewController: NSViewController) {
+    guard let viewController = audioUnitHost.viewController else { fatalError() }
     let filterView = viewController.view
     containerView.addSubview(filterView)
     filterView.pinToSuperviewEdges()
@@ -164,23 +126,141 @@ extension MainViewController {
     addChild(viewController)
     view.needsLayout = true
     containerView.needsLayout = true
-    loadingText.isHidden = true
+  }
+}
 
-    populatePresetMenu(audioUnitManager.audioUnit!)
+extension MainViewController {
+
+  @IBAction private func togglePlay(_ sender: NSButton) {
+    let isPlaying = audioUnitHost.isPlaying
+
+    playButton?.image = isPlaying ? NSImage(named: "stop") : NSImage(named: "play")
+
+    audioUnitHost.audioUnit?.shouldBypassEffect = false
+    bypassButton?.image = NSImage(named: "enabled")
+    bypassButton?.isEnabled = isPlaying
+    bypassMenuItem?.isEnabled = isPlaying
   }
 
-  private func populatePresetMenu(_ audioUnit: FilterAudioUnit) {
-    guard let presetMenu = NSApplication.shared.mainMenu?.item(withTag: 666)?.submenu else { return }
-    for preset in audioUnit.factoryPresets {
-      let keyEquivalent = "\(preset.number + 1)"
-      let menuItem = NSMenuItem(title: preset.name, action: #selector(handlePresetMenuSelection(_:)),
-                                keyEquivalent: keyEquivalent)
-      menuItem.tag = preset.number
-      presetMenu.addItem(menuItem)
+  @IBAction private func toggleBypass(_ sender: NSButton) {
+    let wasBypassed = audioUnitHost.audioUnit?.shouldBypassEffect ?? false
+    let isBypassed = !wasBypassed
+    audioUnitHost.audioUnit?.shouldBypassEffect = isBypassed
+    bypassButton?.image = isBypassed ? NSImage(named: "bypassed") : NSImage(named: "enabled")
+    bypassMenuItem?.title = isBypassed ? "Resume" : "Bypass"
+  }
+
+  @IBAction private func presetsButton(_ sender: NSButton) {
+    let location = NSPoint(x: 0, y: sender.frame.height + 5)
+    presetsMenu.popUp(positioning: nil, at: location, in: sender)
+  }
+
+  @objc private func handleSavePresetMenuSelected(_ sender: NSMenuItem) throws {
+    SavePresetAction(self).start(sender)
+    updatePresetMenu()
+  }
+
+  @objc private func handleRenamePresetMenuSelected(_ sender: NSMenuItem) throws {
+    RenamePresetAction(self).start(sender)
+    updatePresetMenu()
+  }
+
+  @objc private func handleDeletePresetMenuSelected(_ sender: NSMenuItem) throws {
+    DeletePresetAction(self).start(sender)
+    updatePresetMenu()
+  }
+
+  @objc private func presetMenuItemSelected(_ sender: NSMenuItem) {
+    guard let userPresetsManager = userPresetsManager else { return }
+    let number = tagToNumber(sender.tag)
+    userPresetsManager.makeCurrentPreset(number: number)
+    updatePresetMenu()
+  }
+}
+
+extension MainViewController: NSWindowDelegate {
+  func windowWillClose(_ notification: Notification) {
+    audioUnitHost.cleanup()
+    guard let parameterTree = audioUnitHost.audioUnit?.parameterTree,
+          let parameterObserverToken = parameterObserverToken else { return }
+    parameterTree.removeParameterObserver(parameterObserverToken)
+  }
+}
+
+extension MainViewController {
+
+  private func numberToTag(_ number: Int) -> Int {
+    number >= 0 ? (number + 10000) : number
+  }
+
+  private func tagToNumber(_ tag: Int) -> Int {
+    tag >= 10000 ? (tag - 10000) : tag
+  }
+
+  private func populatePresetMenu() {
+    guard let userPresetsManager = userPresetsManager else { return }
+    let audioUnit = userPresetsManager.audioUnit
+
+    for preset in audioUnit.factoryPresetsArray {
+      let key = "\(preset.number + 1)"
+      let menuItem = NSMenuItem(title: preset.name, action: #selector(presetMenuItemSelected(_:)), keyEquivalent: key)
+      menuItem.tag = numberToTag(preset.number)
+      presetsMenu.addItem(menuItem)
     }
 
-    if let currentPreset = audioUnit.currentPreset {
-      presetMenu.item(at: currentPreset.number + 2)?.state = .on
+    updatePresetMenu()
+  }
+
+  internal func updatePresetMenu() {
+    guard let userPresetsManager = userPresetsManager else { return }
+    let active = userPresetsManager.audioUnit.currentPreset?.number ?? Int.max
+
+    savePresetMenuItem.isEnabled = true
+    renamePresetMenuItem.isEnabled = active < 0
+    deletePresetMenuItem.isEnabled = active < 0
+
+    // Determine number of items to keep: 3 commands + divider + # of factory items
+    let factoryCount = userPresetsManager.audioUnit.factoryPresetsArray.count
+    let stockCount = 3 + 1 + factoryCount
+    presetsMenu.items = presetsMenu.items.dropLast(presetsMenu.items.count - stockCount)
+
+    if factoryCount > 0, !userPresetsManager.presets.isEmpty {
+      presetsMenu.addItem(.separator())
     }
+
+    for preset in userPresetsManager.presetsOrderedByName {
+      let key = ""
+      let menuItem = NSMenuItem(title: preset.name, action: #selector(presetMenuItemSelected(_:)), keyEquivalent: key)
+      menuItem.tag = numberToTag(preset.number)
+      presetsMenu.addItem(menuItem)
+    }
+
+    // Finally checkmark any item that matches the current preset
+    for (index, item) in presetsMenu.items.enumerated() {
+      item.state = (index > 3 && tagToNumber(item.tag) == active) ? .on : .off
+    }
+  }
+}
+
+extension MainViewController {
+  func notify(_ title: String, message: String) {
+    let alert = NSAlert()
+    alert.alertStyle = .informational
+    alert.messageText = title
+    alert.informativeText = message
+
+    alert.addButton(withTitle: "OK")
+    alert.beginSheetModal(for: view.window!) { _ in }
+    alert.runModal()
+  }
+
+  func yesOrNo(_ title: String, message: String) -> Bool {
+    let alert = NSAlert()
+    alert.messageText = title
+    alert.informativeText = message
+    alert.alertStyle = .warning
+    alert.addButton(withTitle: "OK")
+    alert.addButton(withTitle: "Cancel")
+    return alert.runModal() == .alertFirstButtonReturn
   }
 }

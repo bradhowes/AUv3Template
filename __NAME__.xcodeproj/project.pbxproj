@@ -95,6 +95,10 @@
 		BDC216252763578100560D90 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC216232763578100560D90 /* DispatchQueue.swift */; };
 		BDC21627276357EA00560D90 /* UserPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC21626276357EA00560D90 /* UserPresetsManager.swift */; };
 		BDC21628276357EA00560D90 /* UserPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC21626276357EA00560D90 /* UserPresetsManager.swift */; };
+		BDC2162D2763834E00560D90 /* DeletePresetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2162A2763834E00560D90 /* DeletePresetAction.swift */; };
+		BDC2162E2763834E00560D90 /* SavePresetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2162B2763834E00560D90 /* SavePresetAction.swift */; };
+		BDC2162F2763834E00560D90 /* RenamePresetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2162C2763834E00560D90 /* RenamePresetAction.swift */; };
+		BDC21631276387F700560D90 /* PromptForReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC21630276387F700560D90 /* PromptForReply.swift */; };
 		BDE2CDF124A3DEE4004AC8FA /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */; };
 		BDE2CDF224A3DEE5004AC8FA /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */; };
 		BDE2CDF524A3DF24004AC8FA /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE2CDF324A3DF13004AC8FA /* Bundle.swift */; };
@@ -303,6 +307,10 @@
 		BDB7CE9D249FC152009580D5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.5.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		BDC216232763578100560D90 /* DispatchQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		BDC21626276357EA00560D90 /* UserPresetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPresetsManager.swift; sourceTree = "<group>"; };
+		BDC2162A2763834E00560D90 /* DeletePresetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletePresetAction.swift; sourceTree = "<group>"; };
+		BDC2162B2763834E00560D90 /* SavePresetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePresetAction.swift; sourceTree = "<group>"; };
+		BDC2162C2763834E00560D90 /* RenamePresetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenamePresetAction.swift; sourceTree = "<group>"; };
+		BDC21630276387F700560D90 /* PromptForReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptForReply.swift; sourceTree = "<group>"; };
 		BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		BDE2CDF324A3DF13004AC8FA /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		BDE2CE1724A3E887004AC8FA /* Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Dev.xcconfig; path = Configuration/Dev.xcconfig; sourceTree = "<group>"; };
@@ -504,6 +512,16 @@
 			path = Kernel;
 			sourceTree = "<group>";
 		};
+		BDC216292763830500560D90 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2162A2763834E00560D90 /* DeletePresetAction.swift */,
+				BDC2162C2763834E00560D90 /* RenamePresetAction.swift */,
+				BDC2162B2763834E00560D90 /* SavePresetAction.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
 		BDDCA51D25F8B526009C1AA7 /* DSP */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +654,8 @@
 				BD75B68225DA9E420071F55E /* AppStore.swift */,
 				BD78FDC124C2F6530091A854 /* MainWindowController.swift */,
 				C4BEE80822237078001E6B6D /* MainViewController.swift */,
+				BDC21630276387F700560D90 /* PromptForReply.swift */,
+				BDC216292763830500560D90 /* Actions */,
 				C4BEE7C722236A58001E6B6D /* Main.storyboard */,
 				C4BEE7C622236A58001E6B6D /* Assets.xcassets */,
 				C4BEE7CA22236A58001E6B6D /* Info.plist */,
@@ -1192,7 +1212,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4BEE7D322236A58001E6B6D /* AppDelegate.swift in Sources */,
+				BDC2162F2763834E00560D90 /* RenamePresetAction.swift in Sources */,
+				BDC2162D2763834E00560D90 /* DeletePresetAction.swift in Sources */,
 				C4BEE80922237078001E6B6D /* MainViewController.swift in Sources */,
+				BDC21631276387F700560D90 /* PromptForReply.swift in Sources */,
+				BDC2162E2763834E00560D90 /* SavePresetAction.swift in Sources */,
 				BD78FDC224C2F6530091A854 /* MainWindowController.swift in Sources */,
 				BD75B68325DA9E420071F55E /* AppStore.swift in Sources */,
 			);

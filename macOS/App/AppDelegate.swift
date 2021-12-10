@@ -6,7 +6,10 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet var playMenuItem: NSMenuItem!
   @IBOutlet var bypassMenuItem: NSMenuItem!
+  @IBOutlet var presetsMenu: NSMenu!
   @IBOutlet var savePresetMenuItem: NSMenuItem!
+  @IBOutlet var renamePresetMenuItem: NSMenuItem!
+  @IBOutlet var deletePresetMenuItem: NSMenuItem!
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
 

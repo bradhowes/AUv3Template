@@ -4,7 +4,9 @@ import __NAME__Framework
 import UIKit
 
 final class MainViewController: UIViewController {
-  private let audioUnitHost = AudioUnitHost(interfaceName: "MainInterface")
+
+  private let audioUnitHost = AudioUnitHost(componentDescription: FilterAudioUnit.componentDescription)
+  internal var userPresetsManager: UserPresetsManager?
 
   @IBOutlet var reviewButton: UIButton!
   @IBOutlet var playButton: UIButton!
@@ -76,11 +78,11 @@ final class MainViewController: UIViewController {
   }
 
   @IBAction func usePreset1(_ sender: Any) {
-    audioUnitHost.audioUnit?.currentPreset = audioUnitHost.audioUnit?.factoryPresets[1]
+    userPresetsManager?.makeCurrentPreset(number: 0)
   }
 
   @IBAction func usePreset2(_ sender: Any) {
-    audioUnitHost.audioUnit?.currentPreset = audioUnitHost.audioUnit?.factoryPresets[2]
+    userPresetsManager?.makeCurrentPreset(number: 1)
   }
 
   @IBAction private func reviewApp(_ sender: UIButton) {
@@ -88,15 +90,17 @@ final class MainViewController: UIViewController {
   }
 }
 
-extension MainViewController: AudioUnitManagerDelegate {
-  func connected() {
-    connectFilterView()
+extension MainViewController: AudioUnitHostDelegate {
+  func connected(audioUnit: AUAudioUnit, viewController: ViewController) {
+    self.userPresetsManager = .init(for: audioUnit)
+    connectFilterView(viewController)
   }
-}
 
-extension MainViewController {
-  private func connectFilterView() {
-    let viewController = audioUnitHost.viewController
+  func failed(error: AudioUnitHostError) {
+    print(error.localizedDescription)
+  }
+
+  private func connectFilterView(_ viewController: UIViewController) {
     guard let filterView = viewController.view else { fatalError("no view found from audio unit") }
     containerView.addSubview(filterView)
     filterView.pinToSuperviewEdges()

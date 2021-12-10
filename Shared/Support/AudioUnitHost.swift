@@ -18,8 +18,8 @@ public protocol AudioUnitManagerDelegate: AnyObject {
  AudioUnit and then instantiates the audio unit itself. Finally, it wires the AudioUnit with SimplePlayEngine to
  send audio samples to the AudioUnit.
  */
-public final class AudioUnitManager {
-  private static let log = Logging.logger("AudioUnitManager")
+public final class AudioUnitHost {
+  private static let log = Logging.logger("AudioUnitHost")
   private var log: OSLog { Self.log }
 
   private let playEngine = SimplePlayEngine()
@@ -48,7 +48,7 @@ public final class AudioUnitManager {
   }
 }
 
-extension AudioUnitManager {
+extension AudioUnitHost {
   private func createAudioUnit(interfaceName: String) {
     os_log(.info, log: log, "createAudioUnit")
 
@@ -85,38 +85,12 @@ extension AudioUnitManager {
       // We have new instance, now obtain its associated UI view controller. Currently, on iOS this will always
       // fail so we manually load and create the view controller.
       avAudioUnit.auAudioUnit.requestViewController { auViewController in
-        let viewController = auViewController as? FilterViewController ??
-          self.createAudioUnitViewController(interfaceName: interfaceName)
 
         // Now we can wire everything up and be on our way.
         // NOTE: we are *not* on the main thread at this point.
-        self.wireAudioUnit(avAudioUnit, viewController: viewController)
+        // self.wireAudioUnit(avAudioUnit, viewController: auiewController)
       }
     }
-  }
-
-  private func createAudioUnitViewController(interfaceName: String) -> FilterViewController {
-    guard let url = Bundle.main.auExtensionUrl else { fatalError("Could not obtain extension bundle URL") }
-    os_log(.info, log: log, "loadViewController - %{public}s", url.path)
-    guard let extensionBundle = Bundle(url: url) else { fatalError("Could not get app extension bundle") }
-
-    #if os(iOS)
-    os_log(.info, log: log, "loading storyboard %{public}s", interfaceName)
-    let storyboard = Storyboard(name: interfaceName, bundle: extensionBundle)
-    os_log(.info, log: log, "instantiating initial view controller")
-    guard let controller = storyboard.instantiateInitialViewController() as? FilterViewController else {
-      fatalError("Unable to get FilterViewController instance")
-    }
-    return controller
-
-    #elseif os(macOS)
-
-    os_log(.info, log: log, "creating new FilterViewController")
-    let viewController = FilterViewController(nibName: interfaceName, bundle: extensionBundle)
-    os_log(.info, log: log, "done")
-    return viewController
-
-    #endif
   }
 
   private func wireAudioUnit(_ avAudioUnit: AVAudioUnit, viewController: FilterViewController) {
@@ -136,7 +110,7 @@ extension AudioUnitManager {
   }
 }
 
-public extension AudioUnitManager {
+public extension AudioUnitHost {
   /**
    Start/stop audio engine
 

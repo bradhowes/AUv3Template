@@ -4,7 +4,7 @@ import __NAME__Framework
 import UIKit
 
 final class MainViewController: UIViewController {
-  private let audioUnitManager = AudioUnitManager(interfaceName: "MainInterface")
+  private let audioUnitHost = AudioUnitHost(interfaceName: "MainInterface")
 
   @IBOutlet var reviewButton: UIButton!
   @IBOutlet var playButton: UIButton!
@@ -22,7 +22,7 @@ final class MainViewController: UIViewController {
     let version = Bundle.main.releaseVersionNumber
     reviewButton.setTitle(version, for: .normal)
 
-    audioUnitManager.delegate = self
+    audioUnitHost.delegate = self
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -47,20 +47,20 @@ final class MainViewController: UIViewController {
   }
 
   public func stopPlaying() {
-    audioUnitManager.cleanup()
+    audioUnitHost.cleanup()
   }
 
   @IBAction private func togglePlay(_ sender: UIButton) {
-    let isPlaying = audioUnitManager.togglePlayback()
+    let isPlaying = audioUnitHost.togglePlayback()
     let titleText = isPlaying ? "Stop" : "Play"
     playButton.setTitle(titleText, for: .normal)
     playButton.setTitleColor(isPlaying ? .systemRed : .systemTeal, for: .normal)
   }
 
   @IBAction private func toggleBypass(_ sender: UIButton) {
-    let wasBypassed = audioUnitManager.audioUnit?.shouldBypassEffect ?? false
+    let wasBypassed = audioUnitHost.audioUnit?.shouldBypassEffect ?? false
     let isBypassed = !wasBypassed
-    audioUnitManager.audioUnit?.shouldBypassEffect = isBypassed
+    audioUnitHost.audioUnit?.shouldBypassEffect = isBypassed
 
     let titleText = isBypassed ? "Resume" : "Bypass"
     bypassButton.setTitle(titleText, for: .normal)
@@ -76,11 +76,11 @@ final class MainViewController: UIViewController {
   }
 
   @IBAction func usePreset1(_ sender: Any) {
-    audioUnitManager.audioUnit?.currentPreset = audioUnitManager.audioUnit?.factoryPresets[1]
+    audioUnitHost.audioUnit?.currentPreset = audioUnitHost.audioUnit?.factoryPresets[1]
   }
 
   @IBAction func usePreset2(_ sender: Any) {
-    audioUnitManager.audioUnit?.currentPreset = audioUnitManager.audioUnit?.factoryPresets[2]
+    audioUnitHost.audioUnit?.currentPreset = audioUnitHost.audioUnit?.factoryPresets[2]
   }
 
   @IBAction private func reviewApp(_ sender: UIButton) {
@@ -96,7 +96,7 @@ extension MainViewController: AudioUnitManagerDelegate {
 
 extension MainViewController {
   private func connectFilterView() {
-    let viewController = audioUnitManager.viewController
+    let viewController = audioUnitHost.viewController
     guard let filterView = viewController.view else { fatalError("no view found from audio unit") }
     containerView.addSubview(filterView)
     filterView.pinToSuperviewEdges()

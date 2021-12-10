@@ -9,13 +9,12 @@ extension AUParameterTree {
 
   public class func createParameter(withIdentifier identifier: String, name: String, address: FilterParameterAddress,
                                     min: AUValue, max: AUValue, unit: AudioUnitParameterUnit, unitName: String? = nil,
-                                    flags: AudioUnitParameterOptions = [.flag_IsReadable, .flag_IsWritable],
+                                    flags: AudioUnitParameterOptions = [.flag_IsReadable, .flag_IsWritable, .flag_CanRamp],
                                     valueStrings: [String]? = nil, dependentParameters: [NSNumber]? = nil) -> AUParameter
   {
-    let param = createParameter(withIdentifier: identifier, name: name, address: address.rawValue,
-                                min: min, max: max,
-                                unit: unit, unitName: unitName, flags: flags, valueStrings: valueStrings,
-                                dependentParameters: dependentParameters)
-    return param
+    createParameter(withIdentifier: identifier, name: name, address: address.rawValue,
+                    min: min, max: max,
+                    unit: unit, unitName: unitName, flags: flags, valueStrings: valueStrings,
+                    dependentParameters: dependentParameters)
   }
 }

@@ -34,8 +34,7 @@ extension MainViewController {
       }
 
       viewController.yesOrNo("Existing Preset",
-                             message: "Do you wish to change the existing preset to have the current settings?")
-      { _ in
+                             message: "Do you wish to change the existing preset to have the current settings?") { _ in
         self.update(preset: existing)
       }
     }

@@ -69,7 +69,8 @@ open class Knob: NSControl {
   private let progressLayer = CAShapeLayer()
   private let indicatorLayer = CAShapeLayer()
   private let ticksLayer = CAShapeLayer()
-  private let updateQueue = DispatchQueue(label: "Knob", qos: .userInteractive, attributes: [], autoreleaseFrequency: .inherit, target: .main)
+  private let updateQueue = DispatchQueue(label: "Knob", qos: .userInteractive, attributes: [],
+                                          autoreleaseFrequency: .inherit, target: .main)
 
   private var _value: Float = 0.0
   private var panOrigin: CGPoint = .zero
@@ -207,9 +208,9 @@ extension Knob {
     let ring = NSBezierPath()
     var points = [CGPoint]()
     for theta in 0...270 {
-      let x = radius * cos(CGFloat(theta) * .pi / 180.0)
-      let y = radius * sin(CGFloat(theta) * .pi / 180.0)
-      points.append(CGPoint(x: x, y: y))
+      let xPos = radius * cos(CGFloat(theta) * .pi / 180.0)
+      let yPos = radius * sin(CGFloat(theta) * .pi / 180.0)
+      points.append(CGPoint(x: xPos, y: yPos))
     }
 
     ring.appendPoints(&points, count: points.count)

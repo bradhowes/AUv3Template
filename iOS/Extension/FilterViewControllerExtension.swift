@@ -2,4 +2,4 @@
 
 import __NAME__Framework
 
-public let FilterViewControllerExtension = 1
+public let filterViewControllerExtension = 1

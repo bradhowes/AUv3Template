@@ -855,6 +855,7 @@
 			buildConfigurationList = C437FE4A222367A8008D6C09 /* Build configuration list for PBXNativeTarget "iOS App" */;
 			buildPhases = (
 				C437FE36222367A6008D6C09 /* Sources */,
+				BDF7933927654E66000DB4ED /* Run swiftlint */,
 				C437FE37222367A6008D6C09 /* Frameworks */,
 				C437FE38222367A6008D6C09 /* Resources */,
 				C437FE5E222367CD008D6C09 /* Embed Frameworks */,
@@ -915,6 +916,7 @@
 				C437FE782223688D008D6C09 /* Resources */,
 				C4660A632225F9A0007BE3B1 /* Embed Frameworks */,
 				C4660A642225F9A0007BE3B1 /* Embed App Extensions */,
+				BDF7933A27654E8F000DB4ED /* Run swiftlint */,
 			);
 			buildRules = (
 			);
@@ -1128,6 +1130,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BDF7933927654E66000DB4ED /* Run swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run swiftlint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -x\nCMD=\"/opt/homebrew/bin/swiftlint\"\nif [[ -x \"${CMD}\" ]]; then\n  \"${CMD}\" --config .swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		BDF7933A27654E8F000DB4ED /* Run swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run swiftlint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -x\nif which swiftlint >/dev/null; then\n  \n  swiftlint --config ../.swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BD1D24A525D486A700523748 /* Sources */ = {

@@ -44,11 +44,10 @@ final class MainViewController: UIViewController {
                                   message: nil, preferredStyle: .alert)
     alert.message =
       """
-      The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as GarageBand, AUM, and Cubasis.
-
-      You can continue to use this app to experiment, but you do not need to have it running to access the AUv3 component in other apps.
-
-      However, if you later delete this app from your device, the AUv3 component will no longer be available in other host apps.
+      The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as
+      GarageBand, AUM, and Cubasis. You can continue to use this app to experiment, but you do not need to have it
+      running to access the AUv3 component in other apps. However, if you later delete this app from your device, the
+      AUv3 component will no longer be available in other host apps.
       """
     alert.addAction(
       UIAlertAction(title: "OK", style: .default, handler: { _ in })
@@ -126,7 +125,7 @@ extension MainViewController: AudioUnitHostDelegate {
       DispatchQueue.performOnMain { self.updateView() }
     }
 
-    parameterTreeObserverToken = parameterTree.token(byAddingParameterObserver: { [weak self] address, _ in
+    parameterTreeObserverToken = parameterTree.token(byAddingParameterObserver: { [weak self] _, _ in
       guard let self = self else { return }
       DispatchQueue.performOnMain { self.updateView() }
     })

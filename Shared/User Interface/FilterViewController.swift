@@ -248,8 +248,7 @@ extension FilterViewController: UITextFieldDelegate {
       self.controlsView.alpha = 1.0
       self.editingView.isHidden = true
       if let stringValue = self.editingValue.text,
-         let value = Float(stringValue)
-      {
+         let value = Float(stringValue) {
         self.controls[address]?.setEditedValue(value)
       }
       os_log(.info, log: self.log, "done animation")

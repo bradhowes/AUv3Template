@@ -74,7 +74,8 @@ open class Knob: UIControl {
   private let progressLayer = CAShapeLayer()
   private let indicatorLayer = CAShapeLayer()
   private let ticksLayer = CAShapeLayer()
-  private let updateQueue = DispatchQueue(label: "Checkbox", qos: .userInteractive, attributes: [], autoreleaseFrequency: .inherit, target: .main)
+  private let updateQueue = DispatchQueue(label: "Checkbox", qos: .userInteractive, attributes: [],
+                                          autoreleaseFrequency: .inherit, target: .main)
 
   private var _value: Float = 0.0
   private var panOrigin: CGPoint = .zero

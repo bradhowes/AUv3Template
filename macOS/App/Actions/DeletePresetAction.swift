@@ -14,7 +14,7 @@ extension MainViewController {
     }
 
     func start(_ action: AnyObject) {
-      let response = viewController.yesOrNo("Delete Preset",
+      let response = viewController.yesOrNo(title: "Delete Preset",
                                             message: "Do you wish to delete the preset? This cannot be undone.")
       if response {
         deletePreset()
@@ -25,7 +25,7 @@ extension MainViewController {
       do {
         try userPresetsManager.deleteCurrent()
       } catch {
-        viewController.notify("Delete Error", message: error.localizedDescription)
+        viewController.notify(title: "Delete Error", message: error.localizedDescription)
       }
     }
   }

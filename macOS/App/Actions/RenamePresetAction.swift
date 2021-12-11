@@ -27,7 +27,7 @@ extension MainViewController {
       do {
         try userPresetsManager.renameCurrent(to: name)
       } catch {
-        viewController.notify("Rename Error", message: error.localizedDescription)
+        viewController.notify(title: "Rename Error", message: error.localizedDescription)
       }
       viewController.updatePresetMenu()
     }

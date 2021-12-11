@@ -47,7 +47,10 @@ public final class FilterAudioUnit: AUAudioUnit {
   /// Parameter tree containing filter parameter values
   override public var parameterTree: AUParameterTree? {
     get { parameterDefinitions.parameterTree }
-    set { fatalError("attempted to set new parameterTree") }
+    set {
+      fatalError("attempted to set new parameterTree")
+      _ = newValue // to silence swiftlint warning
+    }
   }
 
   /// Factory presets for the filter
@@ -124,8 +127,7 @@ public final class FilterAudioUnit: AUAudioUnit {
    */
   override public class func instantiate(with componentDescription: AudioComponentDescription,
                                          options: AudioComponentInstantiationOptions = [],
-                                         completionHandler: @escaping (AUAudioUnit?, Error?) -> Void)
-  {
+                                         completionHandler: @escaping (AUAudioUnit?, Error?) -> Void) {
     do {
       let auAudioUnit = try FilterAudioUnit(componentDescription: componentDescription, options: options)
       completionHandler(auAudioUnit, nil)
@@ -144,8 +146,7 @@ public final class FilterAudioUnit: AUAudioUnit {
    - parameter options: options for instantiation
    */
   override public init(componentDescription: AudioComponentDescription,
-                       options: AudioComponentInstantiationOptions = []) throws
-  {
+                       options: AudioComponentInstantiationOptions = []) throws {
     // Start with the default format. Host or downstream AudioUnit can change the format of the input/output bus
     // objects later between calls to allocateRenderResources().
     guard let format = AVAudioFormat(standardFormatWithSampleRate: sampleRate, channels: 2) else {
@@ -262,9 +263,8 @@ public final class FilterAudioUnit: AUAudioUnit {
     parameterDefinitions.parameters[0..<withCount].map { NSNumber(value: $0.address) }
   }
 
-  override public func supportedViewConfigurations(_ availableViewConfigurations: [AUAudioUnitViewConfiguration]) ->
-    IndexSet
-  {
+  override public func supportedViewConfigurations(
+    _ availableViewConfigurations: [AUAudioUnitViewConfiguration]) -> IndexSet {
     IndexSet(integersIn: 0..<availableViewConfigurations.count)
   }
 

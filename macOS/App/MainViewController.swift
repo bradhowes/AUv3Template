@@ -246,7 +246,7 @@ extension MainViewController {
 }
 
 extension MainViewController {
-  func notify(_ title: String, message: String) {
+  func notify(title: String, message: String) {
     let alert = NSAlert()
     alert.alertStyle = .informational
     alert.messageText = title
@@ -257,7 +257,7 @@ extension MainViewController {
     alert.runModal()
   }
 
-  func yesOrNo(_ title: String, message: String) -> Bool {
+  func yesOrNo(title: String, message: String) -> Bool {
     let alert = NSAlert()
     alert.messageText = title
     alert.informativeText = message

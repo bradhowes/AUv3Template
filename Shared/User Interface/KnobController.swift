@@ -25,9 +25,7 @@ final class KnobController: NSObject, AUParameterControl {
   private var hasActiveLabel: Bool = false
 
   init(parameterObserverToken: AUParameterObserverToken, parameter: AUParameter,
-       formatter: @escaping (AUValue) -> String, knob: Knob, label: Label,
-       logValues: Bool)
-  {
+       formatter: @escaping (AUValue) -> String, knob: Knob, label: Label, logValues: Bool) {
     self.parameterObserverToken = parameterObserverToken
     self.parameter = parameter
     self.formatter = formatter

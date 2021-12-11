@@ -109,8 +109,7 @@ public final class AudioUnitHost {
         each.audioComponentDescription.log(self.log, type: .info)
         if each.audioComponentDescription.componentManufacturer == self.componentDescription.componentManufacturer,
            each.audioComponentDescription.componentType == self.componentDescription.componentType,
-           each.audioComponentDescription.componentSubType == self.componentDescription.componentSubType
-        {
+           each.audioComponentDescription.componentSubType == self.componentDescription.componentSubType {
           os_log(.info, log: self.log, "found match")
           DispatchQueue.main.async {
             self.createAudioUnit(each.audioComponentDescription)
@@ -255,8 +254,7 @@ public extension AudioUnitHost {
     // Save the number of the current preset.
     if let lastPresetNumber = audioUnit.currentPreset?.number {
       UserDefaults.standard.set(lastPresetNumber, forKey: lastPresetNumberKey)
-    }
-    else {
+    } else {
       UserDefaults.standard.removeObject(forKey: lastPresetNumberKey)
     }
   }
@@ -288,8 +286,7 @@ public extension AudioUnitHost {
       let presetNumber = lastPresetNumber.intValue
       audioUnit.currentPreset = (presetNumber >= 0 ? audioUnit.factoryPresetsNonNil : audioUnit.userPresets)
         .first { $0.number == presetNumber }
-    }
-    else {
+    } else {
       audioUnit.currentPreset = nil
     }
   }

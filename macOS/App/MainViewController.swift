@@ -204,7 +204,7 @@ extension MainViewController {
     guard let userPresetsManager = userPresetsManager else { return }
     let audioUnit = userPresetsManager.audioUnit
 
-    for preset in audioUnit.factoryPresetsArray {
+    for preset in audioUnit.factoryPresetsNonNil {
       let key = "\(preset.number + 1)"
       let menuItem = NSMenuItem(title: preset.name, action: #selector(presetMenuItemSelected(_:)), keyEquivalent: key)
       menuItem.tag = numberToTag(preset.number)
@@ -223,7 +223,7 @@ extension MainViewController {
     deletePresetMenuItem.isEnabled = active < 0
 
     // Determine number of items to keep: 3 commands + divider + # of factory items
-    let factoryCount = userPresetsManager.audioUnit.factoryPresetsArray.count
+    let factoryCount = userPresetsManager.audioUnit.factoryPresetsNonNil.count
     let stockCount = 3 + 1 + factoryCount
     presetsMenu.items = presetsMenu.items.dropLast(presetsMenu.items.count - stockCount)
 

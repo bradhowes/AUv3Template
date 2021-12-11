@@ -469,7 +469,7 @@
 			path = Snapshots;
 			sourceTree = "<group>";
 		};
-		BD49661824A35F3900A81F0B /* Class Extensions */ = {
+		BD49661824A35F3900A81F0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				BDB7CE99249FC026009580D5 /* AUAudioUnitPreset.swift */,
@@ -486,7 +486,7 @@
 				BD06772B24CF9FA00039F161 /* Optional.swift */,
 				C4BEE7D722236E99001E6B6D /* View.swift */,
 			);
-			path = "Class Extensions";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		BD95147624A08BB600D8024C /* macOSFrameworkTests */ = {
@@ -699,11 +699,11 @@
 		C4BEE7E422236E99001E6B6D /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				BDC21626276357EA00560D90 /* UserPresetsManager.swift */,
 				BD578EEC25D278490040D83D /* AudioUnitHost.swift */,
 				BDE2CDEF24A3DE9F004AC8FA /* Logging.swift */,
+				BDC21626276357EA00560D90 /* UserPresetsManager.swift */,
 				C4DCBAD5223ADE79000D9CB3 /* Audio */,
-				BD49661824A35F3900A81F0B /* Class Extensions */,
+				BD49661824A35F3900A81F0B /* Extensions */,
 			);
 			path = Support;
 			sourceTree = "<group>";

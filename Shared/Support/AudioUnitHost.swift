@@ -69,7 +69,6 @@ public final class AudioUnitHost {
   private let lastPresetNumberKey = "lastPresetNumberKey"
 
   private let playEngine = SimplePlayEngine()
-  private var isRestoring: Bool = false
   private let locateQueue = DispatchQueue(label: Bundle.bundleID + ".LocateQueue", qos: .userInitiated)
   private let componentDescription: AudioComponentDescription
 
@@ -232,50 +231,68 @@ public final class AudioUnitHost {
 }
 
 public extension AudioUnitHost {
-  private var noCurrentPresetNumber: Int { Int.max }
 
   /**
-   Save the current state of the AudioUnit to UserDefaults for future restoration.
+   Save the current state of the AUv3 component to UserDefaults for future restoration. Saves the value from
+   `fullStateForDocument` and the number of the preset that is in `currentPreset` if non-nil.
    */
   func save() {
-    guard !isRestoring else { return }
+    guard let audioUnit = audioUnit else { return }
+    locateQueue.async { [weak self] in self?.doSave(audioUnit) }
+  }
 
-    if let lastState = audioUnit?.fullStateForDocument {
+  private func doSave(_ audioUnit: AUAudioUnit) {
+
+    // Theoretically, we only need to save the full state if `currentPreset` is nil. However, it is possible that the
+    // preset is a user preset and is removed some time in the future by another application. So we always safe the
+    // full state here (if available).
+    //
+    if let lastState = audioUnit.fullStateForDocument {
       UserDefaults.standard.set(lastState, forKey: lastStateKey)
     } else {
       UserDefaults.standard.removeObject(forKey: lastStateKey)
     }
 
-    let lastPresetNumber = audioUnit?.currentPreset?.number ?? noCurrentPresetNumber
-    UserDefaults.standard.set(lastPresetNumber, forKey: lastPresetNumberKey)
+    // Save the number of the current preset.
+    if let lastPresetNumber = audioUnit.currentPreset?.number {
+      UserDefaults.standard.set(lastPresetNumber, forKey: lastPresetNumberKey)
+    }
+    else {
+      UserDefaults.standard.removeObject(forKey: lastPresetNumberKey)
+    }
   }
 
   /**
-   Restore the state of the AudioUnit using values found in UserDefaults.
+   Restore the state of the AUv3 component using values found in UserDefaults.
    */
   func restore() {
-    guard let audioUnit = audioUnit else { fatalError() }
-    guard !isRestoring else { fatalError() }
+    guard let audioUnit = audioUnit else { return }
+    locateQueue.async { [weak self] in self?.doRestore(audioUnit) }
+  }
 
-    isRestoring = true
-    defer {
-      isRestoring = false
-    }
+  private func doRestore(_ audioUnit: AUAudioUnit) {
 
-    if let lastState = UserDefaults.standard.dictionary(forKey: lastStateKey) {
+    // Fetch all of the values to use before modifying AUv3 state.
+    let lastState = UserDefaults.standard.dictionary(forKey: lastStateKey)
+    let lastPresetNumber = UserDefaults.standard.object(forKey: lastPresetNumberKey)
+
+    // Restore state of component
+    if let lastState = lastState {
       audioUnit.fullStateForDocument = lastState
     }
 
-    guard let lastPresetNumber = UserDefaults.standard.object(forKey: lastPresetNumberKey) as? NSNumber else { return }
-    let presetNumber = lastPresetNumber.intValue
-    guard presetNumber != noCurrentPresetNumber else {
-      audioUnit.currentPreset = nil
-      return
-    }
+    // Restore state of the `currentPreset` value.
+    if let lastPresetNumber = lastPresetNumber as? NSNumber {
 
-    audioUnit.currentPreset = (presetNumber >= 0
-      ? audioUnit.factoryPresetsArray[presetNumber]
-      : audioUnit.userPresets.first(where: { $0.number == presetNumber }))
+      // Locate the preset with the saved number. If number is negative, it is a user preset; else factory preset.
+      // If not found, set `currentPreset` to nil.
+      let presetNumber = lastPresetNumber.intValue
+      audioUnit.currentPreset = (presetNumber >= 0 ? audioUnit.factoryPresetsNonNil : audioUnit.userPresets)
+        .first { $0.number == presetNumber }
+    }
+    else {
+      audioUnit.currentPreset = nil
+    }
   }
 }
 

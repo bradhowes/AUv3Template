@@ -1,6 +1,6 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
-import os
+import os.log
 
 private class Tag {}
 

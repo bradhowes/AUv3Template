@@ -3,7 +3,7 @@
 Collection of additional utilities that make life easier when working with AUv3 and Swift.
 
 - [AudioUnitHost](AudioUnitHost.swift) -- mimics a very minimal AUv3 host by instantiating the AUv3 plugin
-  and showing its control view.
+  and showing its control view. It also provides a way to save and restore AUv3 state between app launches.
 
 - [Logging](Logging.swift) -- implements my own way of partitioning log statements
 

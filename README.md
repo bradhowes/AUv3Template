@@ -1,4 +1,5 @@
 ![CI](https://github.com/bradhowes/AUv3Template/workflows/CI/badge.svg?branch=main)
+[![License: MIT](https://img.shields.io/badge/License-MIT-A31F34.svg)](https://opensource.org/licenses/MIT)
 
 ![](macOS/App/Assets.xcassets/AppIcon.appiconset/256px.png)
 

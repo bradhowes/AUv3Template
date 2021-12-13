@@ -2,6 +2,9 @@
 
 import AVFoundation
 
+/**
+ Wrapper around AVAudioEngine that manages its wiring with an AVAudioUnit instance.
+ */
 final class SimplePlayEngine {
   private lazy var bundle = Bundle(for: type(of: self))
   private lazy var bundleIdentifier = bundle.bundleIdentifier!
@@ -24,6 +27,7 @@ final class SimplePlayEngine {
     }
   }()
 
+  /// True if engine is currently playing the audio file.
   public var isPlaying: Bool { player.isPlaying }
 
   /**
@@ -38,6 +42,7 @@ final class SimplePlayEngine {
 }
 
 extension SimplePlayEngine {
+
   /**
    Start playback of the audio file player.
    */
@@ -112,6 +117,7 @@ extension SimplePlayEngine {
 }
 
 private extension SimplePlayEngine {
+
   /**
    If player is currently playing audio pause it the execution of the given block and then resume it after the block
    is done.

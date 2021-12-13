@@ -1148,7 +1148,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -x\nCMD=\"/opt/homebrew/bin/swiftlint\"\nif [[ -x \"${CMD}\" ]]; then\n  \"${CMD}\" --config .swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "set -x\n\nPATH=\"/opt/homebrewo/bin:${PATH}\"\n\nif type -p swiftlint; then\n    swiftlint --config .swiftlint.yml\nelse\n  echo \"** WARNING: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		BDF7933A27654E8F000DB4ED /* Run swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1165,8 +1165,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -x\nif which swiftlint >/dev/null; then\n  \n  swiftlint --config ../.swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellPath = /bin/bash;
+			shellScript = "set -x\n\nPATH=\"/opt/homebrewo/bin:${PATH}\"\n\nif type -p swiftlint; then\n    swiftlint --config .swiftlint.yml\nelse\n  echo \"** WARNING: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

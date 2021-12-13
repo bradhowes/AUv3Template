@@ -4,9 +4,12 @@ import __NAME__Framework
 import UIKit
 import os.log
 
+/**
+ Main view controller for the app. Shows controls for the filter audio unit as well as controls for preset management.
+ */
 final class MainViewController: UIViewController {
 
-  private let audioUnitHost = AudioUnitHost(componentDescription: FilterAudioUnit.componentDescription)
+  private var audioUnitHost: AudioUnitHost!
   internal var userPresetsManager: UserPresetsManager?
 
   @IBOutlet weak var reviewButton: UIButton!
@@ -32,6 +35,7 @@ final class MainViewController: UIViewController {
     let version = Bundle.main.releaseVersionNumber
     reviewButton.setTitle(version, for: .normal)
 
+    audioUnitHost = .init(componentDescription: Bundle.shared.componentDescription)
     audioUnitHost.delegate = self
   }
 
@@ -90,6 +94,7 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: AudioUnitHostDelegate {
+
   func connected(audioUnit: AUAudioUnit, viewController: ViewController) {
     userPresetsManager = .init(for: audioUnit)
     connectFilterView(viewController)
@@ -173,6 +178,7 @@ extension MainViewController: AudioUnitHostDelegate {
 }
 
 extension MainViewController {
+
   func notify(_ title: String, message: String) {
     let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
     controller.addAction(UIAlertAction(title: "OK", style: .default))

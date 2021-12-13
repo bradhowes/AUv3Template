@@ -157,7 +157,10 @@ extension FilterViewController {
 
     guard parameterObserverToken == nil else { return }
     guard let audioUnit = audioUnit else { fatalError("logic error -- nil audioUnit value") }
-    guard let paramTree = audioUnit.parameterTree else { fatalError("logic error -- nil parameterTree") }
+
+    let params = AudioUnitParameters(parameterHandler: audioUnit.kernel)
+    audioUnit.parameterCollection = params
+    let paramTree = params.parameterTree
 
     keyValueObserverToken = audioUnit.observe(\.allParameterValues) { _, _ in
       self.performOnMain { self.updateDisplay() }
@@ -170,7 +173,6 @@ extension FilterViewController {
 
     self.parameterObserverToken = parameterObserverToken
 
-    let params = audioUnit.parameterDefinitions
     controls[.depth] = KnobController(parameterObserverToken: parameterObserverToken, parameter: params[.depth],
                                       formatter: params.valueFormatter(.depth), knob: depthControl,
                                       label: depthValueLabel, logValues: false)

@@ -15,7 +15,7 @@ AU_COMPONENT_NAME = B-Ray: __NAME__
 AU_COMPONENT_TYPE = aufx
 
 // The component subtype. This should be unique for effects from the same manufacturer.
-AU_COMPONENT_SUBTYPE = __SUBTYPE__
+AU_COMPONENT_SUBTYPE = fofo // __SUBTYPE__
 
 // The unique manufacturer ID. Pick your own, but values with all lowercase letters are reserved
 // by Apple. There used to be a registry...

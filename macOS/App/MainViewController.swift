@@ -5,7 +5,7 @@ import Cocoa
 
 final class MainViewController: NSViewController {
 
-  private let audioUnitHost = AudioUnitHost(componentDescription: FilterAudioUnit.componentDescription)
+  private var audioUnitHost: AudioUnitHost!
   internal var userPresetsManager: UserPresetsManager?
 
   private var playButton: NSButton!
@@ -35,6 +35,8 @@ final class MainViewController: NSViewController {
 extension MainViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    audioUnitHost = .init(componentDescription: Bundle(for: FilterAudioUnit.self).componentDescription)
     audioUnitHost.delegate = self
   }
 

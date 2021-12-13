@@ -19,24 +19,11 @@ public final class FilterAudioUnit: AUAudioUnit {
     case unableToInitialize(String)
   }
 
-  /// Component description that matches this AudioUnit. The values must match those found in the Info.plist
-  /// Used by the app hosts to load the right component.
-  public static let componentDescription: AudioComponentDescription = {
-    let bundle = Bundle(for: FilterAudioUnit.self)
-    return AudioComponentDescription(
-      componentType: FourCharCode(stringLiteral: bundle.auComponentType),
-      componentSubType: FourCharCode(stringLiteral: bundle.auComponentSubtype),
-      componentManufacturer: FourCharCode(stringLiteral: bundle.auComponentManufacturer),
-      componentFlags: 0,
-      componentFlagsMask: 0
-    )
-  }()
+  /// Objective-C bridge into the C++ kernel
+  public let kernel = __NAME__KernelAdapter(Bundle.shared.auBaseName)
 
-  /// Name of the component
-  public static let componentName = Bundle(for: FilterAudioUnit.self).auComponentName
-
-  /// Runtime parameter definitions for the audio unit
-  public lazy var parameterDefinitions: AudioUnitParameters = .init(parameterHandler: kernel)
+  /// Runtime parameter definitions for the audio unit. This is set by the FilterViewController
+  public var parameterCollection: AudioUnitParameterCollection?
 
   /// Support one input bus
   override public var inputBusses: AUAudioUnitBusArray { _inputBusses }
@@ -46,7 +33,7 @@ public final class FilterAudioUnit: AUAudioUnit {
 
   /// Parameter tree containing filter parameter values
   override public var parameterTree: AUParameterTree? {
-    get { parameterDefinitions.parameterTree }
+    get { parameterCollection?.parameterTree }
     set {
       fatalError("attempted to set new parameterTree")
       _ = newValue // to silence swiftlint warning
@@ -54,7 +41,7 @@ public final class FilterAudioUnit: AUAudioUnit {
   }
 
   /// Factory presets for the filter
-  override public var factoryPresets: [AUAudioUnitPreset] { _factoryPresets }
+  override public var factoryPresets: [AUAudioUnitPreset] { parameterCollection?.factoryPresets ?? [] }
 
   /// Announce support for user presets as well
   override public var supportsUserPresets: Bool { true }
@@ -96,20 +83,6 @@ public final class FilterAudioUnit: AUAudioUnit {
 
   /// Maximum frames to render
   private let maxFramesToRender: UInt32 = 512
-
-  /// Objective-C bridge into the C++ kernel
-  private let kernel = __NAME__KernelAdapter(Bundle.main.auBaseName,
-                                             maxDelayMilliseconds: AudioUnitParameters.maxDelayMilliseconds)
-
-  private let factoryPresetValues: [(name: String, preset: FilterPreset)] = [
-    ("Flangie", FilterPreset(depth: 100, rate: 0.14, delay: 0.72, feedback: 50, dryMix: 50, wetMix: 50)),
-    ("Sweeper", FilterPreset(depth: 100, rate: 0.14, delay: 1.51, feedback: 80, dryMix: 50, wetMix: 50)),
-    ("Lord Tremolo", FilterPreset(depth: 100, rate: 8.6, delay: 0.07, feedback: 90, dryMix: 0, wetMix: 100))
-  ]
-
-  private lazy var _factoryPresets = factoryPresetValues.enumerated().map {
-    AUAudioUnitPreset(number: $0, name: $1.name)
-  }
 
   private var inputBus: AUAudioUnitBus
   private var outputBus: AUAudioUnitBus
@@ -196,9 +169,7 @@ public final class FilterAudioUnit: AUAudioUnit {
     guard let preset = preset else { return }
     if preset.number >= 0 {
       os_log(.info, log: log, "factoryPreset %d", preset.number)
-      let values = factoryPresetValues[preset.number]
-      os_log(.info, log: log, "updating parameters")
-      parameterDefinitions.setValues(values.preset)
+      parameterCollection?.setValues(preset: preset.number)
     } else {
       os_log(.info, log: log, "userPreset %d", preset.number)
       if let state = try? presetState(for: preset) {
@@ -260,7 +231,7 @@ public final class FilterAudioUnit: AUAudioUnit {
   }
 
   override public func parametersForOverview(withCount: Int) -> [NSNumber] {
-    parameterDefinitions.parameters[0..<withCount].map { NSNumber(value: $0.address) }
+    parameterCollection?.parameters[0..<withCount].map { NSNumber(value: $0.address) } ?? []
   }
 
   override public func supportedViewConfigurations(

@@ -27,7 +27,7 @@
  */
 @interface __NAME__KernelAdapter : NSObject <AUParameterHandler>
 
-- (nonnull id)init:(nonnull NSString*)appExtensionName maxDelayMilliseconds:(float)maxDelay;
+- (nonnull id)init:(nonnull NSString*)appExtensionName;
 
 /**
  Configure the kernel for new format and max frame in preparation to begin rendering

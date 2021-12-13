@@ -110,6 +110,8 @@
 		BDF793332763AB1A000DB4ED /* DeletePresetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF793322763AB1A000DB4ED /* DeletePresetAction.swift */; };
 		BDF793352763AB1E000DB4ED /* RenamePresetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF793342763AB1E000DB4ED /* RenamePresetAction.swift */; };
 		BDF793372763AB20000DB4ED /* SavePresetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF793362763AB20000DB4ED /* SavePresetAction.swift */; };
+		BDF7933E276794AC000DB4ED /* FilterParameterAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7933C27679476000DB4ED /* FilterParameterAddress.swift */; };
+		BDF7933F276794AF000DB4ED /* FilterParameterAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7933C27679476000DB4ED /* FilterParameterAddress.swift */; };
 		C433F56122404C7C00F1B750 /* FilterViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433F56022404C7C00F1B750 /* FilterViewControllerExtension.swift */; };
 		C437FE59222367CD008D6C09 /* __NAME__Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; };
 		C437FE5A222367CD008D6C09 /* __NAME__Framework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C437FE52222367CD008D6C09 /* __NAME__Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -325,6 +327,7 @@
 		BDF793322763AB1A000DB4ED /* DeletePresetAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePresetAction.swift; sourceTree = "<group>"; };
 		BDF793342763AB1E000DB4ED /* RenamePresetAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenamePresetAction.swift; sourceTree = "<group>"; };
 		BDF793362763AB20000DB4ED /* SavePresetAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePresetAction.swift; sourceTree = "<group>"; };
+		BDF7933C27679476000DB4ED /* FilterParameterAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParameterAddress.swift; sourceTree = "<group>"; };
 		C4201A2822403120006E4333 /* FilterViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewControllerExtension.swift; sourceTree = "<group>"; };
 		C433F56022404C7C00F1B750 /* FilterViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewControllerExtension.swift; sourceTree = "<group>"; };
 		C437FE3A222367A6008D6C09 /* __NAME__Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = __NAME__Host.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -687,6 +690,7 @@
 				BD1D252E25D51AD600523748 /* README.md */,
 				BD18B39E24CB31B200B7CB1E /* AudioUnitParameters.swift */,
 				C4F004A52239B2070014E248 /* FilterAudioUnit.swift */,
+				BDF7933C27679476000DB4ED /* FilterParameterAddress.swift */,
 				BD71E30125E1AF2A005C5E1E /* FilterPreset.swift */,
 				BDB11A5124A114D700DD8EF9 /* Kernel */,
 				C4DCBAD6223ADE85000D9CB3 /* User Interface */,
@@ -1251,6 +1255,7 @@
 				BD18B39D24CB248200B7CB1E /* AudioComponentDescription.swift in Sources */,
 				BDB11A5524A13C4B00DD8EF9 /* Comparble.swift in Sources */,
 				BDB11A5C24A13F8700DD8EF9 /* Color.swift in Sources */,
+				BDF7933E276794AC000DB4ED /* FilterParameterAddress.swift in Sources */,
 				BDB7CE9B249FC0AB009580D5 /* AUAudioUnitPreset.swift in Sources */,
 				C4F004A32239B1E10014E248 /* __NAME__KernelAdapter.mm in Sources */,
 				BD2FD3F5259B5130004A3196 /* AUParameterAddress.swift in Sources */,
@@ -1309,6 +1314,7 @@
 				BD66843125F11F77009CF8ED /* Knob_macOS.swift in Sources */,
 				BDE2CDF624A3DF25004AC8FA /* Bundle.swift in Sources */,
 				C4BEE80022236F6E001E6B6D /* TypeAliases.swift in Sources */,
+				BDF7933F276794AF000DB4ED /* FilterParameterAddress.swift in Sources */,
 				BD2FD3F6259B5130004A3196 /* AUParameterAddress.swift in Sources */,
 				C4F004A72239B2070014E248 /* FilterAudioUnit.swift in Sources */,
 				C4A3D65C223FF12A002784D4 /* SimplePlayEngine.swift in Sources */,

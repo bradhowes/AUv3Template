@@ -4,6 +4,10 @@ import __NAME__Framework
 import UIKit
 
 extension MainViewController {
+
+  /**
+   Flow involved in creating a new user preset or updating an existing one.
+   */
   struct SavePresetAction {
     let viewController: MainViewController
     let userPresetsManager: UserPresetsManager

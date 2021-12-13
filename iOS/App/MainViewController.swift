@@ -42,16 +42,19 @@ final class MainViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     let showedAlertKey = "showedInitialAlert"
+#if !Dev
     guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else { return }
     UserDefaults.standard.set(true, forKey: showedAlertKey)
+#endif
     let alert = UIAlertController(title: "AUv3 Component Installed",
                                   message: nil, preferredStyle: .alert)
     alert.message =
       """
-      The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as
-      GarageBand, AUM, and Cubasis. You can continue to use this app to experiment, but you do not need to have it
-      running to access the AUv3 component in other apps. However, if you later delete this app from your device, the
-      AUv3 component will no longer be available in other host apps.
+      The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as GarageBand and Logic.
+
+      You can continue to use this app to experiment, but you do not need to have it running to access the AUv3 component in other apps.
+
+      However, if you later delete this app from your device, the AUv3 component will no longer be available in other host apps.
       """
     alert.addAction(
       UIAlertAction(title: "OK", style: .default, handler: { _ in })

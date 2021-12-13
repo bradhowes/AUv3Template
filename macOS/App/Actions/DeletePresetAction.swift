@@ -4,6 +4,10 @@ import AppKit
 import __NAME__Framework
 
 extension MainViewController {
+
+  /**
+   Flow involved in deleting an existing user preset.
+   */
   struct DeletePresetAction {
     let viewController: MainViewController
     let userPresetsManager: UserPresetsManager

@@ -3,6 +3,10 @@
 import AudioToolbox
 import os
 
+/**
+ Attributes and methods associated with a collection of AUParameter definitions, the required functionality needed by
+ the FilterAudioUnit component.
+ */
 public protocol AudioUnitParameterCollection: AnyObject {
 
   /// Factory presets available defined for the audio unit

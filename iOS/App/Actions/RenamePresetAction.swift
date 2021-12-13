@@ -4,6 +4,10 @@ import __NAME__Framework
 import UIKit
 
 extension MainViewController {
+
+  /**
+   Flow involved in renaming an existing user preset.
+   */
   struct RenamePresetAction {
     let viewController: MainViewController
     let userPresetsManager: UserPresetsManager

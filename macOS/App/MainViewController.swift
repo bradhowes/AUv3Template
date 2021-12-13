@@ -90,8 +90,10 @@ extension MainViewController {
   override func viewDidAppear() {
     super.viewDidAppear()
     let showedAlertKey = "showedInitialAlert"
+#if !Dev
     guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else { return }
     UserDefaults.standard.set(true, forKey: showedAlertKey)
+#endif
     let alert = NSAlert()
     alert.alertStyle = .informational
     alert.messageText = "AUv3 Component Installed"

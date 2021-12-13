@@ -19,6 +19,8 @@ final class MainViewController: UIViewController {
   @IBOutlet weak var presetSelection: UISegmentedControl!
   @IBOutlet weak var userPresetsMenu: UIButton!
 
+  @IBOutlet weak var instructions: UIView!
+
   private lazy var renameAction = UIAction(title: "Rename", handler: RenamePresetAction(self).start(_:))
   private lazy var deleteAction = UIAction(title: "Delete", handler: DeletePresetAction(self).start(_:))
   private lazy var saveAction = UIAction(title: "Save", handler: SavePresetAction(self).start(_:))
@@ -39,27 +41,20 @@ final class MainViewController: UIViewController {
     audioUnitHost.delegate = self
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     let showedAlertKey = "showedInitialAlert"
 #if !Dev
-    guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else { return }
+    guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else {
+      instructions.isHidden = true
+      return
+    }
     UserDefaults.standard.set(true, forKey: showedAlertKey)
 #endif
-    let alert = UIAlertController(title: "AUv3 Component Installed",
-                                  message: nil, preferredStyle: .alert)
-    alert.message =
-      """
-      The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as GarageBand and Logic.
 
-      You can continue to use this app to experiment, but you do not need to have it running to access the AUv3 component in other apps.
-
-      However, if you later delete this app from your device, the AUv3 component will no longer be available in other host apps.
-      """
-    alert.addAction(
-      UIAlertAction(title: "OK", style: .default, handler: { _ in })
-    )
-    present(alert, animated: true)
+    instructions.layer.borderWidth = 4
+    instructions.layer.borderColor = UIColor.systemOrange.cgColor
+    instructions.layer.cornerRadius = 16
   }
 
   public func stopPlaying() {
@@ -93,6 +88,10 @@ final class MainViewController: UIViewController {
 
   @IBAction private func reviewApp(_ sender: UIButton) {
     AppStore.visitAppStore()
+  }
+
+  @IBAction func dismissInstructions(_ sender: Any) {
+    instructions.isHidden = true
   }
 }
 

@@ -23,6 +23,9 @@ final class MainViewController: NSViewController {
   @IBOutlet var containerView: NSView!
   @IBOutlet var loadingText: NSTextField!
 
+  @IBOutlet weak var instructions: NSView!
+  @IBOutlet weak var instructionsButton: NSButton!
+
   private var windowController: MainWindowController? { view.window?.windowController as? MainWindowController }
   private var appDelegate: AppDelegate? { NSApplication.shared.delegate as? AppDelegate }
 
@@ -78,35 +81,36 @@ extension MainViewController {
     savePresetMenuItem.target = self
     savePresetMenuItem.action = #selector(handleSavePresetMenuSelected(_:))
 
-    // Keep last
     audioUnitHost.delegate = self
+
+    instructions.wantsLayer = true
+    instructions.updateLayer()
+    instructions.layer?.borderColor = NSColor.systemOrange.cgColor
+    instructions.layer?.borderWidth = 4
+    instructions.layer?.cornerRadius = 16
+    instructions.isHidden = true
+    instructions.backgroundColor = NSColor.black
+    instructionsButton.target = self
+    instructionsButton.action = #selector(dismissInstructions(_:))
   }
 
   override func viewDidLayout() {
     super.viewDidLayout()
     filterView?.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: containerView.frame.size)
   }
+}
 
-  override func viewDidAppear() {
-    super.viewDidAppear()
+extension MainViewController {
+  func showInstructions() {
     let showedAlertKey = "showedInitialAlert"
 #if !Dev
-    guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else { return }
+    guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else {
+      instructions.isHidden = true
+      return
+    }
     UserDefaults.standard.set(true, forKey: showedAlertKey)
 #endif
-    let alert = NSAlert()
-    alert.alertStyle = .informational
-    alert.messageText = "AUv3 Component Installed"
-    alert.informativeText =
-      """
-      The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as GarageBand and Logic.
-
-      You can continue to use this app to experiment, but you do not need to have it running to access the AUv3 component in other apps.
-
-      However, if you later delete this app from your device, the AUv3 component will no longer be available in other host apps.
-      """
-    alert.addButton(withTitle: "OK")
-    alert.beginSheetModal(for: view.window!) { _ in }
+    instructions.isHidden = false
   }
 }
 
@@ -116,10 +120,12 @@ extension MainViewController: AudioUnitHostDelegate {
     userPresetsManager = .init(for: audioUnit)
     connectFilterView(viewController)
     populatePresetMenu()
+
+    showInstructions()
   }
 
   func failed(error: AudioUnitHostError) {
-
+    
   }
 
   private func connectFilterView(_ viewController: NSViewController) {
@@ -182,6 +188,10 @@ extension MainViewController {
     let number = tagToNumber(sender.tag)
     userPresetsManager.makeCurrentPreset(number: number)
     updatePresetMenu()
+  }
+
+  @IBAction private func dismissInstructions(_ sender: NSButton) {
+    instructions.isHidden = true
   }
 }
 

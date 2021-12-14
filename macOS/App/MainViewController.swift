@@ -30,7 +30,9 @@ final class MainViewController: NSViewController {
   private var appDelegate: AppDelegate? { NSApplication.shared.delegate as? AppDelegate }
 
   private var filterView: NSView?
-  private var parameterObserverToken: AUParameterObserverToken?
+  private var allParameterValuesObserverToken: NSKeyValueObservation?
+  private var parameterTreeObserverToken: AUParameterObserverToken?
+
 }
 
 // MARK: - View Management
@@ -121,7 +123,7 @@ extension MainViewController: AudioUnitHostDelegate {
   func connected(audioUnit: AUAudioUnit, viewController: ViewController) {
     userPresetsManager = .init(for: audioUnit)
     connectFilterView(viewController)
-    populatePresetMenu()
+    connectParametersToControls(audioUnit)
     showInstructions()
   }
 
@@ -146,6 +148,26 @@ extension MainViewController: AudioUnitHostDelegate {
     addChild(viewController)
     view.needsLayout = true
     containerView.needsLayout = true
+  }
+
+  private func connectParametersToControls(_ audioUnit: AUAudioUnit) {
+    guard let parameterTree = audioUnit.parameterTree else {
+      fatalError("FilterAudioUnit does not define any parameters.")
+    }
+
+    audioUnitHost.restore()
+    populatePresetMenu()
+    updatePresetMenu()
+
+    allParameterValuesObserverToken = audioUnit.observe(\.allParameterValues) { [weak self] _, _ in
+      guard let self = self else { return }
+      DispatchQueue.performOnMain { self.updateView() }
+    }
+
+    parameterTreeObserverToken = parameterTree.token(byAddingParameterObserver: { [weak self] _, _ in
+      guard let self = self else { return }
+      DispatchQueue.performOnMain { self.updateView() }
+    })
   }
 }
 
@@ -204,11 +226,12 @@ extension MainViewController {
 }
 
 extension MainViewController: NSWindowDelegate {
+
   func windowWillClose(_ notification: Notification) {
     audioUnitHost.cleanup()
     guard let parameterTree = audioUnitHost.audioUnit?.parameterTree,
-          let parameterObserverToken = parameterObserverToken else { return }
-    parameterTree.removeParameterObserver(parameterObserverToken)
+          let parameterTreeObserverToken = parameterTreeObserverToken else { return }
+    parameterTree.removeParameterObserver(parameterTreeObserverToken)
   }
 }
 
@@ -264,6 +287,11 @@ extension MainViewController {
     for (index, item) in presetsMenu.items.enumerated() {
       item.state = (index > 3 && tagToNumber(item.tag) == active) ? .on : .off
     }
+  }
+
+  private func updateView() {
+    updatePresetMenu()
+    audioUnitHost.save()
   }
 }
 

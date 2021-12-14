@@ -162,12 +162,20 @@ extension FilterViewController {
     audioUnit.parameterCollection = params
     let paramTree = params.parameterTree
 
-    keyValueObserverToken = audioUnit.observe(\.allParameterValues) { _, _ in
+    keyValueObserverToken = audioUnit.observe(\.allParameterValues) { [weak self] _, _ in
+      guard let self = self,
+            let preset = self.audioUnit?.currentPreset
+      else {
+        return
+      }
+
+      os_log(.info, log: self.log, "audioUnit.observe - currentPreset set %{public}s/%d", preset.name, preset.number)
       self.performOnMain { self.updateDisplay() }
     }
 
-    let parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self] _, _ in
+    let parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self] address, value in
       guard let self = self else { return }
+      os_log(.info, log: self.log, "paramTree.token - parameter: %d  value: %f", address, value)
       self.performOnMain { self.updateDisplay() }
     })
 

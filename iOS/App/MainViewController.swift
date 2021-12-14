@@ -101,12 +101,25 @@ extension MainViewController: AudioUnitHostDelegate {
     userPresetsManager = .init(for: audioUnit)
     connectFilterView(viewController)
     connectParametersToControls(audioUnit)
+    showInstructions()
   }
 
   func failed(error: AudioUnitHostError) {
     let message = "Unable to load the AUv3 component. \(error.description)"
     let controller = UIAlertController(title: "AUv3 Failure", message: message, preferredStyle: .alert)
     present(controller, animated: true)
+  }
+
+  private func showInstructions() {
+    let showedAlertKey = "showedInitialAlert"
+#if !Dev
+    guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else {
+      instructions.isHidden = true
+      return
+    }
+    UserDefaults.standard.set(true, forKey: showedAlertKey)
+#endif
+    instructions.isHidden = false
   }
 
   private func connectFilterView(_ viewController: UIViewController) {

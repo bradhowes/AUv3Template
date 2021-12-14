@@ -83,12 +83,13 @@ extension MainViewController {
 
     audioUnitHost.delegate = self
 
-    instructions.wantsLayer = true
-    instructions.updateLayer()
-    instructions.layer?.borderColor = NSColor.systemOrange.cgColor
-    instructions.layer?.borderWidth = 4
-    instructions.layer?.cornerRadius = 16
+    // Start out hidden and only show after everything is up and running and we discover that this is the first time
+    // for the user to run the application on their device.
     instructions.isHidden = true
+    instructions.wantsLayer = true
+    instructions.layer?.borderWidth = 4
+    instructions.layer?.borderColor = NSColor.systemOrange.lighter.cgColor
+    instructions.layer?.cornerRadius = 16
     instructions.backgroundColor = NSColor.black
     instructionsButton.target = self
     instructionsButton.action = #selector(dismissInstructions(_:))
@@ -101,7 +102,8 @@ extension MainViewController {
 }
 
 extension MainViewController {
-  func showInstructions() {
+
+  private func showInstructions() {
     let showedAlertKey = "showedInitialAlert"
 #if !Dev
     guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else {
@@ -120,12 +122,18 @@ extension MainViewController: AudioUnitHostDelegate {
     userPresetsManager = .init(for: audioUnit)
     connectFilterView(viewController)
     populatePresetMenu()
-
     showInstructions()
   }
 
   func failed(error: AudioUnitHostError) {
-    
+    let message = "Unable to load the AUv3 component. \(error.description)"
+    DispatchQueue.performOnMain {
+
+      // Show error to user and then exit app since there is nothing more to do
+      self.notify(title: "AUv3 Failure", message: message) {
+        NSApplication.shared.mainWindow?.close()
+      }
+    }
   }
 
   private func connectFilterView(_ viewController: NSViewController) {
@@ -260,15 +268,16 @@ extension MainViewController {
 }
 
 extension MainViewController {
-  func notify(title: String, message: String) {
+  func notify(title: String, message: String, completion: (() -> Void)? = nil) {
     let alert = NSAlert()
+
     alert.alertStyle = .informational
     alert.messageText = title
     alert.informativeText = message
 
     alert.addButton(withTitle: "OK")
-    alert.beginSheetModal(for: view.window!) { _ in }
-    alert.runModal()
+    print("before beginSheetModal")
+    alert.beginSheetModal(for: view.window!) { _ in completion?() }
   }
 
   func yesOrNo(title: String, message: String) -> Bool {

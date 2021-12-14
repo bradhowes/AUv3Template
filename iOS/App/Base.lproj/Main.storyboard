@@ -148,11 +148,11 @@ However, if you later delete this app from your device, the AUv3 component will 
                     <connections>
                         <outlet property="bypassButton" destination="9za-g7-28Y" id="Pvy-sY-JhH"/>
                         <outlet property="containerView" destination="68k-M7-cHK" id="Vne-5l-42G"/>
+                        <outlet property="factoryPresetSegmentedControl" destination="n91-Uc-KCJ" id="oPX-wk-ebg"/>
                         <outlet property="instructions" destination="YId-hO-jcy" id="xg8-mK-OUR"/>
                         <outlet property="playButton" destination="tzZ-pe-UL7" id="Yxx-Rt-URy"/>
-                        <outlet property="presetSelection" destination="n91-Uc-KCJ" id="oPX-wk-ebg"/>
                         <outlet property="reviewButton" destination="fJA-Ec-YsF" id="wJL-Ig-4Ro"/>
-                        <outlet property="userPresetsMenu" destination="jGq-i7-iWX" id="dQ7-Ad-j3Y"/>
+                        <outlet property="userPresetsMenuButton" destination="jGq-i7-iWX" id="Xx4-qr-Zvc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

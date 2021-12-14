@@ -16,14 +16,15 @@ final class MainViewController: UIViewController {
   @IBOutlet weak var playButton: UIButton!
   @IBOutlet weak var bypassButton: UIButton!
   @IBOutlet weak var containerView: UIView!
-  @IBOutlet weak var presetSelection: UISegmentedControl!
-  @IBOutlet weak var userPresetsMenu: UIButton!
+  @IBOutlet weak var factoryPresetSegmentedControl: UISegmentedControl!
+  @IBOutlet weak var userPresetsMenuButton: UIButton!
 
   @IBOutlet weak var instructions: UIView!
 
-  private lazy var renameAction = UIAction(title: "Rename", handler: RenamePresetAction(self).start(_:))
-  private lazy var deleteAction = UIAction(title: "Delete", handler: DeletePresetAction(self).start(_:))
   private lazy var saveAction = UIAction(title: "Save", handler: SavePresetAction(self).start(_:))
+  private lazy var renameAction = UIAction(title: "Rename", handler: RenamePresetAction(self).start(_:))
+  private lazy var deleteAction = UIAction(title: "Delete", attributes: .destructive,
+                                           handler: DeletePresetAction(self).start(_:))
 
   private var allParameterValuesObserverToken: NSKeyValueObservation?
   private var parameterTreeObserverToken: AUParameterObserverToken?
@@ -83,7 +84,7 @@ final class MainViewController: UIViewController {
   }
 
   @IBAction func useFactoryPreset(_ sender: UISegmentedControl? = nil) {
-    userPresetsManager?.makeCurrentPreset(number: presetSelection.selectedSegmentIndex)
+    userPresetsManager?.makeCurrentPreset(number: factoryPresetSegmentedControl.selectedSegmentIndex)
   }
 
   @IBAction private func reviewApp(_ sender: UIButton) {
@@ -151,9 +152,9 @@ extension MainViewController: AudioUnitHostDelegate {
     })
   }
 
-  private func useUserPreset(name: String) {
+  private func usePreset(number: Int) {
     guard let userPresetManager = userPresetsManager else { return }
-    userPresetManager.makeCurrentPreset(name: name)
+    userPresetManager.makeCurrentPreset(number: number)
     updatePresetMenu()
   }
 
@@ -161,17 +162,29 @@ extension MainViewController: AudioUnitHostDelegate {
     guard let userPresetsManager = userPresetsManager else { return }
     let active = userPresetsManager.audioUnit.currentPreset?.number ?? Int.max
 
-    let presets = userPresetsManager.presetsOrderedByName.map { (preset: AUAudioUnitPreset) -> UIAction in
-      let action = UIAction(title: preset.name, handler: { _ in self.useUserPreset(name: preset.name) })
+    let factoryPresets = userPresetsManager.audioUnit.factoryPresetsNonNil.map { (preset: AUAudioUnitPreset) -> UIAction in
+      let action = UIAction(title: preset.name, handler: { _ in self.usePreset(number: preset.number) })
       action.state = active == preset.number ? .on : .off
       return action
     }
 
-    let actionsGroup = UIMenu(title: "Actions", options: [],
+    let factoryPresetsMenu = UIMenu(title: "Factory", options: .displayInline, children: factoryPresets)
+
+    let userPresets = userPresetsManager.presetsOrderedByName.map { (preset: AUAudioUnitPreset) -> UIAction in
+      let action = UIAction(title: preset.name, handler: { _ in self.usePreset(number: preset.number) })
+      action.state = active == preset.number ? .on : .off
+      return action
+    }
+
+    let userPresetsMenu = UIMenu(title: "User", options: .displayInline, children: userPresets)
+
+    let actionsGroup = UIMenu(title: "Actions", options: .displayInline,
                               children: active < 0 ? [saveAction, renameAction, deleteAction] : [saveAction])
-    let menu = UIMenu(title: "User Presets", options: [], children: presets + [actionsGroup])
-    userPresetsMenu.menu = menu
-    userPresetsMenu.showsMenuAsPrimaryAction = true
+
+    let menu = UIMenu(title: "Presets", options: [], children: [userPresetsMenu, factoryPresetsMenu, actionsGroup])
+
+    userPresetsMenuButton.menu = menu
+    userPresetsMenuButton.showsMenuAsPrimaryAction = true
   }
 
   private func updateView() {
@@ -185,9 +198,9 @@ extension MainViewController: AudioUnitHostDelegate {
 
   private func updatePresetSelection(_ audioUnit: AUAudioUnit) {
     if let presetNumber = audioUnit.currentPreset?.number {
-      presetSelection.selectedSegmentIndex = presetNumber
+      factoryPresetSegmentedControl.selectedSegmentIndex = presetNumber
     } else {
-      presetSelection.selectedSegmentIndex = -1
+      factoryPresetSegmentedControl.selectedSegmentIndex = -1
     }
   }
 }

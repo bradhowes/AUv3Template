@@ -82,6 +82,30 @@ public final class FocusAwareTextField: NSTextField {
     onFocusChange(true)
     return super.becomeFirstResponder()
   }
+
+  func setStringValue(_ newValue: String, animated: Bool = true, interval: TimeInterval = 0.7) {
+    guard stringValue != newValue else { return }
+    if animated {
+      animate(change: { self.stringValue = newValue }, interval: interval)
+    } else {
+      stringValue = newValue
+    }
+  }
+
+  private func animate(change: @escaping () -> Void, interval: TimeInterval) {
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = interval / 2.0
+      context.timingFunction = CAMediaTimingFunction(name: .easeOut)
+      self.animator().alphaValue = 0.5
+    }, completionHandler: {
+      change()
+      NSAnimationContext.runAnimationGroup({ context in
+        context.duration = interval / 2.0
+        context.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        self.animator().alphaValue = 1.0
+      }, completionHandler: {})
+    })
+  }
 }
 
 #endif

@@ -35,10 +35,9 @@ final class KnobController: NSObject, AUParameterControl {
     super.init()
 
     self.label.text = parameter.displayName
-    #if os(macOS)
+#if os(macOS)
     self.label.delegate = self
-    self.label.onFocusChange = onFocusChanged
-    #endif
+#endif
 
     if useLogValues {
       knob.minimumValue = logSliderMinValue
@@ -53,6 +52,7 @@ final class KnobController: NSObject, AUParameterControl {
 }
 
 extension KnobController {
+
   func setEditedValue(_ value: AUValue) {
     os_log(.info, log: log, "setEditedValue - value: %f", value)
     var value = value
@@ -72,9 +72,9 @@ extension KnobController {
 
   func controlChanged() {
     os_log(.info, log: log, "controlChanged - %f", knob.value)
-    #if os(macOS)
+#if os(macOS)
     NSApp.keyWindow?.makeFirstResponder(nil)
-    #endif
+#endif
     let value = useLogValues ? parameterValueForLogSliderLocation() : knob.value
     showNewValue(value)
     parameter.setValue(value, originator: parameterObserverToken)
@@ -88,7 +88,8 @@ extension KnobController {
 }
 
 extension KnobController {
-  #if os(macOS)
+
+#if os(macOS)
   private func onFocusChanged(hasFocus: Bool) {
     os_log(.info, log: log, "onFocusChanged - hasFocus: %d", hasFocus)
     if hasFocus {
@@ -101,16 +102,16 @@ extension KnobController {
       setEditedValue(label.floatValue)
     }
   }
-  #endif
+#endif
 
   private func logKnobLocationForParameterValue() -> Float {
     log2(((parameter.value - parameter.minValue) / (parameter.maxValue - parameter.minValue)) *
-      logSliderMaxValuePower2Minus1 + 1.0)
+         logSliderMaxValuePower2Minus1 + 1.0)
   }
 
   private func parameterValueForLogSliderLocation() -> AUValue {
     ((pow(2, knob.value) - 1) / logSliderMaxValuePower2Minus1) * (parameter.maxValue - parameter.minValue) +
-      parameter.minValue
+    parameter.minValue
   }
 
   private func showNewValue(_ value: AUValue) {
@@ -125,15 +126,15 @@ extension KnobController {
     let label = self.label
     restoreNameTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
       os_log(.info, log: self.log, "restoreName: %{public}s", displayName)
-      #if os(iOS)
+#if os(iOS)
       UIView.transition(with: self.label, duration: 0.5, options: [.curveLinear, .transitionCrossDissolve]) {
         label.text = displayName
       } completion: { _ in
         label.text = displayName
       }
-      #else
-      label.text = displayName
-      #endif
+#else
+      label.setStringValue(displayName, animated: true, interval: 0.5)
+#endif
     }
   }
 }

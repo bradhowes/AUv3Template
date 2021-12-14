@@ -8,6 +8,7 @@ import os.log
  Main view controller for the app. Shows controls for the filter audio unit as well as controls for preset management.
  */
 final class MainViewController: UIViewController {
+  let showedAlertKey = "showedInitialAlert"
 
   private var audioUnitHost: AudioUnitHost!
   internal var userPresetsManager: UserPresetsManager?
@@ -21,10 +22,12 @@ final class MainViewController: UIViewController {
 
   @IBOutlet weak var instructions: UIView!
 
-  private lazy var saveAction = UIAction(title: "Save", handler: SavePresetAction(self).start(_:))
-  private lazy var renameAction = UIAction(title: "Rename", handler: RenamePresetAction(self).start(_:))
+  private lazy var saveAction = UIAction(title: "Save",
+                                         handler: SavePresetAction(self, completion: self.updatePresetMenu).start(_:))
+  private lazy var renameAction = UIAction(title: "Rename",
+                                           handler: RenamePresetAction(self, completion: self.updatePresetMenu).start(_:))
   private lazy var deleteAction = UIAction(title: "Delete", attributes: .destructive,
-                                           handler: DeletePresetAction(self).start(_:))
+                                           handler: DeletePresetAction(self, completion: self.updatePresetMenu).start(_:))
 
   private var allParameterValuesObserverToken: NSKeyValueObservation?
   private var parameterTreeObserverToken: AUParameterObserverToken?
@@ -38,44 +41,37 @@ final class MainViewController: UIViewController {
     let version = Bundle.main.releaseVersionNumber
     reviewButton.setTitle(version, for: .normal)
 
-    audioUnitHost = .init(componentDescription: Bundle.shared.componentDescription)
-    audioUnitHost.delegate = self
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    let showedAlertKey = "showedInitialAlert"
-#if !Dev
-    guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else {
-      instructions.isHidden = true
-      return
-    }
-    UserDefaults.standard.set(true, forKey: showedAlertKey)
-#endif
-
     instructions.layer.borderWidth = 4
     instructions.layer.borderColor = UIColor.systemOrange.cgColor
     instructions.layer.cornerRadius = 16
+
+    audioUnitHost = .init(componentDescription: Bundle.shared.componentDescription)
+    audioUnitHost.delegate = self
   }
 
   public func stopPlaying() {
     audioUnitHost.cleanup()
   }
+}
 
-  @IBAction private func togglePlay(_ sender: UIButton) {
+// MARK: - Actions
+
+extension MainViewController {
+
+  @IBAction func togglePlay(_ sender: UIButton) {
     let isPlaying = audioUnitHost.togglePlayback()
     sender.isSelected = isPlaying
     sender.tintColor = isPlaying ? .systemYellow : .systemTeal
   }
 
-  @IBAction private func toggleBypass(_ sender: UIButton) {
+  @IBAction func toggleBypass(_ sender: UIButton) {
     let wasBypassed = audioUnitHost.audioUnit?.shouldBypassEffect ?? false
     let isBypassed = !wasBypassed
     audioUnitHost.audioUnit?.shouldBypassEffect = isBypassed
     sender.isSelected = isBypassed
   }
 
-  @IBAction private func visitAppStore(_ sender: UIButton) {
+  @IBAction func visitAppStore(_ sender: UIButton) {
     let appStoreId = Bundle.main.appStoreId
     guard let url = URL(string: "https://itunes.apple.com/app/id\(appStoreId)") else {
       fatalError("Expected a valid URL")
@@ -87,7 +83,7 @@ final class MainViewController: UIViewController {
     userPresetsManager?.makeCurrentPreset(number: factoryPresetSegmentedControl.selectedSegmentIndex)
   }
 
-  @IBAction private func reviewApp(_ sender: UIButton) {
+  @IBAction func reviewApp(_ sender: UIButton) {
     AppStore.visitAppStore()
   }
 
@@ -95,6 +91,8 @@ final class MainViewController: UIViewController {
     instructions.isHidden = true
   }
 }
+
+// MARK: - AudioUnitHostDelegate
 
 extension MainViewController: AudioUnitHostDelegate {
 
@@ -110,20 +108,26 @@ extension MainViewController: AudioUnitHostDelegate {
     let controller = UIAlertController(title: "AUv3 Failure", message: message, preferredStyle: .alert)
     present(controller, animated: true)
   }
+}
 
-  private func showInstructions() {
-    let showedAlertKey = "showedInitialAlert"
+// MARK: - Private
+
+private extension MainViewController {
+
+  func showInstructions() {
 #if !Dev
-    guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else {
+    if UserDefaults.standard.bool(forKey: showedInitialAlert) {
       instructions.isHidden = true
       return
     }
-    UserDefaults.standard.set(true, forKey: showedAlertKey)
 #endif
     instructions.isHidden = false
+
+    // Since this is the first time to run, apply the first factory preset.
+    userPresetsManager?.makeCurrentPreset(number: 0)
   }
 
-  private func connectFilterView(_ viewController: UIViewController) {
+  func connectFilterView(_ viewController: UIViewController) {
     let filterView = viewController.view!
     containerView.addSubview(filterView)
     filterView.pinToSuperviewEdges()
@@ -133,7 +137,7 @@ extension MainViewController: AudioUnitHostDelegate {
     containerView.setNeedsLayout()
   }
 
-  private func connectParametersToControls(_ audioUnit: AUAudioUnit) {
+  func connectParametersToControls(_ audioUnit: AUAudioUnit) {
     guard let parameterTree = audioUnit.parameterTree else {
       fatalError("FilterAudioUnit does not define any parameters.")
     }
@@ -152,7 +156,7 @@ extension MainViewController: AudioUnitHostDelegate {
     })
   }
 
-  private func usePreset(number: Int) {
+  func usePreset(number: Int) {
     guard let userPresetManager = userPresetsManager else { return }
     userPresetManager.makeCurrentPreset(number: number)
     updatePresetMenu()
@@ -187,7 +191,7 @@ extension MainViewController: AudioUnitHostDelegate {
     userPresetsMenuButton.showsMenuAsPrimaryAction = true
   }
 
-  private func updateView() {
+  func updateView() {
     guard let audioUnit = audioUnitHost.audioUnit else { return }
 
     updatePresetMenu()
@@ -196,7 +200,7 @@ extension MainViewController: AudioUnitHostDelegate {
     audioUnitHost.save()
   }
 
-  private func updatePresetSelection(_ audioUnit: AUAudioUnit) {
+  func updatePresetSelection(_ audioUnit: AUAudioUnit) {
     if let presetNumber = audioUnit.currentPreset?.number {
       factoryPresetSegmentedControl.selectedSegmentIndex = presetNumber
     } else {
@@ -204,6 +208,8 @@ extension MainViewController: AudioUnitHostDelegate {
     }
   }
 }
+
+// MARK: - Alerts and Prompts
 
 extension MainViewController {
 

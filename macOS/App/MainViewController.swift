@@ -3,7 +3,12 @@
 import __NAME__Framework
 import Cocoa
 
+/**
+ Main view controller for the app. Shows controls for the filter audio unit and manages the preset control in the window
+ toolbar.
+ */
 final class MainViewController: NSViewController {
+  private let showedInitialAlert = "showedInitialAlert"
 
   private var audioUnitHost: AudioUnitHost!
   internal var userPresetsManager: UserPresetsManager?
@@ -38,11 +43,22 @@ final class MainViewController: NSViewController {
 // MARK: - View Management
 
 extension MainViewController {
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    // Start out hidden and only show after everything is up and running and we discover that this is the first time
+    // for the user to run the application on their device.
+    instructions.isHidden = true
+    instructions.wantsLayer = true
+    instructions.layer?.borderWidth = 4
+    instructions.layer?.borderColor = NSColor.systemOrange.lighter.cgColor
+    instructions.layer?.cornerRadius = 16
+    instructions.backgroundColor = NSColor.black
+    instructionsButton.target = self
+    instructionsButton.action = #selector(dismissInstructions(_:))
+
     audioUnitHost = .init(componentDescription: Bundle(for: FilterAudioUnit.self).componentDescription)
-    audioUnitHost.delegate = self
   }
 
   override func viewWillAppear() {
@@ -84,17 +100,6 @@ extension MainViewController {
     savePresetMenuItem.action = #selector(handleSavePresetMenuSelected(_:))
 
     audioUnitHost.delegate = self
-
-    // Start out hidden and only show after everything is up and running and we discover that this is the first time
-    // for the user to run the application on their device.
-    instructions.isHidden = true
-    instructions.wantsLayer = true
-    instructions.layer?.borderWidth = 4
-    instructions.layer?.borderColor = NSColor.systemOrange.lighter.cgColor
-    instructions.layer?.cornerRadius = 16
-    instructions.backgroundColor = NSColor.black
-    instructionsButton.target = self
-    instructionsButton.action = #selector(dismissInstructions(_:))
   }
 
   override func viewDidLayout() {
@@ -103,20 +108,63 @@ extension MainViewController {
   }
 }
 
+// MARK: - Actions
+
 extension MainViewController {
 
-  private func showInstructions() {
-    let showedAlertKey = "showedInitialAlert"
-#if !Dev
-    guard UserDefaults.standard.bool(forKey: showedAlertKey) == false else {
-      instructions.isHidden = true
-      return
-    }
-    UserDefaults.standard.set(true, forKey: showedAlertKey)
-#endif
-    instructions.isHidden = false
+  @IBAction func togglePlay(_ sender: NSButton) {
+    audioUnitHost.togglePlayback()
+    let isPlaying = audioUnitHost.isPlaying
+
+    playButton?.image = isPlaying ? NSImage(named: "stop") : NSImage(named: "play")
+
+    audioUnitHost.audioUnit?.shouldBypassEffect = false
+    bypassButton?.image = NSImage(named: "enabled")
+    bypassButton?.isEnabled = isPlaying
+    bypassMenuItem?.isEnabled = isPlaying
+  }
+
+  @IBAction func toggleBypass(_ sender: NSButton) {
+    let wasBypassed = audioUnitHost.audioUnit?.shouldBypassEffect ?? false
+    let isBypassed = !wasBypassed
+    audioUnitHost.audioUnit?.shouldBypassEffect = isBypassed
+    bypassButton?.image = isBypassed ? NSImage(named: "bypassed") : NSImage(named: "enabled")
+    bypassMenuItem?.title = isBypassed ? "Resume" : "Bypass"
+  }
+
+  @IBAction func showPresetsMenu(_ sender: NSButton) {
+    let location = NSPoint(x: 0, y: sender.frame.height + 5)
+    presetsMenu.popUp(positioning: nil, at: location, in: sender)
+  }
+
+  @IBAction func handleSavePresetMenuSelected(_ sender: NSMenuItem) throws {
+    SavePresetAction(self, completion: self.updatePresetMenu).start(sender)
+    updatePresetMenu()
+  }
+
+  @IBAction func handleRenamePresetMenuSelected(_ sender: NSMenuItem) throws {
+    RenamePresetAction(self, completion: self.updatePresetMenu).start(sender)
+  }
+
+  @IBAction func handleDeletePresetMenuSelected(_ sender: NSMenuItem) throws {
+    DeletePresetAction(self, completion: self.updatePresetMenu).start(sender)
+    updatePresetMenu()
+  }
+
+  @IBAction func presetMenuItemSelected(_ sender: NSMenuItem) {
+    guard let userPresetsManager = userPresetsManager else { return }
+    let number = tagToNumber(sender.tag)
+    userPresetsManager.makeCurrentPreset(number: number)
+    updatePresetMenu()
+  }
+
+  @IBAction func dismissInstructions(_ sender: NSButton) {
+    UserDefaults.standard.set(true, forKey: showedInitialAlert)
+    instructions.isHidden = true
   }
 }
+
+// MARK: - AudioUnitHostDelegate
 
 extension MainViewController: AudioUnitHostDelegate {
 
@@ -137,8 +185,25 @@ extension MainViewController: AudioUnitHostDelegate {
       }
     }
   }
+}
 
-  private func connectFilterView(_ viewController: NSViewController) {
+// MARK: - NSWindowDelegate
+
+extension MainViewController: NSWindowDelegate {
+
+  func windowWillClose(_ notification: Notification) {
+    audioUnitHost.cleanup()
+    guard let parameterTree = audioUnitHost.audioUnit?.parameterTree,
+          let parameterTreeObserverToken = parameterTreeObserverToken else { return }
+    parameterTree.removeParameterObserver(parameterTreeObserverToken)
+  }
+}
+
+// MARK: - Private
+
+private extension MainViewController {
+
+  func connectFilterView(_ viewController: NSViewController) {
     guard let viewController = audioUnitHost.viewController else { fatalError() }
     let filterView = viewController.view
     containerView.addSubview(filterView)
@@ -150,7 +215,7 @@ extension MainViewController: AudioUnitHostDelegate {
     containerView.needsLayout = true
   }
 
-  private func connectParametersToControls(_ audioUnit: AUAudioUnit) {
+  func connectParametersToControls(_ audioUnit: AUAudioUnit) {
     guard let parameterTree = audioUnit.parameterTree else {
       fatalError("FilterAudioUnit does not define any parameters.")
     }
@@ -169,83 +234,25 @@ extension MainViewController: AudioUnitHostDelegate {
       DispatchQueue.performOnMain { self.updateView() }
     })
   }
-}
 
-extension MainViewController {
+  func showInstructions() {
+#if !Dev
+    if UserDefaults.standard.bool(forKey: showedInitialAlert) {
+      instructions.isHidden = true
+      return
+    }
+#endif
+    instructions.isHidden = false
 
-  @IBAction private func togglePlay(_ sender: NSButton) {
-    audioUnitHost.togglePlayback()
-    let isPlaying = audioUnitHost.isPlaying
-
-    playButton?.image = isPlaying ? NSImage(named: "stop") : NSImage(named: "play")
-
-    audioUnitHost.audioUnit?.shouldBypassEffect = false
-    bypassButton?.image = NSImage(named: "enabled")
-    bypassButton?.isEnabled = isPlaying
-    bypassMenuItem?.isEnabled = isPlaying
+    // Since this is the first time to run, apply the first factory preset.
+    userPresetsManager?.makeCurrentPreset(number: 0)
   }
 
-  @IBAction private func toggleBypass(_ sender: NSButton) {
-    let wasBypassed = audioUnitHost.audioUnit?.shouldBypassEffect ?? false
-    let isBypassed = !wasBypassed
-    audioUnitHost.audioUnit?.shouldBypassEffect = isBypassed
-    bypassButton?.image = isBypassed ? NSImage(named: "bypassed") : NSImage(named: "enabled")
-    bypassMenuItem?.title = isBypassed ? "Resume" : "Bypass"
-  }
+  func numberToTag(_ number: Int) -> Int { number >= 0 ? (number + 10000) : number }
 
-  @IBAction private func showPresetsMenu(_ sender: NSButton) {
-    let location = NSPoint(x: 0, y: sender.frame.height + 5)
-    presetsMenu.popUp(positioning: nil, at: location, in: sender)
-  }
+  func tagToNumber(_ tag: Int) -> Int { tag >= 10000 ? (tag - 10000) : tag }
 
-  @IBAction private func handleSavePresetMenuSelected(_ sender: NSMenuItem) throws {
-    SavePresetAction(self).start(sender)
-    updatePresetMenu()
-  }
-
-  @IBAction private func handleRenamePresetMenuSelected(_ sender: NSMenuItem) throws {
-    RenamePresetAction(self).start(sender)
-    updatePresetMenu()
-  }
-
-  @IBAction private func handleDeletePresetMenuSelected(_ sender: NSMenuItem) throws {
-    DeletePresetAction(self).start(sender)
-    updatePresetMenu()
-  }
-
-  @IBAction private func presetMenuItemSelected(_ sender: NSMenuItem) {
-    guard let userPresetsManager = userPresetsManager else { return }
-    let number = tagToNumber(sender.tag)
-    userPresetsManager.makeCurrentPreset(number: number)
-    updatePresetMenu()
-  }
-
-  @IBAction private func dismissInstructions(_ sender: NSButton) {
-    instructions.isHidden = true
-  }
-}
-
-extension MainViewController: NSWindowDelegate {
-
-  func windowWillClose(_ notification: Notification) {
-    audioUnitHost.cleanup()
-    guard let parameterTree = audioUnitHost.audioUnit?.parameterTree,
-          let parameterTreeObserverToken = parameterTreeObserverToken else { return }
-    parameterTree.removeParameterObserver(parameterTreeObserverToken)
-  }
-}
-
-extension MainViewController {
-
-  private func numberToTag(_ number: Int) -> Int {
-    number >= 0 ? (number + 10000) : number
-  }
-
-  private func tagToNumber(_ tag: Int) -> Int {
-    tag >= 10000 ? (tag - 10000) : tag
-  }
-
-  private func populatePresetMenu() {
+  func populatePresetMenu() {
     guard let userPresetsManager = userPresetsManager else { return }
     let audioUnit = userPresetsManager.audioUnit
 
@@ -259,7 +266,7 @@ extension MainViewController {
     updatePresetMenu()
   }
 
-  internal func updatePresetMenu() {
+  func updatePresetMenu() {
     guard let userPresetsManager = userPresetsManager else { return }
     let active = userPresetsManager.audioUnit.currentPreset?.number ?? Int.max
 
@@ -289,13 +296,16 @@ extension MainViewController {
     }
   }
 
-  private func updateView() {
+  func updateView() {
     updatePresetMenu()
     audioUnitHost.save()
   }
 }
 
+// MARK: - Alerts and Prompts
+
 extension MainViewController {
+
   func notify(title: String, message: String, completion: (() -> Void)? = nil) {
     let alert = NSAlert()
 

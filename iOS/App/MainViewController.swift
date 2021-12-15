@@ -10,7 +10,7 @@ import os.log
 final class MainViewController: UIViewController {
   let showedAlertKey = "showedInitialAlert"
 
-  private var audioUnitHost: AudioUnitHost!
+  private let audioUnitHost: AudioUnitHost = .init(componentDescription: Bundle.shared.componentDescription)
   internal var userPresetsManager: UserPresetsManager?
 
   @IBOutlet weak var reviewButton: UIButton!
@@ -19,7 +19,6 @@ final class MainViewController: UIViewController {
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var factoryPresetSegmentedControl: UISegmentedControl!
   @IBOutlet weak var userPresetsMenuButton: UIButton!
-
   @IBOutlet weak var instructions: UIView!
 
   private lazy var saveAction = UIAction(title: "Save",
@@ -45,7 +44,6 @@ final class MainViewController: UIViewController {
     instructions.layer.borderColor = UIColor.systemOrange.cgColor
     instructions.layer.cornerRadius = 16
 
-    audioUnitHost = .init(componentDescription: Bundle.shared.componentDescription)
     audioUnitHost.delegate = self
   }
 

@@ -43,19 +43,10 @@
 - (void)stopProcessing;
 
 /**
- Process upstream input
-
- @param timestamp the timestamp for the rendering
- @param frameCount the number of frames to render
- @param output the buffer to hold the rendered samples
- @param realtimeEventListHead the first AURenderEvent to process (may be null)
- @param pullInputBlock the closure to invoke to fetch upstream samples
+ Obtain an `internalRenderBlock` to use for the AudioUnit. This is pretty much a straight connection into the kernel
+ with a splash of input value checking.
  */
-- (AUAudioUnitStatus)process:(nonnull AudioTimeStamp*)timestamp
-                  frameCount:(UInt32)frameCount
-                      output:(nonnull AudioBufferList*)output
-                      events:(nullable AURenderEvent*)realtimeEventListHead
-              pullInputBlock:(nonnull AURenderPullInputBlock)pullInputBlock;
+- (nonnull AUInternalRenderBlock)internalRenderBlock;
 
 /**
  Set the bypass state.

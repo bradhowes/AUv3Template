@@ -216,18 +216,7 @@ public final class FilterAudioUnit: AUAudioUnit {
 
   override public var internalRenderBlock: AUInternalRenderBlock {
     os_log(.info, log: log, "internalRenderBlock")
-
-    // Local values to capture in the closure that will be returned
-    let maximumFramesToRender = self.maximumFramesToRender
-    let kernel = self.kernel
-
-    return { _, timestamp, frameCount, outputBusNumber, outputData, events, pullInputBlock in
-      guard outputBusNumber == 0 else { return kAudioUnitErr_InvalidParameterValue }
-      guard frameCount <= maximumFramesToRender else { return kAudioUnitErr_TooManyFramesToProcess }
-      guard let pullInputBlock = pullInputBlock else { return kAudioUnitErr_NoConnection }
-      return kernel.process(UnsafeMutablePointer(mutating: timestamp), frameCount: frameCount, output: outputData,
-                            events: UnsafeMutablePointer(mutating: events), pullInputBlock: pullInputBlock)
-    }
+    return kernel.internalRenderBlock()
   }
 
   override public func parametersForOverview(withCount: Int) -> [NSNumber] {

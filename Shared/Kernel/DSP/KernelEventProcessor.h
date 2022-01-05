@@ -66,9 +66,9 @@ public:
      @param realtimeEventListHead pointer to the first AURenderEvent (may be null)
      @param pullInputBlock the closure to call to obtain upstream samples
      */
-    AUAudioUnitStatus processAndRender(AudioTimeStamp* timestamp, UInt32 frameCount, NSInteger inputBusNumber,
-                                       AudioBufferList* output, AURenderEvent* realtimeEventListHead,
-                                       AURenderPullInputBlock pullInputBlock)
+  AUAudioUnitStatus processAndRender(const AudioTimeStamp* timestamp, UInt32 frameCount, NSInteger inputBusNumber,
+                                     AudioBufferList* output, const AURenderEvent* realtimeEventListHead,
+                                     AURenderPullInputBlock pullInputBlock)
     {
         AudioUnitRenderActionFlags actionFlags = 0;
         auto status = inputBuffer_.pullInput(&actionFlags, timestamp, frameCount, inputBusNumber, pullInputBlock);

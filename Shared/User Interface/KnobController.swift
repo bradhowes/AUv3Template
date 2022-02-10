@@ -90,18 +90,6 @@ extension KnobController {
 extension KnobController {
 
 #if os(macOS)
-  private func onFocusChanged(hasFocus: Bool) {
-    os_log(.info, log: log, "onFocusChanged - hasFocus: %d", hasFocus)
-    if hasFocus {
-      hasActiveLabel = true
-      os_log(.info, log: log, "showing parameter value: %f", parameter.value)
-      label.floatValue = parameter.value
-      restoreNameTimer?.invalidate()
-    } else if hasActiveLabel {
-      hasActiveLabel = false
-      setEditedValue(label.floatValue)
-    }
-  }
 #endif
 
   private func logKnobLocationForParameterValue() -> Float {

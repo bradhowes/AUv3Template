@@ -16,7 +16,7 @@ AU_COMPONENT_TYPE = aufx
 
 // The component subtype. This should be unique for effects from the same manufacturer. For a quick demonstration,
 // set this to some 4-character tag like "abcd" (but without the quotation marks).
-AU_COMPONENT_SUBTYPE = AbCd
+AU_COMPONENT_SUBTYPE = __SUBTYPE__
 
 // The unique manufacturer ID. Pick your own, but values with all lowercase letters are reserved
 // by Apple. There used to be a registry...

@@ -6,14 +6,14 @@
 # About AUv3Template
 
 This is full-featured AUv3 effect template for both iOS and macOS platforms. When configured, it will build an
-app for each platform and embed in the app an app extension containing the AUv3 component. The apps are designed
-to load the AUv3 component and use it to demonstrate how it works by playing a sample audio file and routing it
-through the effect.
+app for each platform and embed in the app bundle an app extension containing the AUv3 component. The apps are designed
+to load the AUv3 component the same was as a host such as GarageBand would. It uses the extension to demonstrate how it 
+works by playing a sample audio file and routing it through the effect and out to the device's speaker.
 
 Additional features and info:
 
-* Uses a C++ kernel for audio sample manipulation in the render thread
-* Provides a *very* tiny Objective-C (Objective-C++) wrapper for access to the kernel in Swift
+* Uses a C++ kernel to generate audio samples in the render thread
+* Provides a *very* tiny Objective-C (Objective-C++ really) wrapper for access to the kernel from Swift code
 * Uses Swift for all UI and all audio unit work not associated with sample rendering
 
 The code was developed in Xcode 12.4 on macOS 11.2.1. I have tested on both macOS and iOS devices primarily in
@@ -34,22 +34,30 @@ effect and `BRay` is my own manufacturer ID. You should use your own values that
 
 # Generating a new AUv3 Project
 
-Since this is a template, use the [build.py](build.py) Python3 script to create a new project from it. It takes
-two arguments, the name of the new project and the _subtype_ of the effect:
+Note that this **is** a template, and as such it may not successfully run when compiled. The best bet is to use the
+Python3 [build.py](scripts/build.py) script to create a new project from the template. To do so, fire up a terminal
+shell and go into the _AUV3Template_ directory. The script takes two arguments:
+
+- the name of the new project
+- the _subtype_ of the effect
+
+You would run it like this:
 
 ```
-% python3 build.py MyEffect subtype
+% python3 scripts/build.py MyEffect subtype
 ```
 
-The name value should be self-evident in purpose; the _subtype_ is a unique 4-character identifier for your new
-effect. It should be unique at least for your manufacturer space (see
-[Configuration/Common.xcconfig](Configuration/Common.xcconfig))
+The name value should be self-evident in purpose: it will be the name of your iOS and macOS app, and the basis for the
+name of your app extensions. The _subtype_ is a unique 4-character identifier for your new effect. It should be unique 
+at least for your manufacturer space (see [Configuration/Common.xcconfig](Configuration/Common.xcconfig)) so that it
+will not conflict with another app extension.
 
-The script will creates new folder called `../MyEffect` and populate it with the files from this template.
+With a project name called "MyEffect", the Python3 script will creates new folder called _MyEffect_ that is a sibling to
+your _AUv3Template_ folder. The script will populate the new folder with the files from this template.
 Afterwards you should have a working AUv3 effect embedded in demo apps for iOS and macOS. All files with
 `__NAME__` in them will be replaced with the first argument given to `build.py` (e.g. "MyEffect"), and all text
-files will be changed so that the strings `__NAME__` and `__SUBTYPE__` are replaced with the values you
-provided.
+files will be changed so that the strings `__NAME__` and `__SUBTYPE__` are replaced with their respective substitutions
+that you provided.
 
 Note that To successfully compile you will need to edit
 [Configuration/Common.xcconfig](Configuration/Common.xcconfig) and change `DEVELOPMENT_TEAM` to hold your own
@@ -87,14 +95,27 @@ speaker. When it runs, you can play the sample file and manipulate the effects s
 Each OS ([macOS](macOS) and [iOS](iOS)) have the same code layout:
 
 * `App` -- code and configury for the application that hosts the AUv3 app extension
-* `Extension` -- code and configury for the extension itself. It also contains the OS-specific UI layout
-  definitions, but the controller for the UI is found in
-  [Shared/User Interface/FilterViewController.swift](Shared/User%20Interface/FilterViewController.swift)
-* `Framework` -- code configury for the framework that contains the shared code
+* `Extension` -- code and configury for the extension itself. It contains the OS-specific UI layout
+  definitions.
 
-The [Shared](Shared) folder holds all of the code that is used by the above products. In it you will find the
-files for the audio unit ([FilterAudioUnit](Shared/FilterAudioUnit.swift)), the user changable parameters for
-the audio unit ([AudioUnitParameters](Shared/AudioUnitParameters.swift)), and the audio processing "kernel"
-written in C++ ([__NAME__Kernel](Shared/Kernel/__NAME__Kernel.h)).
+All of the common code shared between the iOS and macOS apps and app extensions resides in the [Packages](Packages)
+folder as Swift packages. Originally, this common code was built as a shared framework, but now Swift packages is
+powerful enough to do the same. There are at present 5 separate libraries that are built in package form:
 
-There are adidtional details in the individual folders as well.
+* [Kernel](Packages/Sources/Kernel) -- the C++ and Obj-C++ code that renders audio samples
+* [KernelBridge](Packages/Sources/KernelBridge) -- a bridge to the Obj-C++ kernel for Swift code
+* [ParameterAddress](Packages/Sources/ParameterAddress) -- definitions of the runtime parameters that control the 
+operation of the kernel
+* [Parameters](Packages/Sources/Parameters) -- collection of AUParameter entities based on the definitions from 
+the `ParameterAddress` library. Also provides factory presets for the audio unit.
+
+There are additional details in the individual folders as well.
+
+# Dependencies
+
+This code now depends on two Swift packages:
+
+- [AUv3Support](https://github.com/bradhowes/AUv3Support) -- common AUv3 component and host code. Much of the code that
+was originally in a shared framework in this repo is now in this separate package.
+- [Knob](https://github.com/bradhowes/knob) -- a simple library for macOS and iOS that generates rotary "knob" controls
+

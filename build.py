@@ -22,7 +22,7 @@ def makeDestPath(sourcePath, destDir, name, subtype):
     return substituteName(os.path.join(destDir, sourcePath), name, subtype)
 
 def buildFile(sourcePath, destPath, name, subtype):
-    justCopy = ['.py', '.png', '.caf', '.wav', '.xcuserstate', '.opacity']
+    justCopy = ['.py', '.png', '.caf', '.wav', '.xcuserstate', '.opacity', '.ttf']
     os.makedirs(os.path.split(destPath)[0], exist_ok=True)
     if os.path.splitext(destPath)[1] in justCopy:
         shutil.copy2(sourcePath, destPath)

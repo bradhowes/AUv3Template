@@ -238,71 +238,16 @@
                                     <constraint firstItem="iO5-GT-K4x" firstAttribute="centerY" secondItem="AVM-k6-jTo" secondAttribute="centerY" id="pn7-zq-qTJ"/>
                                 </constraints>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="0ha-Rq-WLt" userLabel="Instructions">
-                                <rect key="frame" x="32" y="32" width="403" height="252"/>
-                                <subviews>
-                                    <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="poz-wN-YBn" userLabel="Instructions">
-                                        <rect key="frame" x="16" y="16" width="371" height="220"/>
-                                        <subviews>
-                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="1se-pH-LjN">
-                                                <rect key="frame" x="-2" y="28" width="375" height="192"/>
-                                                <textFieldCell key="cell" selectable="YES" id="ggX-14-BxM">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <string key="title">The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as GarageBand and Logic.
-
-You can continue to use this app to experiment, but you do not need to have it running to access the AUv3 component in other apps.
-
-However, if you later delete this app from your device, the AUv3 component will no longer be available in other host apps.
-</string>
-                                                    <color key="textColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TnS-H3-vEz">
-                                                <rect key="frame" x="159" y="-7" width="53" height="32"/>
-                                                <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nnS-dO-90P">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                                </buttonCell>
-                                                <color key="bezelColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
-                                            </button>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="poz-wN-YBn" secondAttribute="bottom" constant="16" id="SR1-2L-mQO"/>
-                                    <constraint firstAttribute="trailing" secondItem="poz-wN-YBn" secondAttribute="trailing" constant="16" id="bpK-fo-7XM"/>
-                                    <constraint firstAttribute="height" constant="252" id="fM7-Jz-yQJ"/>
-                                    <constraint firstItem="poz-wN-YBn" firstAttribute="top" secondItem="0ha-Rq-WLt" secondAttribute="top" constant="16" id="w70-jX-isQ"/>
-                                    <constraint firstItem="poz-wN-YBn" firstAttribute="leading" secondItem="0ha-Rq-WLt" secondAttribute="leading" constant="16" id="wII-ql-R0a"/>
-                                    <constraint firstAttribute="width" constant="403" id="wta-Cj-7fb"/>
-                                </constraints>
-                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="AVM-k6-jTo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="3f5-lk-ZZb"/>
                             <constraint firstAttribute="bottom" secondItem="AVM-k6-jTo" secondAttribute="bottom" id="Lno-1a-N0L"/>
                             <constraint firstAttribute="trailing" secondItem="AVM-k6-jTo" secondAttribute="trailing" id="Nud-sn-hDf"/>
-                            <constraint firstItem="0ha-Rq-WLt" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="oyx-HA-gkP"/>
                             <constraint firstItem="AVM-k6-jTo" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="q6J-Jx-dsR"/>
-                            <constraint firstItem="0ha-Rq-WLt" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="vCO-sO-xGp"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="AVM-k6-jTo" id="0Du-8s-SA4"/>
-                        <outlet property="instructions" destination="0ha-Rq-WLt" id="M3c-eT-A3O"/>
-                        <outlet property="instructionsButton" destination="TnS-H3-vEz" id="81G-uF-1Gx"/>
                         <outlet property="loadingText" destination="iO5-GT-K4x" id="YsE-Bw-a4P"/>
                     </connections>
                 </viewController>

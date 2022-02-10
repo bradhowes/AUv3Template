@@ -2,8 +2,12 @@
 
 import Cocoa
 
+/**
+ Main window controller for the host app. Only exists here so that others can access the buttons defined in the
+ Main.storyboard file.
+ */
 final class MainWindowController: NSWindowController {
-  @IBOutlet public var playButton: NSButton!
-  @IBOutlet public var bypassButton: NSButton!
-  @IBOutlet public var presetsButton: NSButton!
+  @IBOutlet public weak var playButton: NSButton!
+  @IBOutlet public weak var bypassButton: NSButton!
+  @IBOutlet public weak var presetsButton: NSPopUpButton!
 }

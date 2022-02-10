@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="landscape" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -14,146 +14,14 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="MainViewController" customModule="__NAME__Host" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2HW-yE-4lC" userLabel="Buttons">
-                                <rect key="frame" x="223" y="8" width="221" height="31"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzZ-pe-UL7">
-                                        <rect key="frame" x="0.0" y="3" width="25" height="25"/>
-                                        <color key="tintColor" systemColor="systemTealColor"/>
-                                        <state key="normal" image="play">
-                                            <color key="titleColor" systemColor="systemTealColor"/>
-                                        </state>
-                                        <state key="selected" image="stop"/>
-                                        <connections>
-                                            <action selector="togglePlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kt8-zh-HcD"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9za-g7-28Y">
-                                        <rect key="frame" x="33" y="3" width="25" height="25"/>
-                                        <color key="tintColor" systemColor="systemTealColor"/>
-                                        <state key="normal" image="enabled">
-                                            <color key="titleColor" systemColor="systemTealColor"/>
-                                        </state>
-                                        <state key="selected" image="bypassed"/>
-                                        <connections>
-                                            <action selector="toggleBypass:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AFb-Cz-SLh"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJA-Ec-YsF" userLabel="APP_VERSION">
-                                        <rect key="frame" x="66" y="2.5" width="31" height="26"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="v1.0.0">
-                                            <color key="titleColor" systemColor="systemTealColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="reviewApp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SIe-10-IRd"/>
-                                        </connections>
-                                    </button>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n91-Uc-KCJ" userLabel="Preset Selection">
-                                        <rect key="frame" x="105" y="0.0" width="83" height="32"/>
-                                        <segments>
-                                            <segment title="1"/>
-                                            <segment title="2"/>
-                                            <segment title="3"/>
-                                        </segments>
-                                        <color key="selectedSegmentTintColor" systemColor="systemOrangeColor"/>
-                                        <connections>
-                                            <action selector="useFactoryPreset:" destination="BYZ-38-t0r" eventType="valueChanged" id="qxp-sN-kf6"/>
-                                        </connections>
-                                    </segmentedControl>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGq-i7-iWX" userLabel="Presets Menu">
-                                        <rect key="frame" x="196" y="3" width="25" height="25"/>
-                                        <color key="tintColor" systemColor="systemTealColor"/>
-                                        <state key="normal" image="user">
-                                            <color key="titleColor" systemColor="systemTealColor"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="198-45-xa8">
-                                <rect key="frame" x="276.5" y="171" width="114.5" height="33.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68k-M7-cHK">
-                                <rect key="frame" x="8" y="47" width="651" height="320"/>
-                            </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YId-hO-jcy" userLabel="Instructions">
-                                <rect key="frame" x="33.5" y="71" width="600" height="229.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3qX-ce-gec">
-                                        <rect key="frame" x="20" y="20" width="560" height="189.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDx-3W-ne7">
-                                                <rect key="frame" x="0.0" y="0.0" width="560" height="150.5"/>
-                                                <string key="text"> The AUv3 component '__NAME__' is now available on your device and can be used in other AUv3 host apps such as GarageBand and Logic.
-
-You can continue to use this app to experiment, but you do not need to have it running to access the AUv3 component in other apps.
-
-However, if you later delete this app from your device, the AUv3 component will no longer be available in other host apps.
-</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" red="1" green="0.76441770789999997" blue="0.36662185190000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTl-Uk-c3g">
-                                                <rect key="frame" x="0.0" y="158.5" width="560" height="31"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="OK">
-                                                    <color key="baseForegroundColor" systemColor="systemOrangeColor"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="dismissInstructions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OCx-Uy-ufC"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="3qX-ce-gec" secondAttribute="bottom" constant="20" symbolic="YES" id="91e-co-hiB"/>
-                                    <constraint firstItem="3qX-ce-gec" firstAttribute="leading" secondItem="YId-hO-jcy" secondAttribute="leading" constant="20" symbolic="YES" id="KM9-65-vhQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="3qX-ce-gec" secondAttribute="trailing" constant="20" symbolic="YES" id="chj-Ls-zcC"/>
-                                    <constraint firstItem="3qX-ce-gec" firstAttribute="top" secondItem="YId-hO-jcy" secondAttribute="top" constant="20" symbolic="YES" id="cvq-zq-qLD"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="600" id="i5M-CT-dbR"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="313" id="jUp-Tf-xIK"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <accessibility key="accessibilityConfiguration" identifier="MainView" label="MainView"/>
-                        <constraints>
-                            <constraint firstItem="YId-hO-jcy" firstAttribute="top" secondItem="2HW-yE-4lC" secondAttribute="bottom" constant="32" id="4Ol-S5-uZG"/>
-                            <constraint firstItem="2HW-yE-4lC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6jQ-8s-FqC"/>
-                            <constraint firstItem="YId-hO-jcy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="CkH-mK-xzm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YId-hO-jcy" secondAttribute="trailing" constant="16" id="Erq-JI-f32"/>
-                            <constraint firstItem="68k-M7-cHK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="JSr-xN-3FD"/>
-                            <constraint firstItem="YId-hO-jcy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VI3-UO-P32"/>
-                            <constraint firstItem="198-45-xa8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VLg-w3-2DO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="68k-M7-cHK" secondAttribute="bottom" constant="8" id="f0O-Cd-IJE"/>
-                            <constraint firstItem="2HW-yE-4lC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="gI8-0k-FeD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YId-hO-jcy" secondAttribute="bottom" constant="16" id="jjQ-x6-Ygf"/>
-                            <constraint firstItem="68k-M7-cHK" firstAttribute="top" secondItem="2HW-yE-4lC" secondAttribute="bottom" constant="8" id="kuR-uh-l1b"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="68k-M7-cHK" secondAttribute="trailing" constant="8" id="pxu-xY-NpT"/>
-                            <constraint firstItem="198-45-xa8" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xUY-C0-0hk"/>
-                        </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="bypassButton" destination="9za-g7-28Y" id="Pvy-sY-JhH"/>
-                        <outlet property="containerView" destination="68k-M7-cHK" id="Vne-5l-42G"/>
-                        <outlet property="factoryPresetSegmentedControl" destination="n91-Uc-KCJ" id="oPX-wk-ebg"/>
-                        <outlet property="instructions" destination="YId-hO-jcy" id="xg8-mK-OUR"/>
-                        <outlet property="playButton" destination="tzZ-pe-UL7" id="Yxx-Rt-URy"/>
-                        <outlet property="reviewButton" destination="fJA-Ec-YsF" id="wJL-Ig-4Ro"/>
-                        <outlet property="userPresetsMenuButton" destination="jGq-i7-iWX" id="Xx4-qr-Zvc"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -161,19 +29,8 @@ However, if you later delete this app from your device, the AUv3 component will 
         </scene>
     </scenes>
     <resources>
-        <image name="bypassed" width="25" height="25"/>
-        <image name="enabled" width="25" height="25"/>
-        <image name="play" width="25" height="25"/>
-        <image name="stop" width="25" height="25"/>
-        <image name="user" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

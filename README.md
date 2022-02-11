@@ -1,6 +1,6 @@
 [![CI](https://github.com/bradhowes/AUv3Template/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/bradhowes/AUv3Template/actions/workflows/CI.yml)
 [![Swift 5.5](https://img.shields.io/badge/Swift-5.5-orange.svg?style=flat)](https://swift.org)
-[![AUv3](https://img.shields.io/badge/AUv3-green.svg)](https://github.com/bradhowes/SoundFonts)
+[![AUv3](https://img.shields.io/badge/AudioUnit-AUv3-orange.svg)](https://developer.apple.com/documentation/audiounit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-A31F34.svg)](https://opensource.org/licenses/MIT)
 
 ![](macOS/App/Assets.xcassets/AppIcon.appiconset/256px.png)

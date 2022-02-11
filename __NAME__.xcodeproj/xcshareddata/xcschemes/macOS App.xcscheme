@@ -37,16 +37,6 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BD95147424A08BB600D8024C"
-               BuildableName = "macOS Tests.xctest"
-               BlueprintName = "macOS Tests"
-               ReferencedContainer = "container:__NAME__.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

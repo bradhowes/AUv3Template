@@ -409,7 +409,6 @@
 			buildConfigurationList = C437FE4A222367A8008D6C09 /* Build configuration list for PBXNativeTarget "iOS App" */;
 			buildPhases = (
 				C437FE36222367A6008D6C09 /* Sources */,
-				BDF7933927654E66000DB4ED /* Run swiftlint */,
 				C437FE37222367A6008D6C09 /* Frameworks */,
 				C437FE38222367A6008D6C09 /* Resources */,
 				C437FE752223686D008D6C09 /* Embed App Extensions */,
@@ -464,7 +463,6 @@
 				C437FE782223688D008D6C09 /* Resources */,
 				C4660A632225F9A0007BE3B1 /* Embed Frameworks */,
 				C4660A642225F9A0007BE3B1 /* Embed App Extensions */,
-				BDF7933A27654E8F000DB4ED /* Run swiftlint */,
 			);
 			buildRules = (
 			);
@@ -636,45 +634,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		BDF7933927654E66000DB4ED /* Run swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run swiftlint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "set -x\n\nPATH=\"/opt/homebrewo/bin:${PATH}\"\n\nif type -p swiftlint; then\n    swiftlint --config .swiftlint.yml\nelse\n  echo \"** WARNING: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		BDF7933A27654E8F000DB4ED /* Run swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run swiftlint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "set -x\n\nPATH=\"/opt/homebrewo/bin:${PATH}\"\n\nif type -p swiftlint; then\n    swiftlint --config .swiftlint.yml\nelse\n  echo \"** WARNING: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BD1D257225D5AAB000523748 /* Sources */ = {
@@ -1078,7 +1037,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = macOS/App/App.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1417,7 +1376,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = macOS/App/App.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;

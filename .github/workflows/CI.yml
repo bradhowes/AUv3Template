@@ -13,3 +13,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run iOS build
       run: xcodebuild clean build -scheme 'iOS App' -destination 'name=iPhone 12' -showBuildTimingSummary -allowProvisioningUpdates
+    - name: Run macOS build
+      run: xcodebuild clean build -scheme 'macOS App' -destination 'platform=macOS,arch=x86_64'

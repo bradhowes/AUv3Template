@@ -6,21 +6,21 @@
 #import <string>
 #import <AVFoundation/AVFoundation.h>
 
-#import "BoolParameter.hpp"
-#import "DelayBuffer.hpp"
-#import "EventProcessor.hpp"
-#import "MillisecondsParameter.hpp"
-#import "LFO.hpp"
-#import "PercentageParameter.hpp"
+#import "DSPHeaders/BoolParameter.hpp"
+#import "DSPHeaders/DelayBuffer.hpp"
+#import "DSPHeaders/EventProcessor.hpp"
+#import "DSPHeaders/MillisecondsParameter.hpp"
+#import "DSPHeaders/LFO.hpp"
+#import "DSPHeaders/PercentageParameter.hpp"
 
 /**
  The audio processing kernel that generates a "flange" effect by combining an audio signal with a slightly delayed copy
  of itself. The delay value oscillates at a defined frequency which causes the delayed audio to vary in pitch due to it
  being sped up or slowed down.
  */
-class Kernel : public EventProcessor<Kernel> {
+class Kernel : public DSPHeaders::EventProcessor<Kernel> {
 public:
-  using super = EventProcessor<Kernel>;
+  using super = DSPHeaders::EventProcessor<Kernel>;
   friend super;
 
   /**
@@ -88,7 +88,13 @@ private:
     }
   }
 
-  void doRendering(std::vector<AUValue*>& ins, std::vector<AUValue*>& outs, AUAudioFrameCount frameCount) {
+  AUAudioUnitStatus doPullInput(const AudioTimeStamp* timestamp, UInt32 frameCount, NSInteger inputBusNumber,
+                                AURenderPullInputBlock pullInputBlock) {
+    return pullInput(timestamp, frameCount, inputBusNumber, pullInputBlock);
+  }
+
+  void doRendering(NSInteger outputBusNumber, std::vector<AUValue*>& ins, std::vector<AUValue*>& outs,
+                   AUAudioFrameCount frameCount) {
 
     // Advance by frames in outer loop so we can ramp values when they change without having to save/restore state.
     for (int frame = 0; frame < frameCount; ++frame) {
@@ -104,10 +110,10 @@ private:
       auto delaySpan = depth - delay;
 
       // Calculate the delay signal for even channels (L)
-      auto evenDelay = DSP::bipolarToUnipolar(lfo_.value()) * delaySpan + delay;
+      auto evenDelay = DSPHeaders::DSP::bipolarToUnipolar(lfo_.value()) * delaySpan + delay;
 
       // Optionally, odd channels (R) can be 90° out of phase with the even channels.
-      auto oddDelay = odd90_ ? DSP::bipolarToUnipolar(lfo_.quadPhaseValue()) * delaySpan + delay : evenDelay;
+      auto oddDelay = odd90_ ? DSPHeaders::DSP::bipolarToUnipolar(lfo_.quadPhaseValue()) * delaySpan + delay : evenDelay;
 
       // Safe now to increment the LFO for the next frame.
       lfo_.increment();
@@ -124,18 +130,18 @@ private:
 
   void doMIDIEvent(const AUMIDIEvent& midiEvent) {}
 
-  MillisecondsParameter<AUValue> depth_;
-  MillisecondsParameter<AUValue> delay_;
-  PercentageParameter<AUValue> feedback_;
-  PercentageParameter<AUValue> dryMix_;
-  PercentageParameter<AUValue> wetMix_;
-  BoolParameter negativeFeedback_;
-  BoolParameter odd90_;
+  DSPHeaders::Parameters::MillisecondsParameter<AUValue> depth_;
+  DSPHeaders::Parameters::MillisecondsParameter<AUValue> delay_;
+  DSPHeaders::Parameters::PercentageParameter<AUValue> feedback_;
+  DSPHeaders::Parameters::PercentageParameter<AUValue> dryMix_;
+  DSPHeaders::Parameters::PercentageParameter<AUValue> wetMix_;
+  DSPHeaders::Parameters::BoolParameter negativeFeedback_;
+  DSPHeaders::Parameters::BoolParameter odd90_;
 
   double samplesPerMillisecond_;
   double maxDelayMilliseconds_;
 
-  std::vector<DelayBuffer<AUValue>> delayLines_;
-  LFO<AUValue> lfo_;
-  InputBuffer delayPos_;
+  std::vector<DSPHeaders::DelayBuffer<AUValue>> delayLines_;
+  DSPHeaders::LFO<AUValue> lfo_;
+  DSPHeaders::InputBuffer delayPos_;
 };

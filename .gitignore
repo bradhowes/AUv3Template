@@ -24,4 +24,12 @@ DerivedData/
 
 **/*.old
 
-fastlane/screenshots/
+Gemfile
+Gemfile.lock
+
+fastlane
+Packages/.swiftpm/
+Packages/.build/
+Packages/Package.resolved
+.version
+exportOptions.plist

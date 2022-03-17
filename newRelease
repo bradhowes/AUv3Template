@@ -41,10 +41,10 @@ while [[ "$#" -gt 0 ]]; do
     case "${1}" in
         "--macos") PLATFORMS="macos" ;;
         "--ios") PLATFORMS="ios" ;;
-        "major") CMD="major"; python3 bumpVersions.py -d "${PWD}" -1 ;;
-        "minor") CMD="minor"; python3 bumpVersions.py -d "${PWD}" -2 ;;
-        "patch") CMD="patch"; python3 bumpVersions.py -d "${PWD}" -3 ;;
-        "build") CMD="build"; python3 bumpVersions.py -d "${PWD}" -b ;;
+        "major") CMD="major"; ./bumpVersions -d "${PWD}" -1 ;;
+        "minor") CMD="minor"; ./bumpVersions -d "${PWD}" -2 ;;
+        "patch") CMD="patch"; ./bumpVersions -d "${PWD}" -3 ;;
+        "build") CMD="build"; ./bumpVersions -d "${PWD}" -b ;;
         *) error "invalid arg - ${1}" ;;
     esac
     shift 1
@@ -56,9 +56,9 @@ set -- *.xcodeproj
 PROJECT="${1}"
 log "using PROJECT='${PROJECT}'"
 
-set -- $(tail -1 "${HOME}/zzz.log")
-VERSION="${2#v}"
+VERSION="$(< .version)"
 [[ -z "${VERSION}" ]] && error "failed to get VERSION"
+
 log "using VERSION='${VERSION}'"
 
 if [[ ! -f "${PWD}/exportOptions.plist" ]]; then
@@ -94,7 +94,7 @@ function buildTestDeploy # SCHEME DESTINATION
     local SCHEME="${1}"
     local DESTINATION="${2}"
     local DATE=$(date +'%Y-%m-%d')
-    local HHMM=$(date '%H.%M')
+    local HHMM=$(date +'%H.%M')
     local ARCHIVE_DIR="${HOME}/Library/Developer/Xcode/Archives/${DATE}"
     local ARCHIVE="${ARCHIVE_DIR}/${SCHEME} ${DATE},${HHMM}.xcarchive"
 
@@ -141,18 +141,20 @@ for EACH in ${PLATFORMS}; do
     esac
 done
 
-log "committing version changes"
-echo git add -u
-echo git commit -m "v${VERSION}"
-if [[ "${CMD}" != "build" ]]; then
-    log "tagging repo with ${VERSION}"
-    echo git tag "${VERSION}"
-fi
+git status
 
-log "pushing changes to remote"
-git push
+# log "committing version changes"
+# git add -u
+# git commit -m "v${VERSION}"
+# if [[ "${CMD}" != "build" ]]; then
+#     log "tagging repo with ${VERSION}"
+#     git tag "${VERSION}"
+# fi
 
-if [[ "${CMD}" != "build" ]]; then
-    log "pushing updated tags to remote"
-    echo git push --tags
-fi
+# log "pushing changes to remote"
+# echo git push
+
+# if [[ "${CMD}" != "build" ]]; then
+#     log "pushing updated tags to remote"
+#     git push --tags
+# fi

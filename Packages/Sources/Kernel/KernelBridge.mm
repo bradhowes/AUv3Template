@@ -18,8 +18,9 @@
   return self;
 }
 
-- (void)setRenderingFormat:(AVAudioFormat*)inputFormat maxFramesToRender:(AUAudioFrameCount)maxFramesToRender {
-  kernel_->setRenderingFormat(inputFormat, maxFramesToRender, maxDelayMilliseconds_);
+- (void)setRenderingFormat:(NSInteger)busCount format:(AVAudioFormat*)inputFormat
+         maxFramesToRender:(AUAudioFrameCount)maxFramesToRender {
+  kernel_->setRenderingFormat(busCount, inputFormat, maxFramesToRender, maxDelayMilliseconds_);
 }
 
 - (void)renderingStopped { kernel_->renderingStopped(); }

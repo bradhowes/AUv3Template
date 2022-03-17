@@ -7,6 +7,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "DSPHeaders/BoolParameter.hpp"
+#import "DSPHeaders/BusBuffers.hpp"
 #import "DSPHeaders/DelayBuffer.hpp"
 #import "DSPHeaders/EventProcessor.hpp"
 #import "DSPHeaders/MillisecondsParameter.hpp"
@@ -28,8 +29,7 @@ public:
 
    @param name the name to use for logging purposes.
    */
-  Kernel(const std::string& name)
-  : super(os_log_create(name.c_str(), "Kernel"))
+  Kernel(std::string name) : super(name)
   {
     lfo_.setWaveform(LFOWaveform::triangle);
   }
@@ -41,8 +41,9 @@ public:
    @param maxFramesToRender the maximum number of samples we will be asked to render in one go
    @param maxDelayMilliseconds the max number of milliseconds of audio samples to keep in delay buffer
    */
-  void setRenderingFormat(AVAudioFormat* format, AUAudioFrameCount maxFramesToRender, double maxDelayMilliseconds) {
-    super::setRenderingFormat(format, maxFramesToRender);
+  void setRenderingFormat(NSInteger busCount, AVAudioFormat* format, AUAudioFrameCount maxFramesToRender,
+                          double maxDelayMilliseconds) {
+    super::setRenderingFormat(busCount, format, maxFramesToRender);
     initialize(format.channelCount, format.sampleRate, maxDelayMilliseconds);
   }
 
@@ -88,12 +89,7 @@ private:
     }
   }
 
-  AUAudioUnitStatus doPullInput(const AudioTimeStamp* timestamp, UInt32 frameCount, NSInteger inputBusNumber,
-                                AURenderPullInputBlock pullInputBlock) {
-    return pullInput(timestamp, frameCount, inputBusNumber, pullInputBlock);
-  }
-
-  void doRendering(NSInteger outputBusNumber, std::vector<AUValue*>& ins, std::vector<AUValue*>& outs,
+  void doRendering(NSInteger outputBusNumber, DSPHeaders::BusBuffers ins, DSPHeaders::BusBuffers outs,
                    AUAudioFrameCount frameCount) {
 
     // Advance by frames in outer loop so we can ramp values when they change without having to save/restore state.
@@ -143,5 +139,4 @@ private:
 
   std::vector<DSPHeaders::DelayBuffer<AUValue>> delayLines_;
   DSPHeaders::LFO<AUValue> lfo_;
-  DSPHeaders::InputBuffer delayPos_;
 };

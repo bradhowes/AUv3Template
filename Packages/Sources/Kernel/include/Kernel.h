@@ -22,11 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Configure the kernel for new format and max frame in preparation to begin rendering
 
+ @param busCount number of busses that the kernel must support
  @param inputFormat the current format of the input bus
  @param maxFramesToRender the max frames to expect in a render request
  @param maxDelayMilliseconds the max delay time in milliseconds
  */
-- (void)setRenderingFormat:(AVAudioFormat*)inputFormat maxFramesToRender:(AUAudioFrameCount)maxFramesToRender;
+- (void)setRenderingFormat:(NSInteger)busCount format:(AVAudioFormat*)inputFormat
+         maxFramesToRender:(AUAudioFrameCount)maxFramesToRender;
 
 /**
  Stop processing, releasing any resources used to support rendering.

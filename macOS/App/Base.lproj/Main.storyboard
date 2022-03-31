@@ -12,18 +12,18 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="SimplyFlange" id="1Xt-HY-uBw" userLabel="SimplyFlange Host">
+                            <menuItem title="__NAME__" id="1Xt-HY-uBw" userLabel="__NAME__ Host">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="SimplyFlange" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="__NAME__" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About SimplyFlange" id="5kV-Vb-QxS">
+                                        <menuItem title="About __NAME__" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit SimplyFlange" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit __NAME__" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -97,7 +97,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="SimplyFlange Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="__NAME__ Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -126,7 +126,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="__NAME__" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="SimplyFlange" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="SimplyFlange" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA" userLabel="SimplyFlange">
+                    <window key="window" title="__NAME__" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="__NAME__" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA" userLabel="__NAME__">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
                         <rect key="contentRect" x="81" y="580" width="600" height="300"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1175"/>

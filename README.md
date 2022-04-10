@@ -96,7 +96,7 @@ speaker. When it runs, you can play the sample file and manipulate the effects s
 
 # Code Layout
 
-Each OS ([macOS](macOS) and [iOS](iOS)) have the same code layout:
+Each OS ([macOS](macOS) and [iOS](iOS)) has the same code layout:
 
 * `App` -- code and configury for the application that hosts the AUv3 app extension
 * `Extension` -- code and configury for the extension itself. It contains the OS-specific UI layout
@@ -112,6 +112,9 @@ powerful enough to do the same. There are at present 5 separate libraries that a
 operation of the kernel
 * [Parameters](Packages/Sources/Parameters) -- collection of AUParameter entities based on the definitions from
 the `ParameterAddress` library. Also provides factory presets for the audio unit.
+* [Theme](Packages/Sources/Theme) -- lame attempt at sharing resources in a package. Unfortunately, right now it does not work well with 
+Xcode. For instance, Xcode will not see/use fonts nor color sets that are recorded in this package. I do not know of a way to work around
+this issue other than to copy the resources to a folter outside of the package hierarchy and flag them as belonging to both executables.
 
 There are additional details in the individual folders as well.
 

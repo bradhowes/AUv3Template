@@ -9,29 +9,29 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C437FE39222367A6008D6C09"
-               BuildableName = "__NAME__Host.app"
+               BuildableName = "--NAME--Host.app"
                BlueprintName = "iOS App"
-               ReferencedContainer = "container:__NAME__.xcodeproj">
+               ReferencedContainer = "container:--NAME--.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C437FE792223688D008D6C09"
-               BuildableName = "__NAME__.app"
-               BlueprintName = "__NAME__"
-               ReferencedContainer = "container:__NAME__.xcodeproj">
+               BlueprintIdentifier = "BD1D257525D5AAB000523748"
+               BuildableName = "Snapshots.xctest"
+               BlueprintName = "Snapshots"
+               ReferencedContainer = "container:--NAME--.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "BD1D257525D5AAB000523748"
                BuildableName = "Snapshots.xctest"
                BlueprintName = "Snapshots"
-               ReferencedContainer = "container:__NAME__.xcodeproj">
+               ReferencedContainer = "container:--NAME--.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -64,6 +64,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C437FE39222367A6008D6C09"
+            BuildableName = "--NAME--Host.app"
+            BlueprintName = "iOS App"
+            ReferencedContainer = "container:--NAME--.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -71,15 +81,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C437FE39222367A6008D6C09"
-            BuildableName = "__NAME__Host.app"
+            BuildableName = "--NAME--Host.app"
             BlueprintName = "iOS App"
-            ReferencedContainer = "container:__NAME__.xcodeproj">
+            ReferencedContainer = "container:--NAME--.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

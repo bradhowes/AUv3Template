@@ -22,7 +22,6 @@ extension Knob: AUParameterValueProvider, RangedControl {}
   private let parameters = AudioUnitParameters()
   private var viewConfig: AUAudioUnitViewConfiguration!
   private var keyValueObserverToken: NSKeyValueObservation?
-  private var hasActiveLabel = false
 
   @IBOutlet private weak var controlsView: NSView!
 
@@ -61,7 +60,9 @@ extension Knob: AUParameterValueProvider, RangedControl {}
     .negativeFeedback: negativeFeedbackControl
   ]
 
-  private var editors = [ParameterAddress : AUParameterEditor]()
+  private var editors = [AUParameterEditor]()
+  private var editorMap = [ParameterAddress : AUParameterEditor]()
+
   public var audioUnit: FilterAudioUnit? {
     didSet {
       DispatchQueue.main.async {
@@ -133,16 +134,21 @@ private extension ViewController {
       knob.target = self
       knob.action = #selector(handleKnobValueChanged(_:))
 
-      editors[parameterAddress] = FloatParameterEditor(parameter: parameters[parameterAddress],
-                                                       formatter: parameters.valueFormatter(parameterAddress),
-                                                       rangedControl: knob, label: label)
+      let editor = FloatParameterEditor(parameter: parameters[parameterAddress],
+                                        formatter: parameters.valueFormatter(parameterAddress),
+                                        rangedControl: knob, label: label)
+      editors.append(editor)
+      editorMap[parameterAddress] = editor
     }
 
     for (parameterAddress, control) in switches {
       control.setTint(knobColor)
-      editors[parameterAddress] = BooleanParameterEditor(parameter: parameters[parameterAddress],
-                                                         booleanControl: control)
+      let editor = BooleanParameterEditor(parameter: parameters[parameterAddress], booleanControl: control)
+      editors.append(editor)
+      editorMap[parameterAddress] = editor
     }
+
+    keyValueObserverToken = Self.updateEditorsOnPresetChange(audioUnit!, editors: editors)
 
     os_log(.info, log: log, "createEditors END")
   }
@@ -174,6 +180,6 @@ private extension ViewController {
       audioUnit.currentPreset = nil
     }
 
-    editors[address]?.controlChanged(source: control)
+    editorMap[address]?.controlChanged(source: control)
   }
 }

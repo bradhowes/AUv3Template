@@ -50,8 +50,8 @@
 		BDEC95B627FAD29B00FED7B3 /* Theme in Frameworks */ = {isa = PBXBuildFile; productRef = BDEC95B527FAD29B00FED7B3 /* Theme */; };
 		BDEC95B827FAD2AE00FED7B3 /* Theme in Frameworks */ = {isa = PBXBuildFile; productRef = BDEC95B727FAD2AE00FED7B3 /* Theme */; };
 		C433F56122404C7C00F1B750 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433F56022404C7C00F1B750 /* ViewController.swift */; };
-		C437FE712223686D008D6C09 /* __NAME__AU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FE632223686D008D6C09 /* __NAME__AU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C4660A602225F9A0007BE3B1 /* __NAME__AU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FEA0222368B7008D6C09 /* __NAME__AU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C437FE712223686D008D6C09 /* --NAME--AU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FE632223686D008D6C09 /* --NAME--AU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C4660A602225F9A0007BE3B1 /* --NAME--AU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C437FEA0222368B7008D6C09 /* --NAME--AU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C4737B0B2231D930002CAD0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4737B0A2231D930002CAD0B /* AudioToolbox.framework */; };
 		C4BEE7B122236A29001E6B6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BEE7A422236A29001E6B6D /* Assets.xcassets */; };
 		C4BEE7B322236A29001E6B6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4BEE7A722236A29001E6B6D /* Main.storyboard */; };
@@ -95,7 +95,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				C437FE712223686D008D6C09 /* __NAME__AU.appex in Embed App Extensions */,
+				C437FE712223686D008D6C09 /* --NAME--AU.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,7 +116,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				C4660A602225F9A0007BE3B1 /* __NAME__AU.appex in Embed App Extensions */,
+				C4660A602225F9A0007BE3B1 /* --NAME--AU.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,13 +145,13 @@
 		BDE2CE1724A3E887004AC8FA /* Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Dev.xcconfig; path = Configuration/Dev.xcconfig; sourceTree = "<group>"; };
 		BDE2CE1824A3E8DB004AC8FA /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Staging.xcconfig; path = Configuration/Staging.xcconfig; sourceTree = "<group>"; };
 		BDE2CE1924A3EBD1004AC8FA /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Common.xcconfig; path = Configuration/Common.xcconfig; sourceTree = "<group>"; };
-		BDEFCA2825F64BF10095858D /* __NAME__AU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = __NAME__AU.entitlements; sourceTree = "<group>"; };
+		BDEFCA2825F64BF10095858D /* --NAME--AU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = --NAME--AU.entitlements; sourceTree = "<group>"; };
 		C4201A2822403120006E4333 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C433F56022404C7C00F1B750 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C437FE3A222367A6008D6C09 /* __NAME__Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = __NAME__Host.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FE632223686D008D6C09 /* __NAME__AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = __NAME__AU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FE7A2223688D008D6C09 /* __NAME__.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = __NAME__.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FEA0222368B7008D6C09 /* __NAME__AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = __NAME__AU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE3A222367A6008D6C09 /* --NAME--Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = --NAME--Host.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE632223686D008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = --NAME--AU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE7A2223688D008D6C09 /* --NAME--.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = --NAME--.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FEA0222368B7008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = --NAME--AU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44F544422260E2500484B67 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C44F544622260E2C00484B67 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
 		C4737B092231D918002CAD0B /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -279,10 +279,10 @@
 		C437FE3B222367A6008D6C09 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C437FE3A222367A6008D6C09 /* __NAME__Host.app */,
-				C437FE632223686D008D6C09 /* __NAME__AU.appex */,
-				C437FE7A2223688D008D6C09 /* __NAME__.app */,
-				C437FEA0222368B7008D6C09 /* __NAME__AU.appex */,
+				C437FE3A222367A6008D6C09 /* --NAME--Host.app */,
+				C437FE632223686D008D6C09 /* --NAME--AU.appex */,
+				C437FE7A2223688D008D6C09 /* --NAME--.app */,
+				C437FEA0222368B7008D6C09 /* --NAME--AU.appex */,
 				BD1D257625D5AAB000523748 /* Snapshots.xctest */,
 			);
 			name = Products;
@@ -335,7 +335,7 @@
 		C4BEE7B722236A58001E6B6D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				BDEFCA2825F64BF10095858D /* __NAME__AU.entitlements */,
+				BDEFCA2825F64BF10095858D /* --NAME--AU.entitlements */,
 				C4201A2822403120006E4333 /* ViewController.swift */,
 				C4C9EAAB2227D79D003FEE1C /* ViewController.xib */,
 				C4BEE7BE22236A58001E6B6D /* Info.plist */,
@@ -424,7 +424,7 @@
 				BDEC95B527FAD29B00FED7B3 /* Theme */,
 			);
 			productName = "AUv3Filter iOS";
-			productReference = C437FE3A222367A6008D6C09 /* __NAME__Host.app */;
+			productReference = C437FE3A222367A6008D6C09 /* --NAME--Host.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C437FE622223686D008D6C09 /* iOS Extension */ = {
@@ -451,12 +451,12 @@
 				BD8D4E2227B58A1C007011A5 /* AUv3-Support-iOS */,
 			);
 			productName = "AUv3FilterExtension iOS";
-			productReference = C437FE632223686D008D6C09 /* __NAME__AU.appex */;
+			productReference = C437FE632223686D008D6C09 /* --NAME--AU.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		C437FE792223688D008D6C09 /* __NAME__ */ = {
+		C437FE792223688D008D6C09 /* --NAME-- */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C437FE872223688E008D6C09 /* Build configuration list for PBXNativeTarget "__NAME__" */;
+			buildConfigurationList = C437FE872223688E008D6C09 /* Build configuration list for PBXNativeTarget "--NAME--" */;
 			buildPhases = (
 				C437FE762223688D008D6C09 /* Sources */,
 				C437FE772223688D008D6C09 /* Frameworks */,
@@ -469,13 +469,13 @@
 			dependencies = (
 				C4660A622225F9A0007BE3B1 /* PBXTargetDependency */,
 			);
-			name = __NAME__;
+			name = --NAME--;
 			packageProductDependencies = (
 				BD8D4E1127B58900007011A5 /* AUv3-Support-macOS */,
 				BDEC95B727FAD2AE00FED7B3 /* Theme */,
 			);
 			productName = "AUv3Filter macOS";
-			productReference = C437FE7A2223688D008D6C09 /* __NAME__.app */;
+			productReference = C437FE7A2223688D008D6C09 /* --NAME--.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C437FE9F222368B7008D6C09 /* macOS Extension */ = {
@@ -502,7 +502,7 @@
 				BDC48D0827B5BB03005974D7 /* AUv3-Support-macOS */,
 			);
 			productName = "AUv3FilterExtension macOS";
-			productReference = C437FEA0222368B7008D6C09 /* __NAME__AU.appex */;
+			productReference = C437FEA0222368B7008D6C09 /* --NAME--AU.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -553,7 +553,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C437FE332223672C008D6C09 /* Build configuration list for PBXProject "__NAME__" */;
+			buildConfigurationList = C437FE332223672C008D6C09 /* Build configuration list for PBXProject "--NAME--" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -572,7 +572,7 @@
 			targets = (
 				C437FE39222367A6008D6C09 /* iOS App */,
 				C437FE622223686D008D6C09 /* iOS Extension */,
-				C437FE792223688D008D6C09 /* __NAME__ */,
+				C437FE792223688D008D6C09 /* --NAME-- */,
 				C437FE9F222368B7008D6C09 /* macOS Extension */,
 				BD1D257525D5AAB000523748 /* Snapshots */,
 			);
@@ -899,7 +899,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 20220215161008;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = UP6SS5ES7E;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -918,8 +918,8 @@
 				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__;
-				PRODUCT_NAME = __NAME__Host;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
+				PRODUCT_NAME = --NAME--Host;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -989,8 +989,8 @@
 				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__.appex;
-				PRODUCT_NAME = __NAME__AU;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
+				PRODUCT_NAME = --NAME--AU;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1064,8 +1064,8 @@
 				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__;
-				PRODUCT_NAME = __NAME__;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
+				PRODUCT_NAME = --NAME--;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1108,7 +1108,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = macOS/Extension/__NAME__AU.entitlements;
+				CODE_SIGN_ENTITLEMENTS = macOS/Extension/--NAME--AU.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1135,8 +1135,8 @@
 				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__.appex;
-				PRODUCT_NAME = __NAME__AU;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
+				PRODUCT_NAME = --NAME--AU;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1227,7 +1227,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 20220215161008;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = UP6SS5ES7E;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1253,8 +1253,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__;
-				PRODUCT_NAME = __NAME__Host;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
+				PRODUCT_NAME = --NAME--Host;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1330,8 +1330,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__.appex;
-				PRODUCT_NAME = __NAME__AU;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
+				PRODUCT_NAME = --NAME--AU;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1411,8 +1411,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__;
-				PRODUCT_NAME = __NAME__;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
+				PRODUCT_NAME = --NAME--;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1455,7 +1455,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = macOS/Extension/__NAME__AU.entitlements;
+				CODE_SIGN_ENTITLEMENTS = macOS/Extension/--NAME--AU.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1489,8 +1489,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.braysoftware.__NAME__.appex;
-				PRODUCT_NAME = __NAME__AU;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
+				PRODUCT_NAME = --NAME--AU;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1512,7 +1512,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		C437FE332223672C008D6C09 /* Build configuration list for PBXProject "__NAME__" */ = {
+		C437FE332223672C008D6C09 /* Build configuration list for PBXProject "--NAME--" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C437FE342223672C008D6C09 /* Debug */,
@@ -1539,7 +1539,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		C437FE872223688E008D6C09 /* Build configuration list for PBXNativeTarget "__NAME__" */ = {
+		C437FE872223688E008D6C09 /* Build configuration list for PBXNativeTarget "--NAME--" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C437FE882223688E008D6C09 /* Debug */,

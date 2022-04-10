@@ -18,6 +18,6 @@ Here are the elements in the `Common.xcconfig` and their reason for being:
 * AU_COMPONENT_MANUFACTURER (BRay) — the value for the `componentManufacturer` attribute in the
   `AudioComponentDescription` object. This is the unique identifier for the entity that is distributing the
   audio unit, and according to Apple it cannot be all lower-case.
-* AU_FACTORY_FUNCTION (__NAME__Framework.FilterViewController) — identifies the bundle path to the entity
+* AU_FACTORY_FUNCTION (--NAME--Framework.FilterViewController) — identifies the bundle path to the entity
   that derives from `AUAudioUnitFactory` protocol for creating new audio unit entities from an
   `AudioComponentDescription`

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C437FE792223688D008D6C09"
-               BuildableName = "__NAME__.app"
-               BlueprintName = "__NAME__"
-               ReferencedContainer = "container:__NAME__.xcodeproj">
+               BuildableName = "--NAME--.app"
+               BlueprintName = "--NAME--"
+               ReferencedContainer = "container:--NAME--.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,12 +31,42 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C437FE792223688D008D6C09"
-            BuildableName = "__NAME__.app"
-            BlueprintName = "__NAME__"
-            ReferencedContainer = "container:__NAME__.xcodeproj">
+            BuildableName = "--NAME--.app"
+            BlueprintName = "--NAME--"
+            ReferencedContainer = "container:--NAME--.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "KernelTests"
+               BuildableName = "KernelTests"
+               BlueprintName = "KernelTests"
+               ReferencedContainer = "container:Packages">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ParameterAddressTests"
+               BuildableName = "ParameterAddressTests"
+               BlueprintName = "ParameterAddressTests"
+               ReferencedContainer = "container:Packages">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ParametersTests"
+               BuildableName = "ParametersTests"
+               BlueprintName = "ParametersTests"
+               ReferencedContainer = "container:Packages">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -54,9 +84,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C437FE792223688D008D6C09"
-            BuildableName = "__NAME__.app"
-            BlueprintName = "__NAME__"
-            ReferencedContainer = "container:__NAME__.xcodeproj">
+            BuildableName = "--NAME--.app"
+            BlueprintName = "--NAME--"
+            ReferencedContainer = "container:--NAME--.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -78,9 +108,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C437FE792223688D008D6C09"
-            BuildableName = "__NAME__.app"
-            BlueprintName = "__NAME__"
-            ReferencedContainer = "container:__NAME__.xcodeproj">
+            BuildableName = "--NAME--.app"
+            BlueprintName = "--NAME--"
+            ReferencedContainer = "container:--NAME--.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

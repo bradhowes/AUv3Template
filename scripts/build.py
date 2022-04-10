@@ -16,7 +16,7 @@ import sys
 
 
 def substituteName(content, name, subtype):
-    return content.replace('__NAME__', name).replace('__SUBTYPE__', subtype)
+    return content.replace('--NAME--', name).replace('--SUBTYPE--', subtype)
 
 def makeDestPath(sourcePath, destDir, name, subtype):
     return substituteName(os.path.join(destDir, sourcePath), name, subtype)

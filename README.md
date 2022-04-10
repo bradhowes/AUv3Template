@@ -9,7 +9,7 @@
 
 This is full-featured AUv3 effect template for both iOS and macOS platforms. When configured, it will build an
 app for each platform and embed in the app bundle an app extension containing the AUv3 component. The apps are designed
-to load the AUv3 component the same was as a host such as GarageBand would. It uses the extension to demonstrate how it 
+to load the AUv3 component the same was as a host such as GarageBand would. It uses the extension to demonstrate how it
 works by playing a sample audio file and routing it through the effect and out to the device's speaker.
 
 Additional features and info:
@@ -50,15 +50,15 @@ You would run it like this:
 ```
 
 The name value should be self-evident in purpose: it will be the name of your iOS and macOS app, and the basis for the
-name of your app extensions. The _subtype_ is a unique 4-character identifier for your new effect. It should be unique 
+name of your app extensions. The _subtype_ is a unique 4-character identifier for your new effect. It should be unique
 at least for your manufacturer space (see [Configuration/Common.xcconfig](Configuration/Common.xcconfig)) so that it
 will not conflict with another app extension.
 
 With a project name called "MyEffect", the Python3 script will creates new folder called _MyEffect_ that is a sibling to
 your _AUv3Template_ folder. The script will populate the new folder with the files from this template.
 Afterwards you should have a working AUv3 effect embedded in demo apps for iOS and macOS. All files with
-`__NAME__` in them will be replaced with the first argument given to `build.py` (e.g. "MyEffect"), and all text
-files will be changed so that the strings `__NAME__` and `__SUBTYPE__` are replaced with their respective substitutions
+`--NAME--` in them will be replaced with the first argument given to `build.py` (e.g. "MyEffect"), and all text
+files will be changed so that the strings `--NAME--` and `--SUBTYPE--` are replaced with their respective substitutions
 that you provided.
 
 Note that To successfully compile you will need to edit
@@ -106,9 +106,9 @@ powerful enough to do the same. There are at present 5 separate libraries that a
 
 * [Kernel](Packages/Sources/Kernel) -- the C++ and Obj-C++ code that renders audio samples
 * [KernelBridge](Packages/Sources/KernelBridge) -- a bridge to the Obj-C++ kernel for Swift code
-* [ParameterAddress](Packages/Sources/ParameterAddress) -- definitions of the runtime parameters that control the 
+* [ParameterAddress](Packages/Sources/ParameterAddress) -- definitions of the runtime parameters that control the
 operation of the kernel
-* [Parameters](Packages/Sources/Parameters) -- collection of AUParameter entities based on the definitions from 
+* [Parameters](Packages/Sources/Parameters) -- collection of AUParameter entities based on the definitions from
 the `ParameterAddress` library. Also provides factory presets for the audio unit.
 
 There are additional details in the individual folders as well.
@@ -120,4 +120,3 @@ This code now depends on two Swift packages:
 - [AUv3Support](https://github.com/bradhowes/AUv3Support) -- common AUv3 component and host code. Much of the code that
 was originally in a shared framework in this repo is now in this separate package.
 - [Knob](https://github.com/bradhowes/knob) -- a simple library for macOS and iOS that generates rotary "knob" controls
-

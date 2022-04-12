@@ -29,10 +29,7 @@ public:
 
    @param name the name to use for logging purposes.
    */
-  Kernel(std::string name) : super(name)
-  {
-    lfo_.setWaveform(LFOWaveform::triangle);
-  }
+  Kernel(std::string name) noexcept : super(name) {}
 
   /**
    Update kernel and buffers to support the given format and channel count
@@ -42,7 +39,7 @@ public:
    @param maxDelayMilliseconds the max number of milliseconds of audio samples to keep in delay buffer
    */
   void setRenderingFormat(NSInteger busCount, AVAudioFormat* format, AUAudioFrameCount maxFramesToRender,
-                          double maxDelayMilliseconds) {
+                          double maxDelayMilliseconds) noexcept {
     super::setRenderingFormat(busCount, format, maxFramesToRender);
     initialize(format.channelCount, format.sampleRate, maxDelayMilliseconds);
   }
@@ -52,8 +49,9 @@ public:
 
    @param address the address of the parameter that changed
    @param value the new value for the parameter
+   @param rampDuration number of frames to ramp to the new value
    */
-  void setParameterValue(AUParameterAddress address, AUValue value);
+  void setParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount rampDuration) noexcept;
 
   /**
    Obtain from the kernel the current value of an AU parameter.
@@ -61,14 +59,16 @@ public:
    @param address the address of the parameter to return
    @returns current parameter value
    */
-  AUValue getParameterValue(AUParameterAddress address) const;
+  AUValue getParameterValue(AUParameterAddress address) const noexcept;
 
 private:
+  using DelayLine = DSPHeaders::DelayBuffer<AUValue>;
+  using LFO = DSPHeaders::LFO<AUValue>;
 
-  void initialize(int channelCount, double sampleRate, double maxDelayMilliseconds) {
+  void initialize(int channelCount, double sampleRate, double maxDelayMilliseconds) noexcept {
     samplesPerMillisecond_ = sampleRate / 1000.0;
     maxDelayMilliseconds_ = maxDelayMilliseconds;
-
+    lfo_.setWaveform(LFOWaveform::triangle);
     lfo_.setSampleRate(sampleRate);
 
     auto size = maxDelayMilliseconds * samplesPerMillisecond_ + 1;
@@ -79,19 +79,33 @@ private:
     }
   }
 
-  void setRampedParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration);
+  void setRate(AUValue rate, AUAudioFrameCount rampingDuration) noexcept {
+    rate_.set(rate, rampingDuration);
+    lfo_.setFrequency(rate, rampingDuration);
+  }
 
-  void setParameterFromEvent(const AUParameterEvent& event) {
-    if (event.rampDurationSampleFrames == 0) {
-      setParameterValue(event.parameterAddress, event.value);
-    } else {
-      setRampedParameterValue(event.parameterAddress, event.value, event.rampDurationSampleFrames);
-    }
+  void setParameterFromEvent(const AUParameterEvent& event) noexcept {
+    setParameterValue(event.parameterAddress, event.value, event.rampDurationSampleFrames);
   }
 
   void doRendering(NSInteger outputBusNumber, DSPHeaders::BusBuffers ins, DSPHeaders::BusBuffers outs,
-                   AUAudioFrameCount frameCount) {
+                   AUAudioFrameCount frameCount) noexcept {
 
+    auto rampCount = std::min(rampRemaining_, frameCount);
+    if (rampCount > 0) {
+      rampRemaining_ -= rampCount;
+      for (; rampCount > 0; --rampCount, --frameCount) {
+        renderFrames(1, ins, outs);
+      }
+    }
+
+    // Non-ramping case
+    if (frameCount > 0) {
+      renderFrames(frameCount, ins, outs);
+    }
+  }
+
+  void renderFrames(AUAudioFrameCount frameCount, DSPHeaders::BusBuffers ins, DSPHeaders::BusBuffers outs) noexcept {
     // Advance by frames in outer loop so we can ramp values when they change without having to save/restore state.
     for (int frame = 0; frame < frameCount; ++frame) {
 
@@ -124,8 +138,9 @@ private:
     }
   }
 
-  void doMIDIEvent(const AUMIDIEvent& midiEvent) {}
+  void doMIDIEvent(const AUMIDIEvent& midiEvent) noexcept {}
 
+  DSPHeaders::Parameters::RampingParameter<AUValue> rate_;
   DSPHeaders::Parameters::MillisecondsParameter<AUValue> depth_;
   DSPHeaders::Parameters::MillisecondsParameter<AUValue> delay_;
   DSPHeaders::Parameters::PercentageParameter<AUValue> feedback_;
@@ -137,6 +152,7 @@ private:
   double samplesPerMillisecond_;
   double maxDelayMilliseconds_;
 
-  std::vector<DSPHeaders::DelayBuffer<AUValue>> delayLines_;
-  DSPHeaders::LFO<AUValue> lfo_;
+  std::vector<DelayLine> delayLines_;
+  LFO lfo_;
+  AUAudioFrameCount rampRemaining_;
 };

@@ -13,7 +13,7 @@ private extension Array where Element == AUParameter {
 /**
  Definitions for the runtime parameters of the filter.
  */
-public final class AudioUnitParameters: NSObject, ParameterSource {
+public final class Parameters: NSObject, ParameterSource {
 
   private let log = Shared.logger("AudioUnitParameters")
 
@@ -21,7 +21,7 @@ public final class AudioUnitParameters: NSObject, ParameterSource {
   public let parameters: [AUParameter] = ParameterAddress.allCases.map { $0.parameterDefinition.parameter }
 
   /// Array of 2-tuple values that pair a factory preset name and its definition
-  public let factoryPresetValues: [(name: String, preset: FilterPreset)] = [
+  public let factoryPresetValues: [(name: String, preset: Configuration)] = [
     ("Flangie",
      .init(depth: 7, rate: 0.07, delay: 0.0, feedback: 50, dry: 50, wet: 50, negativeFeedback: 0, odd90: 0)),
     ("Sweeper",
@@ -73,7 +73,7 @@ public final class AudioUnitParameters: NSObject, ParameterSource {
   }
 }
 
-extension AudioUnitParameters {
+extension Parameters {
 
   private var missingParameter: AUParameter { fatalError() }
 
@@ -109,7 +109,7 @@ extension AudioUnitParameters {
    Accept new values for the filter settings. Uses the AUParameterTree framework for communicating the changes to the
    AudioUnit.
    */
-  public func setValues(_ preset: FilterPreset) {
+  public func setValues(_ preset: Configuration) {
     depth.value = preset.depth
     rate.value = preset.rate
     delay.value = preset.delay

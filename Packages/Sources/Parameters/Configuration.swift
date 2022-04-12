@@ -2,7 +2,7 @@
 
 import AudioUnit
 
-public struct FilterPreset {
+public struct Configuration {
   public let depth: AUValue
   public let rate: AUValue
   public let delay: AUValue

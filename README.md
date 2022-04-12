@@ -63,7 +63,7 @@ Afterwards you should have a working AUv3 effect embedded in demo apps for iOS a
 files will be changed so that the strings `--NAME--` and `--SUBTYPE--` are replaced with their respective substitutions
 that you provided.
 
-Note that To successfully compile you will need to edit
+Note that to successfully compile you will need to edit
 [Configuration/Common.xcconfig](Configuration/Common.xcconfig) and change `DEVELOPMENT_TEAM` to hold your own
 Apple developer account ID so you can sign the binaries. You should also adjust other settings as well to
 properly identify you and/or your company.

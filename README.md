@@ -28,7 +28,7 @@ Finally, it passes all
 [auval](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/AudioUnitProgrammingGuide/AudioUnitDevelopmentFundamentals/AudioUnitDevelopmentFundamentals.html)
 tests:
 
-```
+```bash
 % auval -v aufx flng BRay
 ```
 
@@ -47,7 +47,7 @@ shell and go into the _AUV3Template_ directory. The script takes two arguments:
 
 You would run it like this:
 
-```
+```bash
 % python3 scripts/build.py MyEffect subtype
 ```
 
@@ -79,7 +79,7 @@ collision with other AUv3 effects you may have on your system.
 The project will also be setup to generate screenshots using [fastlane](https://github.com/fastlane/fastlane).
 However, you will still need to *install* fastlane if you don't already have it. I used:
 
-```
+```bash
 % brew install fastlane
 ```
 
@@ -112,7 +112,7 @@ powerful enough to do the same. There are at present 5 separate libraries that a
 operation of the kernel
 * [Parameters](Packages/Sources/Parameters) -- collection of AUParameter entities based on the definitions from
 the `ParameterAddress` library. Also provides factory presets for the audio unit.
-* [Theme](Packages/Sources/Theme) -- lame attempt at sharing resources in a package. Unfortunately, right now it does not work well with 
+* [Theme](Packages/Sources/Theme) -- lame attempt at sharing resources in a package. Unfortunately, right now it does not work well with
 Xcode. For instance, Xcode will not see/use fonts nor color sets that are recorded in this package. I do not know of a way to work around
 this issue other than to copy the resources to a folter outside of the package hierarchy and flag them as belonging to both executables.
 

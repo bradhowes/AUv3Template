@@ -207,13 +207,20 @@ extension ViewController {
       return
     }
 
-    // When user changes something and a factory preset was active, clear it.
-    if let preset = audioUnit.currentPreset, preset.number >= 0 {
-      os_log(.debug, log: log, "controlChanged - clearing currentPreset")
-      audioUnit.currentPreset = nil
+    guard let editors = editorMap[address] else {
+      os_log(.debug, log: log, "controlChanged END - nil ediitors")
+      return
     }
 
-    (editorMap[address] ?? []).forEach { $0.controlChanged(source: control) }
+    if editors.contains(where: { $0.differs }) {
+      // When user changes something and a factory preset was active, clear it.
+      if let preset = audioUnit.currentPreset, preset.number >= 0 {
+        os_log(.debug, log: log, "controlChanged - clearing currentPreset")
+        audioUnit.currentPreset = nil
+      }
+    }
+
+    editors.forEach { $0.controlChanged(source: control) }
 
     os_log(.debug, log: log, "controlChanged END")
   }

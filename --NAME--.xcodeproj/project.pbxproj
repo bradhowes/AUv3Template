@@ -145,13 +145,13 @@
 		BDE2CE1724A3E887004AC8FA /* Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Dev.xcconfig; path = Configuration/Dev.xcconfig; sourceTree = "<group>"; };
 		BDE2CE1824A3E8DB004AC8FA /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Staging.xcconfig; path = Configuration/Staging.xcconfig; sourceTree = "<group>"; };
 		BDE2CE1924A3EBD1004AC8FA /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Common.xcconfig; path = Configuration/Common.xcconfig; sourceTree = "<group>"; };
-		BDEFCA2825F64BF10095858D /* --NAME--AU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = --NAME--AU.entitlements; sourceTree = "<group>"; };
+		BDEFCA2825F64BF10095858D /* --NAME--AU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "--NAME--AU.entitlements"; sourceTree = "<group>"; };
 		C4201A2822403120006E4333 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C433F56022404C7C00F1B750 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C437FE3A222367A6008D6C09 /* --NAME--Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = --NAME--Host.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FE632223686D008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = --NAME--AU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FE7A2223688D008D6C09 /* --NAME--.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = --NAME--.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FEA0222368B7008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = --NAME--AU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE3A222367A6008D6C09 /* --NAME--Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "--NAME--Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE632223686D008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "--NAME--AU.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE7A2223688D008D6C09 /* --NAME--.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "--NAME--.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FEA0222368B7008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "--NAME--AU.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44F544422260E2500484B67 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C44F544622260E2C00484B67 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
 		C4737B092231D918002CAD0B /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -469,7 +469,7 @@
 			dependencies = (
 				C4660A622225F9A0007BE3B1 /* PBXTargetDependency */,
 			);
-			name = --NAME--;
+			name = "--NAME--";
 			packageProductDependencies = (
 				BD8D4E1127B58900007011A5 /* AUv3-Support-macOS */,
 				BDEC95B727FAD2AE00FED7B3 /* Theme */,
@@ -919,7 +919,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
-				PRODUCT_NAME = --NAME--Host;
+				PRODUCT_NAME = "--NAME--Host";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -990,7 +990,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
-				PRODUCT_NAME = --NAME--AU;
+				PRODUCT_NAME = "--NAME--AU";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1065,7 +1065,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
-				PRODUCT_NAME = --NAME--;
+				PRODUCT_NAME = "--NAME--";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1108,7 +1108,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = macOS/Extension/--NAME--AU.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "macOS/Extension/--NAME--AU.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1136,7 +1136,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
-				PRODUCT_NAME = --NAME--AU;
+				PRODUCT_NAME = "--NAME--AU";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1254,7 +1254,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
-				PRODUCT_NAME = --NAME--Host;
+				PRODUCT_NAME = "--NAME--Host";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1331,7 +1331,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
-				PRODUCT_NAME = --NAME--AU;
+				PRODUCT_NAME = "--NAME--AU";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1412,7 +1412,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
-				PRODUCT_NAME = --NAME--;
+				PRODUCT_NAME = "--NAME--";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1455,7 +1455,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = macOS/Extension/--NAME--AU.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "macOS/Extension/--NAME--AU.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1490,7 +1490,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
-				PRODUCT_NAME = --NAME--AU;
+				PRODUCT_NAME = "--NAME--AU";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1564,16 +1564,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bradhowes/AUv3Support";
 			requirement = {
-				kind = exactVersion;
-				version = 2.0.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		BD8D4E1327B589D4007011A5 /* XCRemoteSwiftPackageReference "knob" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bradhowes/knob";
 			requirement = {
-				kind = exactVersion;
-				version = 1.6.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

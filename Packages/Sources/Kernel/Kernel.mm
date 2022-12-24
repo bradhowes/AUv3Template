@@ -4,14 +4,14 @@
 
 @import ParameterAddress;
 
-void Kernel::setParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept {
+void Kernel::setRampedParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept {
   os_log_with_type(log_, OS_LOG_TYPE_DEBUG, "setParameterValue - %llul %f %d", address, value, duration);
   assert(duration >= 0);
 
   if (duration > rampRemaining_) rampRemaining_ = duration;
   switch (address) {
     case ParameterAddressDepth: depth_.set(value, duration); break;
-    case ParameterAddressRate: setRate(value, duration); break;
+    case ParameterAddressRate: lfo_.setFrequency(value, duration);
     case ParameterAddressDelay: delay_.set(value, duration); break;
     case ParameterAddressFeedback: feedback_.set(value, duration); break;
     case ParameterAddressDry: dryMix_.set(value, duration); break;

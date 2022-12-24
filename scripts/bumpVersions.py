@@ -26,11 +26,10 @@ import argparse
 import os
 import re
 import sys
-from collections import namedtuple
 from datetime import datetime
 import subprocess
 import tempfile
-from typing import Callable, List, NamedTuple, NoReturn, Tuple, Type, TypeVar
+from typing import Callable, List, NamedTuple, NoReturn, Tuple
 
 
 Path = str
@@ -134,7 +133,7 @@ def getCurrentMarketingVersion(projectFiles: PathList) -> MarketingVersion:
         for v in versions:
             if v != version:
                 log(f'{file} has mismatched version: {v} - expected: {version}')
-    if version == None:
+    if version is None:
         errorAndExit('no MARKETING_VERSION found')
     return MarketingVersion.fromTuple(version)
 
@@ -184,7 +183,7 @@ def runPlistBuddy(path, setArg) -> None:
     status = subprocess.run(['/usr/libexec/PlistBuddy', path, '-c', setArg], stdout=subprocess.PIPE,
                             universal_newlines=True)
     if status.returncode != 0:
-        error('failed to process', args[0])
+        error('failed to process', path, setArg)
 
 
 def locateInfoFiles() -> PathList:
@@ -247,16 +246,17 @@ if __name__ == '__main__':
 
 import unittest
 
+
 class Tests(unittest.TestCase):
 
     def test_bumpMajor(self):
-        self.assertEqual(MarketingVersion(2,0,0), MarketingVersion(1,2,3).bumpMajor())
+        self.assertEqual(MarketingVersion(2, 0, 0), MarketingVersion(1, 2, 3).bumpMajor())
 
     def test_bumpMinor(self):
-        self.assertEqual(MarketingVersion(1,3,0), MarketingVersion(1,2,3).bumpMinor())
+        self.assertEqual(MarketingVersion(1, 3, 0), MarketingVersion(1, 2, 3).bumpMinor())
 
     def test_bumpPatch(self):
-        self.assertEqual(MarketingVersion(1,2,4), MarketingVersion(1,2,3).bumpPatch())
+        self.assertEqual(MarketingVersion(1, 2, 4), MarketingVersion(1, 2, 3).bumpPatch())
 
     def test_getNewProjectVersion(self):
         value = getNewProjectVersion()
@@ -277,7 +277,7 @@ class Tests(unittest.TestCase):
         self.assertTrue(len(locateInfoFiles()) > 0)
 
     def test_MarketingVersionFromString(self):
-        self.assertEqual(MarketingVersion(1,2,4), MarketingVersion.fromString('1.2.4'))
+        self.assertEqual(MarketingVersion(1, 2, 4), MarketingVersion.fromString('1.2.4'))
 
     def test_marketingVersionToString(self):
         self.assertEqual('1.2.4', str(MarketingVersion(1, 2, 4)))
@@ -337,8 +337,8 @@ class Tests(unittest.TestCase):
 </plist>
 '''
         fd, path = tempfile.mkstemp(text=True)
-        marketingVersion = MarketingVersion(1,2,3)
-        with os.fdopen(fd) as temp:
+        marketingVersion = MarketingVersion(1, 2, 3)
+        with os.fdopen(fd) as _:
             with open(path, 'w') as fd:
                 fd.write(contents)
             updateInfoFiles([path], marketingVersion)

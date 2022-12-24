@@ -29,7 +29,11 @@ public:
 
    @param name the name to use for logging purposes.
    */
-  Kernel(std::string name) noexcept : super(name) {}
+  Kernel(std::string name) noexcept : super(), name_{name}, log_{os_log_create(name_.c_str(), "Kernel")}
+  {
+    os_log_debug(log_, "constructor");
+    lfo_.setWaveform(LFOWaveform::triangle);
+  }
 
   /**
    Update kernel and buffers to support the given format and channel count
@@ -49,9 +53,19 @@ public:
 
    @param address the address of the parameter that changed
    @param value the new value for the parameter
-   @param rampDuration number of frames to ramp to the new value
    */
-  void setParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount rampDuration) noexcept;
+  void setParameterValue(AUParameterAddress address, AUValue value) noexcept {
+    setRampedParameterValue(address, value, AUAudioFrameCount(50));
+  }
+
+  /**
+   Process an AU parameter value change by updating the kernel.
+
+   @param address the address of the parameter that changed
+   @param value the new value for the parameter
+   @param duration the number of samples to adjust over
+   */
+  void setRampedParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept;
 
   /**
    Obtain from the kernel the current value of an AU parameter.
@@ -68,24 +82,29 @@ private:
   void initialize(int channelCount, double sampleRate, double maxDelayMilliseconds) noexcept {
     samplesPerMillisecond_ = sampleRate / 1000.0;
     maxDelayMilliseconds_ = maxDelayMilliseconds;
-    lfo_.setWaveform(LFOWaveform::triangle);
+
     lfo_.setSampleRate(sampleRate);
 
     auto size = maxDelayMilliseconds * samplesPerMillisecond_ + 1;
-    os_log_with_type(log_, OS_LOG_TYPE_INFO, "delayLine size: %f", size);
     delayLines_.clear();
     for (auto index = 0; index < channelCount; ++index) {
       delayLines_.emplace_back(size);
     }
   }
 
-  void setRate(AUValue rate, AUAudioFrameCount rampingDuration) noexcept {
-    rate_.set(rate, rampingDuration);
-    lfo_.setFrequency(rate, rampingDuration);
+  void setParameterFromEvent(const AUParameterEvent& event) noexcept {
+    setRampedParameterValue(event.parameterAddress, event.value, event.rampDurationSampleFrames);
   }
 
-  void setParameterFromEvent(const AUParameterEvent& event) noexcept {
-    setParameterValue(event.parameterAddress, event.value, event.rampDurationSampleFrames);
+  void doRenderingStateChanged(bool rendering) {
+    if (!rendering) {
+      depth_.stopRamping();
+      delay_.stopRamping();
+      feedback_.stopRamping();
+      dryMix_.stopRamping();
+      wetMix_.stopRamping();
+      lfo_.stopRamping();
+    }
   }
 
   void doRendering(NSInteger outputBusNumber, DSPHeaders::BusBuffers ins, DSPHeaders::BusBuffers outs,
@@ -140,14 +159,13 @@ private:
 
   void doMIDIEvent(const AUMIDIEvent& midiEvent) noexcept {}
 
-  DSPHeaders::Parameters::RampingParameter<AUValue> rate_;
-  DSPHeaders::Parameters::MillisecondsParameter<AUValue> depth_;
-  DSPHeaders::Parameters::MillisecondsParameter<AUValue> delay_;
-  DSPHeaders::Parameters::PercentageParameter<AUValue> feedback_;
-  DSPHeaders::Parameters::PercentageParameter<AUValue> dryMix_;
-  DSPHeaders::Parameters::PercentageParameter<AUValue> wetMix_;
-  DSPHeaders::Parameters::BoolParameter negativeFeedback_;
-  DSPHeaders::Parameters::BoolParameter odd90_;
+  DSPHeaders::Parameters::MillisecondsParameter<> depth_;
+  DSPHeaders::Parameters::MillisecondsParameter<> delay_;
+  DSPHeaders::Parameters::PercentageParameter<> feedback_;
+  DSPHeaders::Parameters::PercentageParameter<> dryMix_;
+  DSPHeaders::Parameters::PercentageParameter<> wetMix_;
+  DSPHeaders::Parameters::BoolParameter<> negativeFeedback_;
+  DSPHeaders::Parameters::BoolParameter<> odd90_;
 
   double samplesPerMillisecond_;
   double maxDelayMilliseconds_;
@@ -155,4 +173,6 @@ private:
   std::vector<DelayLine> delayLines_;
   LFO lfo_;
   AUAudioFrameCount rampRemaining_;
+  std::string name_;
+  os_log_t log_;
 };

@@ -33,14 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Stop processing, releasing any resources used to support rendering.
  */
-- (void)renderingStopped;
+- (void)deallocateRenderResources;
 
 /**
  Obtain a block to use for rendering with the kernel.
 
  @returns AUInternalRenderBlock instance
  */
-- (AUInternalRenderBlock)internalRenderBlock;
+- (AUInternalRenderBlock)internalRenderBlock:(nullable AUHostTransportStateBlock)tsb;
 
 /**
  Set the bypass state.

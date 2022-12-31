@@ -21,7 +21,6 @@ extension Knob: AUParameterValueProvider, RangedControl {}
 
   private let parameters = Parameters()
   private var viewConfig: AUAudioUnitViewConfiguration!
-  private var keyValueObserverToken: NSKeyValueObservation?
 
   @IBOutlet private weak var controlsView: NSView!
 
@@ -111,6 +110,14 @@ extension ViewController: AUAudioUnitFactory {
   }
 }
 
+extension ViewController: AUParameterEditorDelegate {
+  public func parameterEditorEditingDone(changed: Bool) {
+    if changed {
+      audioUnit?.clearCurrentPresetIfFactoryPreset()
+    }
+  }
+}
+
 // MARK: - Private
 
 private extension ViewController {
@@ -132,10 +139,10 @@ private extension ViewController {
       knob.indicatorLineWidth = progressWidth
 
       knob.target = self
-      knob.action = #selector(handleKnobValueChanged(_:))
+      knob.action = #selector(handleKnobChanged(_:))
 
       let editor = FloatParameterEditor(parameter: parameters[parameterAddress],
-                                        formatter: parameters.valueFormatter(parameterAddress),
+                                        formatting: parameters[parameterAddress],
                                         rangedControl: knob, label: label)
       editors.append(editor)
       editorMap[parameterAddress] = editor
@@ -143,27 +150,25 @@ private extension ViewController {
 
     for (parameterAddress, control) in switches {
       control.setTint(knobColor)
+      control.target = self
+      control.action = #selector(handleSwitchChanged(_:))
+
       let editor = BooleanParameterEditor(parameter: parameters[parameterAddress], booleanControl: control)
       editors.append(editor)
       editorMap[parameterAddress] = editor
     }
 
-    keyValueObserverToken = Self.updateEditorsOnPresetChange(audioUnit!, editors: editors)
-
     os_log(.info, log: log, "createEditors END")
   }
 
-  @IBAction func handleKnobValueChanged(_ control: Knob) {
+  @IBAction func handleKnobChanged(_ control: Knob) {
     guard let address = control.parameterAddress else { fatalError() }
     handleControlChanged(control, address: address)
   }
 
-  @IBAction func handleOdd90Changed(_ control: NSSwitch) {
-    handleControlChanged(control, address: .odd90)
-  }
-
-  @IBAction func handleNegativeFeedbackChanged(_ control: NSSwitch) {
-    handleControlChanged(control, address: .negativeFeedback)
+  @IBAction func handleSwitchChanged(_ control: NSSwitch) {
+    guard let address = control.parameterAddress else { fatalError() }
+    handleControlChanged(control, address: address)
   }
 
   func handleControlChanged(_ control: AUParameterValueProvider, address: ParameterAddress) {

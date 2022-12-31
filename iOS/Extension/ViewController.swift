@@ -21,7 +21,6 @@ extension Knob: AUParameterValueProvider, RangedControl {}
 
   private let parameters = Parameters()
   private var viewConfig: AUAudioUnitViewConfiguration!
-  private var keyValueObservationToken: NSKeyValueObservation?
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var controlsView: View!
@@ -137,7 +136,13 @@ extension ViewController: AUAudioUnitFactory {
 
 // MARK: - Private
 
-extension ViewController {
+extension ViewController: AUParameterEditorDelegate {
+
+  public func parameterEditorEditingDone(changed: Bool) {
+    if changed {
+      audioUnit?.clearCurrentPresetIfFactoryPreset()
+    }
+  }
 
   private func createEditors() {
     os_log(.info, log: log, "createEditors BEGIN")
@@ -162,8 +167,9 @@ extension ViewController {
         knob.progressLineWidth = progressWidth
         knob.indicatorLineWidth = progressWidth
 
+        knob.addTarget(self, action: #selector(handleKnobChanged(_:)), for: .valueChanged)
         let editor = FloatParameterEditor(parameter: parameters[parameterAddress],
-                                          formatter: parameters.valueFormatter(parameterAddress),
+                                          formatting: parameters[parameterAddress],
                                           rangedControl: knob, label: label)
         self.editors.append(editor)
         editors.append(editor)
@@ -175,28 +181,24 @@ extension ViewController {
     os_log(.info, log: log, "createEditors - creating bool parameter editors")
     for (parameterAddress, control) in switches {
       os_log(.info, log: log, "createEditors - before BooleanParameterEditor")
+      control.addTarget(self, action: #selector(handleSwitchChanged(_:)), for: .valueChanged)
 
       let editor = BooleanParameterEditor(parameter: parameters[parameterAddress], booleanControl: control)
       editors.append(editor)
       editorMap[parameterAddress] = [editor]
     }
 
-    keyValueObservationToken = Self.updateEditorsOnPresetChange(audioUnit!, editors: editors)
-
     os_log(.info, log: log, "createEditors END")
   }
 
-  @IBAction public func handleKnobValueChange(_ control: Knob) {
+  @objc public func handleKnobChanged(_ control: Knob) {
     guard let address = control.parameterAddress else { fatalError() }
     handleControlChanged(control, address: address)
   }
 
-  @IBAction public func handleOdd90Change(_ control: Switch) {
-    handleControlChanged(control, address: .odd90)
-  }
-
-  @IBAction public func handleNegativeFeedbackChange(_ control: Switch) {
-    handleControlChanged(control, address: .negativeFeedback)
+  @objc public func handleSwitchChanged(_ control: Switch) {
+    guard let address = control.parameterAddress else { fatalError() }
+    handleControlChanged(control, address: address)
   }
 
   private func handleControlChanged(_ control: AUParameterValueProvider, address: ParameterAddress) {
@@ -213,11 +215,7 @@ extension ViewController {
     }
 
     if editors.contains(where: { $0.differs }) {
-      // When user changes something and a factory preset was active, clear it.
-      if let preset = audioUnit.currentPreset, preset.number >= 0 {
-        os_log(.debug, log: log, "controlChanged - clearing currentPreset")
-        audioUnit.currentPreset = nil
-      }
+      audioUnit.clearCurrentPresetIfFactoryPreset()
     }
 
     editors.forEach { $0.controlChanged(source: control) }

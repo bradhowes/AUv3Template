@@ -104,8 +104,9 @@ def locateFiles(cond: PathPredicate) -> PathList:
     '''
     found = []
     for dirname, dirnames, filenames in os.walk('.'):
-        if 'DerivedData' in dirnames:
-            dirnames.remove('DerivedData')
+        for exclude in ['DerivedData', '.build']:
+            if exclude in dirnames:
+                dirnames.remove(exclude)
         for path in filenames:
             if cond(path):
                 found.append(os.path.join(dirname, path))
@@ -167,14 +168,16 @@ def locateUIFiles() -> PathList:
 
 
 def updateUIContents(contents: str, marketingVersion: MarketingVersion) -> str:
-    return re.sub(r'(userLabel="APP_VERSION".*(text|title)=)"[^\"]*"',
-                  f'\\1"v{marketingVersion}"', contents)
+    contents1 = re.sub(r'(text|title)="[^\"]*"(.*userLabel="APP_VERSION")', f'\\1="v{marketingVersion}"\\2', contents)
+    contents2 = re.sub(r'(userLabel="APP_VERSION".*(text|title))="[^\"]*"', f'\\1="v{marketingVersion}"', contents1)
+    return contents2
 
 
 def updateUIFiles(uiFiles: PathList, marketingVersion: MarketingVersion):
     for path in uiFiles:
         log(f"processing UI file '{path}'")
         contents = getAndBackupFile(path)
+        contents = updateUIContents(contents, marketingVersion)
         saveFile(path, contents)
 
 
@@ -302,6 +305,12 @@ class Tests(unittest.TestCase):
                          updateUIContents(contents, marketingVersion))
         contents = 'foo userLabel="APP_VERSION" title="blah" blah'
         self.assertEqual(f'foo userLabel="APP_VERSION" title="v{marketingVersion}" blah',
+                         updateUIContents(contents, marketingVersion))
+        contents = 'foo text="BLAH" between userLabel="APP_VERSION" silly'
+        self.assertEqual(f'foo text="v{marketingVersion}" between userLabel="APP_VERSION" silly',
+                         updateUIContents(contents, marketingVersion))
+        contents = '<textFieldCell key="cell" lineBreakMode="clipping" title="v3.0.0" id="p30-Bk-a8R" userLabel="APP_VERSION">'
+        self.assertEqual(f'<textFieldCell key="cell" lineBreakMode="clipping" title="v{marketingVersion}" id="p30-Bk-a8R" userLabel="APP_VERSION">',
                          updateUIContents(contents, marketingVersion))
 
     def test_UpdateInfoFile(self):

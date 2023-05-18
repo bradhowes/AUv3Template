@@ -161,12 +161,6 @@ extension ViewController: AUParameterEditorDelegate {
         knob.progressColor = knobColor
         knob.indicatorColor = knobColor
 
-        let trackWidth: CGFloat = parameterAddress == .dry || parameterAddress == .wet ? 8 : 10
-        let progressWidth = trackWidth - 2.0
-        knob.trackLineWidth = trackWidth
-        knob.progressLineWidth = progressWidth
-        knob.indicatorLineWidth = progressWidth
-
         knob.addTarget(self, action: #selector(handleKnobChanged(_:)), for: .valueChanged)
         let editor = FloatParameterEditor(parameter: parameters[parameterAddress],
                                           formatting: parameters[parameterAddress],

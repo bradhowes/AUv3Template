@@ -92,7 +92,7 @@ private:
     }
   }
 
-  void setParameterFromEvent(const AUParameterEvent& event) noexcept {
+  void doParameterEvent(const AUParameterEvent& event) noexcept {
     setRampedParameterValue(event.parameterAddress, event.value, event.rampDurationSampleFrames);
   }
 

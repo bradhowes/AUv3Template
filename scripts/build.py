@@ -74,4 +74,10 @@ def build(name, subtype):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) != 3:
+        print("usage: python build.py NAME SUBTYPE")
+        print("where: ")
+        print("  NAME is the name of the new AUv3 component")
+        print("  SUBTYPE is the unique AUv3 4-character subtype for the new component")
+        sys.exit(1)
     build(sys.argv[1], sys.argv[2])

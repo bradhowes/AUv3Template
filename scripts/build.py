@@ -56,12 +56,14 @@ def build(name, subtype):
         print('** destination', destDir, 'exists')
         sys.exit(1)
     for dirname, dirnames, filenames in os.walk('.'):
-        for ignore in ['.~', '.git', 'DerivedData', 'xcuserdata']:
-            if ignore in dirnames:
-                dirnames.remove(ignore)
+
+        for each in list(filter(lambda a: a[0] == '.' or a == 'xuserdata', dirnames)):
+            dirnames.remove(each)
+
         for filename in filenames:
             if filename == '.DS_Store':
                 continue
+
             sourcePath = os.path.join(dirname, filename)[2:]
             print('--', sourcePath)
             buildFile(sourcePath,

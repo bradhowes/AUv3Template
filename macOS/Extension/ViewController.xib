@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22155" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22155"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,7 +31,7 @@
             <rect key="frame" x="0.0" y="0.0" width="587" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wUu-Yz-l9v" userLabel="v1.0.0">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wUu-Yz-l9v" userLabel="v1.0.0">
                     <rect key="frame" x="500" y="59" width="40" height="17"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="v1.1.0" id="p30-Bk-a8R" userLabel="APP_VERSION">
                         <font key="font" metaFont="system" size="14"/>
@@ -39,7 +39,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2pJ-Hs-NbD" userLabel="Flange">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2pJ-Hs-NbD" userLabel="Flange">
                     <rect key="frame" x="48" y="59" width="492" height="183"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Flange" id="Jce-ED-VFc" userLabel="Flange">
                         <font key="font" size="160" name="Desdemona"/>
@@ -66,7 +66,7 @@
                                                         <constraint firstAttribute="height" constant="120" id="vAd-uR-9t8"/>
                                                     </constraints>
                                                 </customView>
-                                                <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNZ-OF-PRt" customClass="FocusAwareTextField" customModule="AUv3Support">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNZ-OF-PRt" customClass="FocusAwareTextField" customModule="AUv3Support">
                                                     <rect key="frame" x="-2" y="0.0" width="124" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="wMm-uE-pHU"/>
@@ -97,7 +97,7 @@
                                                         <constraint firstAttribute="width" constant="120" id="nK3-Ah-NbH"/>
                                                     </constraints>
                                                 </customView>
-                                                <textField verticalHuggingPriority="750" tag="2" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOT-T3-0Np" customClass="FocusAwareTextField" customModule="AUv3Support">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" tag="2" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOT-T3-0Np" customClass="FocusAwareTextField" customModule="AUv3Support">
                                                     <rect key="frame" x="-2" y="0.0" width="124" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="eeP-Bv-mve"/>
@@ -128,7 +128,7 @@
                                                         <constraint firstAttribute="width" constant="120" id="ukV-Dz-hMY"/>
                                                     </constraints>
                                                 </customView>
-                                                <textField verticalHuggingPriority="750" tag="3" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVU-LP-fEC" customClass="FocusAwareTextField" customModule="AUv3Support">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" tag="3" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVU-LP-fEC" customClass="FocusAwareTextField" customModule="AUv3Support">
                                                     <rect key="frame" x="-2" y="0.0" width="124" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="FRm-Hh-rJg"/>
@@ -160,7 +160,7 @@
                                                         <constraint firstAttribute="height" constant="120" id="V2V-kw-xaN"/>
                                                     </constraints>
                                                 </customView>
-                                                <textField verticalHuggingPriority="750" tag="1" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuF-pJ-Rk3" customClass="FocusAwareTextField" customModule="AUv3Support">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" tag="1" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuF-pJ-Rk3" customClass="FocusAwareTextField" customModule="AUv3Support">
                                                     <rect key="frame" x="-2" y="0.0" width="124" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="A7M-iM-efX"/>
@@ -204,7 +204,7 @@
                                                 <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="l5S-ZP-tBO">
                                                     <rect key="frame" x="10" y="21" width="42" height="25"/>
                                                 </switch>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eOb-pQ-h5V">
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eOb-pQ-h5V">
                                                     <rect key="frame" x="-2" y="0.0" width="67" height="19"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Odd 90°" id="BmG-du-2Fi">
                                                         <font key="font" metaFont="system" size="15"/>
@@ -232,7 +232,7 @@
                                                         <constraint firstAttribute="width" constant="80" id="cgS-KS-MTB"/>
                                                     </constraints>
                                                 </customView>
-                                                <textField verticalHuggingPriority="750" tag="4" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3X-9K-MVH" customClass="FocusAwareTextField" customModule="AUv3Support">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" tag="4" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3X-9K-MVH" customClass="FocusAwareTextField" customModule="AUv3Support">
                                                     <rect key="frame" x="-2" y="0.0" width="84" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="Ob0-G4-Fbi"/>
@@ -263,7 +263,7 @@
                                                         <constraint firstAttribute="width" constant="80" id="czU-wj-DBM"/>
                                                     </constraints>
                                                 </customView>
-                                                <textField verticalHuggingPriority="750" tag="5" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgn-eW-ymD" customClass="FocusAwareTextField" customModule="AUv3Support">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" tag="5" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgn-eW-ymD" customClass="FocusAwareTextField" customModule="AUv3Support">
                                                     <rect key="frame" x="-2" y="0.0" width="84" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="7Ss-uv-eri"/>
@@ -293,7 +293,7 @@
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nu1-EE-DQZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="72" height="38"/>
                                                     <subviews>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BGi-KE-Kig">
+                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BGi-KE-Kig">
                                                             <rect key="frame" x="-2" y="19" width="69" height="19"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Negative" id="9UE-Mc-d2c">
                                                                 <font key="font" metaFont="system" size="15"/>
@@ -301,7 +301,7 @@
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="37o-LD-mdH" userLabel="Feedback">
+                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="37o-LD-mdH" userLabel="Feedback">
                                                             <rect key="frame" x="-2" y="0.0" width="76" height="19"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Feedback" id="96p-Oc-6jO">
                                                                 <font key="font" metaFont="system" size="15"/>

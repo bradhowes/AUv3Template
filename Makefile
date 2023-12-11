@@ -15,7 +15,8 @@ build-macOS:
 	xcodebuild build \
 		-scheme 'macOS App' \
 		-derivedDataPath "$(PWD)/.DerivedData-macOS" \
-		-destination platform="$(PLATFORM_MACOS)"
+		-destination platform="$(PLATFORM_MACOS)" \
+	    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
 build: build-iOS build-macOS
 

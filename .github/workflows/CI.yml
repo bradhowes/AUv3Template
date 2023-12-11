@@ -8,10 +8,11 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
     - uses: actions/checkout@v3
-    - name: Run macOS build
-      run: xcodebuild clean build -scheme 'macOS App' -destination 'platform=macOS,arch=x86_64' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO CODE_SIGN_ENTITLEMENTS=""
-    - name: Run iOS build
-      run: xcodebuild clean build -scheme 'iOS App' -destination 'name=iPhone 13' -showBuildTimingSummary -allowProvisioningUpdates
+    - name: Build macOS and iOS
+      run: make

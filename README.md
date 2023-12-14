@@ -103,7 +103,7 @@ Each OS ([macOS](macOS) and [iOS](iOS)) has the same code layout:
   definitions.
 
 All of the common code shared between the iOS and macOS apps and app extensions resides in the [Packages](Packages)
-folder as Swift packages. Originally, this common code was built as a shared framework, but now Swift packages is
+folder as Swift packages. Originally, this common code was built as a shared framework, but now Swift packages are
 powerful enough to do the same. There are at present 5 separate libraries that are built in package form:
 
 * [Kernel](Packages/Sources/Kernel) -- the C++ and Obj-C++ code that renders audio samples

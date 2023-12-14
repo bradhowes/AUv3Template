@@ -9,7 +9,7 @@
 
 This is full-featured AUv3 effect template for both iOS and macOS platforms. When configured, it will build an
 app for each platform and embed in the app bundle an app extension containing the AUv3 component. The apps are designed
-to load the AUv3 component the same was as a host such as GarageBand would. It uses the extension to demonstrate how it
+to load the AUv3 component the same way as a host such as GarageBand would. It uses the extension to demonstrate how it
 works by playing a sample audio file and routing it through the effect and out to the device's speaker. The host
 app also supports user and factory presets. User presets can be created, updated, renamed and deleted. Factory
 presets can only be activated.

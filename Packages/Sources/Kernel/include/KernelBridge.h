@@ -54,9 +54,9 @@ NS_ASSUME_NONNULL_BEGIN
 // These are the functions that satisfy the AUParameterHandler protocol
 @interface KernelBridge (AUParameterHandler)
 
-- (void)set:(AUParameter *)parameter value:(AUValue)value;
+- (AUImplementorValueObserver)parameterValueObserverBlock;
 
-- (AUValue)get:(AUParameter *)parameter;
+- (AUImplementorValueProvider)parameterValueProviderBlock;
 
 @end
 

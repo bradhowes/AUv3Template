@@ -12,6 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface KernelBridge : NSObject
 
+/**
+ Create a new instance.
+
+ @param appExtensionName the name of the app extension where this audio unit resides. Only used for logging.
+ @param maxDelayMilliseconds the maximum delay value that is supported in the effect. This is used to
+ determine how large of a delay buffer to allocate at start.
+ */
 - (nonnull id)init:(NSString*)appExtensionName maxDelayMilliseconds:(AUValue)maxDelayMilliseconds;
 
 @end
@@ -25,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param busCount number of busses that the kernel must support
  @param inputFormat the current format of the input bus
  @param maxFramesToRender the max frames to expect in a render request
- @param maxDelayMilliseconds the max delay time in milliseconds
  */
 - (void)setRenderingFormat:(NSInteger)busCount format:(AVAudioFormat*)inputFormat
          maxFramesToRender:(AUAudioFrameCount)maxFramesToRender;

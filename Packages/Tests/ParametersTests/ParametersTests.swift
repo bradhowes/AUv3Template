@@ -4,12 +4,6 @@ import Kernel
 import Parameters
 import ParameterAddress
 
-class MockParameterHandler: AUParameterHandler {
-  var mapping = [AUParameterAddress: AUValue]()
-  func set(_ parameter: AUParameter, value: AUValue) { mapping[parameter.address] = value }
-  func get(_ parameter: AUParameter) -> AUValue { mapping[parameter.address] ?? 0.0 }
-}
-
 final class ParameterTests: XCTestCase {
 
   func testParameterAddress() throws {

@@ -4,19 +4,20 @@
 
 @import ParameterAddress;
 
-void Kernel::setRampedParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept {
+AUAudioFrameCount Kernel::setRampedParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept {
   os_log_with_type(log_, OS_LOG_TYPE_DEBUG, "setParameterValue - %llul %f %d", address, value, duration);
   // Setting ramped values are safe -- they come from the event loop and are interleaved with rendering
   switch (address) {
-    case ParameterAddressDepth: depth_.set(value, duration); break;
-    case ParameterAddressRate: lfo_.setFrequency(value, duration); break;
-    case ParameterAddressDelay: delay_.set(value, duration); break;
-    case ParameterAddressFeedback: feedback_.set(value, duration); break;
-    case ParameterAddressDry: dryMix_.set(value, duration); break;
-    case ParameterAddressWet: wetMix_.set(value, duration); break;
-    case ParameterAddressNegativeFeedback: negativeFeedback_.set(value, duration); break;
-    case ParameterAddressOdd90: odd90_.set(value, duration); break;
+    case ParameterAddressDepth: depth_.set(value, duration); return duration;
+    case ParameterAddressRate: lfo_.setFrequency(value, duration); return duration;
+    case ParameterAddressDelay: delay_.set(value, duration); return duration;
+    case ParameterAddressFeedback: feedback_.set(value, duration); return duration;
+    case ParameterAddressDry: dryMix_.set(value, duration); return duration;
+    case ParameterAddressWet: wetMix_.set(value, duration); return duration;
+    case ParameterAddressNegativeFeedback: negativeFeedback_.set(value, duration); return duration;
+    case ParameterAddressOdd90: odd90_.set(value, duration); return 0;
   }
+  return 0;
 }
 
 void Kernel::setParameterValuePending(AUParameterAddress address, AUValue value) noexcept {

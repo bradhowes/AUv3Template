@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @returns AUInternalRenderBlock instance
  */
-- (AUInternalRenderBlock)internalRenderBlock:(nullable AUHostTransportStateBlock)tsb;
+- (AUInternalRenderBlock)internalRenderBlock;
 
 /**
  Set the bypass state.

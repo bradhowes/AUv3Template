@@ -25,18 +25,11 @@
 
 - (void)deallocateRenderResources { kernel_->deallocateRenderResources(); }
 
-- (AUInternalRenderBlock)internalRenderBlock:(nullable AUHostTransportStateBlock)tsb {
+- (AUInternalRenderBlock)internalRenderBlock {
   __block auto dsp = kernel_;
-  __block auto transportStateBlock = tsb;
   return ^AUAudioUnitStatus(AudioUnitRenderActionFlags* flags, const AudioTimeStamp* timestamp,
                             AUAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList* output,
                             const AURenderEvent* realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
-    if (transportStateBlock) {
-      AUHostTransportStateFlags flags;
-      transportStateBlock(&flags, NULL, NULL, NULL);
-      bool rendering = flags & AUHostTransportStateMoving;
-      dsp->setRendering(rendering);
-    }
     return dsp->processAndRender(timestamp, frameCount, outputBusNumber, output, realtimeEventListHead, pullInputBlock);
   };
 }

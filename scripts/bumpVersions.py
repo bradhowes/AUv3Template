@@ -119,16 +119,24 @@ def locateProjectFiles() -> PathList:
     return locateFiles(cond)
 
 
+def locateCommonConfigs() -> PathList:
+    def cond(path):
+        return path == 'Common.xcconfig'
+    return locateFiles(cond)
+
+
 def getCurrentMarketingVersion(projectFiles: PathList) -> MarketingVersion:
     '''Visit all project files, compare MARKETING_VERSION values to make sure they all match, and return one.
     '''
     pattern = re.compile(r'MARKETING_VERSION = ([0-9]+)\.([0-9]+)\.([0-9]+)')
     version = None
     for file in projectFiles:
+        print(file)
         with open(file, 'r') as fd:
             contents = fd.read()
         versions = pattern.findall(contents)
-        if version is None:
+        print(versions)
+        if version is None and versions:
             version = versions[0]
             versions = versions[1:]
         for v in versions:
@@ -140,24 +148,20 @@ def getCurrentMarketingVersion(projectFiles: PathList) -> MarketingVersion:
 
 
 def getNewProjectVersion() -> ProjectVersion:
-    return datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    return datetime.now().strftime('%Y%m%d%H%M%S')
 
 
-def updateProjectContents(contents: str, marketingVersion: MarketingVersion, projectVersion: ProjectVersion) -> str:
-    contents = re.sub(r'(MARKETING_VERSION =) ([0-9]+\.[0-9]+\.[0-9]+);',
-                      f'\\1 {marketingVersion};',
-                      contents)
-    return re.sub(r'(CURRENT_PROJECT_VERSION =) ([0-9]*);',
-                  f'\\1 {projectVersion};',
-                  contents)
+def updateConfigContents(contents: str, marketingVersion: MarketingVersion, projectVersion: ProjectVersion) -> str:
+    contents = re.sub(r'(MARKETING_VERSION =) ([0-9]+\.[0-9]+\.[0-9]+)', f'\\1 {marketingVersion}', contents)
+    return re.sub(r'(CURRENT_PROJECT_VERSION =) (.*)', f'\\1 {projectVersion}', contents)
 
 
-def updateProjectFiles(projectFiles: PathList, marketingVersion: MarketingVersion,
+def updateCommonConfigs(configFiles: PathList, marketingVersion: MarketingVersion,
                        projectVersion: ProjectVersion) -> None:
-    for path in projectFiles:
-        log(f"processing project file '{path}'")
+    for path in configFiles:
+        log(f"processing config file '{path}'")
         contents = getAndBackupFile(path)
-        contents = updateProjectContents(contents, marketingVersion, projectVersion)
+        contents = updateConfigContents(contents, marketingVersion, projectVersion)
         saveFile(path, contents)
 
 
@@ -199,8 +203,9 @@ def updateInfoFiles(infoFiles: PathList, marketingVersion: MarketingVersion) -> 
     componentVersion = marketingVersion.asInt()
     setArg = f'Set :NSExtension:NSExtensionAttributes:AudioComponents:0:version {componentVersion}'
     for path in infoFiles:
-        if open(path).read().find('<key>AudioComponents</key>') == -1:
-            continue
+        with open(path) as fd:
+            if fd.read().find('<key>AudioComponents</key>') == -1:
+                continue
         runPlistBuddy(path, setArg)
 
 
@@ -218,8 +223,10 @@ def main(args):
     if parsed.dir:
         os.chdir(parsed.dir)
 
-    projectFiles = locateProjectFiles()
-    marketingVersion = getCurrentMarketingVersion(projectFiles)
+    configFiles = locateCommonConfigs()
+    # projectFiles = locateProjectFiles()
+
+    marketingVersion = getCurrentMarketingVersion(configFiles)
     log(f"current marketingVersion: {marketingVersion}")
     projectVersion = getNewProjectVersion()
     log(f"new projectVersion: {projectVersion}")
@@ -235,7 +242,7 @@ def main(args):
 
     log(f"new marketingVersion: {marketingVersion}")
     log(f"new projectVersion: {projectVersion}")
-    updateProjectFiles(projectFiles, marketingVersion, projectVersion)
+    updateCommonConfigs(configFiles, marketingVersion, projectVersion)
     updateUIFiles(locateUIFiles(), marketingVersion)
     updateInfoFiles(locateInfoFiles(), marketingVersion)
 
@@ -245,7 +252,7 @@ if __name__ == '__main__':
 
 
 # --- Unit Tests ---
-# % python3 -m unittest bumpVersions.py
+# % python3 -m unittest scripts/bumpVersions.py
 
 import unittest
 
@@ -291,12 +298,12 @@ class Tests(unittest.TestCase):
         self.assertEqual(65537 + 256, MarketingVersion(1, 1, 1).asInt())
         self.assertEqual(795192, MarketingVersion(12, 34, 56).asInt())
 
-    def test_updateProjectContents(self):
+    def test_updateConfigContents(self):
         marketingVersion = str(MarketingVersion(1, 2, 3))
         projectVersion = getNewProjectVersion()
-        contents = 'one MARKETING_VERSION = 9.8.7; one\ntwo CURRENT_PROJECT_VERSION = 123123; two'
-        self.assertEqual(f'one MARKETING_VERSION = 1.2.3; one\ntwo CURRENT_PROJECT_VERSION = {projectVersion}; two',
-                         updateProjectContents(contents, marketingVersion, projectVersion))
+        contents = 'one\nMARKETING_VERSION = 9.8.7\ntwo\nCURRENT_PROJECT_VERSION = 123123\nthree\n'
+        self.assertEqual(f'one\nMARKETING_VERSION = 1.2.3\ntwo\nCURRENT_PROJECT_VERSION = {projectVersion}\nthree\n',
+                         updateConfigContents(contents, marketingVersion, projectVersion))
 
     def test_updateUIContents(self):
         marketingVersion = str(MarketingVersion(1, 2, 3))

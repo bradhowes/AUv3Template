@@ -33,7 +33,7 @@
             <subviews>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wUu-Yz-l9v" userLabel="v1.0.0">
                     <rect key="frame" x="500" y="59" width="40" height="17"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="v1.1.0" id="p30-Bk-a8R" userLabel="APP_VERSION">
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="v1.0.0" id="p30-Bk-a8R" userLabel="APP_VERSION">
                         <font key="font" metaFont="system" size="14"/>
                         <color key="textColor" name="title"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

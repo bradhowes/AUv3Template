@@ -1,37 +1,28 @@
-# See LICENSE folder for this sample’s licensing information.
-#
-# Apple sample code gitignore configuration.
 
-# Finder
-.DS_Store
-
-# Xcode - User files
+## User settings
 xcuserdata/
 
-**/*.xcodeproj/project.xcworkspace/*
-!**/*.xcodeproj/project.xcworkspace/xcshareddata
+## Obj-C/Swift specific
+*.hmap
 
-**/*.xcodeproj/project.xcworkspace/xcshareddata/*
-!**/*.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
 
-**/*.playground/playground.xcworkspace/*
-!**/*.playground/playground.xcworkspace/xcshareddata
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
 
-**/*.playground/playground.xcworkspace/xcshareddata/*
-!**/*.playground/playground.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+# Swift Package Manager
+.build/
 
-DerivedData/
-.DerivedData-macOS/
-.DerivedData-iOS/
+# fastlane
 
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Files from scripts/bumpVersions.py
 **/*.old
-
-Gemfile
-Gemfile.lock
-
-fastlane
-Packages/.swiftpm/
-Packages/.build/
-Packages/Package.resolved
-.version
-exportOptions.plist

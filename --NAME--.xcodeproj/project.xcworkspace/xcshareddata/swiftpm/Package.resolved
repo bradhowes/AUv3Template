@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AUv3Support",
+        "repositoryURL": "https://github.com/bradhowes/AUv3Support",
+        "state": {
+          "branch": null,
+          "revision": "058233cf05a0019462793a7657301f6d2f082d4b",
+          "version": "11.1.4"
+        }
+      },
+      {
+        "package": "Knob",
+        "repositoryURL": "https://github.com/bradhowes/knob",
+        "state": {
+          "branch": null,
+          "revision": "96ef8c40bb826c961e28f658ae9b782a34287cd5",
+          "version": "3.0.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

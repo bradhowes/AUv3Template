@@ -106,15 +106,16 @@ All of the common code shared between the iOS and macOS apps and app extensions 
 folder as Swift packages. Originally, this common code was built as a shared framework, but now Swift packages are
 powerful enough to do the same. There are at present 5 separate libraries that are built in package form:
 
-* [Kernel](Packages/Sources/Kernel) -- the C++ and Obj-C++ code that renders audio samples
-* [KernelBridge](Packages/Sources/KernelBridge) -- a bridge to the Obj-C++ kernel for Swift code
+* [Kernel](Packages/Sources/Kernel) -- the C++ and Obj-C++ code dedicated to rendering audio samples for the AUv3 component
+* [KernelBridge](Packages/Sources/KernelBridge) -- a small bridge to the Obj-C++ kernel for Swift
 * [ParameterAddress](Packages/Sources/ParameterAddress) -- definitions of the runtime parameters that control the
 operation of the kernel
 * [Parameters](Packages/Sources/Parameters) -- collection of AUParameter entities based on the definitions from
 the `ParameterAddress` library. Also provides factory presets for the audio unit.
-* [Theme](Packages/Sources/Theme) -- lame attempt at sharing resources in a package. Unfortunately, right now it does not work well with
-Xcode. For instance, Xcode will not see/use fonts nor color sets that are recorded in this package. I do not know of a way to work around
-this issue other than to copy the resources to a folter outside of the package hierarchy and flag them as belonging to both executables.
+* [Theme](Packages/Sources/Theme) -- lame attempt at sharing resources in a package. Unfortunately, right now it does not work well 
+with Xcode. For instance, Xcode will not see/use fonts nor color sets that are recorded in this package. I do not know of a way to 
+work around this issue other than to copy the resources to a folter outside of the package hierarchy and flag them as belonging to
+both executables.
 
 There are additional details in the individual `README` files in the above folders as well.
 

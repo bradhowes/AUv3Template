@@ -4,36 +4,48 @@
 
 @import ParameterAddress;
 
-AUAudioFrameCount Kernel::setRampedParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept {
-  os_log_with_type(log_, OS_LOG_TYPE_DEBUG, "setParameterValue - %llul %f %d", address, value, duration);
-  // Setting ramped values are safe -- they come from the event loop and are interleaved with rendering
+bool Kernel::doSetImmediateParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept {
   switch (address) {
-    case ParameterAddressDepth: depth_.set(value, duration); return duration;
-    case ParameterAddressRate: lfo_.setFrequency(value, duration); return duration;
-    case ParameterAddressDelay: delay_.set(value, duration); return duration;
-    case ParameterAddressFeedback: feedback_.set(value, duration); return duration;
-    case ParameterAddressDry: dryMix_.set(value, duration); return duration;
-    case ParameterAddressWet: wetMix_.set(value, duration); return duration;
-    case ParameterAddressNegativeFeedback: negativeFeedback_.set(value, duration); return duration;
-    case ParameterAddressOdd90: odd90_.set(value, duration); return 0;
+    case ParameterAddressDepth: depth_.setImmediate(value, duration); return true;
+    case ParameterAddressRate: lfo_.setFrequency(value, duration); return true;
+    case ParameterAddressDelay: delay_.setImmediate(value, duration); return true;
+    case ParameterAddressFeedback: feedback_.setImmediate(value, duration); return true;
+    case ParameterAddressDry: dryMix_.setImmediate(value, duration); return true;
+    case ParameterAddressWet: wetMix_.setImmediate(value, duration); return true;
+    case ParameterAddressNegativeFeedback: negativeFeedback_.setImmediate(value, duration); return true;
+    case ParameterAddressOdd90: odd90_.setImmediate(value, duration); return true;
   }
-  return 0;
+  return false;
 }
 
-void Kernel::setParameterValuePending(AUParameterAddress address, AUValue value) noexcept {
+bool Kernel::doSetPendingParameterValue(AUParameterAddress address, AUValue value) noexcept {
   switch (address) {
-    case ParameterAddressDepth: depth_.setPending(value); break;
-    case ParameterAddressRate: lfo_.setFrequencyPending(value); break;
-    case ParameterAddressDelay: delay_.setPending(value); break;
-    case ParameterAddressFeedback: feedback_.setPending(value); break;
-    case ParameterAddressDry: dryMix_.setPending(value); break;
-    case ParameterAddressWet: wetMix_.setPending(value); break;
-    case ParameterAddressNegativeFeedback: negativeFeedback_.setPending(value); break;
-    case ParameterAddressOdd90: odd90_.setPending(value); break;
+    case ParameterAddressDepth: depth_.setPending(value); return true;
+    case ParameterAddressRate: lfo_.setFrequencyPending(value); return true;
+    case ParameterAddressDelay: delay_.setPending(value); return true;
+    case ParameterAddressFeedback: feedback_.setPending(value); return true;
+    case ParameterAddressDry: dryMix_.setPending(value); return true;
+    case ParameterAddressWet: wetMix_.setPending(value); return true;
+    case ParameterAddressNegativeFeedback: negativeFeedback_.setPending(value); return true;
+    case ParameterAddressOdd90: odd90_.setPending(value); return true;
   }
 }
 
-AUValue Kernel::getParameterValuePending(AUParameterAddress address) const noexcept {
+AUValue Kernel::doGetImmediateParameterValue(AUParameterAddress address) const noexcept {
+  switch (address) {
+    case ParameterAddressDepth: return depth_.getImmediate();
+    case ParameterAddressRate: return lfo_.frequency();
+    case ParameterAddressDelay: return delay_.getImmediate();
+    case ParameterAddressFeedback: return feedback_.getImmediate();
+    case ParameterAddressDry: return dryMix_.getImmediate();
+    case ParameterAddressWet: return wetMix_.getImmediate();
+    case ParameterAddressNegativeFeedback: return negativeFeedback_.getImmediate();
+    case ParameterAddressOdd90: return odd90_.getImmediate();
+  }
+  return 0.0;
+}
+
+AUValue Kernel::doGetPendingParameterValue(AUParameterAddress address) const noexcept {
   switch (address) {
     case ParameterAddressDepth: return depth_.getPending();
     case ParameterAddressRate: return lfo_.frequencyPending();

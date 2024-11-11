@@ -30,7 +30,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C437FE792223688D008D6C09"
                BuildableName = "--NAME--.app"
-               BlueprintName = "--NAME--"
+               BlueprintName = "macOS App"
                ReferencedContainer = "container:--NAME--.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -96,7 +96,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C437FE792223688D008D6C09"
             BuildableName = "--NAME--.app"
-            BlueprintName = "--NAME--"
+            BlueprintName = "macOS App"
             ReferencedContainer = "container:--NAME--.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

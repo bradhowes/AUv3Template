@@ -142,7 +142,7 @@
 		C433F56022404C7C00F1B750 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C437FE3A222367A6008D6C09 /* --NAME--Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "--NAME--Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C437FE632223686D008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "--NAME--AU.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C437FE7A2223688D008D6C09 /* --NAME--.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "--NAME--.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C437FE7A2223688D008D6C09 /* --NAME--Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "--NAME--Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C437FEA0222368B7008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "--NAME--AU.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44F544422260E2500484B67 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C44F544622260E2C00484B67 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
@@ -265,7 +265,7 @@
 			children = (
 				C437FE3A222367A6008D6C09 /* --NAME--Host.app */,
 				C437FE632223686D008D6C09 /* --NAME--AU.appex */,
-				C437FE7A2223688D008D6C09 /* --NAME--.app */,
+				C437FE7A2223688D008D6C09 /* --NAME--Host.app */,
 				C437FEA0222368B7008D6C09 /* --NAME--AU.appex */,
 				BD1D257625D5AAB000523748 /* Snapshots.xctest */,
 			);
@@ -435,9 +435,9 @@
 			productReference = C437FE632223686D008D6C09 /* --NAME--AU.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		C437FE792223688D008D6C09 /* --NAME-- */ = {
+		C437FE792223688D008D6C09 /* macOS App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C437FE872223688E008D6C09 /* Build configuration list for PBXNativeTarget "--NAME--" */;
+			buildConfigurationList = C437FE872223688E008D6C09 /* Build configuration list for PBXNativeTarget "macOS App" */;
 			buildPhases = (
 				C437FE762223688D008D6C09 /* Sources */,
 				C437FE772223688D008D6C09 /* Frameworks */,
@@ -450,12 +450,12 @@
 			dependencies = (
 				C4660A622225F9A0007BE3B1 /* PBXTargetDependency */,
 			);
-			name = "--NAME--";
+			name = "macOS App";
 			packageProductDependencies = (
 				BD8D4E1127B58900007011A5 /* AUv3-Support-macOS */,
 			);
 			productName = "AUv3Filter macOS";
-			productReference = C437FE7A2223688D008D6C09 /* --NAME--.app */;
+			productReference = C437FE7A2223688D008D6C09 /* --NAME--Host.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C437FE9F222368B7008D6C09 /* macOS Extension */ = {
@@ -550,7 +550,7 @@
 			targets = (
 				C437FE39222367A6008D6C09 /* iOS App */,
 				C437FE622223686D008D6C09 /* iOS Extension */,
-				C437FE792223688D008D6C09 /* --NAME-- */,
+				C437FE792223688D008D6C09 /* macOS App */,
 				C437FE9F222368B7008D6C09 /* macOS Extension */,
 				BD1D257525D5AAB000523748 /* Snapshots */,
 			);
@@ -890,14 +890,15 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = iOS/App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
-				PRODUCT_NAME = "--NAME--Host";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(HOST_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(HOST_PRODUCT_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -965,8 +966,8 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
-				PRODUCT_NAME = "--NAME--AU";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AU_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(AU_PRODUCT_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1040,8 +1041,8 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
-				PRODUCT_NAME = "--NAME--";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(HOST_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(HOST_PRODUCT_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1110,8 +1111,8 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
-				PRODUCT_NAME = "--NAME--AU";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AU_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(AU_PRODUCT_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1221,6 +1222,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = iOS/App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1228,8 +1230,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
-				PRODUCT_NAME = "--NAME--Host";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(HOST_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(HOST_PRODUCT_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1303,8 +1305,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
-				PRODUCT_NAME = "--NAME--AU";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AU_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(AU_PRODUCT_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1384,8 +1386,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--";
-				PRODUCT_NAME = "--NAME--";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(HOST_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(HOST_PRODUCT_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1461,8 +1463,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.braysoftware.--NAME--.appex";
-				PRODUCT_NAME = "--NAME--AU";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AU_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(AU_PRODUCT_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1511,7 +1513,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		C437FE872223688E008D6C09 /* Build configuration list for PBXNativeTarget "--NAME--" */ = {
+		C437FE872223688E008D6C09 /* Build configuration list for PBXNativeTarget "macOS App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C437FE882223688E008D6C09 /* Debug */,
@@ -1537,7 +1539,7 @@
 			repositoryURL = "https://github.com/bradhowes/AUv3Support";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 11.1.0;
+				minimumVersion = 13.0.4;
 			};
 		};
 		BD8D4E1327B589D4007011A5 /* XCRemoteSwiftPackageReference "knob" */ = {

@@ -41,7 +41,7 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>AudioComponentBundle</key>
-			<string>com.braysoftware.--NAME--.framework</string>
+			<string>$(AUDIO_COMPONENT_BUNDLE)</string>
 			<key>AudioComponents</key>
 			<array>
 				<dict>
@@ -73,5 +73,7 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(AU_FACTORY_FUNCTION)</string>
 	</dict>
+	<key>NSHumanReadableCopyright</key>
+	<string>$(COPYRIGHT_NOTICE)</string>
 </dict>
 </plist>

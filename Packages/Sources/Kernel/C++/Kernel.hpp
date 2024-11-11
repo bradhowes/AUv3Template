@@ -54,25 +54,6 @@ public:
     initialize(format.channelCount, format.sampleRate, maxDelayMilliseconds);
   }
 
-  /**
-   Process an AU parameter value change by updating the kernel. Note that this
-   is likely coming from UI activity (main thread) and it must not interfere with
-   any render thread activity.
-
-   @param address the address of the parameter that changed
-   @param value the new value for the parameter
-   */
-  void setParameterValuePending(AUParameterAddress address, AUValue value) noexcept;
-
-  /**
-   Obtain from the kernel the current value of an AU parameter. This is most likely
-   call to satisfy UI requests for updates.
-
-   @param address the address of the parameter to return
-   @returns current parameter value
-   */
-  AUValue getParameterValuePending(AUParameterAddress address) const noexcept;
-
 private:
   using DelayLine = DSPHeaders::DelayBuffer<AUValue>;
   using LFO = DSPHeaders::LFO<AUValue>;
@@ -92,13 +73,40 @@ private:
     }
   }
 
-  AUAudioFrameCount setRampedParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept;
+  /**
+   Set a paramete value from within the render loop.
 
-  AUAudioFrameCount doParameterEvent(const AUParameterEvent& event, AUAudioFrameCount duration) noexcept {
-    return setRampedParameterValue(event.parameterAddress, event.value, duration);
-  }
+   @param address the parameter to change
+   @param value the new value to use
+   @param duration the ramping duration to transition to the new value
+   */
+  bool doSetImmediateParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept;
 
-  void doRenderingStateChanged(bool rendering) {}
+  /**
+   Set a paramete value from the UI via the parameter tree. Will be recognized and handled in the next render pass.
+
+   @param address the parameter to change
+   @param value the new value to use
+   */
+  bool doSetPendingParameterValue(AUParameterAddress address, AUValue value) noexcept;
+
+  /**
+   Get the paramete value last set in the render thread. NOTE: this does not account for any ramping that might be in
+   effect.
+
+   @param address the parameter to access
+   @returns parameter value
+   */
+  AUValue doGetImmediateParameterValue(AUParameterAddress address) const noexcept;
+
+  /**
+   Get the paramete value last set by the UI / parameter tree. NOTE: this does not account for any ramping that might
+   be in effect.
+
+   @param address the parameter to access
+   @returns parameter value
+   */
+  AUValue doGetPendingParameterValue(AUParameterAddress address) const noexcept;
 
   void writeSample(DSPHeaders::BusBuffers ins, DSPHeaders::BusBuffers outs, AUValue evenTap, AUValue oddTap,
                    AUValue feedback, AUValue wetMix, AUValue dryMix) noexcept {
@@ -131,7 +139,7 @@ private:
 
   void doRendering(NSInteger outputBusNumber, DSPHeaders::BusBuffers ins, DSPHeaders::BusBuffers outs,
                    AUAudioFrameCount frameCount) noexcept {
-    auto odd90 = odd90_.get();
+    auto odd90 = odd90_.getImmediate();
     if (frameCount == 1) [[unlikely]] {
       auto delay = delay_.frameValue();
       auto depth = depth_.frameValue();
@@ -140,11 +148,11 @@ private:
       auto [evenTap, oddTap] = odd90 ? calcDoubleTap(center, variance) : calcSingleTap(center, variance);
       writeSample(ins, outs, evenTap, oddTap, feedback, wetMix_.frameValue(), dryMix_.frameValue());
     } else [[likely]] {
-      auto delay = delay_.get();
-      auto depth = depth_.get();
-      auto feedback = (negativeFeedback_ ? -1.0 : 1.0) * feedback_.get();
-      auto wetMix = wetMix_.get();
-      auto dryMix = dryMix_.get();
+      auto delay = delay_.getImmediate();
+      auto depth = depth_.getImmediate();
+      auto feedback = (negativeFeedback_ ? -1.0 : 1.0) * feedback_.getImmediate();
+      auto wetMix = wetMix_.getImmediate();
+      auto dryMix = dryMix_.getImmediate();
       auto [center, variance] = calcCenterVariance(delay, depth);
       if (odd90) {
         while (frameCount-- >0) {
@@ -159,8 +167,6 @@ private:
       }
     }
   }
-
-  void doMIDIEvent(const AUMIDIEvent& midiEvent) noexcept {}
 
   DSPHeaders::Parameters::Milliseconds delay_;
   DSPHeaders::Parameters::Percentage depth_;

@@ -17,7 +17,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>--NAME--</string>
+	<string>$(AU_BASE_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -67,6 +67,8 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.AudioUnit-UI</string>
 	</dict>
+	<key>NSHumanReadableCopyright</key>
+	<string>$(COPYRIGHT_NOTICE)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Desdemona.ttf</string>

@@ -48,7 +48,6 @@ extension MainViewController {
                                                          componentManufacturer: bundle.auComponentManufacturer,
                                                          componentFlags: 0, componentFlagsMask: 0)
     let config = HostViewConfig(componentName: audioUnitName,
-                                componentVersion: bundle.releaseVersionNumber,
                                 componentDescription: componentDescription,
                                 sampleLoop: .sample1,
                                 playButton: windowController.playButton,

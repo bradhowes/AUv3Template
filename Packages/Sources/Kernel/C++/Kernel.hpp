@@ -148,11 +148,11 @@ private:
       auto [evenTap, oddTap] = odd90 ? calcDoubleTap(center, variance) : calcSingleTap(center, variance);
       writeSample(ins, outs, evenTap, oddTap, feedback, wetMix_.frameValue(), dryMix_.frameValue());
     } else [[likely]] {
-      auto delay = delay_.getImmediate();
-      auto depth = depth_.getImmediate();
-      auto feedback = (negativeFeedback_ ? -1.0 : 1.0) * feedback_.getImmediate();
-      auto wetMix = wetMix_.getImmediate();
-      auto dryMix = dryMix_.getImmediate();
+      auto delay = delay_.finalValue();
+      auto depth = depth_.finalValue();
+      auto feedback = (negativeFeedback_ ? -1.0 : 1.0) * feedback_.finalValue();
+      auto wetMix = wetMix_.finalValue();
+      auto dryMix = dryMix_.finalValue();
       auto [center, variance] = calcCenterVariance(delay, depth);
       if (odd90) {
         while (frameCount-- >0) {

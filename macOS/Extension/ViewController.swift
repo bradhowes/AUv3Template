@@ -45,6 +45,8 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
   @IBOutlet private weak var odd90Control: NSSwitch!
   @IBOutlet private weak var negativeFeedbackControl: NSSwitch!
 
+  @IBOutlet private weak var versionTag: NSTextView!
+
   private lazy var controls: [ParameterAddress: (Knob, FocusAwareTextField)] = [
     .depth: (depthControl, depthValueLabel),
     .rate: (rateControl, rateValueLabel),
@@ -100,7 +102,13 @@ extension ViewController: AudioUnitViewConfigurationManager {}
 
 extension ViewController: AUAudioUnitFactory {
   @objc public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-    let kernel = KernelBridge(Bundle.main.auBaseName, maxDelayMilliseconds: parameters[.delay].maxValue)
+    let bundle = InternalConstants.bundle
+
+    DispatchQueue.main.async {
+      self.versionTag.string = bundle.versionTag
+    }
+
+    let kernel = KernelBridge(bundle.auBaseName, maxDelayMilliseconds: parameters[.delay].maxValue)
     let audioUnit = try FilterAudioUnitFactory.create(componentDescription: componentDescription,
                                                       parameters: parameters,
                                                       kernel: kernel,
@@ -187,4 +195,9 @@ private extension ViewController {
 
     editor.controlChanged(source: control)
   }
+}
+
+private enum InternalConstants {
+  private class EmptyClass {}
+  static let bundle = Bundle(for: InternalConstants.EmptyClass.self)
 }

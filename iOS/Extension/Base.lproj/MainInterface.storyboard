@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOK-vA-Qxl" userLabel="APP_VERSION">
-                                <rect key="frame" x="545" y="250" width="37.5" height="18"/>
+                                <rect key="frame" x="543" y="250" width="39.5" height="18"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -497,6 +497,7 @@
                         <outlet property="rateTapEdit" destination="8ki-wy-l3o" id="Dn4-Sz-0GY"/>
                         <outlet property="rateValueLabel" destination="GCP-HR-UOg" id="VWE-EP-QhB"/>
                         <outlet property="titleLabel" destination="Vbj-fp-p3P" id="8oV-EU-1us"/>
+                        <outlet property="versionTag" destination="sOK-vA-Qxl" id="8QD-5i-nvk"/>
                         <outlet property="wetMixControl" destination="xjB-dE-KcA" id="G3O-Zd-53a"/>
                         <outlet property="wetMixTapEdit" destination="lM5-yt-nYm" id="dJx-W1-fuq"/>
                         <outlet property="wetMixValueLabel" destination="OFy-GK-jEJ" id="taI-uJ-K5A"/>

@@ -62,6 +62,8 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
   @IBOutlet weak var odd90Control: Switch!
   @IBOutlet weak var negativeFeedbackControl: Switch!
 
+  @IBOutlet weak var versionTag: UILabel!
+
   private lazy var controls: [ParameterAddress: [(Knob, Label, UIView)]] = [
     .depth: [(depthControl, depthValueLabel, depthTapEdit),
              (altDepthControl, altDepthValueLabel, altDepthTapEdit)],
@@ -127,7 +129,13 @@ extension ViewController: AudioUnitViewConfigurationManager {}
 
 extension ViewController: AUAudioUnitFactory {
   @objc public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-    let kernel = KernelBridge(Bundle.main.auBaseName, maxDelayMilliseconds: parameters[.delay].maxValue)
+    let bundle = InternalConstants.bundle
+
+    DispatchQueue.main.async {
+      self.versionTag.text = bundle.versionTag
+    }
+
+    let kernel = KernelBridge(bundle.auBaseName, maxDelayMilliseconds: parameters[.delay].maxValue)
     let audioUnit = try FilterAudioUnitFactory.create(componentDescription: componentDescription,
                                                       parameters: parameters, kernel: kernel,
                                                       viewConfigurationManager: self)
@@ -218,4 +226,9 @@ extension ViewController: AUParameterEditorDelegate {
 
     os_log(.debug, log: log, "controlChanged END")
   }
+}
+
+private enum InternalConstants {
+  private class EmptyClass {}
+  static let bundle = Bundle(for: InternalConstants.EmptyClass.self)
 }

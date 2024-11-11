@@ -15,15 +15,22 @@ final class MainViewController: UIViewController {
     guard let delegate = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
 
     let bundle = Bundle.main
-    let component = AudioComponentDescription(componentType: bundle.auComponentType,
-                                              componentSubType: bundle.auComponentSubtype,
-                                              componentManufacturer: bundle.auComponentManufacturer,
-                                              componentFlags: 0, componentFlagsMask: 0)
+    let component = AudioComponentDescription(
+      componentType: bundle.auComponentType,
+      componentSubType: bundle.auComponentSubtype,
+      componentManufacturer: bundle.auComponentManufacturer,
+      componentFlags: 0, componentFlagsMask: 0
+    )
 
     let tintColor = UIColor(named: "label")!
-    let config = HostViewConfig(name: bundle.auBaseName, version: bundle.releaseVersionNumber, appDelegate: delegate,
-                                appStoreId: bundle.appStoreId, componentDescription: component, sampleLoop: .sample1,
-                                tintColor: tintColor) { url in
+    let config = HostViewConfig(
+      name: bundle.auBaseName,
+      appDelegate: delegate,
+      appStoreId: bundle.appStoreId,
+      componentDescription: component,
+      sampleLoop: .sample1,
+      tintColor: tintColor
+    ) { url in
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 

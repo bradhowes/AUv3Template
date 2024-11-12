@@ -1,5 +1,7 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
+#if os(macOS)
+
 import AUv3Support
 import AUv3Support_macOS
 import CoreAudioKit
@@ -65,3 +67,5 @@ extension MainViewController {
     hostViewManager?.showInitialPrompt()
   }
 }
+
+#endif

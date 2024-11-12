@@ -1,4 +1,5 @@
 // Copyright © 2022 Brad Howes. All rights reserved.
+#if os(iOS)
 
 import AUv3Support
 import CoreAudioKit
@@ -232,3 +233,5 @@ private enum InternalConstants {
   private class EmptyClass {}
   static let bundle = Bundle(for: InternalConstants.EmptyClass.self)
 }
+
+#endif

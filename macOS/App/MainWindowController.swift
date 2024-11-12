@@ -1,5 +1,7 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
 
+#if os(macOS)
+
 import Cocoa
 
 /**
@@ -11,3 +13,5 @@ final class MainWindowController: NSWindowController {
   @IBOutlet public weak var bypassButton: NSButton!
   @IBOutlet public weak var presetsButton: NSPopUpButton!
 }
+
+#endif

@@ -137,7 +137,7 @@
 		BDE2CE1724A3E887004AC8FA /* Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Dev.xcconfig; path = Configuration/Dev.xcconfig; sourceTree = "<group>"; };
 		BDE2CE1824A3E8DB004AC8FA /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Staging.xcconfig; path = Configuration/Staging.xcconfig; sourceTree = "<group>"; };
 		BDE2CE1924A3EBD1004AC8FA /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Common.xcconfig; path = Configuration/Common.xcconfig; sourceTree = "<group>"; };
-		BDEFCA2825F64BF10095858D /* --NAME--AU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "--NAME--AU.entitlements"; sourceTree = "<group>"; };
+		BDEFCA2825F64BF10095858D /* AU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AU.entitlements; sourceTree = "<group>"; };
 		C4201A2822403120006E4333 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C433F56022404C7C00F1B750 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C437FE3A222367A6008D6C09 /* --NAME--Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "--NAME--Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,7 +319,7 @@
 		C4BEE7B722236A58001E6B6D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				BDEFCA2825F64BF10095858D /* --NAME--AU.entitlements */,
+				BDEFCA2825F64BF10095858D /* AU.entitlements */,
 				C4201A2822403120006E4333 /* ViewController.swift */,
 				C4C9EAAB2227D79D003FEE1C /* ViewController.xib */,
 				C4BEE7BE22236A58001E6B6D /* Info.plist */,
@@ -1085,7 +1085,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "macOS/Extension/--NAME--AU.entitlements";
+				CODE_SIGN_ENTITLEMENTS = macOS/Extension/AU.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1430,7 +1430,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "macOS/Extension/--NAME--AU.entitlements";
+				CODE_SIGN_ENTITLEMENTS = macOS/Extension/AU.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;

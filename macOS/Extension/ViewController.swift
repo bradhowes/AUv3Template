@@ -1,5 +1,7 @@
 // Copyright © 2022 Brad Howes. All rights reserved.
 
+#if os(macOS)
+
 import AUv3Support
 import CoreAudioKit
 import Kernel
@@ -14,13 +16,14 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
 /**
  Controller for the AUv3 filter view. Handles wiring up of the controls with AUParameter settings.
  */
-@objc open class ViewController: AUViewController {
+@objc final public class ViewController: AUViewController {
 
   // NOTE: this special form sets the subsystem name and must run before any other logger calls.
   private let log: OSLog = Shared.logger(Bundle.main.auBaseName + "AU", "ViewController")
 
   private let parameters = Parameters()
   private var viewConfig: AUAudioUnitViewConfiguration!
+  private var versionTagValue: String = ""
 
   @IBOutlet private weak var controlsView: NSView!
 
@@ -45,7 +48,7 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
   @IBOutlet private weak var odd90Control: NSSwitch!
   @IBOutlet private weak var negativeFeedbackControl: NSSwitch!
 
-  @IBOutlet private weak var versionTag: NSTextView!
+  @IBOutlet private weak var versionTag: NSTextField!
 
   private lazy var controls: [ParameterAddress: (Knob, FocusAwareTextField)] = [
     .depth: (depthControl, depthValueLabel),
@@ -88,6 +91,10 @@ public extension ViewController {
     os_log(.info, log: log, "viewDidLoad END")
   }
 
+  override func viewDidAppear() {
+    versionTag.text = versionTagValue
+  }
+
   override func mouseDown(with event: NSEvent) {
     // Allow for clicks on the common NSView to end editing of values
     NSApp.keyWindow?.makeFirstResponder(nil)
@@ -104,15 +111,12 @@ extension ViewController: AUAudioUnitFactory {
   @objc public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
     let bundle = InternalConstants.bundle
 
-    DispatchQueue.main.async {
-      self.versionTag.string = bundle.versionTag
-    }
-
     let kernel = KernelBridge(bundle.auBaseName, maxDelayMilliseconds: parameters[.delay].maxValue)
     let audioUnit = try FilterAudioUnitFactory.create(componentDescription: componentDescription,
                                                       parameters: parameters,
                                                       kernel: kernel,
                                                       viewConfigurationManager: self)
+    self.versionTagValue = bundle.versionTag
     self.audioUnit = audioUnit
     return audioUnit
   }
@@ -201,3 +205,5 @@ private enum InternalConstants {
   private class EmptyClass {}
   static let bundle = Bundle(for: InternalConstants.EmptyClass.self)
 }
+
+#endif

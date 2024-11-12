@@ -1,4 +1,5 @@
 // Copyright © 2021 Brad Howes. All rights reserved.
+#if os(iOS)
 
 import AUv3Support
 import AUv3Support_iOS
@@ -39,3 +40,4 @@ final class MainViewController: UIViewController {
   }
 }
 
+#endif

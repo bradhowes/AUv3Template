@@ -1,4 +1,5 @@
 // Copyright © 2022 Brad Howes. All rights reserved.
+#if os(macOS)
 
 import Cocoa
 import AUv3Support
@@ -27,3 +28,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.open(appStoreUrl)
   }
 }
+
+#endif

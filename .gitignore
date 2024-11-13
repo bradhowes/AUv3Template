@@ -24,6 +24,9 @@ DerivedData/
 .DerivedData-iOS/
 .DerivedData-macOS/
 
+coverage_*.txt
+percentage_*.txt
+
 **/*.old
 
 Gemfile

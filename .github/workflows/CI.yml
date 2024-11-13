@@ -12,11 +12,11 @@ env:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Select Xcode 16.0
-      run: ls -l /Applications && sudo xcode-select -s /Applications/Xcode_16.app
+    - name: Select Xcode 15.4
+      run: ls -l /Applications && sudo xcode-select -s /Applications/Xcode_15.4.app
     - name: Build, test, and code coverage
       run: env && make

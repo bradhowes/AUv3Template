@@ -5,4 +5,4 @@ import Kernel
 
 // Extend the Obj-C KernelBridge with protocols for interoperability with `FilterAudioUnit` and `AudioUnitParameters`
 // classes.
-extension KernelBridge: @retroactive AUParameterHandler, @retroactive AudioRenderer {}
+extension KernelBridge: AUParameterHandler, AudioRenderer {}

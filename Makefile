@@ -41,7 +41,7 @@ percentage-macOS: coverage-macOS
 	echo "macOS Coverage Pct:"
 	cat percentage_macOS.txt
 
-report: percentage-iOS percentage-macOS
+report: percentage-macOS
 	@if [[ -n "$$GITHUB_ENV" ]]; then \
         echo "PERCENTAGE=$$(< percentage_macOS.txt)" >> $$GITHUB_ENV; \
     fi

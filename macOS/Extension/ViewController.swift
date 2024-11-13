@@ -11,7 +11,7 @@ import ParameterAddress
 import Parameters
 import os.log
 
-extension Knob: AUParameterValueProvider, RangedControl {}
+extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedControl {}
 
 /**
  Controller for the AUv3 filter view. Handles wiring up of the controls with AUParameter settings.

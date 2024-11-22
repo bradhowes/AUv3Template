@@ -82,4 +82,15 @@ if __name__ == '__main__':
         print("  NAME is the name of the new AUv3 component")
         print("  SUBTYPE is the unique AUv3 4-character subtype for the new component")
         sys.exit(1)
-    build(sys.argv[1], sys.argv[2])
+
+    name = sys.argv[1]
+    if not name:
+        print("*** invalid/missing name")
+        sys.exit(1)
+
+    subType = sys.argv[2]
+    if not subType or len(subType) != 4:
+        print("*** invalid/missing subType -- must be exactly 4 characters")
+        sys.exit(1)
+
+    build(name, subType)

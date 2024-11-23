@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bradhowes/AUv3Support",
       "state" : {
-        "revision" : "2790d6c7b5f183f1b0dd9abcff6ae8a247e58f63",
-        "version" : "14.0.1"
+        "revision" : "c717cc2df4f1bbbf20ae4aa17bdc8e82c478af1e",
+        "version" : "14.0.4"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bradhowes/knob",
       "state" : {
-        "revision" : "96ef8c40bb826c961e28f658ae9b782a34287cd5",
-        "version" : "3.0.3"
+        "revision" : "16e2265e836fede2bf1a3b8df5a3b32dc26fe4fe",
+        "version" : "3.0.4"
       }
     }
   ],

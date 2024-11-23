@@ -158,7 +158,7 @@ extension ViewController: AUParameterEditorDelegate {
   private func createEditors() {
     os_log(.info, log: log, "createEditors BEGIN")
 
-    let knobColor = UIColor(named: "knob")!
+    let knobColor = UIColor.knobProgress
 
     let valueEditor = ValueEditor(containerView: editingContainerView, backgroundView: editingBackground,
                                   parameterName: editingLabel, parameterValue: editingValue,

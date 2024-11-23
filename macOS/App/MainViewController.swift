@@ -28,13 +28,6 @@ final class MainViewController: NSViewController {
 
 extension MainViewController {
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    // When the window appears, we should be able to access all of the items from the storyboard.
-    windowObserver = view.observe(\.window) { _, _ in self.makeHostViewManager() }
-  }
-
   func makeHostViewManager() {
     guard let appDelegate = appDelegate,
           appDelegate.presetsMenu != nil,
@@ -60,6 +53,11 @@ extension MainViewController {
                                 presetsMenu: appDelegate.presetsMenu,
                                 viewController: self, containerView: containerView)
     hostViewManager = .init(config: config)
+  }
+
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    makeHostViewManager()
   }
 
   override func viewDidAppear() {

@@ -6,9 +6,9 @@ import UIKit
 public enum Theme {
 
   public enum ColorKind: String {
-    case label
-    case knobProgress
-    case title
+    case knobLabelColor
+    case knobProgressColor
+    case backgroundTitleColor
   }
 
   public static func color(_ kind: ColorKind) -> UIColor {

@@ -107,7 +107,7 @@ extension ViewController: AudioUnitViewConfigurationManager {}
 
 // MARK: - AUAudioUnitFactory
 
-extension ViewController: AUAudioUnitFactory {
+extension ViewController: @preconcurrency AUAudioUnitFactory {
   @objc public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
     let bundle = InternalConstants.bundle
 
@@ -137,7 +137,7 @@ private extension ViewController {
   func createEditors() {
     os_log(.info, log: log, "createEditors BEGIN")
 
-    let knobColor = NSColor(named: "knob")!
+    let knobColor = NSColor.knobProgress
 
     for (parameterAddress, (knob, label)) in controls {
       knob.progressColor = knobColor

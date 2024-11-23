@@ -36,7 +36,7 @@
                     <rect key="frame" x="498" y="59" width="42" height="17"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="v1.0.0" id="p30-Bk-a8R" userLabel="APP_VERSION">
                         <font key="font" metaFont="system" size="14"/>
-                        <color key="textColor" name="title"/>
+                        <color key="textColor" name="backgroundTitleColor"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -44,7 +44,7 @@
                     <rect key="frame" x="48" y="59" width="492" height="183"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Flange" id="Jce-ED-VFc" userLabel="Flange">
                         <font key="font" size="160" name="Desdemona"/>
-                        <color key="textColor" name="title"/>
+                        <color key="textColor" name="backgroundTitleColor"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -74,7 +74,7 @@
                                                     </constraints>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" alignment="center" title="Depth" usesSingleLineMode="YES" id="k91-bk-kf4">
                                                         <font key="font" metaFont="system" size="20"/>
-                                                        <color key="textColor" name="label"/>
+                                                        <color key="textColor" name="knobLabelColor"/>
                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -105,7 +105,7 @@
                                                     </constraints>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" alignment="center" title="Delay" usesSingleLineMode="YES" id="lqk-lB-PF2">
                                                         <font key="font" metaFont="system" size="20"/>
-                                                        <color key="textColor" name="label"/>
+                                                        <color key="textColor" name="knobLabelColor"/>
                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -136,7 +136,7 @@
                                                     </constraints>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" alignment="center" title="Feedback" usesSingleLineMode="YES" id="KUE-7S-C6W">
                                                         <font key="font" metaFont="system" size="20"/>
-                                                        <color key="textColor" name="label"/>
+                                                        <color key="textColor" name="knobLabelColor"/>
                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -168,7 +168,7 @@
                                                     </constraints>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" alignment="center" title="Rate" usesSingleLineMode="YES" id="dUD-TV-FfK">
                                                         <font key="font" metaFont="system" size="20"/>
-                                                        <color key="textColor" name="label"/>
+                                                        <color key="textColor" name="knobLabelColor"/>
                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -209,7 +209,7 @@
                                                     <rect key="frame" x="-2" y="0.0" width="67" height="19"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Odd 90°" id="BmG-du-2Fi">
                                                         <font key="font" metaFont="system" size="15"/>
-                                                        <color key="textColor" name="label"/>
+                                                        <color key="textColor" name="knobLabelColor"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -240,7 +240,7 @@
                                                     </constraints>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" alignment="center" title="Dry" usesSingleLineMode="YES" id="HiA-bC-Obk">
                                                         <font key="font" metaFont="system" size="17"/>
-                                                        <color key="textColor" name="label"/>
+                                                        <color key="textColor" name="knobLabelColor"/>
                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -271,7 +271,7 @@
                                                     </constraints>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" alignment="center" title="Wet" usesSingleLineMode="YES" id="sdg-kR-mgP">
                                                         <font key="font" metaFont="system" size="17"/>
-                                                        <color key="textColor" name="label"/>
+                                                        <color key="textColor" name="knobLabelColor"/>
                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -298,7 +298,7 @@
                                                             <rect key="frame" x="-2" y="19" width="69" height="19"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Negative" id="9UE-Mc-d2c">
                                                                 <font key="font" metaFont="system" size="15"/>
-                                                                <color key="textColor" name="label"/>
+                                                                <color key="textColor" name="knobLabelColor"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
@@ -306,7 +306,7 @@
                                                             <rect key="frame" x="-2" y="0.0" width="76" height="19"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Feedback" id="96p-Oc-6jO">
                                                                 <font key="font" metaFont="system" size="15"/>
-                                                                <color key="textColor" name="label"/>
+                                                                <color key="textColor" name="knobLabelColor"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
@@ -378,11 +378,11 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
     </objects>
     <resources>
-        <namedColor name="label">
-            <color red="1" green="0.76399999856948853" blue="0.36700001358985901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="title">
+        <namedColor name="backgroundTitleColor">
             <color red="1" green="0.5" blue="0.0" alpha="0.34999999403953552" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="knobLabelColor">
+            <color red="1" green="0.76399999856948853" blue="0.36700001358985901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

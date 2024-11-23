@@ -52,3 +52,9 @@ AU_PRODUCT_NAME = $(AU_BASE_NAME)AU
 
 // The bundle that holds the AUv3 component
 AUDIO_COMPONENT_BUNDLE = $(HOST_PRODUCT_BUNDLE_IDENTIFIER).framework
+
+// The minimum iOS version that we support -- affects build, but not SPM Package. Must edit there as well.
+MIN_IOS_DEPLOYMENT_TARGET = 16.4
+
+// The minimum macOS version that we support
+MIN_MACOSX_DEPLOYMENT_TARGET = 14.6

@@ -23,7 +23,7 @@ final class MainViewController: UIViewController {
       componentFlags: 0, componentFlagsMask: 0
     )
 
-    let tintColor = UIColor(named: "label")!
+    let tintColor = UIColor.knobLabel
     let config = HostViewConfig(
       name: bundle.auBaseName,
       appDelegate: delegate,

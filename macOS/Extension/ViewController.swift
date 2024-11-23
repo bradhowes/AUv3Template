@@ -112,10 +112,12 @@ extension ViewController: @preconcurrency AUAudioUnitFactory {
     let bundle = InternalConstants.bundle
 
     let kernel = KernelBridge(bundle.auBaseName, maxDelayMilliseconds: parameters[.delay].maxValue)
-    let audioUnit = try FilterAudioUnitFactory.create(componentDescription: componentDescription,
-                                                      parameters: parameters,
-                                                      kernel: kernel,
-                                                      viewConfigurationManager: self)
+    let audioUnit = try FilterAudioUnitFactory.create(
+      componentDescription: componentDescription,
+      parameters: parameters,
+      kernel: kernel,
+      viewConfigurationManager: self
+    )
     self.versionTagValue = bundle.versionTag
     self.audioUnit = audioUnit
     return audioUnit

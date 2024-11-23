@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bradhowes/AUv3Support",
       "state" : {
-        "revision" : "c717cc2df4f1bbbf20ae4aa17bdc8e82c478af1e",
-        "version" : "14.0.4"
+        "revision" : "111077c0c04bb7c0edbfc84bc606e55d95566890",
+        "version" : "15.0.1"
       }
     },
     {

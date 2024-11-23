@@ -13,7 +13,7 @@ let package = Package(
     .library(name: "Theme", targets: ["Theme"])
   ],
   dependencies: [
-    .package(url: "https://github.com/bradhowes/AUv3Support", exact: "14.0.4"),
+    .package(url: "https://github.com/bradhowes/AUv3Support", exact: "15.0.1"),
   ],
   targets: [
     .target(

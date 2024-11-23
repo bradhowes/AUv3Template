@@ -14,6 +14,8 @@
 #import "DSPHeaders/Parameters/Milliseconds.hpp"
 #import "DSPHeaders/Parameters/Percentage.hpp"
 
+@import ParameterAddress;
+
 /**
  The audio processing kernel that generates a "flange" effect by combining an audio signal with a slightly delayed copy
  of itself. The delay value oscillates at a defined frequency which causes the delayed audio to vary in pitch due to it
@@ -32,13 +34,7 @@ public:
   Kernel(std::string name) noexcept : super(), name_{name}, log_{os_log_create(name_.c_str(), "Kernel")}
   {
     os_log_debug(log_, "constructor");
-    registerParameter(delay_);
-    registerParameter(depth_);
-    registerParameter(feedback_);
-    registerParameter(wetMix_);
-    registerParameter(dryMix_);
-    registerParameter(negativeFeedback_);
-    registerParameter(odd90_);
+    registerParameters({rate_, delay_,  depth_, feedback_, wetMix_, dryMix_, negativeFeedback_, odd90_});
   }
 
   /**
@@ -72,41 +68,6 @@ private:
       delayLines_.emplace_back(size);
     }
   }
-
-  /**
-   Set a paramete value from within the render loop.
-
-   @param address the parameter to change
-   @param value the new value to use
-   @param duration the ramping duration to transition to the new value
-   */
-  bool doSetImmediateParameterValue(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) noexcept;
-
-  /**
-   Set a paramete value from the UI via the parameter tree. Will be recognized and handled in the next render pass.
-
-   @param address the parameter to change
-   @param value the new value to use
-   */
-  bool doSetPendingParameterValue(AUParameterAddress address, AUValue value) noexcept;
-
-  /**
-   Get the paramete value last set in the render thread. NOTE: this does not account for any ramping that might be in
-   effect.
-
-   @param address the parameter to access
-   @returns parameter value
-   */
-  AUValue doGetImmediateParameterValue(AUParameterAddress address) const noexcept;
-
-  /**
-   Get the paramete value last set by the UI / parameter tree. NOTE: this does not account for any ramping that might
-   be in effect.
-
-   @param address the parameter to access
-   @returns parameter value
-   */
-  AUValue doGetPendingParameterValue(AUParameterAddress address) const noexcept;
 
   void writeSample(DSPHeaders::BusBuffers ins, DSPHeaders::BusBuffers outs, AUValue evenTap, AUValue oddTap,
                    AUValue feedback, AUValue wetMix, AUValue dryMix) noexcept {
@@ -168,19 +129,20 @@ private:
     }
   }
 
-  DSPHeaders::Parameters::Milliseconds delay_;
-  DSPHeaders::Parameters::Percentage depth_;
-  DSPHeaders::Parameters::Percentage feedback_;
-  DSPHeaders::Parameters::Percentage dryMix_;
-  DSPHeaders::Parameters::Percentage wetMix_;
-  DSPHeaders::Parameters::Bool negativeFeedback_;
-  DSPHeaders::Parameters::Bool odd90_;
+  DSPHeaders::Parameters::Float rate_{ParameterAddressRate};
+  DSPHeaders::Parameters::Milliseconds delay_{ParameterAddressDelay};
+  DSPHeaders::Parameters::Percentage depth_{ParameterAddressDepth};
+  DSPHeaders::Parameters::Percentage feedback_{ParameterAddressFeedback};
+  DSPHeaders::Parameters::Percentage dryMix_{ParameterAddressDry};
+  DSPHeaders::Parameters::Percentage wetMix_{ParameterAddressWet};
+  DSPHeaders::Parameters::Bool negativeFeedback_{ParameterAddressNegativeFeedback};
+  DSPHeaders::Parameters::Bool odd90_{ParameterAddressOdd90};
 
   double samplesPerMillisecond_;
   double maxDelayMilliseconds_;
 
   std::vector<DelayLine> delayLines_;
-  LFO lfo_;
+  LFO lfo_{rate_};
   std::string name_;
   os_log_t log_;
 };

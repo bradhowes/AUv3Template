@@ -140,7 +140,7 @@ extension AUParameter: @retroactive AUParameterFormatting {
   /// Obtain a closure that will format parameter values into a string
   public var stringFormatForDisplayValue: String {
     switch self.parameterAddress {
-    case .depth, .feedback, .dry, .wet: return "%.0f"
+    case .feedback, .dry, .wet: return "%.0f"
     default: return "%.2f"
     }
   }

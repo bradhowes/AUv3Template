@@ -20,9 +20,46 @@ Additional features and info:
 * Provides a *very* tiny Objective-C (Objective-C++ really) wrapper for access to the kernel from Swift code
 * Uses Swift for all UI and all audio unit work not associated with sample rendering
 
-The code was developed in Xcode 12.4 on macOS 11.2.1. I have tested on both macOS and iOS devices primarily in
-GarageBand, but also using test hosts on both devices as well as the excellent
-[AUM](https://apps.apple.com/us/app/aum-audio-mixer/id1055636344) app on iOS.
+## iOS Example
+
+Here are images showing my [SimplyFlange](https://github.com/bradhowes/SimplyFlange) app running in the iPhone SE
+simulator in landscape orientation. This app was based on [AUv3Template](https://github.com/bradhowes/AUv3Template) and
+so uses the AUv3Support package.
+
+![Example on iOS](images/flange_ios.png)
+
+The controls at the top come from the AUv3Support-iOS package as part of the host application infrastructure it
+provides. There, you find:
+
+- _play_ button to start/stop audio playing through the filter
+- _bypass_ button to disable the filter
+- _presets bar_ to quickly choose from a factory preset from the AUv3 extension
+- _presets menu_ to show a menu of user and factory presets
+
+![Presets on iOS](images/presets_ios.png)
+
+The hosting app supports creating and managing user presets for the extension. These should operate in the same way that
+they do in other hosting apps such as GarageBand, Logic, Cubasis, AUM. You can create your own presets. When a user
+preset is active, you can then:
+
+- _Update_ the preset by saving the current parameter settings under its name
+- _Rename_ the preset to give it a new name
+- _Delete_ the preset to remove it from the device
+
+## macOS Example
+
+Here is an image showing the macOS version of the same AUv3 plugin. This time the host controls are found in the app's
+title bar.
+
+![Example on macOS](images/flange_macos.png)
+
+# Swift 6
+
+The code was originally developed in Xcode 12.4 on macOS 11.2.1 but the latest version now requires Swift 6. There are
+currently no known concurrency warnings or errors in the code.
+
+Apps from the templatey have tested on both macOS and iOS devices, primarily in GarageBand but also using test hosts on
+both devices as well as the excellent [AUM](https://apps.apple.com/us/app/aum-audio-mixer/id1055636344) app on iOS.
 
 Finally, it passes all
 [auval](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/AudioUnitProgrammingGuide/AudioUnitDevelopmentFundamentals/AudioUnitDevelopmentFundamentals.html)
@@ -32,18 +69,18 @@ tests:
 % auval -v aufx flng BRay
 ```
 
-Here `flng` is the unique component subtype for my [SimplyFlange](https://github.com/bradhowes/SimplyFlange)
-effect and `BRay` is my own manufacturer ID. You should use your own values that you put in
+Here `flng` is the unique component subtype for my [SimplyFlange](https://github.com/bradhowes/SimplyFlange) effect and
+`BRay` is my own manufacturer ID. You should use your own values that you put in
 [Configuration/Common.xcconfig](Configuration/Common.xcconfig).
 
-# Generating a new AUv3 Project
+# Generating a New AUv3 Project
 
 Note that this **is** a template, and as such it may not successfully run when compiled. The best bet is to use the
 Python3 [build.py](scripts/build.py) script to create a new project from the template. To do so, fire up a terminal
 shell and go into the _AUV3Template_ directory. The script takes two arguments:
 
 - the name of the new project
-- the _subtype_ of the effect
+- the 4-character _subtype_ of the effect
 
 You would run it like this:
 
@@ -57,27 +94,23 @@ at least for your manufacturer space (see [Configuration/Common.xcconfig](Config
 will not conflict with another app extension.
 
 With a project name called "MyEffect", the Python3 script will creates new folder called _MyEffect_ that is a sibling to
-your _AUv3Template_ folder. The script will populate the new folder with the files from this template.
-Afterwards you should have a working AUv3 effect embedded in demo apps for iOS and macOS. All files with
-`--NAME--` in them will be replaced with the first argument given to `build.py` (e.g. "MyEffect"), and all text
-files will be changed so that the strings `--NAME--` and `--SUBTYPE--` are replaced with their respective substitutions
-that you provided.
+the _AUv3Template_ folder. The script will populate the new folder with the files from this template. Afterwards you
+should have a buildable and working AUv3 effect embedded in a demo app for iOS and macOS. All files with `--NAME--` in
+them will be replaced with the first argument given to `build.py` (e.g. "MyEffect"), and all text files will be changed
+so that the strings `--NAME--` and `--SUBTYPE--` are replaced with their respective substitutions that you provided.
 
-Note that to successfully compile you will need to edit
-[Configuration/Common.xcconfig](Configuration/Common.xcconfig) and change `DEVELOPMENT_TEAM` to hold your own
-Apple developer account ID so you can sign the binaries. You should also adjust other settings as well to
-properly identify you and/or your company.
-
-There are additional values in this file that you really should change, especially to remove any risk of
-collision with other AUv3 effects you may have on your system.
+Note that to successfully compile you will need to edit [Configuration/Common.xcconfig](Configuration/Common.xcconfig)
+and change the `DEVELOPMENT_TEAM` setting to hold your own Apple developer account ID so that Xcode can sign the
+binaries it creates. You should also adjust other settings as well to properly identify you and/or your company. The
+values to change should be clear.
 
 > :warning: You are free to use the code according to [LICENSE.md](LICENSE.md), but you must not replicate
 > someone's UI, icons, samples, or any other assets if you are going to distribute your effect on the App Store.
 
 ## fastlane
 
-The project will also be setup to generate screenshots using [fastlane](https://github.com/fastlane/fastlane).
-However, you will still need to *install* fastlane if you don't already have it. I used:
+The new project will be configured to generate screenshots using [fastlane](https://github.com/fastlane/fastlane).
+However, you will still need to *install* fastlane if you don't already have it. I've used:
 
 ```bash
 % brew install fastlane

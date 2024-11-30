@@ -21,7 +21,6 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
   // NOTE: this special form sets the subsystem name and must run before any other logger calls.
   private let log: OSLog = Shared.logger(Bundle.main.auBaseName + "AU", "ViewController")
 
-  private let parameters = Parameters()
   private var viewConfig: AUAudioUnitViewConfiguration!
   private var versionTagValue: String = ""
 
@@ -107,20 +106,23 @@ extension ViewController: AudioUnitViewConfigurationManager {}
 
 // MARK: - AUAudioUnitFactory
 
-extension ViewController: @preconcurrency AUAudioUnitFactory {
-  @objc public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-    let bundle = InternalConstants.bundle
+extension ViewController: AUAudioUnitFactory {
+  nonisolated public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
+    try DispatchQueue.main.sync {
+      let bundle = InternalConstants.bundle
+      let parameters = Parameters()
+      let kernel = KernelBridge(bundle.auBaseName, maxDelayMilliseconds: parameters[.delay].maxValue)
+      let audioUnit = try FilterAudioUnitFactory.create(
+        componentDescription: componentDescription,
+        parameters: parameters,
+        kernel: kernel,
+        viewConfigurationManager: self
+      )
 
-    let kernel = KernelBridge(bundle.auBaseName, maxDelayMilliseconds: parameters[.delay].maxValue)
-    let audioUnit = try FilterAudioUnitFactory.create(
-      componentDescription: componentDescription,
-      parameters: parameters,
-      kernel: kernel,
-      viewConfigurationManager: self
-    )
-    self.versionTagValue = bundle.versionTag
-    self.audioUnit = audioUnit
-    return audioUnit
+      self.versionTagValue = bundle.versionTag
+      self.audioUnit = audioUnit
+      return audioUnit
+    }
   }
 }
 
@@ -139,6 +141,12 @@ private extension ViewController {
   func createEditors() {
     os_log(.info, log: log, "createEditors BEGIN")
 
+    guard let audioUnit,
+          let parameterTree = audioUnit.parameterTree
+    else {
+      return
+    }
+
     let knobColor = NSColor.knobProgress
 
     for (parameterAddress, (knob, label)) in controls {
@@ -148,8 +156,8 @@ private extension ViewController {
       knob.target = self
       knob.action = #selector(handleKnobChanged(_:))
 
-      let editor = FloatParameterEditor(parameter: parameters[parameterAddress],
-                                        formatting: parameters[parameterAddress],
+      let editor = FloatParameterEditor(parameter: parameterTree[parameterAddress],
+                                        formatting: parameterTree[parameterAddress],
                                         rangedControl: knob, label: label)
       editors.append(editor)
       editorMap[parameterAddress] = editor
@@ -160,7 +168,7 @@ private extension ViewController {
       control.target = self
       control.action = #selector(handleSwitchChanged(_:))
 
-      let editor = BooleanParameterEditor(parameter: parameters[parameterAddress], booleanControl: control)
+      let editor = BooleanParameterEditor(parameter: parameterTree[parameterAddress], booleanControl: control)
       editors.append(editor)
       editorMap[parameterAddress] = editor
     }
@@ -206,6 +214,15 @@ private extension ViewController {
 private enum InternalConstants {
   private class EmptyClass {}
   static let bundle = Bundle(for: InternalConstants.EmptyClass.self)
+}
+
+extension AUParameterTree {
+  fileprivate subscript (_ parameter: ParameterAddress) -> AUParameter {
+    guard let parameter = self.parameter(source: parameter) else {
+      fatalError("Unexpected parameter address \(parameter)")
+    }
+    return parameter
+  }
 }
 
 #endif

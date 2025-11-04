@@ -62,6 +62,8 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
   @IBOutlet weak var odd90Control: Switch!
   @IBOutlet weak var negativeFeedbackControl: Switch!
 
+  @IBOutlet private weak var versionTag: Label!
+
   private lazy var controls: [ParameterAddress: [(Knob, Label, UIView)]] = [
     .depth: [(depthControl, depthValueLabel, depthTapEdit),
              (altDepthControl, altDepthValueLabel, altDepthTapEdit)],

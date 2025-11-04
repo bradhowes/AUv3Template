@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,7 +43,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nB9-xP-QOJ">
                                         <rect key="frame" x="0.0" y="0.0" width="492" height="248.5"/>
                                         <subviews>
-                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Th3-tm-Tp2" userLabel="Row 1">
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Th3-tm-Tp2" userLabel="Row 1">
                                                 <rect key="frame" x="126" y="-136.5" width="240" height="136.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zc-Wu-SkW" userLabel="Depth">
@@ -117,7 +117,6 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <variation key="heightClass=regular-widthClass=compact" hidden="NO"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Nt1-Eg-mZb" userLabel="Row 2">
                                                 <rect key="frame" x="0.0" y="0.0" width="492" height="142"/>
@@ -156,7 +155,6 @@
                                                             <constraint firstItem="hui-tD-xRO" firstAttribute="leading" secondItem="I7B-Iz-NtY" secondAttribute="leading" id="mdS-23-KJT"/>
                                                             <constraint firstItem="mHo-9f-pLo" firstAttribute="leading" secondItem="hui-tD-xRO" secondAttribute="leading" id="xGL-Cy-Cv3"/>
                                                         </constraints>
-                                                        <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
                                                     </view>
                                                     <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSI-o8-Nqf" userLabel="Alt Delay">
                                                         <rect key="frame" x="124" y="0.0" width="120" height="142"/>
@@ -192,7 +190,6 @@
                                                             <constraint firstItem="3TX-4e-MBG" firstAttribute="centerX" secondItem="Mvw-nZ-fi3" secondAttribute="centerX" id="kjA-Tu-XCa"/>
                                                             <constraint firstItem="Mvw-nZ-fi3" firstAttribute="leading" secondItem="sSI-o8-Nqf" secondAttribute="leading" id="lke-ba-fez"/>
                                                         </constraints>
-                                                        <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oDd-k9-ILX" userLabel="Rate">
                                                         <rect key="frame" x="248" y="0.0" width="120" height="142"/>
@@ -466,9 +463,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="altDelay" destination="sSI-o8-Nqf" id="HVc-Bx-FSm"/>
                         <outlet property="altDelayControl" destination="Mvw-nZ-fi3" id="CLF-AU-tMh"/>
                         <outlet property="altDelayTapEdit" destination="OdN-B7-7c6" id="dJf-vU-Itb"/>
                         <outlet property="altDelayValueLabel" destination="3TX-4e-MBG" id="Ogw-gy-9Pb"/>
+                        <outlet property="altDepth" destination="I7B-Iz-NtY" id="1mD-kA-7V6"/>
                         <outlet property="altDepthControl" destination="hui-tD-xRO" id="opH-v1-G8u"/>
                         <outlet property="altDepthTapEdit" destination="mHo-9f-pLo" id="Y5v-OC-pf0"/>
                         <outlet property="altDepthValueLabel" destination="T5c-Sd-KDy" id="kP4-uH-gI6"/>
@@ -496,6 +495,7 @@
                         <outlet property="rateControl" destination="hF3-lq-xlE" id="tnF-tx-GTh"/>
                         <outlet property="rateTapEdit" destination="8ki-wy-l3o" id="Dn4-Sz-0GY"/>
                         <outlet property="rateValueLabel" destination="GCP-HR-UOg" id="VWE-EP-QhB"/>
+                        <outlet property="row1" destination="Th3-tm-Tp2" id="kKE-ob-AT2"/>
                         <outlet property="titleLabel" destination="Vbj-fp-p3P" id="8oV-EU-1us"/>
                         <outlet property="versionTag" destination="sOK-vA-Qxl" id="8QD-5i-nvk"/>
                         <outlet property="wetMixControl" destination="xjB-dE-KcA" id="G3O-Zd-53a"/>

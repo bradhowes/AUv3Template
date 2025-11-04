@@ -27,6 +27,10 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var controlsView: View!
 
+  @IBOutlet weak var row1: View!
+  @IBOutlet weak var altDepth: View!
+  @IBOutlet weak var altDelay: View!
+
   @IBOutlet weak var depthControl: Knob!
   @IBOutlet weak var depthValueLabel: Label!
   @IBOutlet weak var depthTapEdit: UIView!
@@ -117,6 +121,25 @@ public extension ViewController {
     view.backgroundColor = .black
     if audioUnit != nil {
       createEditors()
+    }
+  }
+
+  override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+    if traitCollection.horizontalSizeClass == .compact {
+      // Going to be taller
+      if size.width < size.height {
+        row1.isHidden = false
+        altDelay.isHidden = true
+        altDepth.isHidden = true
+      } else {
+        row1.isHidden = true
+        altDelay.isHidden = false
+        altDepth.isHidden = false
+      }
+    } else {
+      row1.isHidden = true
+      altDelay.isHidden = false
+      altDepth.isHidden = false
     }
   }
 }

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24412" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24412"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ViewController" customModule="--NAME--AU">
+        <customObject id="-2" userLabel="File's Owner" customClass="ViewController_macOS" customModule="__NAME__AU">
             <connections>
-                <outlet property="controlsView" destination="oPI-wC-N8q" id="nuC-JX-CtU"/>
-                <outlet property="delayControl" destination="1VT-Na-dOb" id="6Ci-Ox-yQb"/>
-                <outlet property="delayValueLabel" destination="aOT-T3-0Np" id="I4c-aN-TAg"/>
-                <outlet property="depthControl" destination="vJE-Qk-G6z" id="Sm8-9h-wdn"/>
-                <outlet property="depthValueLabel" destination="FNZ-OF-PRt" id="Kh0-cz-bml"/>
-                <outlet property="dryMixControl" destination="oTi-Ii-NHh" id="3vx-BB-oqS"/>
-                <outlet property="dryMixValueLabel" destination="k3X-9K-MVH" id="HN6-UD-uwU"/>
-                <outlet property="feedbackControl" destination="nyC-Ao-wzj" id="ogn-Hb-9Tj"/>
-                <outlet property="feedbackValueLabel" destination="NVU-LP-fEC" id="VZC-7u-7ui"/>
-                <outlet property="negativeFeedbackControl" destination="oCS-oA-s1A" id="Cpo-CY-tS5"/>
-                <outlet property="odd90Control" destination="l5S-ZP-tBO" id="3vV-9N-bPP"/>
-                <outlet property="rateControl" destination="25e-Ls-Yhr" id="dxc-H0-f1l"/>
-                <outlet property="rateValueLabel" destination="YuF-pJ-Rk3" id="7as-t3-K1d"/>
-                <outlet property="versionTag" destination="wUu-Yz-l9v" id="Sxv-0S-PyL"/>
+                <outlet property="controlsView" destination="heu-JP-C0e" id="N0o-Li-cll"/>
+                <outlet property="delayControl" destination="1VT-Na-dOb" id="Qej-qk-L2z"/>
+                <outlet property="delayValueLabel" destination="aOT-T3-0Np" id="cHJ-uB-6GF"/>
+                <outlet property="depthControl" destination="vJE-Qk-G6z" id="xjF-TU-7ge"/>
+                <outlet property="depthValueLabel" destination="FNZ-OF-PRt" id="G2q-L4-IPM"/>
+                <outlet property="dryMixControl" destination="oTi-Ii-NHh" id="WYo-u5-Jeu"/>
+                <outlet property="dryMixValueLabel" destination="k3X-9K-MVH" id="yfk-XW-Bta"/>
+                <outlet property="feedbackControl" destination="nyC-Ao-wzj" id="wsf-An-gkt"/>
+                <outlet property="feedbackValueLabel" destination="NVU-LP-fEC" id="4dB-ef-2O5"/>
+                <outlet property="negativeFeedbackControl" destination="oCS-oA-s1A" id="grI-d9-Pq9"/>
+                <outlet property="odd90Control" destination="l5S-ZP-tBO" id="Lbx-Y4-5qP"/>
+                <outlet property="rateControl" destination="25e-Ls-Yhr" id="poT-LP-iOY"/>
+                <outlet property="rateValueLabel" destination="YuF-pJ-Rk3" id="9Ye-rJ-LAv"/>
+                <outlet property="versionTag" destination="wUu-Yz-l9v" id="DmN-jd-bn1"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="H7S-LS-0kL"/>
-                <outlet property="wetMixControl" destination="KfU-K8-Mrs" id="0Ek-vi-hRR"/>
-                <outlet property="wetMixValueLabel" destination="Bgn-eW-ymD" id="C3K-s8-j1e"/>
+                <outlet property="wetMixControl" destination="KfU-K8-Mrs" id="bh3-Ss-Zqa"/>
+                <outlet property="wetMixValueLabel" destination="Bgn-eW-ymD" id="qDb-Ec-U4E"/>
             </connections>
         </customObject>
         <customView wantsLayer="YES" appearanceType="darkAqua" id="Hz6-mo-xeY" userLabel="AUv3 FilterView">

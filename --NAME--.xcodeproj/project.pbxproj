@@ -29,13 +29,13 @@
 		BD8D4E2D27B58E5C007011A5 /* Desdemona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD8D4E2727B58E24007011A5 /* Desdemona.ttf */; };
 		BD8D4E2E27B58E5D007011A5 /* Desdemona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD8D4E2727B58E24007011A5 /* Desdemona.ttf */; };
 		BD8D4E2F27B58E5E007011A5 /* Desdemona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD8D4E2727B58E24007011A5 /* Desdemona.ttf */; };
-		BD95149624A0C57E00D8024C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4201A2822403120006E4333 /* ViewController.swift */; };
+		BD95149624A0C57E00D8024C /* ViewController_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4201A2822403120006E4333 /* ViewController_macOS.swift */; };
 		BD9FA81B24A9505300FA9940 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9FA81A24A9505300FA9940 /* Default-568h@2x.png */; };
 		BDB7CE93249EC556009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE92249EC556009580D5 /* Accelerate.framework */; };
 		BDB7CE94249EC565009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE92249EC556009580D5 /* Accelerate.framework */; };
 		BDB7CE9E249FC152009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE9D249FC152009580D5 /* Accelerate.framework */; };
 		BDB7CE9F249FC157009580D5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB7CE9D249FC152009580D5 /* Accelerate.framework */; };
-		BDB8C9D327B5C1B2003177EB /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C9EAAB2227D79D003FEE1C /* ViewController.xib */; };
+		BDB8C9D327B5C1B2003177EB /* ViewController_macOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C9EAAB2227D79D003FEE1C /* ViewController_macOS.xib */; };
 		BDC48CFB27B5BB03005974D7 /* Kernel in Frameworks */ = {isa = PBXBuildFile; productRef = BDC48CFA27B5BB03005974D7 /* Kernel */; };
 		BDC48CFD27B5BB03005974D7 /* KernelBridge in Frameworks */ = {isa = PBXBuildFile; productRef = BDC48CFC27B5BB03005974D7 /* KernelBridge */; };
 		BDC48CFF27B5BB03005974D7 /* ParameterAddress in Frameworks */ = {isa = PBXBuildFile; productRef = BDC48CFE27B5BB03005974D7 /* ParameterAddress */; };
@@ -139,7 +139,7 @@
 		BDE2CE1824A3E8DB004AC8FA /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Staging.xcconfig; path = Configuration/Staging.xcconfig; sourceTree = "<group>"; };
 		BDE2CE1924A3EBD1004AC8FA /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Common.xcconfig; path = Configuration/Common.xcconfig; sourceTree = "<group>"; };
 		BDEFCA2825F64BF10095858D /* AU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AU.entitlements; sourceTree = "<group>"; };
-		C4201A2822403120006E4333 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C4201A2822403120006E4333 /* ViewController_macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController_macOS.swift; sourceTree = "<group>"; };
 		C433F56022404C7C00F1B750 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C437FE3A222367A6008D6C09 /* --NAME--Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "--NAME--Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C437FE632223686D008D6C09 /* --NAME--AU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "--NAME--AU.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,7 +164,7 @@
 		C4BEE80F22237302001E6B6D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C4BEE8122223734E001E6B6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		C4BEE81B22237772001E6B6D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		C4C9EAAB2227D79D003FEE1C /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		C4C9EAAB2227D79D003FEE1C /* ViewController_macOS.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController_macOS.xib; sourceTree = "<group>"; };
 		C4CE62D8222601070055FE6B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -322,8 +322,8 @@
 			isa = PBXGroup;
 			children = (
 				BDEFCA2825F64BF10095858D /* AU.entitlements */,
-				C4201A2822403120006E4333 /* ViewController.swift */,
-				C4C9EAAB2227D79D003FEE1C /* ViewController.xib */,
+				C4201A2822403120006E4333 /* ViewController_macOS.swift */,
+				C4C9EAAB2227D79D003FEE1C /* ViewController_macOS.xib */,
 				C4BEE7BE22236A58001E6B6D /* Info.plist */,
 			);
 			path = Extension;
@@ -609,7 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD8D4E2B27B58E58007011A5 /* Media.xcassets in Resources */,
-				BDB8C9D327B5C1B2003177EB /* ViewController.xib in Resources */,
+				BDB8C9D327B5C1B2003177EB /* ViewController_macOS.xib in Resources */,
 				BD8D4E2F27B58E5E007011A5 /* Desdemona.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -657,7 +657,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD95149624A0C57E00D8024C /* ViewController.swift in Sources */,
+				BD95149624A0C57E00D8024C /* ViewController_macOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

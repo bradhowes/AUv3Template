@@ -16,7 +16,7 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
 /**
  Controller for the AUv3 filter view. Handles wiring up of the controls with AUParameter settings.
  */
-@objc final public class ViewController: AUViewController {
+@objc final public class ViewController_macOS: AUViewController {
 
   // NOTE: this special form sets the subsystem name and must run before any other logger calls.
   private let log: OSLog = Shared.logger(Bundle.main.auBaseName + "AU", "ViewController")
@@ -77,7 +77,7 @@ extension Knob: @retroactive AUParameterValueProvider, @retroactive RangedContro
   }
 }
 
-public extension ViewController {
+public extension ViewController_macOS {
 
   override func viewDidLoad() {
     os_log(.info, log: log, "viewDidLoad BEGIN")
@@ -102,11 +102,11 @@ public extension ViewController {
 
 // MARK: - AudioUnitViewConfigurationManager
 
-extension ViewController: AudioUnitViewConfigurationManager {}
+extension ViewController_macOS: AudioUnitViewConfigurationManager {}
 
 // MARK: - AUAudioUnitFactory
 
-extension ViewController: AUAudioUnitFactory {
+extension ViewController_macOS: AUAudioUnitFactory {
   nonisolated public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
     try DispatchQueue.main.sync {
       let bundle = InternalConstants.bundle
@@ -126,7 +126,7 @@ extension ViewController: AUAudioUnitFactory {
   }
 }
 
-extension ViewController: AUParameterEditorDelegate {
+extension ViewController_macOS: AUParameterEditorDelegate {
   public func parameterEditorEditingDone(changed: Bool) {
     if changed {
       audioUnit?.clearCurrentPresetIfFactoryPreset()
@@ -136,7 +136,7 @@ extension ViewController: AUParameterEditorDelegate {
 
 // MARK: - Private
 
-private extension ViewController {
+private extension ViewController_macOS {
 
   func createEditors() {
     os_log(.info, log: log, "createEditors BEGIN")

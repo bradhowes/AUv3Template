@@ -5,6 +5,8 @@
 
 ![](macOS/App/Assets.xcassets/AppIcon.appiconset/256px.png)
 
+> NOTE: a newer version of this project which uses Swift UI is at [AUv3Template-SwiftUI](https://github.com/bradhowes/AUv3Template-SwiftUI).
+
 # About AUv3Template
 
 This is full-featured AUv3 effect template for both iOS and macOS platforms. When configured, it will build an

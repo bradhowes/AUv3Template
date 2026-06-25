@@ -60,8 +60,8 @@ title bar.
 The code was originally developed in Xcode 12.4 on macOS 11.2.1 but the latest version now requires Swift 6. There are
 currently no known concurrency warnings or errors in the code.
 
-Apps from the templatey have tested on both macOS and iOS devices, primarily in GarageBand but also using test hosts on
-both devices as well as the excellent [AUM](https://apps.apple.com/us/app/aum-audio-mixer/id1055636344) app on iOS.
+Apps from the template have been tested on both macOS and iOS devices, primarily in GarageBand but also using test hosts on
+both devices as well as in the excellent [AUM](https://apps.apple.com/us/app/aum-audio-mixer/id1055636344) app on iOS.
 
 Finally, it passes all
 [auval](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/AudioUnitProgrammingGuide/AudioUnitDevelopmentFundamentals/AudioUnitDevelopmentFundamentals.html)
